@@ -1,3 +1,14 @@
+import React from "react";
+import { View, Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
+import "./styles/BottomBar.css"
+
+import AccountIcon from "../custom_components/icon-pack/AccountIcon"
+import MarksIcon from "../custom_components/icon-pack/MarksIcon"
+import ScheduleIcon from "../custom_components/icon-pack/ScheduleIcon"
+import PlusIcon from "../custom_components/icon-pack/PlusIcon"
+import SettingsIcon from "../custom_components/icon-pack/SettingsIcon"
+
+
 import AccountView from "./AccountView";
 import MarksView from "./MarksView";
 import ScheduleView from "./ScheduleView";
@@ -5,14 +16,6 @@ import PlusView from "./PlusView";
 import SettingsView from "./SettingsView";
 import PropTypes from "prop-types";
 
-import React from "react";
-import { View, Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
-
-import Icon28User from '@vkontakte/icons/dist/28/user';
-import Icon28Notification from '@vkontakte/icons/dist/28/notification';
-import Icon28Settings from '@vkontakte/icons/dist/28/settings';
-import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
-import Icon28SmileOutline from '@vkontakte/icons/dist/28/smile_outline';
 
 class BottomBar extends React.Component {
     constructor(props) {
@@ -25,52 +28,60 @@ class BottomBar extends React.Component {
     }
 
     onStoryChange(e) {
+        console.log('lal', e);
         this.setState({activeStory: e.currentTarget.dataset.story})
     }
 
     render() {
 
         return (
+
             <Epic activeStory={this.state.activeStory} tabbar={
                 <Tabbar>
                     <TabbarItem
                         onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'account'}
-                        data-story="account"
-                    ><Icon28User/></TabbarItem>
+                        selected={this.state.activeStory === 'Account'}
+                        data-story="Account"
+                    ><AccountIcon size="28" selected={this.state.activeStory === 'Account'}/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'marks'}
-                        data-story="marks"
-                    ><Icon28SmileOutline/></TabbarItem>
+                        selected={this.state.activeStory === 'Marks'}
+                        data-story="Marks"
+                    >
+                        <MarksIcon size="28" selected={this.state.activeStory === 'Marks'}/>
+                    </TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'schedule'}
-                        data-story="schedule"
-                        label="12"
-                    ><Icon28Newsfeed/></TabbarItem>
+                        selected={this.state.activeStory === 'Schedule'}
+                        data-story="Schedule"
+                    ><ScheduleIcon size="28" selected={this.state.activeStory === 'Schedule'}/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'plus'}
-                        data-story="plus"
-
-                    ><Icon28Notification/></TabbarItem>
+                        selected={this.state.activeStory === 'Plus'}
+                        data-story="Plus"
+                    ><PlusIcon size="28" selected={this.state.activeStory === 'Plus'}/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'settings'}
-                        data-story="settings"
-                    ><Icon28Settings/></TabbarItem>
+                        selected={this.state.activeStory === 'Settings'}
+                        data-story="Settings"
+                    ><SettingsIcon size="28" selected={this.state.activeStory === 'Settings'}/></TabbarItem>
                 </Tabbar>
             }>
-                <AccountView id="account" activePanel="account" >
+                <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+                    <linearGradient id="my-cool-gradient" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#0000ff" />
+                        <stop offset="100%" stop-color="#ff0000" />
+                    </linearGradient>
+                </svg>
+                <AccountView id="Account" activePanel="account" >
                 </AccountView>
-                <MarksView id="marks" activePanel="account">
+                <MarksView id="Marks" activePanel="account">
                 </MarksView>
-                <ScheduleView id="schedule" activePanel="account">
+                <ScheduleView id="Schedule" activePanel="account">
                 </ScheduleView>
-                <PlusView id="plus" activePanel="account">
+                <PlusView id="Plus" activePanel="account">
                 </PlusView>
-                <SettingsView id="settings" activePanel="account">
+                <SettingsView id="Settings" activePanel="account">
                 </SettingsView>
             </Epic>
         )

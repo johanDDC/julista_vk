@@ -1,0 +1,38 @@
+#gradient-horizontal {
+    --color-stop-1: #a770ef;
+    --color-stop-2: #cf8bf3;
+    --color-stop-3: #fdb99b;
+}
+
+.bottomIcon{
+    width: 24px;
+    height: 24px;
+    color: #0000ff;
+}
+
+svg{
+    fill: url(#gradient-horizontal);
+    /*color: red;*/
+    /*background: linear-gradient(#0000ff, #ff0000);*/
+    /*<stop offset="50%" stop-color="#224488" />*/
+}
+
+#accountIcon{
+    /*background: url("../../img/bottom_icons/account.svg");*/
+}
+
+#marksIcon{
+    /*background: url("../../img/bottom_icons/marks.svg");*/
+}
+
+#scheduleIcon{
+    /*background: url("../../img/bottom_icons/schedule.svg");*/
+}
+
+#plusIcon{
+    /*background: url("../../img/bottom_icons/plus.svg");*/
+}
+
+#settingsIcon{
+    /*background: url("../../img/bottom_icons/settings.svg");*/
+}

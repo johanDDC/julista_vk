@@ -8,14 +8,15 @@ class AccountView extends React.Component {
         super(props);
 
         this.state = {
-            activePanel : 'account'
+            activePanel : this.props.activePanel
         }
     }
 
     render() {
+        console.log(this.state.activePanel);
         return (
             <View activePanel={this.props.activePanel}>
-                <Account id="auth" go={this.props.go} fetchedUser={this.props.fetchedUser}/>
+                <Account id={this.state.activePanel} go={this.props.go} fetchedUser={this.props.fetchedUser}/>
             </View>
         )
     }
