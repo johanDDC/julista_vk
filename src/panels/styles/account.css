@@ -7,4 +7,5 @@
 
 .View__header, .PanelHeader, .PanelHeader-bg, .PanelHeader__right, .PanelHeader-right{
     background-color: #ff0000 !important;
+    display: none;
 }

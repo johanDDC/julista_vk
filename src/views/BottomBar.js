@@ -33,16 +33,14 @@ class BottomBar extends React.Component {
     }
 
     render() {
-
         return (
-
             <Epic activeStory={this.state.activeStory} tabbar={
                 <Tabbar>
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Account'}
                         data-story="Account"
-                    ><AccountIcon size="28" selected={this.state.activeStory === 'Account'}/></TabbarItem>
+                    ><AccountIcon id="gradient-horizontal" size="28" selected={this.state.activeStory === 'Account'}/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Marks'}
