@@ -1,29 +1,85 @@
+.authGroup{
+    margin: 0;
+}
+
 .welcome{
     color: black;
     display: flex;
     flex-direction: row;
     font-size: 30px;
     font-weight: bold;
+    padding-bottom: 0;
 }
-
-.large_tip{
-    color: rgb(142 142 147);
-    display: flex;
-    flex-direction: row;
-    font-size: 20px;
-    font-weight: normal;
-}
-
 .medium_tip{
     color: rgb(142 142 147);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     font-size: 16px;
     font-weight: normal;
 }
 
-.field{
+.large_tip{
+    color: rgb(142 142 147);
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.annotate{
+    color: rgb(142 142 147);
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.inputContainer{
     display: flex;
     flex-direction: row;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.inputIcon{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.inputInput{
+    display: flex;
+    flex-direction: column;
+}
+
+.inviteInput{
+    display: flex;
+    flex-direction: row;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#buttonContainer{
+}
+
+#getIn{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgb(58 169 255), rgb(131 100 255), rgb(132 101 255));
+    height: 55px;
+    border: 0;
+    border-radius: 12px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: rgba(86 144 255 0.3);
+}
+
+.restorePassword{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.restoreLink{
+    font-weight: bold;
 }

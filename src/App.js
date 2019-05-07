@@ -12,7 +12,7 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			activeVeiw: 'MainView',
+			activeVeiw: 'AuthorizationView',
 			activePanel: 'auth',
 			fetchedUser: null,
 		};

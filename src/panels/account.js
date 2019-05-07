@@ -7,7 +7,7 @@ import "./styles/account.css"
 
 const Account = ({ id, go, fetchedUser }) => (
     <Panel id={id}>
-        <PanelHeader className='header_color'>
+        <PanelHeader id="accountHeader" className='header_color'>
             <PanelHeaderContent
                 before={<Avatar size={40} src="https://sun9-5.userapi.com/c834100/v834100961/4f8f1/hjsBzq433co.jpg?ava=1" />}
                 onClick={() => {}}

@@ -1,4 +1,4 @@
-import {Avatar, Div, Group, Input, ListItem, Panel, PanelHeader} from '@vkontakte/vkui';
+import {Avatar, Div, Group, Input, ListItem, Panel, PanelHeader, Link} from '@vkontakte/vkui';
 import Icon24UserOutline from '@vkontakte/icons/dist/24/user_outline';
 import Icon24MarketOutline from '@vkontakte/icons/dist/24/market_outline';
 import PropTypes from "prop-types";
@@ -8,38 +8,48 @@ import "./styles/auth.css"
 const Auth = ({ id, go, fetchedUser }) => (
     <Panel id={id}>
         <PanelHeader className='header_color'>Авторизация</PanelHeader>
-        {fetchedUser &&
-        <Group title="User Data Fetched with VK Connect">
-            <ListItem
-                before={fetchedUser.photo_200 ? <Avatar src={fetchedUser.photo_200}/> : null}
-                description={fetchedUser.city && fetchedUser.city.title ? fetchedUser.city.title : ''}
-            >
-                {`${fetchedUser.first_name} ${fetchedUser.last_name}`}
-            </ListItem>
-        </Group>}
-
-        <Group>
+        <Group className="authGroup">
             <Div className="welcome">
                 Добро пожаловать!
             </Div>
             <Div className="large_tip">
                 Войдите с помощью данных аккаунта mos.ru
             </Div>
-            <Div className="medium_tip">
-                Номер телефона или email
+            <Div className="inputContainer">
+                <div className="inputIcon"></div>
+                <div className="inputInput">
+                    <p className="medium_tip">Номер телефона или email</p>
+                    <Input type="text"/>
+                </div>
             </Div>
-            <Div className="field">
-                <Icon24UserOutline />
-                <Input top="Мобильный телефон" type="text"/>
+            <Div className="inputContainer">
+                <div className="inputIcon"></div>
+                <div className="inputInput">
+                    <p className="medium_tip">Пароль</p>
+                    <Input type="text"/>
+                </div>
             </Div>
-            <Div className="medium_tip">
-                Пароль
+            <Div>
+                <span className="medium_tip">Введите код приглашения, при его наличии, или оставьте поле пустым</span>
             </Div>
-            <Div className="field">
-                <Icon24MarketOutline />
-                <Input type="text"/>
+            <Div className="inviteInput">
+                <div></div>
+                <div>
+                    <Input type="text"/>
+                </div>
             </Div>
-            <Div className="small_tip"></Div>
+            <Div>
+            <span className="annotate">Нажимая войти, вы соглашаетесь на обработку, хранение, передачу ваших персональных данных.
+                <br/>
+                <Link href="https://google.com" target="_blank">Регламент</Link> и <Link href="https://google.com" target="_blank">политика конфиденциальности</Link></span>
+            </Div>
+            <Div id="buttonContainer">
+                <button id="getIn">Войти</button>
+            </Div>
+            <Div className="restorePassword">
+                <span>Забыли данные учетной записи?</span>
+                <Link href="https://google.com" target="_blank" className="restoreLink">Восстановить</Link>
+            </Div>
         </Group>
     </Panel>
 );
