@@ -5,14 +5,13 @@ import '@vkontakte/vkui/dist/vkui.css';
 
 import AuthorizationView from "./views/AuthorizationView"
 import BottomBar from "./views/BottomBar"
-// import {Root} from "@vkontakte/vkui/src";
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			activeVeiw: 'AuthorizationView',
+			activeVeiw: 'MainView',
 			activePanel: 'auth',
 			fetchedUser: null,
 		};

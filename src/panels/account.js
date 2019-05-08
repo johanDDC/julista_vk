@@ -1,21 +1,28 @@
-import {Avatar, Div, Group, Input, ListItem, Panel, PanelHeader, PanelHeaderContent} from '@vkontakte/vkui';
-import Icon24UserOutline from '@vkontakte/icons/dist/24/user_outline';
-import Icon24MarketOutline from '@vkontakte/icons/dist/24/market_outline';
+import {Avatar, Div, Group, Input, ListItem, Panel, PanelHeader, PanelHeaderContent, InfoRow, Progress} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/account.css"
 
+import DropdownIcon from "../custom_components/icon-pack/DropdownIcon"
+import LevelCircle from "../custom_components/levelCircle"
+
 const Account = ({ id, go, fetchedUser }) => (
     <Panel id={id}>
-        <PanelHeader id="accountHeader" className='header_color'>
-            <PanelHeaderContent
-                before={<Avatar size={40} src="https://sun9-5.userapi.com/c834100/v834100961/4f8f1/hjsBzq433co.jpg?ava=1" />}
-                onClick={() => {}}
-                className='header'
-            >
-                Аккаунт
-            </PanelHeaderContent>
+        <PanelHeader id="accountHeader"
+                     noShadow={true}
+                     left={<Div id="studentInfo"><span id="studentName">Иван Пешехонов <DropdownIcon size="13"/></span><span id="studentGrade">11 класс</span></Div>}>
         </PanelHeader>
+        <div className="blueBack">
+        </div>
+        <Div className="accountProgress">
+            <LevelCircle color="rgb(86 144 255)" outline_color="rgba(86, 144, 255, 0.5)" val="11"/>
+            <InfoRow title="Уровень" style={{alignSelf: "flex-end"}}>
+                <Progress value={90} />
+            </InfoRow>
+        </Div>
+        <Group>
+
+        </Group>
     </Panel>
 );
 
