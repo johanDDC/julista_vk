@@ -1,6 +1,4 @@
 import {Avatar, Div, Group, Input, ListItem, Panel, PanelHeader, Link} from '@vkontakte/vkui';
-import Icon24UserOutline from '@vkontakte/icons/dist/24/user_outline';
-import Icon24MarketOutline from '@vkontakte/icons/dist/24/market_outline';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/auth.css"
