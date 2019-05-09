@@ -1,4 +1,4 @@
-import {Avatar, Div, Group, Input, ListItem, Panel, PanelHeader, Link} from '@vkontakte/vkui';
+import {Div, Group, Input, Panel, PanelHeader, Link} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/auth.css"

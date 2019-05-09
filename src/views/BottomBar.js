@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
+import { Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
 import "./styles/BottomBar.css"
 
 import AccountIcon from "../custom_components/icon-pack/AccountIcon"
@@ -65,7 +65,7 @@ class BottomBar extends React.Component {
                     ><SettingsIcon size="28" selected={this.state.activeStory === 'Settings'}/></TabbarItem>
                 </Tabbar>
             }>
-                <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+                <svg style={{width:0,height:0,position: "absolute"}} aria-hidden="true" focusable="false">
                     <linearGradient id="my-cool-gradient" x2="1" y2="1">
                         <stop offset="0%" stop-color="#0000ff" />
                         <stop offset="100%" stop-color="#ff0000" />

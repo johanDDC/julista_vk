@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from '@vkontakte/vkui-connect';
-import { View, Root } from '@vkontakte/vkui';
+import { Root } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import AuthorizationView from "./views/AuthorizationView"

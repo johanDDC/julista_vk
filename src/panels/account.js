@@ -1,4 +1,4 @@
-import {FixedLayout , Div, Group, Button, ListItem, Panel, PanelHeader, PanelHeaderContent, InfoRow, Progress} from '@vkontakte/vkui';
+import {FixedLayout , Div, Group, Button, Panel, PanelHeader, InfoRow, Progress} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/account.css"
