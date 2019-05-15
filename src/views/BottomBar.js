@@ -39,13 +39,12 @@ class BottomBar extends React.Component {
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Account'}
-                        data-story="Account"
-                    ><AccountIcon id="gradient-horizontal" size="28" selected={this.state.activeStory === 'Account'}/></TabbarItem>
+                        data-story="Account">
+                        <AccountIcon id="gradient-horizontal" size="28" selected={this.state.activeStory === 'Account'}/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Marks'}
-                        data-story="Marks"
-                    >
+                        data-story="Marks">
                         <MarksIcon size="28" selected={this.state.activeStory === 'Marks'}/>
                     </TabbarItem>
                     <TabbarItem
@@ -73,7 +72,7 @@ class BottomBar extends React.Component {
                 </svg>
                 <AccountView id="Account" activePanel="account" >
                 </AccountView>
-                <MarksView id="Marks" activePanel="account">
+                <MarksView id="Marks" activePanel="marks">
                 </MarksView>
                 <ScheduleView id="Schedule" activePanel="account">
                 </ScheduleView>

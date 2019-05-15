@@ -36,13 +36,13 @@ const Account = ({ id, go, fetchedUser }) => (
             ТОП КЛАССА
         </Div>
         <Div className="userTopElement">
-            <AccountUserContainer number="1" name="Иван Пешехонов" level="20"/>
+            <AccountUserContainer number="1" name="Ольга Муродян" level="20"/>
         </Div>
         <Div className="userTopElement">
-            <AccountUserContainer number="2" name="Наташа Мазнова" level="20"/>
+            <AccountUserContainer number="2" name="Авет Петросян" level="20"/>
         </Div>
         <Div className="userTopElement">
-            <AccountUserContainer number="3" name="Рита-везде-побрита" level="20"/>
+            <AccountUserContainer number="3" name="Иван Пешехонов" level="20"/>
         </Div>
         <Div className="userTopElement">
             <span id="overPlace">Ты находишься на 6 месте</span>
@@ -58,10 +58,10 @@ const Account = ({ id, go, fetchedUser }) => (
                 Володя Ржавый получил 5 за контрольную по уроку алгебра. Единственный в классе!
             </div>
             <div className="notification">
-                Володя Ржавый получил 5 за контрольную по уроку алгебра. Единственный в классе!
+                Ирина Шикина достигла 10 уровня
             </div>
             <div className="notification">
-                Володя Ржавый получил 5 за контрольную по уроку алгебра. Единственный в классе!
+                Твой класс получил рекордные 26 оценок за неделю. Из них 15 пятёрок!
             </div>
             <div className="notification notificationBottom">
                 <Button level="tertiary" style={{margin: 0, padding: 0}}>

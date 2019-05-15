@@ -1,0 +1,71 @@
+.marksTabs{
+    width: 100%;
+}
+
+.marksTabs > .TabsItem{
+    width: 80px;
+}
+
+#header-right-marks > *, #header-left-marks > *{
+    display: none;
+}
+
+
+.title{
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(86 144 255);
+    z-index: 3;
+    /*padding-bottom: 0;*/
+    /*padding-top: 0;*/
+}
+
+.allMarksContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 5px 15px 0 rgba(27, 27, 78, 0.1);
+    border-radius: 14px;
+    margin: 0 15px 0 15px;
+}
+
+.subjectRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.subject{
+    font-size: 17px;
+}
+
+.avg{
+    font-size: 13px;
+    color: rgb(140 140 140);
+}
+
+#panel-header-marks > *, #header-bg-marks > *, #header-right-marks > *, #header-left-marks > *, #header-title-marks > *{
+    background-color: rgb(86 144 255) !important;
+}
+
+
+.lastMarksContainer{
+    height:108px;
+}
+
+.lastMarksContainer > .HorizontalScroll__in{
+    padding: 0;
+}
+
+.lastMarkContainer{
+    width: 68px;
+    height: 68px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    border-radius: 20px;
+    margin: 5px 0 10px 10px;
+    z-index: 5;
+}
