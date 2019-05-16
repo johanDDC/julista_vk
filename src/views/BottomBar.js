@@ -22,7 +22,7 @@ class BottomBar extends React.Component {
         super(props);
 
         this.state = {
-            activeStory: 'account'
+            activeStory: 'Schedule'
         };
         this.onStoryChange = this.onStoryChange.bind(this);
     }
@@ -74,11 +74,11 @@ class BottomBar extends React.Component {
                 </AccountView>
                 <MarksView id="Marks" activePanel="marks">
                 </MarksView>
-                <ScheduleView id="Schedule" activePanel="account">
+                <ScheduleView id="Schedule" activePanel="schedule">
                 </ScheduleView>
-                <PlusView id="Plus" activePanel="account">
+                <PlusView id="Plus" activePanel="plus">
                 </PlusView>
-                <SettingsView id="Settings" activePanel="account">
+                <SettingsView id="Settings" activePanel="settings">
                 </SettingsView>
             </Epic>
         )

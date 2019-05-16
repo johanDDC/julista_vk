@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from '@vkontakte/vkui';
-import Account from '../panels/account'
+import Schedule from '../panels/schedule'
 
 class ScheduleView extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            activePanel : 'account'
+            activePanel : 'schedule'
         }
     }
 
     render() {
         return (
             <View activePanel={this.props.activePanel}>
-                <Account id="auth" go={this.props.go} fetchedUser={this.props.fetchedUser}/>
+                <Schedule id={this.state.activePanel} go={this.props.go} />
             </View>
         )
     }
