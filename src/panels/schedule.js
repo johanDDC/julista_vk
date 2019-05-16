@@ -1,10 +1,8 @@
-import {FixedLayout , Div, Group, Button, Panel, PanelHeader, InfoRow, Progress} from '@vkontakte/vkui';
+import {FixedLayout , Div, Group, Button, Panel, PanelHeader, InfoRow, Gallery} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
-import {View} from "../views/ScheduleView";
-import Account from "../views/ScheduleView";
-import {Tabs, TabsItem} from "./marks";
+import Mark from "../custom_components/mark"
 
 class Schedule extends React.Component {
     constructor(props) {
@@ -60,15 +58,69 @@ class Schedule extends React.Component {
         );
     };
 
+    generateScheduleTale = () => {
+
+        let generateSubjectTale = () => {
+            return(
+                <div className="scheduleSubjectTale">
+                    <div className="scheduleSubjectTaleNumber">
+                        1
+                    </div>
+                    <div className="scheduleSubjectTaleInfo">
+                        <span className="scheduleSubjectTaleSubjectName">
+                            Мировая Художественная культура
+                        </span>
+                        <span className="scheduleSubjectTaleHomework">
+                            Выучить библию наизусть
+                        </span>
+                        <span className="scheduleSubjectTaleTimetable">
+                            9:30 - 10:15
+                        </span>
+                    </div>
+                    <div className="scheduleSubjectTaleMarks">
+                        <Mark size="25" val="4" is_routine={false} fs="15"/>
+                    </div>
+                </div>
+            )
+        };
+
+      return(
+          <Div className="scheduleTale">
+              {generateSubjectTale()}
+          </Div>
+      );
+    };
+
+    drawShedule = () => {
+        return(
+          <div>
+              <Gallery
+                  slideWidth="100%"
+                  // align="center"
+                  style={{ height: '100%', borderRadius: "14px 14px 0 0"}}
+                  slideIndex={this.state.currentDay > 0 ? this.state.currentDay - 1 : this.state.currentDay}
+                  onChange={slideIndex => this.setState({currentDay : slideIndex + 1})}
+              >
+                  {this.generateScheduleTale()}
+                  {this.generateScheduleTale()}
+                  {this.generateScheduleTale()}
+                  {this.generateScheduleTale()}
+                  {this.generateScheduleTale()}
+                  {this.generateScheduleTale()}
+              </Gallery>
+          </div>
+        );
+    };
 
     render() {
         return (
-            <Panel id={this.props.id}>
+            <Panel id={this.props.id} style={{backgroundColor : "rgb(86, 144, 255)"}}>
                 <PanelHeader
                     noShadow>
                     <span className="scheduleHeaderMonth">Май</span>
                 </PanelHeader>
-                {this.drawTopBar(this.state.currentDay)}
+                {this.drawTopBar()}
+                {this.drawShedule()}
             </Panel>
         )
     }

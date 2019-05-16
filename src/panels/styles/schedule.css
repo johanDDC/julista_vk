@@ -2,6 +2,10 @@
     background-color: rgb(86 144 255) !important;
 }
 
+#schedule > div{
+    background-color: rgb(86 144 255) !important;
+}
+
 .scheduleHeaderMonth{
     font-size: 17px;
 }
@@ -36,4 +40,66 @@
     background-color: #fff;
     border-radius: 50%;
     color: rgb(86 144 255);
+}
+
+.scheduleSubjectTale{
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px 0 rgba(27, 27, 78, 0.1);
+    background-color: white;
+    margin-bottom: 12px;
+}
+
+.scheduleSubjectTaleNumber{
+    width: 26px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: rgb(60 60 60);
+    border-radius: 14px 0 0 14px;
+    background-color: rgb(246 246 246);
+}
+
+.scheduleSubjectTaleInfo{
+    padding-left: 10px;
+}
+
+.scheduleSubjectTaleMarks{
+    border-radius: 0 14px 14px 0;
+    padding-right: 10px;
+}
+
+.scheduleSubjectTaleInfo, .scheduleSubjectTaleInfo > span, .scheduleSubjectTaleMarks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.scheduleSubjectTaleSubjectName{
+    font-size: 17px;
+    margin-bottom: 2px;
+}
+
+.scheduleSubjectTaleHomework{
+    font-size: 15px;
+    color: rgb(65 65 65);
+    margin-bottom: 2px;
+}
+
+.scheduleSubjectTaleTimetable{
+    font-size: 13px;
+    color: rgb(140 140 140);
+}
+
+.scheduleTale{
+    background-color: white;
+    border-radius: 14px 14px 0 0;
+    height: calc(100vh - 54px - 64px - 80px);
 }
