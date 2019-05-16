@@ -1,9 +1,16 @@
+#header-title-marks{
+    width: 100% !important;
+}
+
 .marksTabs{
+    display: flex;
+    flex-direction: row;
     width: 100%;
 }
 
 .marksTabs > .TabsItem{
-    width: 80px;
+    display: flex;
+    flex-grow: 2;
 }
 
 #header-right-marks > *, #header-left-marks > *{
@@ -119,7 +126,7 @@
     box-shadow: 0 5px 15px 0 rgba(27, 27, 78, 0.1);
     display: flex;
     flex-direction: column;
-    margin: 0 15px 0 15px;
+    margin: 12px 15px 0 15px;
     border-radius: 14px;
 }
 
@@ -134,4 +141,17 @@
     flex-direction: row;
     justify-content: space-between;
 
+}
+
+.resultMarksContainerMark{
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    border-right: 2px solid rgb(246 246 246);
+}
+
+.resultMarksContainerResultedMark{
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
 }

@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from '@vkontakte/vkui';
 import Account from '../panels/account'
-import getAccount from "../utils/api"
-
-let token = "4eb19a73d08ec2ed08e02551746be828";
-let pid = "5801878";
+// import getAccount from "../utils/api"
+//
+// let token = "4eb19a73d08ec2ed08e02551746be828";
+// let pid = "5801878";
 
 class AccountView extends React.Component {
     constructor(props) {

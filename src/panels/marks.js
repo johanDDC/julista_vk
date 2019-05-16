@@ -1,4 +1,4 @@
-import {Tabs , Div, Group, Button, Panel, PanelHeader, TabsItem, HorizontalScroll} from '@vkontakte/vkui';
+import {Tabs , Div, Panel, PanelHeader, TabsItem, HorizontalScroll} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/marks.css"
@@ -10,7 +10,7 @@ class Marks extends React.Component{
         super(props);
 
         this.state = {
-            activeTab: "result",
+            activeTab: "1",
         };
     }
 
@@ -76,9 +76,35 @@ class Marks extends React.Component{
                 <Div className="resultMarksContainer">
                     <span className="resultMarksContainerSubject">Математика</span>
                     <div className="resultMarksContainerMarks">
-                        <Mark size="32" val="3" is_routine={true} fs="20"/>
-                        <Mark size="32" val="3" is_routine={true} fs="20"/>
-                        <Mark size="32" val="3" is_routine={true} fs="20"/>
+                        <div className="resultMarksContainerMark">
+                            <Mark size="32" val="3" is_routine={true} fs="20"/>
+                        </div>
+                        <div className="resultMarksContainerMark">
+                            <Mark size="32" val="3" is_routine={true} fs="20"/>
+                        </div>
+                        <div className="resultMarksContainerMark">
+                            <Mark size="32" val="3" is_routine={true} fs="20"/>
+                        </div>
+                        <div className="resultMarksContainerResultedMark">
+                            <Mark size="32" val="3" is_routine={false} fs="20"/>
+                        </div>
+                    </div>
+                </Div>
+                <Div className="resultMarksContainer">
+                    <span className="resultMarksContainerSubject">Математика</span>
+                    <div className="resultMarksContainerMarks">
+                        <div className="resultMarksContainerMark">
+                            <Mark size="32" val="3" is_routine={true} fs="20"/>
+                        </div>
+                        <div className="resultMarksContainerMark">
+                            <Mark size="32" val="4" is_routine={true} fs="20"/>
+                        </div>
+                        <div className="resultMarksContainerMark">
+                            <Mark size="32" val="5" is_routine={true} fs="20"/>
+                        </div>
+                        <div className="resultMarksContainerResultedMark">
+                            <Mark size="32" val="5" is_routine={false} fs="20"/>
+                        </div>
                     </div>
                 </Div>
             </div>
