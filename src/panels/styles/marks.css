@@ -33,6 +33,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 7px;
 }
 
 .subject{
@@ -42,6 +43,34 @@
 .avg{
     font-size: 13px;
     color: rgb(140 140 140);
+}
+
+.marksRow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.marksRow > div{
+    margin-right: 14px;
+    margin-bottom: 8px;
+}
+
+.advicesRow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.adviceContainer{
+    padding: 1px 7px 1px 7px;
+    background: linear-gradient(90deg, rgb(28 179 54), rgb(114 222 32));
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
 }
 
 #panel-header-marks > *, #header-bg-marks > *, #header-right-marks > *, #header-left-marks > *, #header-title-marks > *{
@@ -62,10 +91,47 @@
     height: 68px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
     background-color: #fff;
     border-radius: 20px;
     margin: 5px 0 10px 10px;
     z-index: 5;
+}
+
+.lastMarkSubject{
+    font-size: 9px;
+    color: rgb(86 144 255);
+}
+
+.lastMarkDate{
+    font-size: 9px;
+    color: white;
+    background-color: rgb(86 144 255);
+    border-radius: 7px;
+    margin: 0 5px 0 4px;
+    padding: 0 5px 0 4px;
+}
+
+.resultMarksContainer{
+    background-color: #fff;
+    box-shadow: 0 5px 15px 0 rgba(27, 27, 78, 0.1);
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px 0 15px;
+    border-radius: 14px;
+}
+
+.resultMarksContainerSubject{
+    font-size: 17px;
+    color: #000;
+    margin-bottom: 7px;
+}
+
+.resultMarksContainerMarks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
 }
