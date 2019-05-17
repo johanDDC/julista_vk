@@ -1,4 +1,4 @@
-import {Div, Group, Button, Panel, PanelHeader, FixedLayout, Gallery} from '@vkontakte/vkui';
+import {Div, Button, Panel, PanelHeader, FixedLayout, Gallery} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
@@ -85,9 +85,9 @@ class Schedule extends React.Component {
         };
 
       return(
-          <Div className="scheduleTale">
+          <div className="scheduleTale">
               {generateSubjectTale()}
-          </Div>
+          </div>
       );
     };
 
@@ -97,7 +97,7 @@ class Schedule extends React.Component {
               <Gallery
                   slideWidth="100%"
                   // align="center"
-                  style={{ height: '100%', borderRadius: "14px 14px 0 0", marginTop: "62px"}}
+                  className="scheduleSliderContainer"
                   slideIndex={this.state.currentDay > 0 ? this.state.currentDay - 1 : this.state.currentDay}
                   onChange={slideIndex => this.setState({currentDay : slideIndex + 1})}
               >
