@@ -36,10 +36,10 @@ const Account = ({ id, go, fetchedUser }) => (
             ТОП КЛАССА
         </Div>
         <Div className="userTopElement">
-            <AccountUserContainer number="1" name="Ольга Муродян" level="20"/>
+            <AccountUserContainer number="1" name="Наташа Мазнова" level="20"/>
         </Div>
         <Div className="userTopElement">
-            <AccountUserContainer number="2" name="Авет Петросян" level="20"/>
+            <AccountUserContainer number="2" name="Катя Стрёмная" level="20"/>
         </Div>
         <Div className="userTopElement">
             <AccountUserContainer number="3" name="Иван Пешехонов" level="20"/>

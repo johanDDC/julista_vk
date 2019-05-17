@@ -1,4 +1,4 @@
-import {FixedLayout , Div, Group, Button, Panel, PanelHeader, InfoRow, Gallery} from '@vkontakte/vkui';
+import {Div, Group, Button, Panel, PanelHeader, FixedLayout, Gallery} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
@@ -15,7 +15,7 @@ class Schedule extends React.Component {
 
     drawTopBar = () => {
         return(
-          <div>
+          <FixedLayout className="scheduleWeekTopBarContainer">
               <Div className="scheduleWeekTopBar">
                   <div className="scheduleWeekDay">
                       <span>ПН</span>
@@ -54,7 +54,7 @@ class Schedule extends React.Component {
                       </Button>
                   </div>
               </Div>
-          </div>
+          </FixedLayout>
         );
     };
 
@@ -97,7 +97,7 @@ class Schedule extends React.Component {
               <Gallery
                   slideWidth="100%"
                   // align="center"
-                  style={{ height: '100%', borderRadius: "14px 14px 0 0"}}
+                  style={{ height: '100%', borderRadius: "14px 14px 0 0", marginTop: "62px"}}
                   slideIndex={this.state.currentDay > 0 ? this.state.currentDay - 1 : this.state.currentDay}
                   onChange={slideIndex => this.setState({currentDay : slideIndex + 1})}
               >

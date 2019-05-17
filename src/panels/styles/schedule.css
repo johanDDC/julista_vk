@@ -1,5 +1,6 @@
 #panel-header-schedule > *, #header-bg-schedule > *, #header-right-schedule > *, #header-left-schedule > *, #header-title-schedule > *{
     background-color: rgb(86 144 255) !important;
+    z-index: 5 !important;
 }
 
 #schedule > div{
@@ -8,6 +9,11 @@
 
 .scheduleHeaderMonth{
     font-size: 17px;
+}
+
+.scheduleWeekTopBarContainer{
+    width: 100%;
+    z-index: 5;
 }
 
 .scheduleWeekTopBar{
@@ -101,5 +107,6 @@
 .scheduleTale{
     background-color: white;
     border-radius: 14px 14px 0 0;
-    height: calc(100vh - 54px - 64px - 80px);
+    height: calc(100vh - 62px - 43px - 48px);
+    z-index: 999;
 }
