@@ -1,11 +1,80 @@
+#panel-header-settings > *, #header-bg-settings > *, #header-right-settings > *, #header-left-settings > *, #header-title-settings > *{
+    background-color: rgb(86 144 255) !important;
+    z-index: 5 !important;
+}
 .settingsTitleContainer{
     margin: 4px 16px 4px 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
 }
 
 .settingsTitle{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 35px;
     font-size: 13px;
     color: black;
+}
+
+.settingsSettingContainer{
+    width: 100%;
+    min-height: 30px;
+    padding: 0 0 0 16px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 0 !important;
+}
+
+.settingsSettingContainer > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.settingsSettingContainer > div > .Button__content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.settingsSettingContainer > div > div{
+    color: black;
+    font-size: 17px !important;
+}
+
+.settingsSettingInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 30px;
+    height: 100%;
+    width: 100%;
+    padding: 3px 0 3px 0;
+    margin-left: 15px;
+}
+
+.settingsSettingSeparated{
+    border-bottom: 1px solid rgb(209 209 214);
+}
+
+.settingSettingTitle{
+    display: flex;
+    flex-direction: row;
+    font-size: 17px !important;
+    color: black;
+}
+
+.settingsSettingSwitch{
+    margin-right: 16px;
+}
+
+.settingsSettingSwitcher{
+    margin-right: 16px;
 }
