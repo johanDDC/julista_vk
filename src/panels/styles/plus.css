@@ -13,7 +13,6 @@
 
 .plusOfferInfo{
     height: 78%;
-    width: 100%;
     display: flex;
     flex-direction: column;
     padding-bottom: 0;
@@ -35,7 +34,7 @@
 .plusOfferAdditional{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 10px 0 10px 0;
 }
 
@@ -69,6 +68,25 @@
 }
 
 .plusAliceContainer > div > div{
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+
+.plusVkContainer{
+    width: 100%;
+    padding: 0 18px 0 18px;
+    color: #fff;
+    background:  linear-gradient(90deg, rgb(80 112 225), rgb(134 168 231));
+    border-radius:14px !important;
+    height: 51px !important;
+    border: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.plusVkContainer > div > div{
     font-size: 20px !important;
     font-weight: bold !important;
 }

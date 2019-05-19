@@ -10,6 +10,7 @@ class Schedule extends React.Component {
 
         this.state = {
             currentDay: (this.props.currentDay ? this.props.currentDay : 1),
+            weekDuration : 6
         };
     }
 
@@ -92,6 +93,7 @@ class Schedule extends React.Component {
     };
 
     drawShedule = () => {
+        console.log('day', this.state.currentDay);
         return(
           <div>
               <Gallery
@@ -99,7 +101,8 @@ class Schedule extends React.Component {
                   // align="center"
                   className="scheduleSliderContainer"
                   slideIndex={this.state.currentDay > 0 ? this.state.currentDay - 1 : this.state.currentDay}
-                  onChange={slideIndex => this.setState({currentDay : slideIndex + 1})}
+                  onChange={slideIndex => {this.setState({currentDay : (slideIndex + 1)}); console.log('slide', slideIndex);}}
+                  onEnd={(this.state.currentDay > this.state.weekDuration ? this.setState({currentDay : this.state.weekDuration}) : null)}
               >
                   {this.generateScheduleTale()}
                   {this.generateScheduleTale()}
@@ -107,6 +110,7 @@ class Schedule extends React.Component {
                   {this.generateScheduleTale()}
                   {this.generateScheduleTale()}
                   {this.generateScheduleTale()}
+                  <div></div>
               </Gallery>
           </div>
         );

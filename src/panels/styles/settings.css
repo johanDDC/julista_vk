@@ -1,0 +1,11 @@
+.settingsTitleContainer{
+    margin: 4px 16px 4px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.settingsTitle{
+    font-size: 13px;
+    color: black;
+}

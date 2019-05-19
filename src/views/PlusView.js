@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from '@vkontakte/vkui';
 import Plus from "../panels/plus";
-import Schedule from "./ScheduleView";
 
 class PlusView extends React.Component {
     constructor(props) {

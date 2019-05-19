@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from '@vkontakte/vkui';
-import Account from '../panels/account'
+import Settings from '../panels/settings'
 
 class SettingsView extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            activePanel : 'account'
+            activePanel : 'settings'
         }
     }
 
     render() {
         return (
             <View activePanel={this.props.activePanel}>
-                <Account id="auth" go={this.props.go} fetchedUser={this.props.fetchedUser}/>
+                <Settings id={this.state.activePanel} go={this.props.go} fetchedUser={this.props.fetchedUser}/>
             </View>
         )
     }
