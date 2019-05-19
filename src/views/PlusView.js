@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from '@vkontakte/vkui';
-import Account from '../panels/account'
+import Plus from "../panels/plus";
+import Schedule from "./ScheduleView";
 
 class PlusView extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            activePanel : 'account'
+            activePanel : 'plus'
         }
     }
 
     render() {
         return (
             <View activePanel={this.props.activePanel}>
-                <Account id="auth" go={this.props.go} fetchedUser={this.props.fetchedUser}/>
+                <Plus  id={this.state.activePanel} go={this.props.go}/>
             </View>
         )
     }
