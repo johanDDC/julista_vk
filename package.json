@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "cross-env PORT=10888 react-scripts start",
     "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "homepage" : "http://thebordeliner.github.io/julista_vk",
   "devDependencies": {
     "cross-env": "^5.2.0",
     "react-hot-loader": "^4.8.4",

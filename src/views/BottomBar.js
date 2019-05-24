@@ -22,7 +22,7 @@ class BottomBar extends React.Component {
         super(props);
 
         this.state = {
-            activeStory: 'Settings'
+            activeStory: 'Account'
         };
         this.onStoryChange = this.onStoryChange.bind(this);
     }
@@ -34,7 +34,7 @@ class BottomBar extends React.Component {
 
     render() {
         return (
-            <Epic activeStory={this.state.activeStory} tabbar={
+            <Epic className="bottomBarItself" activeStory={this.state.activeStory} tabbar={
                 <Tabbar>
                     <TabbarItem
                         onClick={this.onStoryChange}
