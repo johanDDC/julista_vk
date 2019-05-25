@@ -65,7 +65,7 @@ class Settings extends React.Component {
                         Уведомления
                     </span>
                 </div>
-                <div  className="settingsSettingContainer">
+                <div  className="settingsSettingContainer" style={{paddigRight: "-16px"}}>
                     <AdvancesIcon/>
                     <div className="settingsSettingInfo settingsSettingSeparated">
                         <span className="settingsSettingTitle">
@@ -76,7 +76,7 @@ class Settings extends React.Component {
                         </span>
                     </div>
                 </div>
-                <div className="settingsSettingContainer">
+                <div className="settingsSettingContainer" style={{paddigRight: "-16px"}}>
                     <NewMarksIcon/>
                     <div className="settingsSettingInfo settingsSettingSeparated">
                         <span className="settingsSettingTitle">
@@ -87,7 +87,7 @@ class Settings extends React.Component {
                         </span>
                     </div>
                 </div>
-                <div className="settingsSettingContainer">
+                <div className="settingsSettingContainer" style={{paddigRight: "-16px"}}>
                     <ReportsIcon/>
                     <div className="settingsSettingInfo settingsSettingSeparated">
                         <span className="settingsSettingTitle">
@@ -98,7 +98,7 @@ class Settings extends React.Component {
                         </span>
                     </div>
                 </div>
-                <div className="settingsSettingContainer">
+                <div className="settingsSettingContainer" style={{paddigRight: "-16px"}}>
                     <EventsIcon/>
                     <div className="settingsSettingInfo">
                         <span className="settingsSettingTitle">

@@ -17,7 +17,7 @@ class Marks extends React.Component{
     drawFirstTab = () => {
         return(
             <div>
-                <Div className="title">
+                <Div className="title"  style={{paddingTop: "0"}}>
                     ПОСЛЕДНИЕ ОЦЕНКИ
                 </Div>
                 <HorizontalScroll className="lastMarksContainer">
@@ -115,8 +115,12 @@ class Marks extends React.Component{
         return(
             <Panel id={this.props.id}>
                 <PanelHeader
-                    noShadow>
-                    <Tabs theme="header" type="default" className="marksTabs">
+                    noShadow={true}
+                    left={<Div style={{fontWeight: 'bold', fontSize: '20px'}}><span>Аккаунт</span></Div>}>
+                    Оценки
+                </PanelHeader>
+                <Div style={{paddingTop: "0", paddingBottom: "0",}}>
+                    <Tabs theme="header" type="buttons" className="marksTabs">
                         <TabsItem
                             onClick={() => this.setState({ activeTab: '1' })}
                             selected={this.state.activeTab === '1'}
@@ -136,7 +140,7 @@ class Marks extends React.Component{
                             Итоговые
                         </TabsItem>
                     </Tabs>
-                </PanelHeader>
+                </Div>
                 {this.state.activeTab === '1' ? this.drawFirstTab() : null}
                 {this.state.activeTab === 'result' ? this.drawResultTab() : null}
             </Panel>

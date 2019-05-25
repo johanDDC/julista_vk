@@ -1,3 +1,7 @@
+#panel-header-auth > *, #header-bg-auth > *, #header-right-auth > *, #header-left-auth > *, #header-title-auth > *{
+    background-color: rgb(86 144 255) !important;
+}
+
 .authGroup{
     margin: 0;
 }

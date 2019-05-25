@@ -6,11 +6,28 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    background-color: transparent !important;
 }
 
 .marksTabs > .TabsItem{
     display: flex;
     flex-grow: 2;
+    background-color: transparent !important;
+    border-radius: 7px !important;
+}
+
+.marksTabs > .TabsItem--selected{
+    background-color:  rgb(86 144 255) !important;
+    color: #fff !important;
+}
+
+.marksTabs > .TabsItem > div{
+    color: rgb(86 144 255) !important;
+    font-weight: bold !important;
+}
+
+.marksTabs > .TabsItem--selected > div{
+    color: #fff !important;
 }
 
 #header-right-marks > *, #header-left-marks > *{
@@ -82,6 +99,7 @@
 
 #panel-header-marks > *, #header-bg-marks > *, #header-right-marks > *, #header-left-marks > *, #header-title-marks > *{
     background-color: rgb(86 144 255) !important;
+    color: white !important;
 }
 
 

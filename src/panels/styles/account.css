@@ -2,8 +2,14 @@
     background-color: rgb(86 144 255);
 }
 
-#panel-header-account > *, #header-bg-account > *, #header-right-account > *, #header-left-account > *{
+#panel-header-account > *, #header-bg-account > *, #header-right-account > *, #header-left-account > *, #header-title-account > *{
     background-color: rgb(86 144 255) !important;
+}
+
+.studentInfoContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #studentInfo{
@@ -12,13 +18,13 @@
 }
 
 #studentName{
-    color: white;
+    color: #000;
     font-size: 15px;
     font-weight: bold;
 }
 
 #studentGrade{
-    color: white;
+    color: #000;
     font-size: 13px;
 }
 
@@ -33,14 +39,13 @@
 }
 
 .accountProgress{
-    /*margin-top: -23px;*/
-    background-color: white;
-    height: 22px;
+    background-color: rgb(246 246 246);
     border-radius: 14px;
-    margin: -23px 10px 10px 10px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    color: rgb(86 144 255);
+    font-weight: bold;
+    margin: 0 10px 0 10px;
 }
 
 #progressBar{
@@ -57,7 +62,7 @@
     align-items: center;
     border-radius: 14px;
     color: white;
-    margin: 82px 10px 0 10px ;
+    margin: 15px 10px 0 10px ;
 }
 
 #successTitleContainer{

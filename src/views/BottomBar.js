@@ -22,7 +22,7 @@ class BottomBar extends React.Component {
         super(props);
 
         this.state = {
-            activeStory: 'Account'
+            activeStory: 'Marks'
         };
         this.onStoryChange = this.onStoryChange.bind(this);
     }

@@ -1,33 +1,35 @@
-import {FixedLayout , Div, Group, Button, Panel, PanelHeader, InfoRow, Progress} from '@vkontakte/vkui';
+
+import {Div, Group, Button, Panel, PanelHeader, InfoRow, Progress} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/account.css"
 
-import DropdownIcon from "../custom_components/icon-pack/DropdownIcon"
-import LevelCircle from "../custom_components/levelCircle"
 import AccountUserContainer from "../custom_components/accountUserContainer"
 
 const Account = ({ id, go, fetchedUser }) => (
     <Panel id={id}>
-        <PanelHeader id="accountHeader"
+        <PanelHeader
                      noShadow={true}
-                     left={<Div id="studentInfo"><span id="studentName">Иван Пешехонов
-                         <Button level="tertiary" style={{margin: 0, padding: 0}}><DropdownIcon size="13"/></Button>
-                     </span><span id="studentGrade">11 класс</span></Div>}>
+                     left={<Div style={{fontWeight: 'bold', fontSize: '20px'}}><span>Аккаунт</span></Div>}>
         </PanelHeader>
-        <FixedLayout vertical="top">
-            <div className="blueBack">
+        <Div className="studentInfoContainer">
+            <div id="studentInfo">
+                <span id="studentName">
+                    Иван Пешехонов
+                </span>
+                <span id="studentGrade">
+                    11 класс
+                </span>
             </div>
-            <Div className="accountProgress">
-                <LevelCircle color="rgb(86 144 255)" outline_color="rgba(86, 144, 255, 0.5)" val="11"/>
-                <InfoRow title="Уровень" id="progressBar">
-                    <Progress value={90} />
-                </InfoRow>
-            </Div>
-        </FixedLayout>
-        <Div className="successContainer">
-                <span id="successTitleContainer">Текущая успеваемость</span>
-                <span id="successVal">Высокая</span>
+            <div/>
+        </Div>
+        <Div className="accountProgress">
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                <span>Успеваемость</span>
+            </div>
+            <InfoRow title="Уровень" id="progressBar">
+                <Progress value={90} />
+            </InfoRow>
         </Div>
         <Div className="title">
             ЗАДАЧИ

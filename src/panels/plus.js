@@ -1,9 +1,10 @@
-import {Div, Button, Panel, PanelHeader} from '@vkontakte/vkui';
+import {Div, Button, Panel, PanelHeader, FixedLayout} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/plus.css"
 
 import InviteUserContainer from "../custom_components/inviteUserContainer"
+import PlusIcon from "../custom_components/icon-pack/PlusIcon"
 
 
 class Plus extends React.Component {
@@ -18,10 +19,17 @@ class Plus extends React.Component {
     render() {
         return(
             <Panel  id={this.props.id}>
-                <PanelHeader>
-                    Booklet Plus
+                <PanelHeader
+                    noShadow={true}
+                    left={<Div style={{fontWeight: 'bold', fontSize: '20px'}}><span>Booklet Plus</span></Div>}>
                 </PanelHeader>
-                <div className="plusOfferContainer">
+                <FixedLayout>
+                    <Div className="plusBlueBack">
+                        <span>Расширь возможности своего дневника</span>
+                        <PlusIcon selected={true} size="36" stroke_color={"#ffffff"}/>
+                    </Div>
+                </FixedLayout>
+                <div className="plusOfferContainer" style={{marginTop: "70px"}}>
                     <Div className="plusOfferInfo">
                         <span className="plusOfferTitle">
                             Уведомления
