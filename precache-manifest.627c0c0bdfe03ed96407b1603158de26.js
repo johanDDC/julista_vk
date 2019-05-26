@@ -4,23 +4,23 @@ self.__precacheManifest = [
     "url": "/julista_vk/static/js/runtime~main.62e97286.js"
   },
   {
-    "revision": "065deda1a01651264ef7",
-    "url": "/julista_vk/static/js/main.1f0cbf34.chunk.js"
+    "revision": "62b5a6bb98feda9f17f9",
+    "url": "/julista_vk/static/js/main.c93a2c3f.chunk.js"
   },
   {
     "revision": "2996c583335784ad24a3",
     "url": "/julista_vk/static/js/2.f8604d79.chunk.js"
   },
   {
-    "revision": "065deda1a01651264ef7",
-    "url": "/julista_vk/static/css/main.9286793a.chunk.css"
+    "revision": "62b5a6bb98feda9f17f9",
+    "url": "/julista_vk/static/css/main.e110dbd3.chunk.css"
   },
   {
     "revision": "2996c583335784ad24a3",
     "url": "/julista_vk/static/css/2.f952a7a9.chunk.css"
   },
   {
-    "revision": "85a24fc9b07ce655ab53521413bf3356",
+    "revision": "305a7bf4ab2c713f91c60700799a18c7",
     "url": "/julista_vk/index.html"
   }
 ];
