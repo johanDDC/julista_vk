@@ -11,7 +11,7 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			activeVeiw: 'MainView',
+			activeVeiw: 'AuthorizationView',
 			activePanel: 'auth',
 			fetchedUser: null,
 		};
@@ -38,7 +38,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<Root activeView={this.state.activeVeiw}>
-				<AuthorizationView id="AuthorizationView" activePanel="auth" fetchedUser={this.state.fetchedUser} go={this.go}>
+				<AuthorizationView id="AuthorizationView" activePanel="choose_diary" fetchedUser={this.state.fetchedUser} go={this.go}>
 					{/*<Auth id="auth" fetchedUser={this.state.fetchedUser} go={this.go} />*/}
 					{/*<Persik id="persik" go={this.go} />*/}
 				</AuthorizationView>
