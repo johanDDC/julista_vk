@@ -25,18 +25,25 @@
     height: 40px;
     border-radius: 21px;
     border: 1px solid #efefef;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     background-color: #efefef;
     margin-bottom: 20px;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+}
+
+.chooseDiaryScreenDiaryContainer > div > div{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    color: black !important;
 }
 
 .chooseDiaryScreenDiaryContainerIcon{
     border-radius: 100%;
     width: 30px;
     height: 30px;
-    margin: 0 15px 0 15px;
+    margin: 0 15px 0 0;
 }
 
 .chooseDiaryScreenDiaryContainerChecker{
@@ -51,18 +58,18 @@
     width: 100%;
 }
 
-#getIn{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.getInButton{
+    margin: 0;
+    padding: 0;
+    color: #fff;
     background: linear-gradient(rgb(58 169 255), rgb(131 100 255), rgb(132 101 255));
-    height: 55px;
+    border-radius:12px !important;
+    height: 55px !important;
+    width: 100%;
     border: 0;
-    border-radius: 12px;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    box-shadow: rgba(86 144 255 0.3);
+}
+
+.getInButton > div > div{
+    font-size: 17px !important;
+    font-weight: bold !important;
 }

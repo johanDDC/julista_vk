@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Div, PanelHeader, View, Group, Panel} from '@vkontakte/vkui';
+import {Div, PanelHeader, View, Panel, Button} from '@vkontakte/vkui';
 import Auth from '../panels/auth'
 import "./styles/Authorization.css"
 
@@ -9,12 +9,14 @@ class AuthorizationView extends React.Component {
         super(props);
 
         this.state = {
+            activePanel: this.props.activePanel,
+            diary: ''
         }
     }
 
     render() {
         return (
-            <View activePanel={this.props.activePanel}>
+            <View activePanel={this.state.activePanel}>
                 <Panel id="choose_diary">
                     <PanelHeader noShadow={true}></PanelHeader>
                     <Div className="chooseDiaryScreen">
@@ -22,27 +24,29 @@ class AuthorizationView extends React.Component {
                             Выберите ваш дневник
                         </span>
                         <div className="chooseDiaryScreenDiaryDiaries">
-                            <div className="chooseDiaryScreenDiaryContainer">
+                            <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
+                                    onClick={() => {this.setState({activePanel : 'auth', diary: 'mosru'})}}>
                                 <div className="chooseDiaryScreenDiaryContainerIcon" style={{backgroundColor: "#0080ff"}}></div>
                                 <span className="chooseDiaryScreenDiaryContainerTitle">МЭШ (mos.ru)</span>
                                 <div className="chooseDiaryScreenDiaryContainerChecker">
                                     <div>rar</div>
                                 </div>
-                            </div>
-                            <div className="chooseDiaryScreenDiaryContainer">
+                            </Button>
+                            <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
+                                    onClick={() => {this.setState({activePanel : 'auth', diary: 'mosregru'})}}>
                                 <div className="chooseDiaryScreenDiaryContainerIcon" style={{backgroundColor: "#ff3000"}}></div>
                                 <span className="chooseDiaryScreenDiaryContainerTitle">mosreg.ru</span>
                                 <div className="chooseDiaryScreenDiaryContainerChecker">
                                     <div>rar</div>
                                 </div>
-                            </div>
+                            </Button>
                         </div>
-                        <Div id="buttonContainer">
-                            <button id="getIn">Войти</button>
-                        </Div>
+                        <Button level="tertiary" className="getInButton" style={{visibility: "hidden"}}>
+                            Войти
+                        </Button>
                     </Div>
                 </Panel>
-                <Auth id="auth" go={this.props.go} fetchedUser={this.props.fetchedUser}/>
+                <Auth id="auth" go={this.props.go} fetchedUser={this.props.fetchedUser} diary={this.state.diary}/>
             </View>
         )
     }

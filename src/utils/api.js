@@ -1,21 +1,22 @@
-function updateToken() {
-    return 0;
+let request = new XMLHttpRequest();
+let baseUrl = "https://bklet.ml/";
+
+function auth(login, password, diary) {
+    let methodUrl = "api/auth/";
+    request.open('POST', baseUrl + methodUrl, false);
+    request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+    let json ={
+        diary : diary,
+        login : login,
+        password : password
+    };
+
+    console.log(json);
+
+    request.send(JSON.stringify(json));
+
+    console.log(request.responseText);
 }
 
-function getAccount(token, pid ){
-    let url = `https://julista.annenkov.me/profile_screen/?token=${token}&pid=${pid}`;
-    console.log(url);
-
-    var request = new XMLHttpRequest();
-    request.open('GET', url, false);
-    request.send(null);
-
-    if (request.status !== 200) {
-        token = updateToken();
-        getAccount(token, pid);
-    } else {
-        return JSON.parse(request.responseText)
-    }
-}
-
-export default getAccount
+export default auth
