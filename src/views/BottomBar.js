@@ -22,7 +22,10 @@ class BottomBar extends React.Component {
         super(props);
 
         this.state = {
-            activeStory: 'Marks'
+            activeStory: 'Account',
+
+            userId: this.props.userId,
+            userSecret: this.props.userSecret
         };
         this.onStoryChange = this.onStoryChange.bind(this);
     }
@@ -86,7 +89,9 @@ class BottomBar extends React.Component {
 }
 
 BottomBar.propTypes = {
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    userSecret: PropTypes.any,
+    userId: PropTypes.any
 };
 
 export default BottomBar;

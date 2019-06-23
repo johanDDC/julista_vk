@@ -56,8 +56,7 @@ class App extends React.Component {
 					go={this.go}
 					updateFunc={this.updateData}>
 				</AuthorizationView>
-				{console.log('azazaz\n' + this.state.userId)}
-				<BottomBar id="MainView" />
+				<BottomBar id="MainView" userId={this.state.userId} userSecret={this.state.userSecret} />
 			</Root>
 		);
 	}

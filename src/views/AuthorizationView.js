@@ -36,7 +36,7 @@ class AuthorizationView extends React.Component {
                         <div className="chooseDiaryScreenDiaryDiaries">
                             <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
                                     onClick={() => {this.setState({activePanel : 'auth', diary: 'mosru'})}}>
-                                <div className="chooseDiaryScreenDiaryContainerIcon" style={{backgroundColor: "#0080ff"}}></div>
+                                <div className="chooseDiaryScreenDiaryContainerIcon" style={{backgroundColor: "#ff3000"}}></div>
                                 <span className="chooseDiaryScreenDiaryContainerTitle">МЭШ (mos.ru)</span>
                                 <div className="chooseDiaryScreenDiaryContainerChecker">
                                     <div>rar</div>
@@ -44,8 +44,32 @@ class AuthorizationView extends React.Component {
                             </Button>
                             <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
                                     onClick={() => {this.setState({activePanel : 'auth', diary: 'mosregru'})}}>
-                                <div className="chooseDiaryScreenDiaryContainerIcon" style={{backgroundColor: "#ff3000"}}></div>
+                                <div className="chooseDiaryScreenDiaryContainerIcon" style={{backgroundColor: "#ffa000"}}></div>
                                 <span className="chooseDiaryScreenDiaryContainerTitle">mosreg.ru</span>
+                                <div className="chooseDiaryScreenDiaryContainerChecker">
+                                    <div>rar</div>
+                                </div>
+                            </Button>
+                            <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
+                                    onClick={() => {this.setState({activePanel : 'auth', diary: 'netschool'})}}>
+                                <div className="chooseDiaryScreenDiaryContainerIcon" style={{backgroundColor: "#ffff00"}}></div>
+                                <span className="chooseDiaryScreenDiaryContainerTitle">netschool</span>
+                                <div className="chooseDiaryScreenDiaryContainerChecker">
+                                    <div>rar</div>
+                                </div>
+                            </Button>
+                            <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
+                                    onClick={() => {this.setState({activePanel : 'auth', diary: 'dnevnikru'})}}>
+                                <div className="chooseDiaryScreenDiaryContainerIcon" style={{backgroundColor: "#30ff00"}}></div>
+                                <span className="chooseDiaryScreenDiaryContainerTitle">dnevnick.ru</span>
+                                <div className="chooseDiaryScreenDiaryContainerChecker">
+                                    <div>rar</div>
+                                </div>
+                            </Button>
+                            <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
+                                    onClick={() => {this.setState({activePanel : 'auth', diary: 'edutatar'})}}>
+                                <div className="chooseDiaryScreenDiaryContainerIcon" style={{backgroundColor: "#0080ff"}}></div>
+                                <span className="chooseDiaryScreenDiaryContainerTitle">edutatar</span>
                                 <div className="chooseDiaryScreenDiaryContainerChecker">
                                     <div>rar</div>
                                 </div>
