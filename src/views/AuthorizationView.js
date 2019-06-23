@@ -17,7 +17,6 @@ class AuthorizationView extends React.Component {
 
     viewScreenSpinner = (switcher) => {
         if (switcher) {
-            console.log('on');
             this.setState({popout: <ScreenSpinner/>});
         }
         else

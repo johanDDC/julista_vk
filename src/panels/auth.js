@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./styles/auth.css"
 
-import auth from "../utils/api"
+import {auth} from "../utils/api"
 
 class Auth extends React.Component{
     constructor(props) {
@@ -25,7 +25,6 @@ class Auth extends React.Component{
             let userId;
 
             let req = auth(this.state.login, this.state.password, this.state.diary);
-            console.log(req);
             if (req){
                 if(req.status){
                     userSecret = req.secret;
