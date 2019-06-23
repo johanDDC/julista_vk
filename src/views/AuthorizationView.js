@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Div, PanelHeader, View, Panel, Button} from '@vkontakte/vkui';
+import {Div, PanelHeader, View, Panel, Button, ScreenSpinner} from '@vkontakte/vkui';
 import Auth from '../panels/auth'
 import "./styles/Authorization.css"
 
@@ -10,13 +10,23 @@ class AuthorizationView extends React.Component {
 
         this.state = {
             activePanel: this.props.activePanel,
-            diary: ''
+            diary: '',
+            popout: null
         }
     }
 
+    viewScreenSpinner = (switcher) => {
+        if (switcher) {
+            console.log('on');
+            this.setState({popout: <ScreenSpinner/>});
+        }
+        else
+            this.setState({ popout: null });
+    };
+
     render() {
         return (
-            <View activePanel={this.state.activePanel}>
+            <View popout={this.state.popout} activePanel={this.state.activePanel}>
                 <Panel id="choose_diary">
                     <PanelHeader noShadow={true}></PanelHeader>
                     <Div className="chooseDiaryScreen">
@@ -46,7 +56,11 @@ class AuthorizationView extends React.Component {
                         </Button>
                     </Div>
                 </Panel>
-                <Auth id="auth" go={this.props.go} fetchedUser={this.props.fetchedUser} diary={this.state.diary}/>
+                <Auth id="auth" go={this.props.go}
+                      fetchedUser={this.props.fetchedUser}
+                      diary={this.state.diary}
+                      updateFunc={this.props.updateFunc}
+                      setSpinner={this.viewScreenSpinner}/>
             </View>
         )
     }
@@ -64,6 +78,7 @@ AuthorizationView.propTypes = {
             title: PropTypes.string,
         }),
     }),
+    updateFunc: PropTypes.func
 };
 
 export default AuthorizationView;

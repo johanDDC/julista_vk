@@ -13,9 +13,37 @@ class Auth extends React.Component{
             diary: this.props.diary,
             login: "",
             password: "",
-            inviteCode: ""
+            inviteCode: "",
+            popout: null
         };
     }
+
+    buttonClick = () => {
+        this.props.setSpinner(true); //FIXME spinner doesn`t work
+        if (this.state.login.trim() !== "" && this.state.password.trim() !== "") {
+            let userSecret;
+            let userId;
+
+            let req = auth(this.state.login, this.state.password, this.state.diary);
+            console.log(req);
+            if (req){
+                if(req.status){
+                    userSecret = req.secret;
+                    userId = req.id;
+
+                    this.props.setSpinner(false);
+                    this.props.updateFunc("MainView", userId, userSecret);
+                } else {
+                    this.props.setSpinner(false);
+                    // Неверный логин или пароль
+                }
+            } else {
+                this.props.setSpinner(false);
+                // Вообще левая ошибка
+            }
+        }
+        this.props.setSpinner(false);
+    };
 
     render() {
         return(
@@ -67,8 +95,7 @@ class Auth extends React.Component{
                 <Link href="https://google.com" target="_blank">Регламент</Link> и <Link href="https://google.com" target="_blank">политика конфиденциальности</Link></span>
                     </Div>
                     <Button level="tertiary" className="getInButton"
-                            onClick={() => {console.log(this.state.login + "\n" + this.state.password + "\n" + this.state.diary);
-                                auth(this.state.login, this.state.password, this.state.diary)}}>
+                            onClick={this.buttonClick}>
                         Войти
                     </Button>
                     <Div className="restorePassword">
@@ -93,7 +120,9 @@ Auth.propTypes = {
             title: PropTypes.string,
         }),
     }),
-    diary: PropTypes.string.isRequired
+    diary: PropTypes.string.isRequired,
+    updateFunc: PropTypes.func,
+    setSpinner: PropTypes.func
 };
 
 export default Auth;

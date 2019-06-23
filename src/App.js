@@ -14,6 +14,9 @@ class App extends React.Component {
 			activeVeiw: 'AuthorizationView',
 			activePanel: 'auth',
 			fetchedUser: null,
+
+			userId: null,
+			userSecret: null
 		};
 	}
 
@@ -35,13 +38,25 @@ class App extends React.Component {
 		this.setState({ activePanel: e.currentTarget.dataset.to })
 	};
 
+	updateData = (view, id, secret) => {
+		this.setState({
+			activeVeiw: view,
+			userId: id,
+			userSecret: secret
+		})
+	};
+
 	render() {
 		return (
 			<Root activeView={this.state.activeVeiw}>
-				<AuthorizationView id="AuthorizationView" activePanel="choose_diary" fetchedUser={this.state.fetchedUser} go={this.go}>
-					{/*<Auth id="auth" fetchedUser={this.state.fetchedUser} go={this.go} />*/}
-					{/*<Persik id="persik" go={this.go} />*/}
+				<AuthorizationView
+					id="AuthorizationView"
+					activePanel="choose_diary"
+					fetchedUser={this.state.fetchedUser}
+					go={this.go}
+					updateFunc={this.updateData}>
 				</AuthorizationView>
+				{console.log('azazaz\n' + this.state.userId)}
 				<BottomBar id="MainView" />
 			</Root>
 		);

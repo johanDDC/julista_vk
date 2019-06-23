@@ -12,11 +12,11 @@ function auth(login, password, diary) {
         password : password
     };
 
-    console.log(json);
-
     request.send(JSON.stringify(json));
 
-    console.log(request.responseText);
+    console.log(request.responseType);
+
+    return JSON.parse(request.responseText)
 }
 
 export default auth
