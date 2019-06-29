@@ -31,7 +31,6 @@ class BottomBar extends React.Component {
     }
 
     onStoryChange(e) {
-        console.log('lal', e);
         this.setState({activeStory: e.currentTarget.dataset.story})
     }
 
@@ -75,9 +74,13 @@ class BottomBar extends React.Component {
                 </svg>
                 <AccountView id="Account" activePanel="account" >
                 </AccountView>
-                <MarksView id="Marks" activePanel="marks">
+                <MarksView id="Marks" activePanel="marks"
+                           userId={this.state.userId}
+                           userSecret={this.state.userSecret}>
                 </MarksView>
-                <ScheduleView id="Schedule" activePanel="schedule">
+                <ScheduleView id="Schedule" activePanel="schedule"
+                              userId={this.state.userId}
+                              userSecret={this.state.userSecret}>
                 </ScheduleView>
                 <PlusView id="Plus" activePanel="plus">
                 </PlusView>

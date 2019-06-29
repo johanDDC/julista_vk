@@ -13,20 +13,23 @@ class MarksView extends React.Component {
             activePanel : 'marks',
 
             userId: this.props.userId,
-            userSecret: this.props.userSecret
-        }
+            userSecret: this.props.userSecret,
+
+            marksData: null
+        };
+
+        this.getMarks()
     }
 
     getMarks = () => {
-        let data = getAndAggregateMarks(this.state.userId, this.state.userSecret)
-        console.log('data\n' + data)
+        let marksData = getAndAggregateMarks(this.state.userId, this.state.userSecret);
+        this.setState({marksData : marksData})
     };
 
     render() {
         return (
             <View activePanel={this.props.activePanel}>
-                {this.getMarks()}
-                <Marks id={this.state.activePanel} go={this.props.go}/>
+                <Marks id={this.state.activePanel} go={this.props.go} marksData={this.state.marksData}/>
             </View>
         )
     }

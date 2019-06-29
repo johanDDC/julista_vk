@@ -11,6 +11,8 @@ class Marks extends React.Component{
 
         this.state = {
             activeTab: "1",
+
+            marksData: this.props.marksData
         };
     }
 
@@ -150,7 +152,8 @@ class Marks extends React.Component{
 }
 Marks.propTypes = {
     id: PropTypes.string.isRequired,
-    go: PropTypes.func.isRequired
+    go: PropTypes.func.isRequired,
+    marksData: PropTypes.any
 };
 
 export default Marks;
