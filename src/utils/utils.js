@@ -1,5 +1,5 @@
 export function scheduleGetDates() {
-    let today = new Date();
+    let today = new Date("03.08.2019");
     let dayOfWeek = today.getDay();
     let monday = null;
 

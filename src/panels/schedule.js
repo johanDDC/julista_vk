@@ -93,23 +93,22 @@ class Schedule extends React.Component {
         );
     };
 
-    generateScheduleTale = () => {
-
-        let generateSubjectTale = () => {
+    generateScheduleTale = (day) => {
+        let generateSubjectTale = (num, subjectName, subjectHomework, subjectTime) => {
             return (
                 <div className="scheduleSubjectTale">
                     <div className="scheduleSubjectTaleNumber">
-                        1
+                        {num}
                     </div>
                     <div className="scheduleSubjectTaleInfo">
                         <span className="scheduleSubjectTaleSubjectName">
-                            Мировая Художественная культура
+                            {subjectName}
                         </span>
                         <span className="scheduleSubjectTaleHomework">
-                            Выучить библию наизусть
+                            {subjectHomework}
                         </span>
                         <span className="scheduleSubjectTaleTimetable">
-                            9:30 - 10:15
+                            {subjectTime[0]} - {subjectTime[1]}
                         </span>
                     </div>
                     <div className="scheduleSubjectTaleMarks">
@@ -119,15 +118,34 @@ class Schedule extends React.Component {
             )
         };
 
+        let subjectTales = [];
+
+        let subjects = day.subjects;
+        subjects.forEach((subject, num) => {
+            subjectTales.push(generateSubjectTale(subject.number, subject.name, "", subject.time))
+        });
+
         return (
             <div className="scheduleTale">
-                {generateSubjectTale()}
+                {subjectTales}
             </div>
         );
     };
 
+    generateSchedule = () => {
+        let days = this.scheduleData.data.days;
+        let tales = [];
+
+        days.forEach((day) => {
+            tales.push(this.generateScheduleTale(day));
+        });
+
+        return(
+            [tales]
+        )
+    };
+
     drawShedule = () => {
-        console.log('day', this.state.currentDay);
         return (
             <div>
                 <Gallery
@@ -137,16 +155,10 @@ class Schedule extends React.Component {
                     slideIndex={this.state.currentDay > 0 ? this.state.currentDay - 1 : this.state.currentDay}
                     onChange={slideIndex => {
                         this.setState({currentDay: (slideIndex + 1)});
-                        console.log('slide', slideIndex);
                     }}
                     onEnd={(this.state.currentDay > this.state.weekDuration ? this.setState({currentDay: this.state.weekDuration}) : null)}
                 >
-                    {this.generateScheduleTale()}
-                    {this.generateScheduleTale()}
-                    {this.generateScheduleTale()}
-                    {this.generateScheduleTale()}
-                    {this.generateScheduleTale()}
-                    {this.generateScheduleTale()}
+                    {this.generateSchedule()}
                     <div></div>
                 </Gallery>
             </div>
