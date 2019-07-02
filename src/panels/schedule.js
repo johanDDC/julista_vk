@@ -22,6 +22,7 @@ class Schedule extends React.Component {
             this.dayDates[7],
             this.dayDates[8],
         );
+        console.log(this.dayDates)
     }
 
     drawTopBar = () => { //FIXME
@@ -140,9 +141,9 @@ class Schedule extends React.Component {
             tales.push(this.generateScheduleTale(day));
         });
 
-        return(
-            [tales]
-        )
+        console.log(tales);
+        tales.push(<div></div>);
+        return tales
     };
 
     drawShedule = () => {
@@ -159,7 +160,6 @@ class Schedule extends React.Component {
                     onEnd={(this.state.currentDay > this.state.weekDuration ? this.setState({currentDay: this.state.weekDuration}) : null)}
                 >
                     {this.generateSchedule()}
-                    <div></div>
                 </Gallery>
             </div>
         );

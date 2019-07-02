@@ -19,7 +19,6 @@ function defineColor(val) {
         colors[0] = "rgb(255 75 43)";
         colors[1] = "rgb(255 65 108)";
     }
-    console.log(colors);
     return colors;
 } //TODO add 10 system support
 
