@@ -1,4 +1,5 @@
 import {setCorrectYear} from "./utils"
+import {async} from "q";
 
 let request = new XMLHttpRequest();
 let baseUrl = "https://bklet.ml/";

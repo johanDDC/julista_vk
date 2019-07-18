@@ -20,7 +20,9 @@ class AuthorizationView extends React.Component {
     }
 
     viewScreenSpinner = (switcher) => {
-        this.setState({popout: (switcher ? <ScreenSpinner/> : null)});
+        // this.setState({popout: (switcher ? <ScreenSpinner/> : null)});
+        console.log("start spinner", switcher);
+        this.setState({popout: <ScreenSpinner/>})
     };
 
     render() {

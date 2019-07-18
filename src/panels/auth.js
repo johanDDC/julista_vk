@@ -16,14 +16,14 @@ class Auth extends React.Component{
         };
     }
 
-    buttonClick = () => {
-        this.props.setSpinner(true); //FIXME spinner doesn`t work
+    buttonClick = async () => {
+        await this.props.setSpinner(true); //FIXME spinner doesn`t work
         if (this.state.login.trim() !== "" && this.state.password.trim() !== "") {
             let userSecret;
             let userId;
 
             let req = auth(this.state.login, this.state.password, this.props.diary);
-            console.log(req);
+            console.log("req", req);
             if (req){
                 if(req.status){
                     userSecret = req.secret;
