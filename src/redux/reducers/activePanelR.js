@@ -1,10 +1,11 @@
-const diary = (state = "", action) => {
+const activePanel = (state = "choose_diary", action) => {
     switch (action.type) {
-        case "SET_DIARY":
+        case "SET_PANEL":
             return action.value;
+
         default:
             return state;
     }
 };
 
-export default diary;
+export default activePanel

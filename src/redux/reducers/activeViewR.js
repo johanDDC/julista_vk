@@ -1,4 +1,11 @@
 const activeView = (state = "AuthorizationView", action) => {
-    if(action.type === "main")
-        return
+    switch (action.type) {
+        case "SET_VIEW":
+            return action.value;
+
+        default:
+            return state;
+    }
 };
+
+export default activeView;

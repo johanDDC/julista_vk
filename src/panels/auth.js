@@ -10,11 +10,9 @@ class Auth extends React.Component{
         super(props);
 
         this.state = {
-            diary: this.props.diary,
             login: "",
             password: "",
             inviteCode: "",
-            popout: null
         };
     }
 
@@ -24,14 +22,16 @@ class Auth extends React.Component{
             let userSecret;
             let userId;
 
-            let req = auth(this.state.login, this.state.password, this.state.diary);
+            let req = auth(this.state.login, this.state.password, this.props.diary);
+            console.log(req);
             if (req){
                 if(req.status){
                     userSecret = req.secret;
                     userId = req.id;
 
                     this.props.setSpinner(false);
-                    this.props.updateFunc("MainView", userId, userSecret);
+                    this.props.setView("MainView");
+                    // this.props.updateFunc("MainView", userId, userSecret);
                 } else {
                     this.props.setSpinner(false);
                     // Неверный логин или пароль
@@ -110,7 +110,6 @@ class Auth extends React.Component{
 
 Auth.propTypes = {
     id: PropTypes.string.isRequired,
-    go: PropTypes.func.isRequired,
     fetchedUser: PropTypes.shape({
         photo_200: PropTypes.string,
         first_name: PropTypes.string,
@@ -120,7 +119,7 @@ Auth.propTypes = {
         }),
     }),
     diary: PropTypes.string.isRequired,
-    updateFunc: PropTypes.func,
+    setView: PropTypes.func.isRequired,
     setSpinner: PropTypes.func
 };
 
