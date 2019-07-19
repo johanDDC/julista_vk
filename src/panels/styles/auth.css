@@ -3,27 +3,30 @@
 }
 
 .authGroup{
+    display: flex;
     margin: 0;
+    height: calc(100vh - 46px);
 }
 
 .welcome{
-    color: black;
+    color: #212121;
     display: flex;
     flex-direction: row;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
     padding-bottom: 0;
 }
 .medium_tip{
-    color: rgb(142 142 147);
-    font-size: 16px;
+    color: #767676;
+    font-size: 14px;
     font-weight: normal;
 }
 
 .large_tip{
-    color: rgb(142 142 147);
+    color: #767676;
     font-size: 20px;
     font-weight: normal;
+    /*margin-bottom: 22px;*/
 }
 
 .annotate{
@@ -37,6 +40,7 @@
     flex-direction: row;
     padding-bottom: 0;
     padding-top: 0;
+    margin-top: 48px;
 }
 
 .inputIcon{
@@ -48,6 +52,7 @@
 .inputInput{
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .inviteInput{
@@ -78,12 +83,15 @@
 
 .restorePassword{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 12px;
+    color: #6d6d6d;
+    padding-bottom: 0;
 }
 
 .restoreLink{
+    margin-left: 2px;
     font-weight: bold;
 }

@@ -1,0 +1,26 @@
+.customInputContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.customInputTip{
+    color: #757575;
+    font-size: 12px;
+    position: absolute;
+    transition: 0.5s linear;
+}
+
+.customInput{
+    width: 100%;
+    height: 20px;
+    border: 0;
+    border-bottom: 1px solid #d1d1d1;
+    font-size: 16px;
+    color: #1f1f1f;
+}
+
+.customInput:focus{
+    border-bottom: 2px solid #5690ff;
+}
