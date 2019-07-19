@@ -36,7 +36,7 @@ class App extends React.Component {
                     id="AuthorizationView"
                 >
                 </AuthorizationView>
-                <BottomBar id="MainView" userId={this.props.userId} userSecret={this.props.userSecret}/>
+                <BottomBar id="MainView"/>
             </Root>
         );
     }

@@ -6,7 +6,7 @@ import "./styles/account.css"
 
 import AccountUserContainer from "../custom_components/accountUserContainer"
 
-const Account = ({ id, go, fetchedUser }) => (
+const Account = ({ id }) => (
     <Panel id={id}>
         <PanelHeader
                      noShadow={true}
@@ -78,10 +78,6 @@ const Account = ({ id, go, fetchedUser }) => (
 
 Account.propTypes = {
     id: PropTypes.string.isRequired,
-    go: PropTypes.func.isRequired,
-    fetchedUser: PropTypes.shape({
-        photo_200: PropTypes.string,
-    }),
 };
 
 export default Account;

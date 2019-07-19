@@ -152,7 +152,6 @@ class Marks extends React.Component{
 }
 Marks.propTypes = {
     id: PropTypes.string.isRequired,
-    go: PropTypes.func.isRequired,
     marksData: PropTypes.any
 };
 

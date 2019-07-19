@@ -20,9 +20,9 @@ class AuthorizationView extends React.Component {
     }
 
     viewScreenSpinner = (switcher) => {
-        // this.setState({popout: (switcher ? <ScreenSpinner/> : null)});
+        this.setState({popout: (switcher ? <ScreenSpinner/> : null)});
         console.log("start spinner", switcher);
-        this.setState({popout: <ScreenSpinner/>})
+        // this.setState({popout: <ScreenSpinner/>})
     };
 
     render() {
@@ -37,16 +37,13 @@ class AuthorizationView extends React.Component {
                       fetchedUser={this.props.fetchedUser}
                       setSpinner={this.viewScreenSpinner}
                       setView={this.props.setViewAction}
+                      setPanel={this.props.setPanelAction}
                 />
             </View>
         )
     }
 }
 
-//
-// AuthorizationView.propTypes = {
-//
-// };
 
 const mapStateToProps = store => {
     console.log("Auth View", store);
@@ -62,8 +59,8 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
     return {
         setDiaryAction: diary => dispatch(setDiary(diary)),
-        setPanelAction: panel => dispatch(setPanel(panel)),
         setViewAction: view => dispatch(setView(view)),
+        setPanelAction: panel => dispatch(setPanel(panel)),
     }
 };
 

@@ -127,8 +127,6 @@ class Settings extends React.Component {
 
 Settings.propTypes = {
     id: PropTypes.string.isRequired,
-    go: PropTypes.func.isRequired,
-    currentDay: PropTypes.number
 };
 
 export default Settings;

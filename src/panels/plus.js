@@ -122,8 +122,6 @@ class Plus extends React.Component {
 
 Plus.propTypes = {
     id: PropTypes.string.isRequired,
-    go: PropTypes.func.isRequired,
-    currentDay: PropTypes.number
 };
 
 export default Plus;

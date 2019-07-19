@@ -181,7 +181,6 @@ class Schedule extends React.Component {
 
 Schedule.propTypes = {
     id: PropTypes.string.isRequired,
-    go: PropTypes.func.isRequired,
     currentDay: PropTypes.number,
     userSecret: PropTypes.any,
     userId: PropTypes.any

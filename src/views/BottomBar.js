@@ -15,6 +15,8 @@ import ScheduleView from "./ScheduleView";
 import PlusView from "./PlusView";
 import SettingsView from "./SettingsView";
 import PropTypes from "prop-types";
+import {setPanel} from "../redux/actions/PanelAction";
+import {connect} from "react-redux";
 
 
 class BottomBar extends React.Component {
@@ -23,14 +25,28 @@ class BottomBar extends React.Component {
 
         this.state = {
             activeStory: 'Account',
-
-            userId: this.props.userId,
-            userSecret: this.props.userSecret
         };
         this.onStoryChange = this.onStoryChange.bind(this);
     }
 
     onStoryChange(e) {
+        switch (e.currentTarget.dataset.story) {
+            case "Account":
+                this.props.setPanelAction("account");
+                break;
+            case "Marks":
+                this.props.setPanelAction("marks");
+                break;
+            case "Schedule":
+                this.props.setPanelAction("schedule");
+                break;
+            case "Plus":
+                this.props.setPanelAction("plus");
+                break;
+            case "Settings":
+                this.props.setPanelAction("settings");
+                break;
+        }
         this.setState({activeStory: e.currentTarget.dataset.story})
     }
 
@@ -66,35 +82,46 @@ class BottomBar extends React.Component {
                     ><SettingsIcon size="28" selected={this.state.activeStory === 'Settings'}/></TabbarItem>
                 </Tabbar>
             }>
-                <svg style={{width:0,height:0,position: "absolute"}} aria-hidden="true" focusable="false">
-                    <linearGradient id="my-cool-gradient" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#0000ff" />
-                        <stop offset="100%" stop-color="#ff0000" />
-                    </linearGradient>
-                </svg>
-                <AccountView id="Account" activePanel="account" >
+                <AccountView id="Account" >
                 </AccountView>
-                <MarksView id="Marks" activePanel="marks"
-                           userId={this.state.userId}
-                           userSecret={this.state.userSecret}>
+                <MarksView id="Marks" activePanel={this.props.activePanel}
+                           userId={this.props.userId}
+                           userSecret={this.props.userSecret}>
                 </MarksView>
-                <ScheduleView id="Schedule" activePanel="schedule"
-                              userId={this.state.userId}
-                              userSecret={this.state.userSecret}>
+                <ScheduleView id="Schedule" activePanel={this.props.activePanel}
+                              userId={this.props.userId}
+                              userSecret={this.props.userSecret}>
                 </ScheduleView>
-                <PlusView id="Plus" activePanel="plus">
+                <PlusView id="Plus">
                 </PlusView>
-                <SettingsView id="Settings" activePanel="settings">
+                <SettingsView id="Settings">
                 </SettingsView>
             </Epic>
         )
     }
 }
 
-BottomBar.propTypes = {
-    id: PropTypes.string.isRequired,
-    userSecret: PropTypes.any,
-    userId: PropTypes.any
+// BottomBar.propTypes = {
+//     id: PropTypes.string.isRequired,
+// };
+
+const mapStateToProps = store => {
+    console.log("BottomBar", store);
+    return {
+        activePanel: store.activePanel,
+        userId: store.userId,
+        userSecret: store.userSecret,
+    }
 };
 
-export default BottomBar;
+const mapDispatchToProps = dispatch => {
+    return {
+        setPanelAction: panel => dispatch(setPanel(panel)),
+    }
+};
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(BottomBar);

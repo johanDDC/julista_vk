@@ -4,6 +4,7 @@ import { View } from '@vkontakte/vkui';
 import Marks from '../panels/marks'
 
 import {getAndAggregateMarks} from "../utils/api"
+import {connect} from "react-redux";
 
 class MarksView extends React.Component {
     constructor(props) {
@@ -29,21 +30,19 @@ class MarksView extends React.Component {
     render() {
         return (
             <View activePanel={this.props.activePanel}>
-                <Marks id={this.state.activePanel} go={this.props.go} marksData={this.state.marksData}/>
+                <Marks id="marks" marksData={this.state.marksData}/>
             </View>
         )
     }
 }
 
-MarksView.propTypes = {
-    id: PropTypes.string.isRequired,
-    activePanel: PropTypes.string.isRequired,
-    go: PropTypes.func,
-    fetchedUser: PropTypes.shape({
-        photo_200: PropTypes.string,
-    }),
-    userSecret: PropTypes.any,
-    userId: PropTypes.any
+const mapStateToProps = store => {
+    console.log("Marks View", store);
+    return {
+        activePanel: store.activePanel,
+        userId: store.userId,
+        userSecret: store.userSecret,
+    }
 };
 
-export default MarksView;
+export default connect(mapStateToProps)(MarksView)

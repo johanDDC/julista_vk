@@ -30,7 +30,8 @@ class Auth extends React.Component{
                     userId = req.id;
 
                     this.props.setSpinner(false);
-                    this.props.setView("MainView");
+                    // await this.props.setPanel("account");
+                    this.props.setView("MainView", "account");
                     // this.props.updateFunc("MainView", userId, userSecret);
                 } else {
                     this.props.setSpinner(false);
@@ -120,6 +121,7 @@ Auth.propTypes = {
     }),
     diary: PropTypes.string.isRequired,
     setView: PropTypes.func.isRequired,
+    setPanel: PropTypes.func.isRequired,
     setSpinner: PropTypes.func
 };
 
