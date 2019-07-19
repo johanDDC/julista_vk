@@ -1,3 +1,10 @@
 const userId = (state = null, action) => {
-    return state;
+    switch (action.type) {
+        case "SET_ID":
+            return action.value;
+        default:
+            return state;
+    }
 };
+
+export default userId

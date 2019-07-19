@@ -1,3 +1,10 @@
 const userSecret = (state = null, action) => {
-    return state;
+    switch (action.type) {
+        case "SET_SECRET":
+            return action.value;
+        default:
+            return state;
+    }
 };
+
+export default userSecret

@@ -101,10 +101,6 @@ class BottomBar extends React.Component {
     }
 }
 
-// BottomBar.propTypes = {
-//     id: PropTypes.string.isRequired,
-// };
-
 const mapStateToProps = store => {
     console.log("BottomBar", store);
     return {
