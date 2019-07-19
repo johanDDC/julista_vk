@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 *.lock
 *.imi
+*.iml
 
 # Dependency directories
 package-lock.json
