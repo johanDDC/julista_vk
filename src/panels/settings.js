@@ -6,10 +6,8 @@ import VKSettingsIcon from "../custom_components/icon-pack/VKSettingsIcon"
 import PurposeIcon from "../custom_components/icon-pack/PurposeIcon"
 import AdvancesIcon from "../custom_components/icon-pack/AdvancesIcon"
 import NewMarksIcon from "../custom_components/icon-pack/NewMarksIcon"
-import ReportsIcon from "../custom_components/icon-pack/ReportsIcon"
-import EventsIcon from "../custom_components/icon-pack/EventsIcon"
+import Mark from "../custom_components/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
-import RightArrowIcon from "../custom_components/icon-pack/RightArrowIcon"
 
 
 class Settings extends React.Component {
@@ -51,7 +49,9 @@ class Settings extends React.Component {
                         </span>
                     </div>
                     <Button level="tertiary" className="settingsSettingContainer">
-                        <PurposeIcon/>
+                        <div style={{width: "24px"}}>
+                            <Mark size="28" val={this.props.expectedMark.toString()} is_routine={false}/>
+                        </div>
                         <div className="settingsSettingInfo">
                         <span className="settingsSettingTitle">
                             Желаемая оценка
@@ -98,6 +98,8 @@ class Settings extends React.Component {
 
 Settings.propTypes = {
     id: PropTypes.string.isRequired,
+    expectedMark: PropTypes.number.isRequired,
+    changeMark: PropTypes.func.isRequired,
 };
 
 export default Settings;

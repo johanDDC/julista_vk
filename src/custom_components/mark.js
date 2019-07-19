@@ -27,7 +27,7 @@ const Mark = props => (
                                             height: (props.size ? `${props.size}px `:`20px`),
                                             background: (props.is_routine ? "rgb(86 144 255)"
                                                 : `linear-gradient(90deg, ${defineColor(props.val)[0]}, ${defineColor(props.val)[1]})`),
-                                            fontSize: (props.fs ? `${props.fs}px` : "14px")}}>
+                                            fontSize: (props.fontSize ? `${props.fontSize}px` : "14px")}}>
         <span>{props.val}</span>
     </div>
 );
@@ -36,7 +36,7 @@ Mark.propTypes = {
     size: PropTypes.string.isRequired,
     val: PropTypes.string.isRequired,
     is_routine: PropTypes.bool.isRequired,
-    fs: PropTypes.string
+    fontSize: PropTypes.string
 };
 
 export default Mark;
