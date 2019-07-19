@@ -58,28 +58,28 @@ class BottomBar extends React.Component {
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Account'}
                         data-story="Account">
-                        <AccountIcon id="gradient-horizontal" size="28" selected={this.state.activeStory === 'Account'}/></TabbarItem>
+                        <AccountIcon size="24" selected={this.state.activeStory === 'Account'}/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Marks'}
                         data-story="Marks">
-                        <MarksIcon size="28" selected={this.state.activeStory === 'Marks'}/>
+                        <MarksIcon size="24" selected={this.state.activeStory === 'Marks'}/>
                     </TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Schedule'}
                         data-story="Schedule"
-                    ><ScheduleIcon size="28" selected={this.state.activeStory === 'Schedule'}/></TabbarItem>
+                    ><ScheduleIcon size="24" selected={this.state.activeStory === 'Schedule'}/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Plus'}
                         data-story="Plus"
-                    ><PlusIcon size="28" selected={this.state.activeStory === 'Plus'}/></TabbarItem>
+                    ><PlusIcon size="24" selected={this.state.activeStory === 'Plus'}/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Settings'}
                         data-story="Settings"
-                    ><SettingsIcon size="28" selected={this.state.activeStory === 'Settings'}/></TabbarItem>
+                    ><SettingsIcon size="24" selected={this.state.activeStory === 'Settings'}/></TabbarItem>
                 </Tabbar>
             }>
                 <AccountView id="Account" >
