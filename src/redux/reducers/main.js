@@ -5,18 +5,16 @@ import activePanel from "./activePanelR"
 import diary from "./diaryR"
 import fetchedUser from "./fetchedUserR"
 import userId from "./userIdR"
-import userLogin from "./userLoginR"
-import userPassword from "./userPasswordR"
 import userSecret from "./userSecretR"
+import expectedMark from "./expectedMarkR"
 
-export const initialState = {
+const initialState = {
     activeView: 'AuthorizationView',
     diary: null,
     fetchedUser: null,
-    userLogin: null,
-    userPassword: null,
     userId: null,
     userSecret: null,
+    expectedMark: 5
 };
 
 export const rootReducer = combineReducers({
@@ -26,6 +24,5 @@ export const rootReducer = combineReducers({
     fetchedUser: fetchedUser,
     userId: userId,
     userSecret: userSecret,
-    userLogin: userLogin,
-    userPassword: userPassword,
+    expectedMark: expectedMark
 });
