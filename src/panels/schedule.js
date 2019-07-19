@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
 import Mark from "../custom_components/mark"
-import {scheduleGetDates} from "../utils/utils"
+import {scheduleGetDates, getRusMonthName} from "../utils/utils"
 import {getSchedule} from "../utils/api";
 
 class Schedule extends React.Component {
@@ -12,18 +12,39 @@ class Schedule extends React.Component {
 
         this.state = {
             currentDay: (this.props.currentDay ? this.props.currentDay === 0 ? 6 : this.props.currentDay : 1),
-            weekDuration: 6
+            month: getRusMonthName(new Date().getMonth()),
+            weekDuration: 6,
+            ready: false,
         };
 
         this.dayDates = scheduleGetDates();
+        console.log("day dates", this.dayDates);
+    }
+
+    componentDidMount() {
+        this.runSpinner();
+        // this.scheduleData = {
+        //     data: {
+        //         days : []
+        //     }
+        // };
+    }
+
+    runSpinner = async () => {
+        await this.props.setSpinner(true);
         this.scheduleData = getSchedule(
             this.props.userId,
             this.props.userSecret,
             this.dayDates[7],
             this.dayDates[8],
         );
-        console.log(this.dayDates)
-    }
+        console.log("schedule data", this.scheduleData);
+        this.setState({
+            ready: true,
+            weekDuration: (this.scheduleData.data.days.length > 5 ? 6: 5) // if holidays, length is equal to 0
+        });
+        this.props.setSpinner(false);
+    };
 
     drawTopBar = () => { //FIXME
         return (
@@ -79,16 +100,21 @@ class Schedule extends React.Component {
                             </div>
                         </Button>
                     </div>
-                    <div className="scheduleWeekDay">
-                        <span>СБ</span>
-                        <Button level="tertiary" style={{margin: 0, padding: 0, color: "#fff"}}
-                                onClick={() => this.setState({currentDay: 6})}>
-                            <div
-                                className={`scheduleWeekDayDate ${this.state.currentDay === 6 ? 'scheduleWeekDaySelected' : null}`}>
-                                {this.dayDates[5]}
+                    {(
+                        this.state.weekDuration === 6 ?
+                            <div className="scheduleWeekDay">
+                                <span>СБ</span>
+                                <Button level="tertiary" style={{margin: 0, padding: 0, color: "#fff"}}
+                                        onClick={() => this.setState({currentDay: 6})}>
+                                    <div
+                                        className={`scheduleWeekDayDate ${this.state.currentDay === 6 ? 'scheduleWeekDaySelected' : null}`}>
+                                        {this.dayDates[5]}
+                                    </div>
+                                </Button>
                             </div>
-                        </Button>
-                    </div>
+                            :
+                            null
+                    )}
                 </Div>
             </FixedLayout>
         );
@@ -132,6 +158,13 @@ class Schedule extends React.Component {
             </div>
         );
     };
+    generateEmptyTale = () => {
+        return (
+            <div className="scheduleTale">
+                <p>Сегодня нет занятий</p>
+            </div>
+        )
+    };
 
     generateSchedule = () => {
         let days = this.scheduleData.data.days;
@@ -140,6 +173,12 @@ class Schedule extends React.Component {
         days.forEach((day) => {
             tales.push(this.generateScheduleTale(day));
         });
+
+        if (tales.length === 0){
+            for (let i = 0; i < 5; i++) {
+                tales.push(this.generateEmptyTale());
+            }
+        }
 
         console.log(tales);
         tales.push(<div></div>);
@@ -151,7 +190,6 @@ class Schedule extends React.Component {
             <div>
                 <Gallery
                     slideWidth="100%"
-                    // align="center"
                     className="scheduleSliderContainer"
                     slideIndex={this.state.currentDay > 0 ? this.state.currentDay - 1 : this.state.currentDay}
                     onChange={slideIndex => {
@@ -170,10 +208,12 @@ class Schedule extends React.Component {
             <Panel id={this.props.id} style={{backgroundColor: "rgb(86, 144, 255)"}}>
                 <PanelHeader
                     noShadow>
-                    <span className="scheduleHeaderMonth">Май</span>
+                    <span className="scheduleHeaderMonth">{this.state.month}</span>
                 </PanelHeader>
                 {this.drawTopBar()}
-                {this.drawShedule()}
+                {
+                    (this.state.ready ? this.drawShedule() : null)
+                }
             </Panel>
         )
     }
@@ -183,7 +223,8 @@ Schedule.propTypes = {
     id: PropTypes.string.isRequired,
     currentDay: PropTypes.number,
     userSecret: PropTypes.any,
-    userId: PropTypes.any
+    userId: PropTypes.any,
+    setSpinner: PropTypes.func,
 };
 
 export default Schedule;

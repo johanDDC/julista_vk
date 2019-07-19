@@ -47,12 +47,13 @@ export function getSchedule(id, secret, start, end) {
 
     let queries = `?id=${id}&secret=${secret}&start=${setCorrectYear(start.toLocaleDateString())}&end=${setCorrectYear(end.toLocaleDateString())}`;
 
-    console.log(queries);
+    console.log("q", queries);
 
     request.open('GET', baseUrl + methodUrl + queries, false);
     request.send(null);
 
     console.log(request.responseText);
 
-    return JSON.parse(request.responseText)
+    if (request.readyState === 4)
+        return JSON.parse(request.responseText)
 }
