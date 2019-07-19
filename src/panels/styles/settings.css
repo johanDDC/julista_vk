@@ -1,24 +1,33 @@
 #panel-header-settings > *, #header-bg-settings > *, #header-right-settings > *, #header-left-settings > *, #header-title-settings > *{
-    background-color: rgb(86 144 255) !important;
+    background-color: #5690ff !important;
     z-index: 5 !important;
 }
 .settingsTitleContainer{
-    margin: 4px 16px 4px 16px;
+    padding: 0 0 16px 0;
 }
 
 .settingsTitle{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    min-height: 35px;
-    font-size: 13px;
-    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    color: #5690ff;
+}
+
+.groupSettingsContainer{
+    background-color: #fff;
+    box-shadow: 0 4px 4px 0 #d9d9d9;
+    padding: 15px 0 12px 16px;
+    margin-bottom: 12px;
+}
+
+.groupSettingsContainer > button{
+    margin-top: 0 !important;
+    padding: 0;
 }
 
 .settingsSettingContainer{
     width: 100%;
     min-height: 30px;
-    padding: 0 0 0 16px;
+    /*padding: 0 0 0 16px;*/
     background-color: white;
     display: flex;
     flex-direction: row;
@@ -60,14 +69,10 @@
     margin-left: 15px;
 }
 
-.settingsSettingSeparated{
-    border-bottom: 1px solid rgb(209 209 214);
-}
-
-.settingSettingTitle{
+.settingsSettingTitle{
     display: flex;
     flex-direction: row;
-    font-size: 17px !important;
+    font-size: 16px !important;
     color: black;
 }
 

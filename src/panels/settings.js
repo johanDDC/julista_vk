@@ -1,4 +1,4 @@
-import {Panel, PanelHeader, Button, Switch} from '@vkontakte/vkui';
+import {Panel, PanelHeader, Button, Switch, Group} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/settings.css"
@@ -24,102 +24,73 @@ class Settings extends React.Component {
     render() {
         return (
             <Panel id={this.props.id}>
-                <PanelHeader>
+                <PanelHeader noShadow>
                     Настройки
                 </PanelHeader>
-                <div className="settingsTitleContainer">
-                    <span className="settingsTitle">
-                        Ссылки
-                    </span>
-                </div>
-                <Button level="tertiary" className="settingsSettingContainer">
-                    <VKSettingsIcon/>
-                    <div className="settingsSettingInfo">
-                        <span className="settingsSettingTitle">
-                            Группа ВК
-                        </span>
-                        <span className="settingsSettingSwitch">
-                            <RightArrowIcon/>
+                <div className="groupSettingsContainer">
+                    <div className="settingsTitleContainer">
+                        <span className="settingsTitle">
+                            Ссылки
                         </span>
                     </div>
-                </Button>
-                <div className="settingsTitleContainer">
-                    <span className="settingsTitle">
-                        Обучение
-                    </span>
+                    <Button level="tertiary" className="settingsSettingContainer">
+                        <VKSettingsIcon/>
+                        <div className="settingsSettingInfo">
+                            <span className="settingsSettingTitle" style={{color: "#5181b8", fontWeight: "bold"}}>
+                                Группа ВК
+                            </span>
+                            <span className="settingsSettingSwitch">
+                        </span>
+                        </div>
+                    </Button>
                 </div>
-                <Button level="tertiary" className="settingsSettingContainer">
-                    <PurposeIcon/>
-                    <div className="settingsSettingInfo">
+                <div className="groupSettingsContainer">
+                    <div className="settingsTitleContainer">
+                        <span className="settingsTitle">
+                            Дневник
+                        </span>
+                    </div>
+                    <Button level="tertiary" className="settingsSettingContainer">
+                        <PurposeIcon/>
+                        <div className="settingsSettingInfo">
                         <span className="settingsSettingTitle">
                             Желаемая оценка
                         </span>
-                        <span className="settingsSettingSwitch">
-                            <span style={{color: "rgb(143 142 148)", marginRight: "15px"}}>5</span>
-                            <RightArrowIcon/>
-                        </span>
-                    </div>
-                </Button>
-                <div className="settingsTitleContainer">
-                    <span className="settingsTitle">
-                        Уведомления
-                    </span>
-                </div>
-                <div  className="settingsSettingContainer" style={{paddingRight: "-16px"}}>
-                    <AdvancesIcon/>
-                    <div className="settingsSettingInfo settingsSettingSeparated">
+                        </div>
+                    </Button>
+                    <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}>
+                        <AdvancesIcon/>
+                        <div className="settingsSettingInfo">
                         <span className="settingsSettingTitle">
-                            Советы
+                            Уведомления
                         </span>
-                        <span>
+                            <span>
                             <Switch className="settingsSettingSwitcher"/>
                         </span>
-                    </div>
-                </div>
-                <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}>
-                    <NewMarksIcon/>
-                    <div className="settingsSettingInfo settingsSettingSeparated">
-                        <span className="settingsSettingTitle">
-                            Новые оценки
-                        </span>
-                        <span>
-                            <Switch className="settingsSettingSwitcher"/>
-                        </span>
-                    </div>
-                </div>
-                <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}>
-                    <ReportsIcon/>
-                    <div className="settingsSettingInfo settingsSettingSeparated">
-                        <span className="settingsSettingTitle">
-                            Сводки за день
-                        </span>
-                        <span>
-                            <Switch className="settingsSettingSwitcher"/>
-                        </span>
-                    </div>
-                </div>
-                <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}>
-                    <EventsIcon/>
-                    <div className="settingsSettingInfo">
-                        <span className="settingsSettingTitle">
-                            Собьытия из ленты
-                        </span>
-                        <span>
-                            <Switch className="settingsSettingSwitcher"/>
-                        </span>
-                    </div>
-                </div>
-                <Button level="tertiary" className="settingsSettingContainer" style={{marginTop: "35px"}}>
-                    <GetOutIcon/>
-                    <div className="settingsSettingInfo">
-                        <span className="settingsSettingTitle">
-                            Выйти
-                        </span>
-                        <div className="settingsSettingSwitch">
-                            <RightArrowIcon/>
                         </div>
                     </div>
-                </Button>
+                    <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}>
+                        <NewMarksIcon/>
+                        <div className="settingsSettingInfo">
+                        <span className="settingsSettingTitle">
+                            Тёмная тема
+                        </span>
+                            <span>
+                            <Switch className="settingsSettingSwitcher"/>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div className="groupSettingsContainer">
+                    <Button level="tertiary" className="settingsSettingContainer" style={{marginTop: "35px"}}>
+                        <GetOutIcon/>
+                        <div className="settingsSettingInfo">
+                        <span className="settingsSettingTitle" style={{color: "#ff4939", fontWeight: "bold"}}>
+                            Выйти
+                        </span>
+                        </div>
+                    </Button>
+                </div>
             </Panel>
         )
     }
