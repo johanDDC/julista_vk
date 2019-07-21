@@ -9,39 +9,29 @@ class Schedule extends React.Component {
     constructor(props) {
         super(props);
 
+        this.dayDates = scheduleGetDates();
+        console.log("CONSTUCTOR IS RUN");
+        this.scheduleData = this.props.appData.journal;
+        let flag = this.props.appData.journal.data.days.length === 0;
+
         this.state = {
             currentDay: (this.props.currentDay ? this.props.currentDay === 0 ? 6 : this.props.currentDay : 1),
             month: getRusMonthName(new Date().getMonth()),
-            weekDuration: 6,
-            ready: false,
+            weekDuration: (!flag ? this.scheduleData.data.days.length : 5),
+            ready: !flag,
         };
 
-        this.dayDates = scheduleGetDates();
-        console.log("day dates", this.dayDates);
-
-        this.scheduleData = {
-            data: {
-                days: []
-            }
-        };
-    }
-
-    componentDidMount() {
-        this.runSpinner();
+        if (flag)
+            this.runSpinner();
     }
 
     runSpinner = async () => {
-        console.log("is it below?");
         this.props.getJournal([], this.props.userId, this.props.userSecret, this.dayDates[7], this.dayDates[8]);
-        console.log("schedule data", this.scheduleData);
         let journal = this.props.appData.journal;
-        console.log("journal data", this.props.appData.journal);
-
+        console.log("RUN-FUNC IS RUN");
 
         let id = setInterval(() => {
             if (this.props.appData.journal.length !== 0) {
-                console.log("?", journal, "/", this.props.appData.journal);
-                console.log("it`s going to update");
                 this.scheduleData = this.props.appData.journal;
                 clearInterval(id);
                 this.setState({
@@ -50,6 +40,7 @@ class Schedule extends React.Component {
                 });
             }
         }, 200);
+
     };
 
     drawTopBar = () => { //FIXME
@@ -186,7 +177,6 @@ class Schedule extends React.Component {
             }
         }
 
-        console.log(tales);
         tales.push(<div></div>);
         return tales
     };
@@ -217,7 +207,7 @@ class Schedule extends React.Component {
                     <span className="scheduleHeaderMonth">{this.state.month}</span>
                 </PanelHeader>
                 {this.drawTopBar()}
-                {console.log("render schedule data", this.scheduleData)}
+                {console.log("render schedule data", this.scheduleData, this.state.ready)}
                 {
                     (this.state.ready ? this.drawShedule() : null)
                 }

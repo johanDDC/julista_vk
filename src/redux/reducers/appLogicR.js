@@ -1,5 +1,9 @@
 const initialState = {
-    journal: [],
+    journal: {
+        data: {
+            days: []
+        }
+    },
     marks: [],
     isFetching: false,
 };
