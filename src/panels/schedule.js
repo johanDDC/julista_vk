@@ -1,8 +1,9 @@
-import {Div, Button, Panel, PanelHeader, FixedLayout, Gallery} from '@vkontakte/vkui';
+import {Div, Button, Panel, PanelHeader, FixedLayout, Gallery, Spinner} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
 import Mark from "../custom_components/mark"
+import CustomSpinner from "../custom_components/customSpinner"
 import {scheduleGetDates, getRusMonthName} from "../utils/utils"
 
 class Schedule extends React.Component {
@@ -22,10 +23,10 @@ class Schedule extends React.Component {
         };
 
         if (flag)
-            this.runSpinner();
+            this.loadData();
     }
 
-    runSpinner = async () => {
+    loadData = async () => {
         this.props.getJournal([], this.props.userId, this.props.userSecret, this.dayDates[7], this.dayDates[8]);
         let journal = this.props.appData.journal;
         console.log("RUN-FUNC IS RUN");
@@ -41,6 +42,12 @@ class Schedule extends React.Component {
             }
         }, 200);
 
+    };
+
+    drawSpinner = () => {
+        return (
+            <CustomSpinner isInverse={false}/>
+        );
     };
 
     drawTopBar = () => { //FIXME
@@ -209,7 +216,7 @@ class Schedule extends React.Component {
                 {this.drawTopBar()}
                 {console.log("render schedule data", this.scheduleData, this.state.ready)}
                 {
-                    (this.state.ready ? this.drawShedule() : null)
+                    (this.state.ready ? this.drawShedule() : this.drawSpinner())
                 }
             </Panel>
         )
@@ -221,7 +228,6 @@ Schedule.propTypes = {
     currentDay: PropTypes.number,
     userSecret: PropTypes.any,
     userId: PropTypes.any,
-    setSpinner: PropTypes.func,
     getJournal: PropTypes.func.isRequired,
     appData: PropTypes.any.isRequired,
 };
