@@ -25,7 +25,6 @@ export function getJournal(journal, id, secret, start, end) {
         // }, 1000)
     }
 }
-
 function getSchedule(id, secret, start, end, dispatcher) {
     let methodUrl = "api/diary/journal/dates/";
 

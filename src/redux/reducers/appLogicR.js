@@ -23,6 +23,8 @@ function appLogic(state = initialState, action) {
                 journal: action.data,
                 isFetching: false
             };
+        case "GET_JOURNAL_FAIL":
+            //TODO append fail case
 
         default:
             return state

@@ -8,6 +8,7 @@ import userId from "./userIdR"
 import userSecret from "./userSecretR"
 import expectedMark from "./expectedMarkR"
 import appLogic from "./appLogicR"
+import profile from "./profileR"
 
 const initialState = {
     activeView: 'AuthorizationView',
@@ -27,4 +28,5 @@ export const rootReducer = combineReducers({
     userSecret: userSecret,
     expectedMark: expectedMark,
     appLogic: appLogic,
+    profile: profile,
 });

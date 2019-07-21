@@ -4,6 +4,7 @@ import React from "react";
 import "./styles/marks.css"
 
 import Mark from "../custom_components/mark"
+import CustomSpinner from "../custom_components/customSpinner";
 
 class Marks extends React.Component{
     constructor (props) {
@@ -15,6 +16,12 @@ class Marks extends React.Component{
             marksData: this.props.marksData
         };
     }
+
+    drawSpinner = () => {
+        return (
+            <CustomSpinner isInverse={true}/>
+        );
+    };
 
     drawFirstTab = () => {
         return(

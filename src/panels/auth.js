@@ -11,58 +11,38 @@ import CustomInput from "../custom_components/customInput"
 class Auth extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            login: "",
-            password: "",
-            inviteCode: "",
-        };
     }
 
     btnBack = () => {
         this.props.setPanel("choose_diary")
     };
 
-    buttonClick = async () => {
-        await this.props.setSpinner(true); //FIXME spinner doesn`t work
-        await this.setState({
-            login: document.getElementById("loginInput-i").value,
-            password: document.getElementById("passInput-i").value,
-            inviteCode: document.getElementById("inviteCodeInput-i").value,
-        });
-        if (this.state.login.trim() !== "" && this.state.password.trim() !== "") {
-            let userSecret;
-            let userId;
+    buttonClick = () => {
+        this.props.setSpinner(true); //FIXME spinner doesn`t work
+        let login = document.getElementById("loginInput-i").value;
+        let password = document.getElementById("passInput-i").value;
+        let inviteCode = document.getElementById("inviteCodeInput-i").value;
 
-            let req = auth(this.state.login, this.state.password, this.props.diary);
-            console.log("req", req);
-            if (req) {
-                if (req.status) {
-                    userSecret = req.secret;
-                    userId = req.id;
+        if (login.trim() !== "" && password.trim() !== "") {
+            console.log("inside func");
+            this.props.getProfile(login, password, this.props.diary);
 
-                    this.props.setId(userId);
-                    this.props.setSecret(userSecret);
+            let id = setInterval(() => {
+                if (this.props.profile.secret) {
+                    clearInterval(id);
                     this.props.setSpinner(false);
                     this.props.setView("MainView", "account");
-                } else {
-                    this.props.setSpinner(false);
-                    // Неверный логин или пароль
                 }
-            } else {
-                this.props.setSpinner(false);
-                // Вообще левая ошибка
-            }
+            }, 200);
         }
-        this.props.setSpinner(false);
     };
 
     render() {
         return (
             <Panel id={this.props.id}>
                 <PanelHeader
-                             left={<HeaderButton onClick={this.btnBack}>{osname === IOS ?
-                                 <Icon28ChevronBack/> : <Icon24Back/>}</HeaderButton>}>
+                    left={<HeaderButton onClick={this.btnBack}>{osname === IOS ?
+                        <Icon28ChevronBack/> : <Icon24Back/>}</HeaderButton>}>
                     Авторизация
                 </PanelHeader>
                 <Group className="authGroup">
@@ -136,10 +116,10 @@ Auth.propTypes = {
         }),
     }),
     diary: PropTypes.string.isRequired,
-    setSecret: PropTypes.func.isRequired,
-    setId: PropTypes.func.isRequired,
+    profile: PropTypes.any.isRequired,
     setView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
+    getProfile: PropTypes.func.isRequired,
     setSpinner: PropTypes.func
 };
 
