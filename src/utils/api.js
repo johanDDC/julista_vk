@@ -1,5 +1,6 @@
 import {setCorrectYear} from "./utils"
-import {async} from "q";
+
+const axios = require('axios');
 
 let request = new XMLHttpRequest();
 let baseUrl = "https://bklet.ml/";
@@ -23,6 +24,16 @@ export function auth(login, password, diary) {
     request.send(JSON.stringify(json));
 
     return JSON.parse(request.responseText)
+
+    // axios.post(baseUrl + methodUrl, {
+    //     diary: "mosru",
+    //     login: "zzoorm@gmail.com",
+    //     password: "YaLol123"
+    // })
+    //     .then((response) => {
+    //         console.log("resp", response.data);
+    //         return response.data;
+    //     });
 }
 
 export function getAndAggregateMarks(id, secret) {

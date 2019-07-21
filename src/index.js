@@ -6,7 +6,7 @@ import connect from '@vkontakte/vkui-connect';
 import App from './App';
 import store from "./redux/store/main";
 import {Provider} from "react-redux"
-// import registerServiceWorker from './sw';
+import registerServiceWorker from './sw';
 
 // Init VK App
 connect.send('VKWebAppInit', {});
@@ -15,10 +15,12 @@ connect.send('VKWebAppInit', {});
 // расскомментируйте строку с registerServiceWorker();
 // Но не забывайте, что на данный момент у технологии есть достаточно подводных камней
 // Подробнее про сервис воркеры можно почитать тут — https://vk.cc/8MHpmT 
-// registerServiceWorker();
+
 
 ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>
     , document.getElementById('root'));
+
+registerServiceWorker();

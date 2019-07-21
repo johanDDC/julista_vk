@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from '@vkontakte/vkui';
+import {ScreenSpinner, View} from '@vkontakte/vkui';
 import Plus from "../panels/plus";
 import {connect} from "react-redux";
 
@@ -11,7 +11,7 @@ class PlusView extends React.Component {
 
     render() {
         return (
-            <View activePanel={this.props.activePanel}>
+            <View popout={<ScreenSpinner/>} activePanel={this.props.activePanel}>
                 <Plus  id="plus"/>
             </View>
         )

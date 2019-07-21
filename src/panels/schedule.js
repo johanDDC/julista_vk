@@ -4,7 +4,6 @@ import React from "react";
 import "./styles/schedule.css"
 import Mark from "../custom_components/mark"
 import {scheduleGetDates, getRusMonthName} from "../utils/utils"
-import {getSchedule} from "../utils/api";
 
 class Schedule extends React.Component {
     constructor(props) {
@@ -19,31 +18,38 @@ class Schedule extends React.Component {
 
         this.dayDates = scheduleGetDates();
         console.log("day dates", this.dayDates);
+
+        this.scheduleData = {
+            data: {
+                days: []
+            }
+        };
     }
 
     componentDidMount() {
         this.runSpinner();
-        // this.scheduleData = {
-        //     data: {
-        //         days : []
-        //     }
-        // };
     }
 
     runSpinner = async () => {
-        await this.props.setSpinner(true);
-        this.scheduleData = getSchedule(
-            this.props.userId,
-            this.props.userSecret,
-            this.dayDates[7],
-            this.dayDates[8],
-        );
+        console.log("is it below?");
+        this.props.getJournal([], this.props.userId, this.props.userSecret, this.dayDates[7], this.dayDates[8]);
         console.log("schedule data", this.scheduleData);
-        this.setState({
-            ready: true,
-            weekDuration: (this.scheduleData.data.days.length > 5 ? 6: 5) // if holidays, length is equal to 0
-        });
-        this.props.setSpinner(false);
+        let journal = this.props.appData.journal;
+        console.log("journal data", this.props.appData.journal);
+
+
+        let id = setInterval(() => {
+            if (this.props.appData.journal.length !== 0) {
+                console.log("?", journal, "/", this.props.appData.journal);
+                console.log("it`s going to update");
+                this.scheduleData = this.props.appData.journal;
+                clearInterval(id);
+                this.setState({
+                    ready: true,
+                    weekDuration: (this.scheduleData.data.days.length > 5 ? 6 : 5) // if holidays, length is equal to 0
+                });
+            }
+        }, 200);
     };
 
     drawTopBar = () => { //FIXME
@@ -174,7 +180,7 @@ class Schedule extends React.Component {
             tales.push(this.generateScheduleTale(day));
         });
 
-        if (tales.length === 0){
+        if (tales.length === 0) {
             for (let i = 0; i < 5; i++) {
                 tales.push(this.generateEmptyTale());
             }
@@ -211,6 +217,7 @@ class Schedule extends React.Component {
                     <span className="scheduleHeaderMonth">{this.state.month}</span>
                 </PanelHeader>
                 {this.drawTopBar()}
+                {console.log("render schedule data", this.scheduleData)}
                 {
                     (this.state.ready ? this.drawShedule() : null)
                 }
@@ -225,6 +232,8 @@ Schedule.propTypes = {
     userSecret: PropTypes.any,
     userId: PropTypes.any,
     setSpinner: PropTypes.func,
+    getJournal: PropTypes.func.isRequired,
+    appData: PropTypes.any.isRequired,
 };
 
 export default Schedule;

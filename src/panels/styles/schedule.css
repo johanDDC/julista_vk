@@ -143,5 +143,5 @@
 }
 
 .scheduleSliderContainer > div:last-child{
-    transition: transform 0.24s cubic-bezier(.77,0,.18,1) 0s !important;
+    transition: transform 0.24s cubic-bezier(0.1, 0, 0.25, 1) 0s !important;
 }

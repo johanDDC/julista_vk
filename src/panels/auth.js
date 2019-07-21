@@ -25,7 +25,7 @@ class Auth extends React.Component {
 
     buttonClick = async () => {
         await this.props.setSpinner(true); //FIXME spinner doesn`t work
-        this.setState({
+        await this.setState({
             login: document.getElementById("loginInput-i").value,
             password: document.getElementById("passInput-i").value,
             inviteCode: document.getElementById("inviteCodeInput-i").value,
