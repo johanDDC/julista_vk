@@ -1,15 +1,17 @@
 {
-  "main.css": "/julista_vk/static/css/main.d245d6dd.chunk.css",
-  "main.js": "/julista_vk/static/js/main.b4c03a3a.chunk.js",
-  "main.js.map": "/julista_vk/static/js/main.b4c03a3a.chunk.js.map",
-  "runtime~main.js": "/julista_vk/static/js/runtime~main.62e97286.js",
-  "runtime~main.js.map": "/julista_vk/static/js/runtime~main.62e97286.js.map",
-  "static/css/2.5af0800a.chunk.css": "/julista_vk/static/css/2.5af0800a.chunk.css",
-  "static/js/2.7a2f8705.chunk.js": "/julista_vk/static/js/2.7a2f8705.chunk.js",
-  "static/js/2.7a2f8705.chunk.js.map": "/julista_vk/static/js/2.7a2f8705.chunk.js.map",
-  "index.html": "/julista_vk/index.html",
-  "precache-manifest.627b651c3448b08ee66255dfde3ff53b.js": "/julista_vk/precache-manifest.627b651c3448b08ee66255dfde3ff53b.js",
-  "service-worker.js": "/julista_vk/service-worker.js",
-  "static/css/2.5af0800a.chunk.css.map": "/julista_vk/static/css/2.5af0800a.chunk.css.map",
-  "static/css/main.d245d6dd.chunk.css.map": "/julista_vk/static/css/main.d245d6dd.chunk.css.map"
+  "files": {
+    "main.css": "/julista_vk/static/css/main.0d3a3a07.chunk.css",
+    "main.js": "/julista_vk/static/js/main.0d0aba60.chunk.js",
+    "main.js.map": "/julista_vk/static/js/main.0d0aba60.chunk.js.map",
+    "runtime~main.js": "/julista_vk/static/js/runtime~main.62e97286.js",
+    "runtime~main.js.map": "/julista_vk/static/js/runtime~main.62e97286.js.map",
+    "static/css/2.b0769fe6.chunk.css": "/julista_vk/static/css/2.b0769fe6.chunk.css",
+    "static/js/2.54defd38.chunk.js": "/julista_vk/static/js/2.54defd38.chunk.js",
+    "static/js/2.54defd38.chunk.js.map": "/julista_vk/static/js/2.54defd38.chunk.js.map",
+    "index.html": "/julista_vk/index.html",
+    "precache-manifest.1092d4ac6ae6763e3a0fb71334a5a101.js": "/julista_vk/precache-manifest.1092d4ac6ae6763e3a0fb71334a5a101.js",
+    "service-worker.js": "/julista_vk/service-worker.js",
+    "static/css/2.b0769fe6.chunk.css.map": "/julista_vk/static/css/2.b0769fe6.chunk.css.map",
+    "static/css/main.0d3a3a07.chunk.css.map": "/julista_vk/static/css/main.0d3a3a07.chunk.css.map"
+  }
 }
