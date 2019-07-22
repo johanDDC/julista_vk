@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./styles/choose_diary.css"
 
-import {setDiary} from "../redux/actions/DiaryAction";
 import {setPanel} from "../redux/actions/PanelAction";
 
 class ChooseDiary extends React.Component {

@@ -4,13 +4,10 @@ import {Div, PanelHeader, View, Panel, Button, ScreenSpinner} from '@vkontakte/v
 import Auth from '../panels/auth'
 import ChooseDiary from '../panels/choose_diary'
 import "./styles/Authorization.css"
-import {setId} from "../redux/actions/IdAction";
-import {setSecret} from "../redux/actions/SecretAction";
-import {setDiary} from "../redux/actions/DiaryAction";
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
 import {connect} from 'react-redux'
-import {doAuthorize} from "../redux/actions/profileAction";
+import {doAuthorize, setDiary} from "../redux/actions/profileAction";
 
 
 class AuthorizationView extends React.Component {
@@ -56,7 +53,7 @@ const mapStateToProps = store => {
         activePanel: store.activePanel,
         diary: store.diary,
         fetchedUser: store.fetchedUser,
-        profile: store.profile
+        profile: store.profile,
     }
 };
 

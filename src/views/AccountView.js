@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { View } from '@vkontakte/vkui';
 import Account from '../panels/account'
 import {connect} from "react-redux";
-// import getAccount from "../utils/api"
 
 
 class AccountView extends React.Component {
@@ -28,8 +27,7 @@ const mapStateToProps = store => {
     console.log("Account View", store);
     return {
         activePanel: store.activePanel,
-        userId: store.userId,
-        userSecret: store.userSecret,
+        profile: store.profile
     }
 };
 

@@ -22,8 +22,7 @@ const mapStateToProps = store => {
     console.log("Plus View", store);
     return {
         activePanel: store.activePanel,
-        userId: store.userId,
-        userSecret: store.userSecret,
+        profile: store.profile,
     }
 };
 

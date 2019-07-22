@@ -27,7 +27,6 @@ const CustomInput = props => {
                 <input id={`${props.id}-i`}
                     type={props.type}
                        className="customInput"
-                       onChange={props.onChange}
                        onFocus={clickCapture}
                        onBlur={clickLost}
                 />
@@ -38,7 +37,6 @@ const CustomInput = props => {
 CustomInput.propTypes = {
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
 };
 

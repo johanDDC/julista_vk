@@ -1,6 +1,7 @@
 const initialState = {
     id: null,
     secret: null,
+    diary: null,
     isFetching: false,
 };
 
@@ -23,6 +24,12 @@ function profile(state = initialState, action) {
             };
         case "DO_AUTHORIZATION_FAIL":
         //TODO append fail case
+        case "SET_DIARY":
+            return {
+                ...state,
+                diary: action.data,
+                isFetching: false
+            };
 
         default:
             return state

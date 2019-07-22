@@ -105,8 +105,7 @@ const mapStateToProps = store => {
     console.log("BottomBar", store);
     return {
         activePanel: store.activePanel,
-        userId: store.userId,
-        userSecret: store.userSecret,
+        profile: store.profile,
     }
 };
 

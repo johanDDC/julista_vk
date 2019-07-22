@@ -13,9 +13,6 @@ class MarksView extends React.Component {
         this.state = {
             activePanel : 'marks',
 
-            userId: this.props.userId,
-            userSecret: this.props.userSecret,
-
             marksData: null
         };
 
@@ -23,7 +20,7 @@ class MarksView extends React.Component {
     }
 
     getMarks = () => {
-        let marksData = getAndAggregateMarks(this.state.userId, this.state.userSecret);
+        let marksData = getAndAggregateMarks(this.props.profile.id, this.props.profile.secret);
         this.setState({marksData : marksData})
     };
 
@@ -40,8 +37,7 @@ const mapStateToProps = store => {
     console.log("Marks View", store);
     return {
         activePanel: store.activePanel,
-        userId: store.userId,
-        userSecret: store.userSecret,
+        profile: store.profile
     }
 };
 

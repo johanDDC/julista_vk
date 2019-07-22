@@ -16,7 +16,6 @@ export function doAuthorize(login, password, diary) {
         auth(login, password, diary, dispatch)
     }
 }
-
 function auth(login, password, diary, dispatcher) {
     let methodUrl = "api/auth/";
     // let json ={
@@ -41,4 +40,11 @@ function auth(login, password, diary, dispatcher) {
                 },
             })
         });
+}
+
+export function setDiary(diary) {
+    return {
+        type: "SET_DIARY",
+        data: diary
+    }
 }

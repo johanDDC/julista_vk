@@ -25,8 +25,7 @@ const mapStateToProps = store => {
     console.log("Settings View", store);
     return {
         activePanel: store.activePanel,
-        userId: store.userId,
-        userSecret: store.userSecret,
+        profile: store.profile,
         expectedMark: store.expectedMark
     }
 };

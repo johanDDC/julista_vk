@@ -25,7 +25,7 @@ class Auth extends React.Component {
 
         if (login.trim() !== "" && password.trim() !== "") {
             console.log("inside func");
-            this.props.getProfile(login, password, this.props.diary);
+            this.props.getProfile(login, password, this.props.profile.diary);
 
             let id = setInterval(() => {
                 if (this.props.profile.secret) {
@@ -115,7 +115,6 @@ Auth.propTypes = {
             title: PropTypes.string,
         }),
     }),
-    diary: PropTypes.string.isRequired,
     profile: PropTypes.any.isRequired,
     setView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,

@@ -27,7 +27,7 @@ class Schedule extends React.Component {
     }
 
     loadData = async () => {
-        this.props.getJournal([], this.props.userId, this.props.userSecret, this.dayDates[7], this.dayDates[8]);
+        this.props.getJournal([], this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8]);
         let journal = this.props.appData.journal;
         console.log("RUN-FUNC IS RUN");
 
@@ -226,8 +226,7 @@ class Schedule extends React.Component {
 Schedule.propTypes = {
     id: PropTypes.string.isRequired,
     currentDay: PropTypes.number,
-    userSecret: PropTypes.any,
-    userId: PropTypes.any,
+    profile: PropTypes.any.isRequired,
     getJournal: PropTypes.func.isRequired,
     appData: PropTypes.any.isRequired,
 };
