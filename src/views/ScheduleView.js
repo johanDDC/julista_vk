@@ -9,24 +9,14 @@ import {getJournal} from "../redux/actions/AppLogicAction";
 class ScheduleView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            popout: null,
-        };
         this.currentDay = new Date().getDay();
     }
 
-    viewScreenSpinner = (switcher) => {
-        this.setState({popout: (switcher ? <ScreenSpinner style={{color: "black"}}/> : null)});
-        console.log("start spinner", switcher);
-        // this.setState({popout: <ScreenSpinner/>})
-    };
-
     render() {
         return (
-            <View activePanel={this.props.activePanel} popout={this.state.popout}>
+            <View activePanel={this.props.activePanel}>
                 <Schedule id="schedule"
                           currentDay={this.currentDay}
-                          setSpinner={this.viewScreenSpinner}
                           profile={this.props.profile}
                           getJournal={this.props.getJournalAction}
                           appData={this.props.appLogic}
