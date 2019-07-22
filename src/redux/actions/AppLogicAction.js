@@ -10,19 +10,7 @@ export function getJournal(journal, id, secret, start, end) {
             data: journal,
         });
 
-        // а экшен внутри setTimeout
-        // диспатчится через секунду
-        // как будто-бы в это время
-        // наши данные загружались из сети
-
         getSchedule(id, secret, start, end, dispatch);
-
-        // setTimeout(() => {
-        //     dispatch({
-        //         type: GET_PHOTOS_SUCCESS,
-        //         payload: [1, 2, 3, 4, 5],
-        //     })
-        // }, 1000)
     }
 }
 function getSchedule(id, secret, start, end, dispatcher) {
@@ -37,6 +25,37 @@ function getSchedule(id, secret, start, end, dispatcher) {
             console.log("resp", response.data);
             dispatcher({
                 type:"GET_JOURNAL_SUCCESS",
+                data: response.data
+            })
+        });
+}
+
+export function getMarks(id, secret) {
+    return dispatch => {
+        dispatch({
+            type: "GET_MARKS_REQUEST",
+            data: {
+                data : []
+            },
+        });
+
+        getAndAggregateMarks(id, secret, dispatch)
+    }
+}
+function getAndAggregateMarks(id, secret, dispatcher) {
+    let methodUrl = "api/diary/marks/all/";
+    let startDate = new Date(2018, 9, 3);
+    let endDate = new Date();
+
+    let queries = `?id=${id}&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString())}&end=${setCorrectYear(endDate.toLocaleDateString())}`;
+
+    console.log(baseUrl + methodUrl + queries);
+
+    axios.get(baseUrl + methodUrl + queries)
+        .then((response) => {
+            console.log("resp", response.data);
+            dispatcher({
+                type:"GET_MARKS_SUCCESS",
                 data: response.data
             })
         });

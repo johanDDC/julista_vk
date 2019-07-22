@@ -4,7 +4,9 @@ const initialState = {
             days: []
         }
     },
-    marks: [],
+    marks: {
+        data : []
+    },
     isFetching: false,
 };
 
@@ -16,7 +18,6 @@ function appLogic(state = initialState, action) {
                 journal: action.data,
                 isFetching: true
             };
-
         case "GET_JOURNAL_SUCCESS":
             return {
                 ...state,
@@ -26,6 +27,20 @@ function appLogic(state = initialState, action) {
         case "GET_JOURNAL_FAIL":
             //TODO append fail case
 
+        case "GET_MARKS_REQUEST":
+            return {
+                ...state,
+                marks: action.data,
+                isFetching: true
+            };
+        case "GET_MARKS_SUCCESS":
+            return {
+                ...state,
+                marks: action.data,
+                isFetching: false
+            };
+        case "GET_MARKS_FAIL":
+        //TODO append fail case
         default:
             return state
     }

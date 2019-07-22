@@ -18,7 +18,7 @@ class Auth extends React.Component {
     };
 
     buttonClick = () => {
-        this.props.setSpinner(true); //FIXME spinner doesn`t work
+        this.props.setSpinner(true);
         let login = document.getElementById("loginInput-i").value;
         let password = document.getElementById("passInput-i").value;
         let inviteCode = document.getElementById("inviteCodeInput-i").value;

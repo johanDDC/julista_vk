@@ -1,9 +1,8 @@
-import {Panel, PanelHeader, Button, Switch, Group} from '@vkontakte/vkui';
+import {Panel, PanelHeader, Button, Switch, Tooltip} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/settings.css"
 import VKSettingsIcon from "../custom_components/icon-pack/VKSettingsIcon"
-import PurposeIcon from "../custom_components/icon-pack/PurposeIcon"
 import AdvancesIcon from "../custom_components/icon-pack/AdvancesIcon"
 import NewMarksIcon from "../custom_components/icon-pack/NewMarksIcon"
 import Mark from "../custom_components/mark"
@@ -15,7 +14,7 @@ class Settings extends React.Component {
         super(props);
 
         this.state = {
-            currentDay: (this.props.currentDay ? this.props.currentDay : 1),
+            tooltip: false,
         };
     }
 
@@ -69,14 +68,22 @@ class Settings extends React.Component {
                         </span>
                         </div>
                     </div>
-                    <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}>
+                    <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}
+                         onClick={() => this.setState({tooltip: true})}>
                         <NewMarksIcon/>
                         <div className="settingsSettingInfo">
                         <span className="settingsSettingTitle">
                             Тёмная тема
                         </span>
                             <span>
-                            <Switch className="settingsSettingSwitcher"/>
+                            <Tooltip
+                                text="Потом добавлю, отъебись."
+                                isShown={this.state.tooltip}
+                                onClose={() => this.setState({tooltip: false})}
+                                offsetX={10}
+                            >
+                                <Switch className="settingsSettingSwitcher" disabled/>
+                            </Tooltip>
                         </span>
                         </div>
                     </div>

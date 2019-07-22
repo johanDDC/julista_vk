@@ -11,7 +11,7 @@ class PlusView extends React.Component {
 
     render() {
         return (
-            <View popout={<ScreenSpinner/>} activePanel={this.props.activePanel}>
+            <View activePanel={this.props.activePanel}>
                 <Plus  id="plus"/>
             </View>
         )
