@@ -1,9 +1,7 @@
-import {Div, Group, Input, Panel, PanelHeader, Link, Button} from '@vkontakte/vkui';
+import {Div, Panel, Button} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/choose_diary.css"
-
-import {setPanel} from "../redux/actions/PanelAction";
 
 class ChooseDiary extends React.Component {
     constructor(props) {
@@ -12,7 +10,6 @@ class ChooseDiary extends React.Component {
     }
 
     choose = (diary) => {
-        console.log("choose", diary);
         this.props.setPanel("auth");
         this.props.setDiary(diary)
     };

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View } from '@vkontakte/vkui';
 import Settings from '../panels/settings'
 import {connect} from "react-redux";

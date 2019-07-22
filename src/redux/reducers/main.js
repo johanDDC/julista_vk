@@ -7,13 +7,6 @@ import expectedMark from "./expectedMarkR"
 import appLogic from "./appLogicR"
 import profile from "./profileR"
 
-const initialState = {
-    activeView: 'AuthorizationView',
-    diary: null,
-    fetchedUser: null,
-    expectedMark: 5
-};
-
 export const rootReducer = combineReducers({
     activeView: activeView,
     activePanel: activePanel,

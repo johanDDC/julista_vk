@@ -1,4 +1,4 @@
-import {Div, Button, Panel, PanelHeader, FixedLayout, Gallery, Spinner} from '@vkontakte/vkui';
+import {Div, Button, Panel, PanelHeader, FixedLayout, Gallery,} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
@@ -11,7 +11,6 @@ class Schedule extends React.Component {
         super(props);
 
         this.dayDates = scheduleGetDates();
-        console.log("CONSTUCTOR IS RUN");
         this.scheduleData = this.props.appData.journal;
         let flag = this.props.appData.journal.data.days.length === 0;
 
@@ -29,7 +28,6 @@ class Schedule extends React.Component {
     loadData = async () => {
         this.props.getJournal([], this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8]);
         let journal = this.props.appData.journal;
-        console.log("RUN-FUNC IS RUN");
 
         let id = setInterval(() => {
             if (this.props.appData.journal.length !== 0) {
@@ -214,7 +212,6 @@ class Schedule extends React.Component {
                     <span className="scheduleHeaderMonth">{this.state.month}</span>
                 </PanelHeader>
                 {this.drawTopBar()}
-                {console.log("render schedule data", this.scheduleData, this.state.ready)}
                 {
                     (this.state.ready ? this.drawShedule() : this.drawSpinner())
                 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {ScreenSpinner, View} from '@vkontakte/vkui';
+import {View} from '@vkontakte/vkui';
 import Plus from "../panels/plus";
 import {connect} from "react-redux";
 

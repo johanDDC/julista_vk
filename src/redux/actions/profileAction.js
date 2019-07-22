@@ -1,5 +1,3 @@
-import {setCorrectYear} from "../../utils/utils"
-
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/";
 

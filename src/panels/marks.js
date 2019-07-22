@@ -13,7 +13,6 @@ class Marks extends React.Component {
         this.marksData = this.props.appData.marks;
         this.tabs = [];
         this.tabsItems = [];
-        console.log("length", this.props.appData.marks.data.length);
         let flag = this.props.appData.marks.data.length === 0;
 
         this.state = {
@@ -32,9 +31,7 @@ class Marks extends React.Component {
 
         let id = setInterval(() => {
             if (this.props.appData.marks.data.length !== 0) {
-                console.log("here we are");
                 this.marksData = this.props.appData.marks;
-                console.log(this.marksData);
                 clearInterval(id);
                 this.startRender();
             }
@@ -212,7 +209,6 @@ class Marks extends React.Component {
                         </TabsItem>
                     </Tabs>
                 </Div>
-                {console.log("SOSOK", this.state.activeTab)}
                 {this.state.ready ? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
                 {this.state.activeTab === 'result' ? this.drawResultTab() : null}
             </Panel>

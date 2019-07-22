@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Div, PanelHeader, View, Panel, Button, ScreenSpinner} from '@vkontakte/vkui';
+import { View, ScreenSpinner} from '@vkontakte/vkui';
 import Auth from '../panels/auth'
 import ChooseDiary from '../panels/choose_diary'
 import "./styles/Authorization.css"
@@ -21,8 +20,6 @@ class AuthorizationView extends React.Component {
 
     viewScreenSpinner = async (switcher) => {
         this.setState({popout: (switcher ? <ScreenSpinner/> : null)});
-        console.log("start spinner", switcher);
-        // this.setState({popout: <ScreenSpinner/>})
     };
 
     render() {

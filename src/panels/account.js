@@ -1,4 +1,3 @@
-
 import {Div, Group, Button, Panel, PanelHeader, InfoRow, Progress} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";

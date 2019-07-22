@@ -7,10 +7,6 @@ import {connect} from 'react-redux'
 import AuthorizationView from "./views/AuthorizationView"
 import BottomBar from "./views/BottomBar"
 
-const reducer = () => {
-
-};
-
 class App extends React.Component {
     constructor(props) {
         super(props);

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View } from '@vkontakte/vkui';
 import Account from '../panels/account'
 import {connect} from "react-redux";
@@ -10,11 +9,7 @@ class AccountView extends React.Component {
         super(props);
     }
 
-    // data = getAccount(token, pid);
-
     render() {
-        console.log("AP", this.props.activePanel);
-        // console.log('json', this.data);
         return (
             <View activePanel={(this.props.activePanel === "auth" ? "account" : this.props.activePanel)}>
                 <Account id="account"/>

@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {ScreenSpinner, View} from '@vkontakte/vkui';
+import { View } from '@vkontakte/vkui';
 import Schedule from '../panels/schedule'
 import {connect} from "react-redux";
-import {setPanel} from "../redux/actions/PanelAction";
 import {getJournal} from "../redux/actions/AppLogicAction";
 
 class ScheduleView extends React.Component {

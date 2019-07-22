@@ -1,11 +1,10 @@
-import {Div, Group, HeaderButton, Panel, PanelHeader, Link, Button, osname, IOS, Input} from '@vkontakte/vkui';
+import {Div, Group, HeaderButton, Panel, PanelHeader, Link, Button, osname, IOS} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import "./styles/auth.css"
 
-import {auth} from "../utils/api"
 import CustomInput from "../custom_components/customInput"
 
 class Auth extends React.Component {
@@ -24,7 +23,6 @@ class Auth extends React.Component {
         let inviteCode = document.getElementById("inviteCodeInput-i").value;
 
         if (login.trim() !== "" && password.trim() !== "") {
-            console.log("inside func");
             this.props.getProfile(login, password, this.props.profile.diary);
 
             let id = setInterval(() => {

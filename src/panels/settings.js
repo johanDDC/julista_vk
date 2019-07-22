@@ -80,7 +80,7 @@ class Settings extends React.Component {
                                 text="Потом добавлю, отъебись."
                                 isShown={this.state.tooltip}
                                 onClose={() => this.setState({tooltip: false})}
-                                offsetX={10}
+                                offsetX={-5}
                             >
                                 <Switch className="settingsSettingSwitcher" disabled/>
                             </Tooltip>
