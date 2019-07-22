@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bfce3accaf48318d316fd662cabef8a9",
+    "revision": "8cce1d85552ddd462bd31286c3a3e590",
     "url": "/julista_vk/index.html"
   },
   {
-    "revision": "bc921fc342ab36572fce",
+    "revision": "57dcf9278ae1b5437960",
     "url": "/julista_vk/static/css/2.b0769fe6.chunk.css"
   },
   {
-    "revision": "faebe104fe21a5bd99de",
+    "revision": "fcc96fcf49e9caba97ed",
     "url": "/julista_vk/static/css/main.a7dcde5d.chunk.css"
   },
   {
-    "revision": "bc921fc342ab36572fce",
-    "url": "/julista_vk/static/js/2.2feeefa6.chunk.js"
+    "revision": "57dcf9278ae1b5437960",
+    "url": "/julista_vk/static/js/2.303631ef.chunk.js"
   },
   {
-    "revision": "faebe104fe21a5bd99de",
-    "url": "/julista_vk/static/js/main.75b12f67.chunk.js"
+    "revision": "fcc96fcf49e9caba97ed",
+    "url": "/julista_vk/static/js/main.ccb87f0b.chunk.js"
   },
   {
     "revision": "ba74cc1b9316036cd340",
