@@ -19,6 +19,7 @@ class Schedule extends React.Component {
             month: getRusMonthName(new Date().getMonth()),
             weekDuration: (!flag ? this.scheduleData.data.days.length : 5),
             ready: !flag,
+            heights: [],
         };
 
         if (flag)
@@ -186,6 +187,23 @@ class Schedule extends React.Component {
         return tales
     };
 
+    fixHeight = () => {
+        setTimeout(() => {
+            if (this.state.heights.length === 0){
+                let tempArr = [];
+                for (let i = 0; i < this.state.weekDuration; i++) {
+                    tempArr.push(document.getElementsByClassName("scheduleTale")[i].offsetHeight)
+                }
+                this.setState({heights : tempArr});
+            } else {
+                document.getElementsByClassName("scheduleSliderContainer")[0].style.height =
+                    `${this.state.heights[this.state.currentDay - 1]}px`;
+            }
+            console.log(document.getElementsByClassName("scheduleTale")[this.state.currentDay - 1].offsetHeight)
+
+        }, 200);
+    };
+
     drawShedule = () => {
         return (
             <div>
@@ -197,6 +215,7 @@ class Schedule extends React.Component {
                         this.setState({currentDay: (slideIndex + 1)});
                     }}
                     onEnd={(this.state.currentDay > this.state.weekDuration ? this.setState({currentDay: this.state.weekDuration}) : null)}
+                    onScroll={(event => alert("lal"))}
                 >
                     {this.generateSchedule()}
                 </Gallery>
@@ -214,6 +233,9 @@ class Schedule extends React.Component {
                 {this.drawTopBar()}
                 {
                     (this.state.ready ? this.drawShedule() : this.drawSpinner())
+                }
+                {
+                    this.state.ready ? this.fixHeight() : null
                 }
             </Panel>
         )

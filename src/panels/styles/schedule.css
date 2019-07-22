@@ -3,6 +3,10 @@
     z-index: 5 !important;
 }
 
+#schedule > .Panel__in{
+    padding-bottom: 0 !important;
+}
+
 #schedule > div{
     background-color: rgb(86 144 255) !important;
 }
@@ -112,12 +116,14 @@
 .scheduleTale{
     background-color: white;
     border-radius: 14px 14px 0 0;
-    min-height: calc(100vh - 62px - 13px - 48px);
-    max-height: 100%;
+    min-height: calc(100vh - 120px - 48px);
+    height: auto;
+    max-height: 100vh;
     z-index: 999;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 60px !important;
 }
 
 .scheduleSliderContainer{
