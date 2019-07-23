@@ -47,7 +47,7 @@ class Settings extends React.Component {
                             Дневник
                         </span>
                     </div>
-                    <Button level="tertiary" className="settingsSettingContainer">
+                    <Button level="tertiary" className="settingsSettingContainer" onClick={this.props.chooseMark}>
                         <div style={{width: "24px"}}>
                             <Mark size="28" val={this.props.expectedMark.toString()} is_routine={false}/>
                         </div>
@@ -107,6 +107,7 @@ Settings.propTypes = {
     id: PropTypes.string.isRequired,
     expectedMark: PropTypes.number.isRequired,
     changeMark: PropTypes.func.isRequired,
+    chooseMark: PropTypes.func.isRequired,
 };
 
 export default Settings;
