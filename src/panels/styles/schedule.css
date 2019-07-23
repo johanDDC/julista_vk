@@ -3,6 +3,21 @@
     z-index: 5 !important;
 }
 
+
+#schedule{
+    overflow-y: hidden;
+}
+.Gallery{
+    overflow-y: scroll;
+}
+.Gallery__viewport{
+    overflow-y: scroll;
+}
+.Gallery__slide{
+    overflow-y: scroll;
+}
+
+
 #schedule > .Panel__in{
     padding-bottom: 0 !important;
 }
@@ -124,6 +139,7 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 60px !important;
+    overflow-y: scroll;
 }
 
 .scheduleSliderContainer{
@@ -134,6 +150,7 @@
 
 .scheduleSliderContainer > div > div > .Gallery__slide{
     margin-right: 10px;
+    overflow-y: scroll;
 }
 
 /*.scheduleSliderContainer > div > .Gallery__layer{*/

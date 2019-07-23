@@ -215,7 +215,6 @@ class Schedule extends React.Component {
                         this.setState({currentDay: (slideIndex + 1)});
                     }}
                     onEnd={(this.state.currentDay > this.state.weekDuration ? this.setState({currentDay: this.state.weekDuration}) : null)}
-                    onScroll={(event => alert("lal"))}
                 >
                     {this.generateSchedule()}
                 </Gallery>
