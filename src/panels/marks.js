@@ -203,7 +203,7 @@ class Marks extends React.Component {
                     Оценки
                 </PanelHeader>
                 <Div style={{paddingTop: "0", paddingBottom: "0",}}>
-                    <Tabs theme="header" type="buttons" className="marksTabs">
+                    <Tabs  type="buttons" className="marksTabs">
                         {this.drawTabsItem()}
                         <TabsItem
                             onClick={() => this.setState({activeTab: 'result'})}

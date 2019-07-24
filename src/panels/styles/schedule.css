@@ -1,26 +1,17 @@
 #panel-header-schedule > *, #header-bg-schedule > *, #header-right-schedule > *, #header-left-schedule > *, #header-title-schedule > *{
     background-color: rgb(86 144 255) !important;
-    z-index: 5 !important;
+    /*z-index: 5 !important;*/
 }
 
 
 #schedule{
     overflow-y: hidden;
 }
-.Gallery{
-    overflow-y: scroll;
-}
-.Gallery__viewport{
-    overflow-y: scroll;
-}
-.Gallery__slide{
-    overflow-y: scroll;
-}
 
 
-#schedule > .Panel__in{
-    padding-bottom: 0 !important;
-}
+/*#schedule > .Panel__in{*/
+/*    padding-bottom: 0 !important;*/
+/*}*/
 
 #schedule > div{
     background-color: rgb(86 144 255) !important;
@@ -32,7 +23,6 @@
 
 .scheduleWeekTopBarContainer{
     width: 100%;
-    z-index: 5;
 }
 
 .scheduleWeekTopBar{
@@ -77,6 +67,14 @@
     box-shadow: 0 5px 15px 0 rgba(27, 27, 78, 0.1);
     background-color: white;
     margin: 12px;
+}
+
+.scheduleSubjectLastChild{
+    width: 92%;
+    min-height: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .scheduleSubjectTaleNumber{
@@ -131,26 +129,29 @@
 .scheduleTale{
     background-color: white;
     border-radius: 14px 14px 0 0;
-    min-height: calc(100vh - 120px - 48px);
-    height: auto;
-    max-height: 100vh;
-    z-index: 999;
+    /*min-height: calc(100vh - 168px);*/
+    /*height: 100%;*/
+    /*max-height: 100%;*/
+    /*z-index: 999;*/
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 60px !important;
-    overflow-y: scroll;
+    overflow-y: auto;
+    /*overflow-x: hidden;*/
 }
 
+/*.scheduleTale:last-child{*/
+/*    margin-bottom: 120px;*/
+/*}*/
+
 .scheduleSliderContainer{
-    height: 100%;
+    height: calc(100vh - 48px - 24px - 56px);
     /*border-radius: 14px 14px 0 0;*/
     margin-top: 62px;
 }
 
 .scheduleSliderContainer > div > div > .Gallery__slide{
     margin-right: 10px;
-    overflow-y: scroll;
 }
 
 /*.scheduleSliderContainer > div > .Gallery__layer{*/

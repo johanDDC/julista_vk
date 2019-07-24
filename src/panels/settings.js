@@ -106,7 +106,6 @@ class Settings extends React.Component {
 Settings.propTypes = {
     id: PropTypes.string.isRequired,
     expectedMark: PropTypes.number.isRequired,
-    changeMark: PropTypes.func.isRequired,
     chooseMark: PropTypes.func.isRequired,
 };
 

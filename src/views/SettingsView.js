@@ -65,7 +65,6 @@ class SettingsView extends React.Component {
             <View activePanel={this.props.activePanel} popout={this.state.popout}>
                 <Settings id="settings"
                           expectedMark={this.props.expectedMark}
-                          changeMark={this.props.setMarkAction}
                           chooseMark={this.chooseMark}/>
             </View>
         )

@@ -155,6 +155,8 @@ class Schedule extends React.Component {
             subjectTales.push(generateSubjectTale(subject.number, subject.name, "", subject.time))
         });
 
+        subjectTales.push(<div className="scheduleSubjectLastChild"></div>);
+
         return (
             <div className="scheduleTale">
                 {subjectTales}
@@ -187,26 +189,25 @@ class Schedule extends React.Component {
         return tales
     };
 
-    fixHeight = () => {
-        setTimeout(() => {
-            if (this.state.heights.length === 0){
-                let tempArr = [];
-                for (let i = 0; i < this.state.weekDuration; i++) {
-                    tempArr.push(document.getElementsByClassName("scheduleTale")[i].offsetHeight)
-                }
-                this.setState({heights : tempArr});
-            } else {
-                document.getElementsByClassName("scheduleSliderContainer")[0].style.height =
-                    `${this.state.heights[this.state.currentDay - 1]}px`;
-            }
-            console.log(document.getElementsByClassName("scheduleTale")[this.state.currentDay - 1].offsetHeight)
-
-        }, 200);
-    };
+    // fixHeight = () => {
+    //     setTimeout(() => {
+    //         if (this.state.heights.length === 0){
+    //             let tempArr = [];
+    //             for (let i = 0; i < this.state.weekDuration; i++) {
+    //                 tempArr.push(document.getElementsByClassName("scheduleTale")[i].offsetHeight)
+    //             }
+    //             this.setState({heights : tempArr});
+    //         } else {
+    //             document.getElementsByClassName("scheduleSliderContainer")[0].style.height =
+    //                 `${this.state.heights[this.state.currentDay - 1]}px`;
+    //         }
+    //         console.log(document.getElementsByClassName("scheduleTale")[this.state.currentDay - 1].offsetHeight)
+    //
+    //     }, 200);
+    // };
 
     drawShedule = () => {
         return (
-            <div>
                 <Gallery
                     slideWidth="100%"
                     className="scheduleSliderContainer"
@@ -218,7 +219,6 @@ class Schedule extends React.Component {
                 >
                     {this.generateSchedule()}
                 </Gallery>
-            </div>
         );
     };
 
@@ -233,9 +233,9 @@ class Schedule extends React.Component {
                 {
                     (this.state.ready ? this.drawShedule() : this.drawSpinner())
                 }
-                {
-                    this.state.ready ? this.fixHeight() : null
-                }
+                {/*{*/}
+                {/*    this.state.ready ? this.fixHeight() : null*/}
+                {/*}*/}
             </Panel>
         )
     }
