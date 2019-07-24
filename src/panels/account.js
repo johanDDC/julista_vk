@@ -30,10 +30,10 @@ const Account = ({ id }) => (
                 <Progress value={90} />
             </InfoRow>
         </Div>
-        <Div className="title">
+        <Div className="marksBlocksTitle">
             ЗАДАЧИ
         </Div>
-        <Div className="title">
+        <Div className="marksBlocksTitle">
             ТОП КЛАССА
         </Div>
         <Div className="userTopElement">
@@ -48,7 +48,7 @@ const Account = ({ id }) => (
         <Div className="userTopElement">
             <span id="overPlace">Ты находишься на 6 месте</span>
         </Div>
-        <Div className="title">
+        <Div className="marksBlocksTitle">
             ВАЖНЫЕ УВЕДОМЛЕНИЯ
         </Div>
         <Group className="lastNotificationsContainer">

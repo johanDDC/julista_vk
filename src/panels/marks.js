@@ -89,7 +89,7 @@ class Marks extends React.Component {
             return (
                 <Div className="lastMarkContainer">
                     <div className="lastMarkVal">
-                        <Mark size="36" val="5" is_routine={false} fs="20"/>
+                        <Mark size="36" val="5" is_routine={false} fontSize="20"/>
                     </div>
                     <div className="lastMarkSubject">Математика</div>
                     <div className="lastMarkDate">Сегодня</div>
@@ -105,7 +105,7 @@ class Marks extends React.Component {
                 avg += mark.value * mark.weight;
                 marks.push(
                     <div>
-                        <Mark size="20" val={mark.value} is_routine={true}/>
+                        <Mark size="16" val={mark.value} is_routine={true} fontSize="12"/>
                     </div>
                 );
             });
@@ -135,16 +135,16 @@ class Marks extends React.Component {
 
         return (
             <div id={currentTab}>
-                <Div className="title" style={{paddingTop: "0"}}>
+                <Div className="marksBlocksTitle" style={{paddingTop: "0"}}>
                     ПОСЛЕДНИЕ ОЦЕНКИ
                 </Div>
                 <HorizontalScroll className="lastMarksContainer">
                     {drawLastMarks()}
                 </HorizontalScroll>
-                <Div className="title">
+                <Div className="marksBlocksTitle">
                     ВСЕ ОЦЕНКИ
-                    {subjectsFields}
                 </Div>
+                {subjectsFields}
             </div>
         );
     };
@@ -202,8 +202,9 @@ class Marks extends React.Component {
                 >
                     Оценки
                 </PanelHeader>
+                <div className="marksScreen">
                 <Div style={{paddingTop: "0", paddingBottom: "0",}}>
-                    <Tabs  type="buttons" className="marksTabs">
+                    <Tabs theme="header" type="buttons" className="marksTabs">
                         {this.drawTabsItem()}
                         <TabsItem
                             onClick={() => this.setState({activeTab: 'result'})}
@@ -215,6 +216,7 @@ class Marks extends React.Component {
                 </Div>
                 {this.state.ready ? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
                 {this.state.activeTab === 'result' ? this.drawResultTab() : null}
+                </div>
             </Panel>
         )
     }
