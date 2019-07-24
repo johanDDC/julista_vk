@@ -1,8 +1,7 @@
-import {Div, Group, HeaderButton, Panel, PanelHeader, Link, Button, osname, IOS} from '@vkontakte/vkui';
+import {Div, Panel, PanelHeader, Link, Button} from '@vkontakte/vkui';
+import PanelHeaderBack from '@vkontakte/vkui/dist/components/PanelHeaderBack/PanelHeaderBack';
 import PropTypes from "prop-types";
 import React from "react";
-import Icon24Back from '@vkontakte/icons/dist/24/back';
-import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import "./styles/auth.css"
 
 import CustomInput from "../custom_components/customInput"
@@ -38,12 +37,10 @@ class Auth extends React.Component {
     render() {
         return (
             <Panel id={this.props.id}>
-                <PanelHeader
-                    left={<HeaderButton onClick={this.btnBack}>{osname === IOS ?
-                        <Icon28ChevronBack/> : <Icon24Back/>}</HeaderButton>}>
+                <PanelHeader left={<PanelHeaderBack onClick={this.btnBack} />}>
                     Авторизация
                 </PanelHeader>
-                <Group className="authGroup">
+                <div className="authGroup">
                     <Div className="welcome">
                         Добро пожаловать,
                     </Div>
@@ -96,7 +93,7 @@ class Auth extends React.Component {
                             Войти
                         </Button>
                     </Div>
-                </Group>
+                </div>
             </Panel>
         )
     }

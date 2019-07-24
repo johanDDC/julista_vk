@@ -4,8 +4,10 @@
 
 .authGroup{
     display: flex;
-    margin: 0;
-    height: calc(100vh - 46px);
+    flex-direction: column;
+    background-color: #fff;
+    min-height: calc(100vh - 44px);
+    overflow-y: hidden;
 }
 
 .welcome{
