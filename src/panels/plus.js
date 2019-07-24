@@ -48,7 +48,7 @@ class Plus extends React.Component {
                 <FixedLayout style={{width: "100%"}}>
                     <Div className="plusBlueBack">
                         <span>Расширь возможности своего дневника</span>
-                        <PlusIcon selected={true} size="36" stroke_color={"#ffffff"}/>
+                        <PlusIcon selected={true} size="42" stroke_color={"#ffffff"}/>
                     </Div>
                 </FixedLayout>
                 <div style={{padding: "0 16px 0 16px", marginBottom: "8px"}}>
