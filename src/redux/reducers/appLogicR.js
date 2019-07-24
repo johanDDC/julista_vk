@@ -7,6 +7,9 @@ const initialState = {
     marks: {
         data : []
     },
+    lastMarks: {
+        data : []
+    },
     isFetching: false,
 };
 
@@ -40,6 +43,21 @@ function appLogic(state = initialState, action) {
                 isFetching: false
             };
         case "GET_MARKS_FAIL":
+        //TODO append fail case
+
+        case "GET_LAST_MARKS_REQUEST":
+            return {
+                ...state,
+                lastMarks: action.data,
+                isFetching: true
+            };
+        case "GET_LAST_MARKS_SUCCESS":
+            return {
+                ...state,
+                lastMarks: action.data,
+                isFetching: false
+            };
+        case "GET_LAST_MARKS_FAIL":
         //TODO append fail case
         default:
             return state

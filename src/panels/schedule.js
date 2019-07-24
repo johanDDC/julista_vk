@@ -124,25 +124,47 @@ class Schedule extends React.Component {
     };
 
     generateScheduleTale = (day) => {
-        let generateSubjectTale = (num, subjectName, subjectHomework, subjectTime) => {
+        let generateSubjectTale = (subject) => {
+            let marks = [];
+            let homework;
+            // console.log("subject", subject);
+            if (subject) {
+                if (subject.marks) {
+                    subject.marks.forEach(mark => {
+                        marks.push( //Append weight here
+                            <Mark size="24" val={mark.score} is_routine={false} fontSize="14"/>
+                        );
+                    });
+                }
+                if (subject.assignments) {
+                    subject.assignments.forEach(assignment => {
+                        try {
+                            homework = assignment.text
+                        } catch (e) {
+
+                        }
+                    });
+                }
+            }
+
             return (
                 <div className="scheduleSubjectTale">
                     <div className="scheduleSubjectTaleNumber">
-                        {num}
+                        {subject.number}
                     </div>
                     <div className="scheduleSubjectTaleInfo">
                         <span className="scheduleSubjectTaleSubjectName">
-                            {subjectName}
+                            {subject.name}
                         </span>
                         <span className="scheduleSubjectTaleHomework">
-                            {subjectHomework}
+                            {homework}
                         </span>
                         <span className="scheduleSubjectTaleTimetable">
-                            {subjectTime[0]} - {subjectTime[1]}
+                            {subject.time[0]} - {subject.time[1]}
                         </span>
                     </div>
                     <div className="scheduleSubjectTaleMarks">
-                        <Mark size="25" val="4" is_routine={false} fs="15"/>
+                        {marks}
                     </div>
                 </div>
             )
@@ -151,8 +173,8 @@ class Schedule extends React.Component {
         let subjectTales = [];
 
         let subjects = day.subjects;
-        subjects.forEach((subject, num) => {
-            subjectTales.push(generateSubjectTale(subject.number, subject.name, "", subject.time))
+        subjects.forEach((subject) => {
+            subjectTales.push(generateSubjectTale(subject))
         });
 
         subjectTales.push(<div className="scheduleSubjectLastChild"></div>);
@@ -208,17 +230,17 @@ class Schedule extends React.Component {
 
     drawShedule = () => {
         return (
-                <Gallery
-                    slideWidth="100%"
-                    className="scheduleSliderContainer"
-                    slideIndex={this.state.currentDay > 0 ? this.state.currentDay - 1 : this.state.currentDay}
-                    onChange={slideIndex => {
-                        this.setState({currentDay: (slideIndex + 1)});
-                    }}
-                    onEnd={(this.state.currentDay > this.state.weekDuration ? this.setState({currentDay: this.state.weekDuration}) : null)}
-                >
-                    {this.generateSchedule()}
-                </Gallery>
+            <Gallery
+                slideWidth="100%"
+                className="scheduleSliderContainer"
+                slideIndex={this.state.currentDay > 0 ? this.state.currentDay - 1 : this.state.currentDay}
+                onChange={slideIndex => {
+                    this.setState({currentDay: (slideIndex + 1)});
+                }}
+                onEnd={(this.state.currentDay > this.state.weekDuration ? this.setState({currentDay: this.state.weekDuration}) : null)}
+            >
+                {this.generateSchedule()}
+            </Gallery>
         );
     };
 

@@ -3,7 +3,7 @@ import {View} from '@vkontakte/vkui';
 import Marks from '../panels/marks'
 
 import {connect} from "react-redux";
-import {getMarks} from "../redux/actions/AppLogicAction";
+import {getLastMarks, getMarks} from "../redux/actions/AppLogicAction";
 
 class MarksView extends React.Component {
     constructor(props) {
@@ -17,6 +17,7 @@ class MarksView extends React.Component {
                        profile={this.props.profile}
                        appData={this.props.appLogic}
                        getMarks={this.props.getMarksAction}
+                       getLastMarks={this.props.getLastMarksAction}
                 />
             </View>
         )
@@ -36,6 +37,9 @@ const mapDispatchToProps = dispatch => {
     return {
         getMarksAction: (userId, secret) => {
             dispatch(getMarks(userId, secret))
+        },
+        getLastMarksAction: (userId, secret) => {
+          dispatch(getLastMarks(userId, secret))
         }
     }
 };

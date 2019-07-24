@@ -2,6 +2,7 @@ import {Tabs, Div, Panel, PanelHeader, TabsItem, HorizontalScroll} from '@vkonta
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/marks.css"
+import {getStartDateForLastMarks} from "../utils/utils"
 
 import Mark from "../custom_components/mark"
 import CustomSpinner from "../custom_components/customSpinner";
@@ -11,6 +12,7 @@ class Marks extends React.Component {
         super(props);
 
         this.marksData = this.props.appData.marks;
+        this.lastMarksData = this.props.appData.lastMarks;
         this.tabs = [];
         this.tabsItems = [];
         let flag = this.props.appData.marks.data.length === 0;
@@ -28,11 +30,19 @@ class Marks extends React.Component {
 
     loadData = async () => {
         this.props.getMarks(this.props.profile.id, this.props.profile.secret);
+        this.props.getLastMarks(this.props.profile.id, this.props.profile.secret);
 
         let id = setInterval(() => {
             if (this.props.appData.marks.data.length !== 0) {
                 this.marksData = this.props.appData.marks;
                 clearInterval(id);
+                this.startRender();
+            }
+        }, 200);
+        let id2 = setInterval(() => {
+            if (this.props.appData.lastMarks.data.length !== 0) {
+                this.lastMarksData = this.props.appData.lastMarks;
+                clearInterval(id2);
                 this.startRender();
             }
         }, 200);
@@ -85,17 +95,28 @@ class Marks extends React.Component {
 
         generateSubjectsFields(currentTab);
 
-        function drawLastMarks() {
-            return (
-                <Div className="lastMarkContainer">
-                    <div className="lastMarkVal">
-                        <Mark size="36" val="5" is_routine={false} fontSize="20"/>
+        let drawLastMarks = () => {
+            if (this.lastMarksData.data.length !== 0) {
+                return (
+                    <div>
+                        <Div className="marksBlocksTitle" style={{paddingTop: "0"}}>
+                            ПОСЛЕДНИЕ ОЦЕНКИ
+                        </Div>
+                        <HorizontalScroll className="lastMarksContainer">
+                            <Div className="lastMarkContainer">
+                                <div className="lastMarkVal">
+                                    <Mark size="36" val="5" is_routine={false} fontSize="20"/>
+                                </div>
+                                <div className="lastMarkSubject">Математика</div>
+                                <div className="lastMarkDate">Сегодня</div>
+                            </Div>
+                        </HorizontalScroll>
                     </div>
-                    <div className="lastMarkSubject">Математика</div>
-                    <div className="lastMarkDate">Сегодня</div>
-                </Div>
-            );
-        }
+                );
+            } else {
+                return null;
+            }
+        };
 
         function generateSubject(subject, currentPeriod) {
             let period = subject.periods[currentPeriod];
@@ -135,12 +156,7 @@ class Marks extends React.Component {
 
         return (
             <div id={currentTab}>
-                <Div className="marksBlocksTitle" style={{paddingTop: "0"}}>
-                    ПОСЛЕДНИЕ ОЦЕНКИ
-                </Div>
-                <HorizontalScroll className="lastMarksContainer">
-                    {drawLastMarks()}
-                </HorizontalScroll>
+                {drawLastMarks()}
                 <Div className="marksBlocksTitle">
                     ВСЕ ОЦЕНКИ
                 </Div>
@@ -203,19 +219,19 @@ class Marks extends React.Component {
                     Оценки
                 </PanelHeader>
                 <div className="marksScreen">
-                <Div style={{paddingTop: "0", paddingBottom: "0",}}>
-                    <Tabs theme="header" type="buttons" className="marksTabs">
-                        {this.drawTabsItem()}
-                        <TabsItem
-                            onClick={() => this.setState({activeTab: 'result'})}
-                            selected={this.state.activeTab === 'result'}
-                        >
-                            Итоговые
-                        </TabsItem>
-                    </Tabs>
-                </Div>
-                {this.state.ready ? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
-                {this.state.activeTab === 'result' ? this.drawResultTab() : null}
+                    <Div style={{paddingTop: "0", paddingBottom: "0",}}>
+                        <Tabs theme="header" type="buttons" className="marksTabs">
+                            {this.drawTabsItem()}
+                            <TabsItem
+                                onClick={() => this.setState({activeTab: 'result'})}
+                                selected={this.state.activeTab === 'result'}
+                            >
+                                Итоговые
+                            </TabsItem>
+                        </Tabs>
+                    </Div>
+                    {this.state.ready ? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
+                    {this.state.activeTab === 'result' ? this.drawResultTab() : null}
                 </div>
             </Panel>
         )
@@ -226,6 +242,7 @@ class Marks extends React.Component {
 Marks.propTypes = {
     id: PropTypes.string.isRequired,
     getMarks: PropTypes.func.isRequired,
+    getLastMarks: PropTypes.func.isRequired,
     profile: PropTypes.any.isRequired,
     appData: PropTypes.any.isRequired,
 };

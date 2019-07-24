@@ -1,4 +1,4 @@
-import {setCorrectYear} from "../../utils/utils"
+import {getStartDateForLastMarks, setCorrectYear} from "../../utils/utils"
 
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/";
@@ -56,6 +56,37 @@ function getAndAggregateMarks(id, secret, dispatcher) {
             console.log("resp", response.data);
             dispatcher({
                 type:"GET_MARKS_SUCCESS",
+                data: response.data
+            })
+        });
+}
+
+export function getLastMarks(id, secret) {
+    return dispatch => {
+        dispatch({
+            type: "GET_LAST_MARKS_REQUEST",
+            data: {
+                data : []
+            },
+        });
+
+        getLMarks(id, secret, dispatch);
+    }
+}
+function getLMarks(id, secret, dispatcher) {
+    let methodUrl = "api/diary/marks/dates/";
+    let endDate = new Date(2019, 3, 15);
+    let startDate = getStartDateForLastMarks(endDate);
+
+    let queries = `?id=${id}&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString())}&end=${setCorrectYear(endDate.toLocaleDateString())}`;
+
+    console.log(baseUrl + methodUrl + queries);
+
+    axios.get(baseUrl + methodUrl + queries)
+        .then((response) => {
+            console.log("resp", response.data);
+            dispatcher({
+                type:"GET_LAST_MARKS_SUCCESS",
                 data: response.data
             })
         });

@@ -62,3 +62,8 @@ export function getRusMonthName(monthNum) {
 
     }
 }
+
+export function getStartDateForLastMarks(dueDate) {
+    let startDate = new Date(dueDate.getFullYear(), dueDate.getMonth(), dueDate.getDate() - 7);
+    return startDate;
+}
