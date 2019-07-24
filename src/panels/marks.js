@@ -110,7 +110,7 @@ class Marks extends React.Component {
                 );
             });
             avg /= marks.length;
-
+            avg = avg.toFixed(2);
             return (
                 <Div className="allMarksContainer">
                     <div className="subjectRow">
@@ -118,7 +118,7 @@ class Marks extends React.Component {
                             {subject.name}
                         </span>
                         <span className="avg">
-                            {avg}
+                            {isNaN(avg) ? null : avg}
                         </span>
                     </div>
                     <div className="marksRow">
@@ -150,42 +150,46 @@ class Marks extends React.Component {
     };
 
     drawResultTab = () => {
+        let subjectFields = [];
+
+        let drawSubjectField = (subject) => {
+            let periods = subject.periods.length;
+            let marks = [];
+            for (let i = 0; i < periods; i++) {
+                marks.push(subject.periods[i].final_mark);
+            }
+            let renderedMarks = [];
+            marks.forEach(mark => {
+                if (mark)
+                    renderedMarks.push(
+                        <div className="resultMarksContainerMark">
+                            <Mark size="24" val={mark} is_routine={true} fontSize="12"/>
+                        </div>
+                    )
+            });
+            console.log("marksArr", marks);
+
+            return (
+                <Div className="resultMarksContainer">
+                    <span className="resultMarksContainerSubject">{subject.name}</span>
+                    <div className="resultMarksContainerMarks">
+                        {renderedMarks}
+                        <div className="resultMarksContainerResultedMark">
+                            <Mark size="24" val={subject.year_mark} is_routine={false} fontSize="12"/>
+                        </div>
+                    </div>
+                </Div>
+            );
+        };
+
+        this.marksData.data.forEach(subject => {
+            if (subject.periods.length !== 0)
+                subjectFields.push(drawSubjectField(subject));
+        });
+
         return (
             <div>
-                <Div className="resultMarksContainer">
-                    <span className="resultMarksContainerSubject">Математика</span>
-                    <div className="resultMarksContainerMarks">
-                        <div className="resultMarksContainerMark">
-                            <Mark size="32" val="3" is_routine={true} fs="20"/>
-                        </div>
-                        <div className="resultMarksContainerMark">
-                            <Mark size="32" val="3" is_routine={true} fs="20"/>
-                        </div>
-                        <div className="resultMarksContainerMark">
-                            <Mark size="32" val="3" is_routine={true} fs="20"/>
-                        </div>
-                        <div className="resultMarksContainerResultedMark">
-                            <Mark size="32" val="3" is_routine={false} fs="20"/>
-                        </div>
-                    </div>
-                </Div>
-                <Div className="resultMarksContainer">
-                    <span className="resultMarksContainerSubject">Математика</span>
-                    <div className="resultMarksContainerMarks">
-                        <div className="resultMarksContainerMark">
-                            <Mark size="32" val="3" is_routine={true} fs="20"/>
-                        </div>
-                        <div className="resultMarksContainerMark">
-                            <Mark size="32" val="4" is_routine={true} fs="20"/>
-                        </div>
-                        <div className="resultMarksContainerMark">
-                            <Mark size="32" val="5" is_routine={true} fs="20"/>
-                        </div>
-                        <div className="resultMarksContainerResultedMark">
-                            <Mark size="32" val="5" is_routine={false} fs="20"/>
-                        </div>
-                    </div>
-                </Div>
+                {subjectFields}
             </div>
         )
     };
