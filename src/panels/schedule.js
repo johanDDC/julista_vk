@@ -127,12 +127,13 @@ class Schedule extends React.Component {
         let generateSubjectTale = (subject) => {
             let marks = [];
             let homework;
+            {/*<Mark size="24" val={mark.score} is_routine={false} fontSize="14"/>*/}
             if (subject) {
                 if (subject.marks) {
                     console.log("subject", subject.marks);
                     subject.marks.forEach(mark => {
                         marks.push( //Append weight here
-                            <Mark size="24" val={mark.score} is_routine={false} fontSize="14"/>
+                            <Mark size="24" val={mark.score.toString()} is_routine={false} fontSize="14"/>
                         );
                     });
                 }
@@ -176,7 +177,9 @@ class Schedule extends React.Component {
 
         let subjects = day.subjects;
         subjects.forEach((subject) => {
-            subjectTales.push(generateSubjectTale(subject))
+            let sbj = generateSubjectTale(subject);
+            // console.log("sbj", sbj);
+            subjectTales.push(sbj)
         });
 
         subjectTales.push(<div className="scheduleSubjectLastChild"></div>);
