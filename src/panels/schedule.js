@@ -127,9 +127,9 @@ class Schedule extends React.Component {
         let generateSubjectTale = (subject) => {
             let marks = [];
             let homework;
-            // console.log("subject", subject);
             if (subject) {
                 if (subject.marks) {
+                    console.log("subject", subject.marks);
                     subject.marks.forEach(mark => {
                         marks.push( //Append weight here
                             <Mark size="24" val={mark.score} is_routine={false} fontSize="14"/>
@@ -149,6 +149,7 @@ class Schedule extends React.Component {
 
             return (
                 <div className="scheduleSubjectTale">
+                    {console.log("marks", marks)}
                     <div className="scheduleSubjectTaleNumber">
                         {subject.number}
                     </div>
@@ -165,6 +166,7 @@ class Schedule extends React.Component {
                     </div>
                     <div className="scheduleSubjectTaleMarks">
                         {marks}
+                        {/*<Mark size="24" val="4" is_routine={false} fontSize="14"/>*/}
                     </div>
                 </div>
             )

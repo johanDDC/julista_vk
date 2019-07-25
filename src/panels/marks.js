@@ -96,7 +96,8 @@ class Marks extends React.Component {
         generateSubjectsFields(currentTab);
 
         let drawLastMarks = () => {
-            if (this.lastMarksData.data.length !== 0) {
+            console.log("lastmarks", this.lastMarksData.data);
+            if (this.lastMarksData.data.length !== 0 && this.lastMarksData.data.lessons.length !== 0) {
                 return (
                     <div>
                         <Div className="marksBlocksTitle" style={{paddingTop: "0"}}>

@@ -12,11 +12,6 @@
     padding-bottom: 0 !important;
 }
 
-
-/*#schedule > .Panel__in{*/
-/*    padding-bottom: 0 !important;*/
-/*}*/
-
 #schedule > div{
     background-color: rgb(86 144 255) !important;
 }
@@ -80,7 +75,8 @@
 }
 
 .scheduleSubjectTaleNumber{
-    width: 26px;
+    min-width: 26px;
+    max-width: 26px;
     height: 100% !important;
     display: flex;
     flex-direction: column;
@@ -155,11 +151,13 @@
 
 .scheduleSliderContainer{
     height: calc(100vh - 48px - 12px - 56px);
+    overflow-y: scroll;
     /*border-radius: 14px 14px 0 0;*/
     margin-top: 62px;
 }
 
 .scheduleSliderContainer > div > div > .Gallery__slide{
+    overflow-y: scroll;
     margin-right: 10px;
 }
 
