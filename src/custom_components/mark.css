@@ -4,4 +4,22 @@
     justify-content: center;
     align-items: center;
     color: #ffffff;
+    position: relative;
+}
+
+.markWeight{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    color: #fff;
+    border-radius: 50%;
+    border: 2px solid #f6f6f6;
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    background: linear-gradient(#3aa9ff, #8364ff, #8465ff);
 }
