@@ -219,7 +219,7 @@ class Marks extends React.Component {
                     Оценки
                 </PanelHeader>
                 <div className="marksScreen">
-                    <Div style={{paddingTop: "0", paddingBottom: "0",}}>
+                    <Div style={{paddingTop: "13px", paddingBottom: "0",}}>
                         <Tabs theme="header" type="buttons" className="marksTabs">
                             {this.drawTabsItem()}
                             <TabsItem
