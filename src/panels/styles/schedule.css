@@ -5,7 +5,11 @@
 
 
 #schedule{
-    overflow-y: hidden;
+    overflow-y: auto;
+}
+
+#schedule > .Panel__in{
+    padding-bottom: 0 !important;
 }
 
 
