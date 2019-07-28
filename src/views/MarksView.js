@@ -16,7 +16,6 @@ class MarksView extends React.Component {
             activeModal: "modalMark"
         };
         this.closeModal = () => {
-            console.log("write this if u`r ignored");
             this.setState({modalMarks: null})
         };
     }
