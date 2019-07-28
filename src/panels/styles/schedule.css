@@ -67,7 +67,7 @@
 
 .scheduleSubjectLastChild {
     width: calc(100% - 32px);
-    min-height: 48px;
+    min-height: 56px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -136,18 +136,31 @@
     margin-right: 10px;
 }
 
-/*.scheduleSliderContainer > div > .Gallery__layer{*/
-/*    transition: rotate 0.24s, transform  0.24s cubic-bezier(0.1, 0, 0.25, 1) 0s !important;*/
-/*    !*transform: rotate(0deg) !important;*!*/
-/*    !*transform: rotate(45deg) !important;*!*/
-/*}*/
-
-.scheduleSliderContainer > div > .Gallery__layer:active {
-    /*transition: rotate 0.24s, transform  0.24s cubic-bezier(0.1, 0, 0.25, 1) 0s !important;*/
-    /*transform: rotate(60deg) !important;*/
-    /*transform: translateX(-330px);*/
-}
-
 .scheduleSliderContainer > div:last-child {
     transition: transform 0.24s cubic-bezier(0.1, 0, 0.25, 1) 0s !important;
+}
+
+.modalScheduleTitle{
+    color: #5690ff;
+    font-size: 14px;
+    margin: 16px 0 16px 0;
+}
+
+.modalScheduleInfoRow{
+    display: flex;
+    flex-direction: row;
+}
+
+.modalScheduleInfoRowLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 25px;
+}
+
+.modalScheduleInfoRowText{
+    display: flex;
+    font-size: 14px;
+    color: #535353;
 }

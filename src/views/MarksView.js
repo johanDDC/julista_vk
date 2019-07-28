@@ -13,7 +13,6 @@ class MarksView extends React.Component {
 
         this.state = {
             modalMarks: null,
-            activeModal: "modalMark"
         };
         this.closeModal = () => {
             this.setState({modalMarks: null})
@@ -22,16 +21,12 @@ class MarksView extends React.Component {
 
     setModalMark = (modal, name) => {
         this.setState({
-            activeModal: "modalMark",
             modalMarks:
-                <ModalRoot activeModal={this.state.activeModal}>
+                <ModalRoot activeModal="modalMark">
                     <ModalPage
                         id="modalMark"
                         onClose={this.closeModal}
                         settlingHeight={50}
-                        style={{
-                            backgroundColor: "#ff0000"
-                        }}
                         header={
                             <ModalPageHeader
                                 left={IS_PLATFORM_ANDROID &&

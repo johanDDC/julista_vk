@@ -118,7 +118,8 @@ class Marks extends React.Component {
                 marksModal.push(
                     <div className="modalMarkMarksInfo">
                         <div className="modalMarkMarksInfoLeft">
-                            <Mark size="22" is_routine={false} val={mark.value} fontSize="14" weight={mark.weight.toString()}/>
+                            <Mark size="22" is_routine={false} val={mark.value} fontSize="14"
+                                  weight={mark.weight.toString()}/>
                         </div>
                         <div className="modalMarkMarksInfoContainer">
                             <div className="modalMarkMarksInfoForm">

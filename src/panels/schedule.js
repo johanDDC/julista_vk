@@ -126,14 +126,25 @@ class Schedule extends React.Component {
     generateScheduleTale = (day) => {
         let generateSubjectTale = (subject) => {
             let marks = [];
-            let homework;
+            let homework = null;
+            let modalMarksPresentation = [];
             if (subject) {
                 if (subject.marks) {
                     console.log("subject", subject.marks);
                     subject.marks.forEach(mark => {
                         marks.push( //Append weight here
                             <Mark size="24" val={mark.score.toString()} is_routine={false} fontSize="14"
-                                  weight={mark.score.toString()}/>
+                                  weight={mark.weight.toString()}/>
+                        );
+                        modalMarksPresentation.push(
+                            <div className="modalScheduleInfoRow">
+                                <div className="modalScheduleInfoRowLeft">
+                                    <Mark size="22" val={mark.score.toString()} is_routine={false} fontSize="14"
+                                          weight={mark.weight.toString()}/>
+                                </div>
+                                <div className="modalScheduleInfoRowText">
+                                </div>
+                            </div>
                         );
                     });
                 }
@@ -147,9 +158,82 @@ class Schedule extends React.Component {
                     });
                 }
             }
+            console.log("building modal");
+            let modal = (
+                subject.label.title ?
+                    <div>
+                        {subject.marks ?
+                            <div>
+                                <div className="modalScheduleTitle">
+                                    Сведения о предмете
+                                </div>
+                                {modalMarksPresentation}
+                            </div>
+                            : null}
+                        {homework ?
+                            <div>
+                                <div className="modalScheduleTitle">
+                                    Домашнее задание
+                                </div>
+                                <div className="modalScheduleInfoRow">
+                                    <div className="modalScheduleInfoRowLeft">
+                                        -
+                                    </div>
+                                    <div className="modalScheduleInfoRowText">
+                                        {homework}
+                                    </div>
+                                </div>
+                            </div>
+                            : null}
+                        {subject.room ?
+                            <div>
+                                <div className="modalScheduleTitle">
+                                    Кабинет
+                                </div>
+                                <div className="modalScheduleInfoRow">
+                                    <div className="modalScheduleInfoRowLeft">
+                                        -
+                                    </div>
+                                    <div className="modalScheduleInfoRowText">
+                                        {subject.room}
+                                    </div>
+                                </div>
+                            </div>
+                            : null}
+                        <div>
+                            <div className="modalScheduleTitle">
+                                Тема урока
+                            </div>
+                            <div className="modalScheduleInfoRow">
+                                <div className="modalScheduleInfoRowLeft">
+                                    -
+                                </div>
+                                <div className="modalScheduleInfoRowText">
+                                    {subject.label.title}
+                                </div>
+                            </div>
+                        </div>
+                        {(subject.label.module ?
+                            <div>
+                                <div className="modalScheduleTitle">
+                                    Модуль
+                                </div>
+                                <div className="modalScheduleInfoRow">
+                                    <div className="modalScheduleInfoRowLeft">
+                                        -
+                                    </div>
+                                    <div className="modalScheduleInfoRowText">
+                                        {subject.label.module}
+                                    </div>
+                                </div>
+                            </div>
+                            : null)}
+                    </div>
+                    : null
+            );
 
             return (
-                <div className="scheduleSubjectTale">
+                <div className="scheduleSubjectTale" onClick={() => this.props.openModal(modal, subject.name)}>
                     <div className="scheduleSubjectTaleNumber">
                         {subject.number}
                     </div>
@@ -214,23 +298,6 @@ class Schedule extends React.Component {
         return tales
     };
 
-    // fixHeight = () => {
-    //     setTimeout(() => {
-    //         if (this.state.heights.length === 0){
-    //             let tempArr = [];
-    //             for (let i = 0; i < this.state.weekDuration; i++) {
-    //                 tempArr.push(document.getElementsByClassName("scheduleTale")[i].offsetHeight)
-    //             }
-    //             this.setState({heights : tempArr});
-    //         } else {
-    //             document.getElementsByClassName("scheduleSliderContainer")[0].style.height =
-    //                 `${this.state.heights[this.state.currentDay - 1]}px`;
-    //         }
-    //         console.log(document.getElementsByClassName("scheduleTale")[this.state.currentDay - 1].offsetHeight)
-    //
-    //     }, 200);
-    // };
-
     drawShedule = () => {
         return (
             <Gallery
@@ -258,9 +325,6 @@ class Schedule extends React.Component {
                 {
                     (this.state.ready ? this.drawShedule() : this.drawSpinner())
                 }
-                {/*{*/}
-                {/*    this.state.ready ? this.fixHeight() : null*/}
-                {/*}*/}
             </Panel>
         )
     }
@@ -272,6 +336,7 @@ Schedule.propTypes = {
     profile: PropTypes.any.isRequired,
     getJournal: PropTypes.func.isRequired,
     appData: PropTypes.any.isRequired,
+    openModal: PropTypes.func.isRequired,
 };
 
 export default Schedule;

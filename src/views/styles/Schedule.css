@@ -1,0 +1,11 @@
+#modal-modalSchedule .ModalPageHeader__in{
+    background-color: #f6f6f6 !important;
+    font-size: 20px;
+    font-weight: bold;
+    color: #292929;
+}
+
+#modal-modalSchedule .ModalPage__content{
+    padding: 16px 16px 0 16px;
+    overflow-y: scroll;
+}
