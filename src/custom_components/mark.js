@@ -31,7 +31,7 @@ const Mark = props => (
         borderRadius: (props.val === "Незачёт" || props.val === "Зачёт" ? "11px" : "50%")
     }}>
         <span>{props.val}</span>
-        {(props.weight ?
+        {(props.weight && props.weight > 1 ?
             <div className="markWeight">
                 {props.weight}
             </div>
@@ -43,7 +43,7 @@ Mark.propTypes = {
     size: PropTypes.string.isRequired,
     val: PropTypes.string.isRequired,
     is_routine: PropTypes.bool.isRequired,
-    weight: PropTypes.string.isRequired,
+    weight: PropTypes.string,
     fontSize: PropTypes.string
 };
 

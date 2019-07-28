@@ -1,8 +1,20 @@
-import {Tabs, Div, Panel, PanelHeader, TabsItem, HorizontalScroll} from '@vkontakte/vkui';
+import {
+    Tabs,
+    Div,
+    Panel,
+    PanelHeader,
+    TabsItem,
+    HorizontalScroll,
+    ModalPage,
+    ModalRoot,
+    ModalPageHeader,
+    HeaderButton,
+    IS_PLATFORM_ANDROID
+} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/marks.css"
-import {getStartDateForLastMarks} from "../utils/utils"
+import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 
 import Mark from "../custom_components/mark"
 import CustomSpinner from "../custom_components/customSpinner";
@@ -20,6 +32,11 @@ class Marks extends React.Component {
         this.state = {
             activeTab: "1",
             ready: !flag,
+            activeModal: "modalMark"
+        };
+
+        this.closeModal = () => {
+            this.setState({activeModal: null})
         };
 
         if (flag)
@@ -86,6 +103,91 @@ class Marks extends React.Component {
     drawTab = (currentTab) => {
         let subjectsFields = [];
 
+        let generateSubject = (subject, currentPeriod) => {
+            let period = subject.periods[currentPeriod];
+            let marks = [];
+            let marksModal = [];
+            let avg = 0;
+            period.marks.forEach(mark => {
+                avg += mark.value * mark.weight;
+                marks.push(
+                    <div>
+                        <Mark size="16" val={mark.value} is_routine={true} fontSize="12"/>
+                    </div>
+                );
+                marksModal.push(
+                    <div className="modalMarkMarksInfo">
+                        <div className="modalMarkMarksInfoLeft">
+                            <Mark size="22" is_routine={false} val={mark.value} fontSize="14" weight={mark.weight.toString()}/>
+                        </div>
+                        <div className="modalMarkMarksInfoContainer">
+                            <div className="modalMarkMarksInfoForm">
+                                {mark.form}
+                            </div>
+                            <div className="modalMarkMarksInfoName">
+                                {mark.name}
+                            </div>
+                            <div className="modalMarkMarksInfoDate">
+                                14 никогдабря
+                            </div>
+                        </div>
+                    </div>
+                );
+            });
+            marksModal.push(<div className="modalMarkMarksInfoEmpty"></div>);
+            avg /= marks.length;
+            avg = avg.toFixed(2);
+            let modal = (
+                <div>
+                    <div className="modalMarkTitle">
+                        Сведения о предмете
+                    </div>
+                    <div className="modalMarkSubjectInfo">
+                        <div className="modalMarkSubjectInfoLeft">
+                            {avg}
+                        </div>
+                        <div className="modalMarkSubjectInfoText">
+                            Средний балл
+                        </div>
+                    </div>
+                    <div className="modalMarkSubjectInfo">
+                        <div className="modalMarkSubjectInfoLeft">
+                            {subject.year_mark ?
+                                <Mark size="22" val={subject.year_mark.toString()} is_routine={false} fontSize="14"/>
+                                : "-"}
+                        </div>
+                        <div className="modalMarkSubjectInfoText">
+                            Итоговая оценка
+                        </div>
+                    </div>
+                    <div className="modalMarkTitle">
+                        Оценки
+                    </div>
+                    {marksModal}
+                </div>
+            );
+            return (
+                <button className="allMarksContainer" onClick={() => this.props.openModal(modal, subject.name)}>
+                    <div className="subjectRow">
+                        <span className="subject">
+                            {subject.name}
+                        </span>
+                        <span className="avg">
+                            {isNaN(avg) ? null : avg}
+                        </span>
+                    </div>
+                    <div className="marksRow">
+                        {marks}
+                    </div>
+                    <div className="advicesRow">
+                        <div className="adviceContainer">
+                            Получите 1 пятерку
+                        </div>
+                    </div>
+                </button>
+            );
+        };
+
         let generateSubjectsFields = (currentPeriod) => {
             this.marksData.data.forEach(subject => {
                 if (subject.periods.length !== 0)
@@ -119,42 +221,6 @@ class Marks extends React.Component {
             }
         };
 
-        function generateSubject(subject, currentPeriod) {
-            let period = subject.periods[currentPeriod];
-            let marks = [];
-            let avg = 0;
-            period.marks.forEach(mark => {
-                avg += mark.value * mark.weight;
-                marks.push(
-                    <div>
-                        <Mark size="16" val={mark.value} is_routine={true} fontSize="12"/>
-                    </div>
-                );
-            });
-            avg /= marks.length;
-            avg = avg.toFixed(2);
-            return (
-                <Div className="allMarksContainer">
-                    <div className="subjectRow">
-                        <span className="subject">
-                            {subject.name}
-                        </span>
-                        <span className="avg">
-                            {isNaN(avg) ? null : avg}
-                        </span>
-                    </div>
-                    <div className="marksRow">
-                        {marks}
-                    </div>
-                    <div className="advicesRow">
-                        <div className="adviceContainer">
-                            Получите 1 пятерку
-                        </div>
-                    </div>
-                </Div>
-            );
-        }
-
         return (
             <div id={currentTab}>
                 {drawLastMarks()}
@@ -184,7 +250,6 @@ class Marks extends React.Component {
                         </div>
                     )
             });
-            console.log("marksArr", marks);
 
             return (
                 <Div className="resultMarksContainer">
@@ -246,6 +311,8 @@ Marks.propTypes = {
     getLastMarks: PropTypes.func.isRequired,
     profile: PropTypes.any.isRequired,
     appData: PropTypes.any.isRequired,
+    openModal: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
 };
 
 export default Marks;

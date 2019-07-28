@@ -54,6 +54,8 @@
 }
 
 .allMarksContainer{
+    width: calc(100% - 32px);
+    border: 0;
     display: flex;
     flex-direction: column;
     background-color: #f6f6f6;
@@ -180,4 +182,68 @@
     display: flex;
     flex-grow: 1;
     justify-content: center;
+}
+
+.modalMarkTitle{
+    font-size: 14px;
+    color: #5690ff;
+    margin-bottom: 23px;
+}
+
+.modalMarkSubjectInfo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: #535353;
+}
+
+.modalMarkSubjectInfoLeft{
+    margin-right: 25px;
+    font-size: 14px;
+    color: #999999;
+    font-weight: bold;
+}
+
+.modalMarkMarksInfo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 19px;
+}
+
+.modalMarkMarksInfoLeft{
+    height: 100%;
+    margin-right: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.modalMarkMarksInfoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.modalMarkMarksInfoForm{
+    font-size: 16px;
+    color: #292929;
+}
+
+.modalMarkMarksInfoName{
+    font-size: 14px;
+    color: #535353;
+    margin: 7px 0 7px 0;
+}
+
+.modalMarkMarksInfoDate{
+    font-size: 12px;
+    color: #999999;
+}
+
+.modalMarkMarksInfoEmpty{
+    width: 100%;
+    min-height: 61px;
 }
