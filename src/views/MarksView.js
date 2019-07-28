@@ -29,7 +29,7 @@ class MarksView extends React.Component {
                     <ModalPage
                         id="modalMark"
                         onClose={this.closeModal}
-                        settlingHeight={85}
+                        settlingHeight={50}
                         style={{
                             backgroundColor: "#ff0000"
                         }}

@@ -134,7 +134,6 @@ class Marks extends React.Component {
                     </div>
                 );
             });
-            marksModal.push(<div className="modalMarkMarksInfoEmpty"></div>);
             avg /= marks.length;
             avg = avg.toFixed(2);
             let modal = (
@@ -167,7 +166,7 @@ class Marks extends React.Component {
                 </div>
             );
             return (
-                <button className="allMarksContainer" onClick={() => this.props.openModal(modal, subject.name)}>
+                <div className="allMarksContainer" onClick={() => this.props.openModal(modal, subject.name)}>
                     <div className="subjectRow">
                         <span className="subject">
                             {subject.name}
@@ -184,7 +183,7 @@ class Marks extends React.Component {
                             Получите 1 пятерку
                         </div>
                     </div>
-                </button>
+                </div>
             );
         };
 
