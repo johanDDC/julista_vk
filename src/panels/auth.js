@@ -9,6 +9,9 @@ import CustomInput from "../custom_components/customInput"
 class Auth extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            error: false,
+        }
     }
 
     btnBack = () => {
@@ -25,10 +28,21 @@ class Auth extends React.Component {
             this.props.getProfile(login, password, this.props.profile.diary);
 
             let id = setInterval(() => {
-                if (this.props.profile.secret) {
+                if (this.props.profile.error) {
                     clearInterval(id);
                     this.props.setSpinner(false);
-                    this.props.setView("MainView", "account");
+                    if (this.props.profile.id instanceof Error){
+                        this.props.openError();
+                    } else {
+                        this.props.openIncorrect();
+                    }
+                    this.setState({error: true});
+                } else {
+                    if (this.props.profile.secret) {
+                        clearInterval(id);
+                        this.props.setSpinner(false);
+                        this.props.setView("MainView", "account");
+                    }
                 }
             }, 200);
         }
@@ -37,7 +51,7 @@ class Auth extends React.Component {
     render() {
         return (
             <Panel id={this.props.id}>
-                <PanelHeader left={<PanelHeaderBack onClick={this.btnBack} />}>
+                <PanelHeader left={<PanelHeaderBack onClick={this.btnBack}/>}>
                     Авторизация
                 </PanelHeader>
                 <div className="authGroup">
@@ -114,7 +128,9 @@ Auth.propTypes = {
     setView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
     getProfile: PropTypes.func.isRequired,
-    setSpinner: PropTypes.func
+    setSpinner: PropTypes.func,
+    openError: PropTypes.func.isRequired,
+    openIncorrect: PropTypes.func.isRequired,
 };
 
 export default Auth;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScreenSpinner} from '@vkontakte/vkui';
+import {View, ScreenSpinner, Alert} from '@vkontakte/vkui';
 import Auth from '../panels/auth'
 import ChooseDiary from '../panels/choose_diary'
 import "./styles/Authorization.css"
@@ -22,6 +22,41 @@ class AuthorizationView extends React.Component {
         this.setState({popout: (switcher ? <ScreenSpinner/> : null)});
     };
 
+    callIncorrect = () => {
+        this.setState({
+            popout:
+                <Alert
+                    actionsLayout="vertical"
+                    actions={[{
+                        title: 'ОК',
+                        autoclose: true,
+                        style: 'cancel'
+                    }]}
+                    onClose={() => this.setState({popout: null})}
+                >
+                    <h2>Ошибка авторизации</h2>
+                    <p>Неправильный логин или пароль</p>
+                </Alert>
+        })
+    };
+    callError = () => {
+        this.setState({
+            popout:
+                <Alert
+                    actionsLayout="vertical"
+                    actions={[{
+                        title: 'ОК',
+                        autoclose: true,
+                        style: 'cancel'
+                    }]}
+                    onClose={() => this.setState({popout: null})}
+                >
+                    <h2>Ошибка авторизации</h2>
+                    <p>Проблемы с подключением. Пожалуйста, перепроверьте правильность введённых данных и попробуйте ещё раз.</p>
+                </Alert>
+        })
+    };
+
     render() {
         return (
             <View popout={this.state.popout} activePanel={this.props.activePanel}>
@@ -37,6 +72,8 @@ class AuthorizationView extends React.Component {
                       setPanel={this.props.setPanelAction}
                       profile={this.props.profile}
                       getProfile={this.props.getProfileAction}
+                      openError={this.callError}
+                      openIncorrect={this.callIncorrect}
                 />
             </View>
         )

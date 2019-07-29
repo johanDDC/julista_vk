@@ -14,6 +14,7 @@ export function doAuthorize(login, password, diary) {
         auth(login, password, diary, dispatch)
     }
 }
+
 function auth(login, password, diary, dispatcher) {
     let methodUrl = "api/auth/";
     // let json ={
@@ -30,16 +31,27 @@ function auth(login, password, diary, dispatcher) {
     axios.post(baseUrl + methodUrl, json)
         .then((response) => {
             console.log("resp", response.data);
-            dispatcher({
-                type: "DO_AUTHORIZATION_SUCCESS",
-                data: {
-                    id: response.data.id,
-                    secret: response.data.secret,
-                },
-            })
+            if (response.data.status) {
+                dispatcher({
+                    type: "DO_AUTHORIZATION_SUCCESS",
+                    data: {
+                        id: response.data.id,
+                        secret: response.data.secret,
+                    },
+                })
+            } else {
+                dispatcher({
+                    type: "DO_AUTHORIZATION_FAIL",
+                    data: response.data
+                })
+            }
         })
         .catch(error => {
-            console.log("auth error", error)
+            console.log("auth error", error);
+            dispatcher({
+                type: "DO_AUTHORIZATION_FAIL",
+                data: error
+            })
         });
 }
 

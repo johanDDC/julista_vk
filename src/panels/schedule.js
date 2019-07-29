@@ -36,7 +36,7 @@ class Schedule extends React.Component {
                 clearInterval(id);
                 this.setState({error: true, ready: true});
             }
-            if (this.props.appData.journal.length !== 0 && !this.state.error) {
+            if (!this.state.error && this.props.appData.journal.length !== 0) {
                 this.scheduleData = this.props.appData.journal;
                 clearInterval(id);
                 this.setState({
