@@ -29,6 +29,7 @@ const CustomInput = props => {
                        className="customInput"
                        onFocus={clickCapture}
                        onBlur={clickLost}
+                       autoComplete="off"
                 />
             </div>
         )

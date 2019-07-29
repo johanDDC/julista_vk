@@ -34,15 +34,17 @@ class Schedule extends React.Component {
         let id = setInterval(() => {
             if (this.props.appData.error) {
                 clearInterval(id);
-                this.setState({error: true, ready: true});
-            }
-            if (!this.state.error && this.props.appData.journal.length !== 0) {
-                this.scheduleData = this.props.appData.journal;
-                clearInterval(id);
-                this.setState({
-                    ready: true,
-                    weekDuration: (this.scheduleData.data.days.length > 5 ? 6 : 5) // if holidays, length is equal to 0
-                });
+                this.setState({error: true});
+                this.setState({ready: true});
+            } else {
+                if (this.props.appData.journal.data.days.length !== 0) {
+                    this.scheduleData = this.props.appData.journal;
+                    clearInterval(id);
+                    this.setState({
+                        ready: true,
+                        weekDuration: (this.scheduleData.data.days.length > 5 ? 6 : 5) // if holidays, length is equal to 0
+                    });
+                }
             }
         }, 200);
 
@@ -129,6 +131,7 @@ class Schedule extends React.Component {
     };
 
     generateScheduleTale = (day) => {
+        console.log("here");
         let generateSubjectTale = (subject) => {
             let marks = [];
             let homework = null;
@@ -213,8 +216,8 @@ class Schedule extends React.Component {
                                 <div className="modalScheduleInfoRowLeft">
                                     -
                                 </div>
+                                {subject.label.title}
                                 <div className="modalScheduleInfoRowText">
-                                    {subject.label.title}
                                 </div>
                             </div>
                         </div>
@@ -295,20 +298,24 @@ class Schedule extends React.Component {
     generateSchedule = () => {
         let days = this.scheduleData.data.days;
         let tales = [];
+        console.log("err", this.state.error);
 
         if (this.state.error) {
             for (let i = 0; i < 5; i++) {
                 tales.push(this.generateErrorSchedule());
             }
         } else {
+            console.log("days", days);
             days.forEach((day) => {
+                console.log("Petya was here");
                 tales.push(this.generateScheduleTale(day));
             });
+        }
 
-            if (tales.length === 0) {
-                for (let i = 0; i < 5; i++) {
-                    tales.push(this.generateEmptyTale());
-                }
+        if (tales.length === 0) {
+            console.log("lal");
+            for (let i = 0; i < 5; i++) {
+                tales.push(this.generateEmptyTale());
             }
         }
 
