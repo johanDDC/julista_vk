@@ -20,6 +20,7 @@ class Schedule extends React.Component {
             weekDuration: (!flag ? this.scheduleData.data.days.length : 5),
             ready: !flag,
             heights: [],
+            error: false
         };
 
         if (flag)
@@ -27,11 +28,15 @@ class Schedule extends React.Component {
     }
 
     loadData = async () => {
-        this.props.getJournal([], this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8]);
+        this.props.getJournal(this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8]);
         let journal = this.props.appData.journal;
 
         let id = setInterval(() => {
-            if (this.props.appData.journal.length !== 0) {
+            if (this.props.appData.error) {
+                clearInterval(id);
+                this.setState({error: true, ready: true});
+            }
+            if (this.props.appData.journal.length !== 0 && !this.state.error) {
                 this.scheduleData = this.props.appData.journal;
                 clearInterval(id);
                 this.setState({
@@ -279,18 +284,31 @@ class Schedule extends React.Component {
             </div>
         )
     };
+    generateErrorSchedule = () => {
+        return (
+            <div className="scheduleTale">
+                <p className="scheduleTaleError">Непредвиденная ошибка. Пожалуйста, попробуйте позже.</p>
+            </div>
+        )
+    };
 
     generateSchedule = () => {
         let days = this.scheduleData.data.days;
         let tales = [];
 
-        days.forEach((day) => {
-            tales.push(this.generateScheduleTale(day));
-        });
-
-        if (tales.length === 0) {
+        if (this.state.error) {
             for (let i = 0; i < 5; i++) {
-                tales.push(this.generateEmptyTale());
+                tales.push(this.generateErrorSchedule());
+            }
+        } else {
+            days.forEach((day) => {
+                tales.push(this.generateScheduleTale(day));
+            });
+
+            if (tales.length === 0) {
+                for (let i = 0; i < 5; i++) {
+                    tales.push(this.generateEmptyTale());
+                }
             }
         }
 

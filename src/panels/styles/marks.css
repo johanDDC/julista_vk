@@ -9,6 +9,14 @@
     padding-bottom: 56px;
 }
 
+.marksScreenError{
+    font-size: 16px;
+    font-weight: bold;
+    color: #E80A1E;
+    padding: 50% 16px 0 16px;
+    text-align: center;
+}
+
 #header-title-marks{
     width: 100% !important;
 }
@@ -241,4 +249,11 @@
 .modalMarkMarksInfoDate{
     font-size: 12px;
     color: #999999;
+}
+
+.errorLastMarks{
+    font-size: 12px;
+    font-weight: bold;
+    color: #E80A1E;
+    text-align: center;
 }

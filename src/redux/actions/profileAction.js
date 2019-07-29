@@ -37,6 +37,9 @@ function auth(login, password, diary, dispatcher) {
                     secret: response.data.secret,
                 },
             })
+        })
+        .catch(error => {
+            console.log("auth error", error)
         });
 }
 

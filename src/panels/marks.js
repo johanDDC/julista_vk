@@ -5,16 +5,10 @@ import {
     PanelHeader,
     TabsItem,
     HorizontalScroll,
-    ModalPage,
-    ModalRoot,
-    ModalPageHeader,
-    HeaderButton,
-    IS_PLATFORM_ANDROID
 } from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/marks.css"
-import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 
 import Mark from "../custom_components/mark"
 import CustomSpinner from "../custom_components/customSpinner";
@@ -32,11 +26,8 @@ class Marks extends React.Component {
         this.state = {
             activeTab: "1",
             ready: !flag,
-            activeModal: "modalMark"
-        };
-
-        this.closeModal = () => {
-            this.setState({activeModal: null})
+            error: false,
+            errorLastMarks: false,
         };
 
         if (flag)
@@ -50,14 +41,22 @@ class Marks extends React.Component {
         this.props.getLastMarks(this.props.profile.id, this.props.profile.secret);
 
         let id = setInterval(() => {
-            if (this.props.appData.marks.data.length !== 0) {
+            if (this.props.appData.error) {
+                clearInterval(id);
+                this.setState({error: true, ready: true});
+            }
+            if (!this.state.error && this.props.appData.marks.data.length !== 0) {
                 this.marksData = this.props.appData.marks;
                 clearInterval(id);
                 this.startRender();
             }
         }, 200);
         let id2 = setInterval(() => {
-            if (this.props.appData.lastMarks.data.length !== 0) {
+            if (this.props.appData.errorLastMarks) {
+                clearInterval(id);
+                this.setState({errorLastMarks: true, ready: true});
+            }
+            if (this.props.appData.lastMarks.data.length !== 0 && !this.state.errorLastMarks) {
                 this.lastMarksData = this.props.appData.lastMarks;
                 clearInterval(id2);
                 this.startRender();
@@ -199,25 +198,31 @@ class Marks extends React.Component {
 
         let drawLastMarks = () => {
             console.log("lastmarks", this.lastMarksData.data);
-            if (this.lastMarksData.data.length !== 0 && this.lastMarksData.data.lessons.length !== 0) {
+            if (this.state.errorLastMarks) {
                 return (
-                    <div>
-                        <Div className="marksBlocksTitle" style={{paddingTop: "0"}}>
-                            ПОСЛЕДНИЕ ОЦЕНКИ
-                        </Div>
-                        <HorizontalScroll className="lastMarksContainer">
-                            <Div className="lastMarkContainer">
-                                <div className="lastMarkVal">
-                                    <Mark size="36" val="5" is_routine={false} fontSize="20"/>
-                                </div>
-                                <div className="lastMarkSubject">Математика</div>
-                                <div className="lastMarkDate">Сегодня</div>
-                            </Div>
-                        </HorizontalScroll>
-                    </div>
-                );
+                    <p className="errorLastMarks">Не удалось загрузить последние оценки из-за непредвиденной ошибки.</p>
+                )
             } else {
-                return null;
+                if (this.lastMarksData.data.length !== 0 && this.lastMarksData.data.lessons.length !== 0) {
+                    return (
+                        <div>
+                            <Div className="marksBlocksTitle" style={{paddingTop: "0"}}>
+                                ПОСЛЕДНИЕ ОЦЕНКИ
+                            </Div>
+                            <HorizontalScroll className="lastMarksContainer">
+                                <Div className="lastMarkContainer">
+                                    <div className="lastMarkVal">
+                                        <Mark size="36" val="5" is_routine={false} fontSize="20"/>
+                                    </div>
+                                    <div className="lastMarkSubject">Математика</div>
+                                    <div className="lastMarkDate">Сегодня</div>
+                                </Div>
+                            </HorizontalScroll>
+                        </div>
+                    );
+                } else {
+                    return null;
+                }
             }
         };
 
@@ -284,21 +289,25 @@ class Marks extends React.Component {
                 >
                     Оценки
                 </PanelHeader>
-                <div className="marksScreen">
-                    <Div style={{paddingTop: "13px", paddingBottom: "13px",}}>
-                        <Tabs theme="header" type="buttons" className="marksTabs">
-                            {this.drawTabsItem()}
-                            <TabsItem
-                                onClick={() => this.setState({activeTab: 'result'})}
-                                selected={this.state.activeTab === 'result'}
-                            >
-                                Итоговые
-                            </TabsItem>
-                        </Tabs>
-                    </Div>
-                    {this.state.ready ? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
-                    {this.state.activeTab === 'result' ? this.drawResultTab() : null}
-                </div>
+                {this.state.error ?
+                    <p className="marksScreenError">Непредвиденная ошибка. Пожалуйста, попробуйте позже.</p>
+                    :
+                    <div className="marksScreen">
+                        <Div style={{paddingTop: "13px", paddingBottom: "13px",}}>
+                            <Tabs theme="header" type="buttons" className="marksTabs">
+                                {this.drawTabsItem()}
+                                <TabsItem
+                                    onClick={() => this.setState({activeTab: 'result'})}
+                                    selected={this.state.activeTab === 'result'}
+                                >
+                                    Итоговые
+                                </TabsItem>
+                            </Tabs>
+                        </Div>
+                        {this.state.ready ? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
+                        {this.state.activeTab === 'result' ? this.drawResultTab() : null}
+                    </div>
+                }
             </Panel>
         )
     }
