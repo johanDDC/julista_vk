@@ -8,9 +8,7 @@ export function getJournal(id, secret, start, end) {
         dispatch({
             type: "GET_JOURNAL_REQUEST",
             data: {
-                data: {
-                    days: []
-                }
+                data: []
             },
         });
 
@@ -69,13 +67,20 @@ function getAndAggregateMarks(id, secret, dispatcher) {
     axios.get(baseUrl + methodUrl + queries)
         .then((response) => {
             console.log("resp", response.data);
-            dispatcher({
-                type: "GET_MARKS_SUCCESS",
-                data: response.data
-            })
+            if (response.data.data === null){
+                dispatcher({
+                    type: "GET_MARKS_FAIL",
+                    data: []
+                })
+            } else {
+                dispatcher({
+                    type: "GET_MARKS_SUCCESS",
+                    data: response.data
+                })
+            }
         })
         .catch(error => {
-            console.log("marks error", error)
+            console.log("marks error", error);
             dispatcher({
                 type: "GET_MARKS_FAIL",
                 data: error
@@ -112,10 +117,17 @@ function getLMarks(id, secret, dispatcher) {
     axios.get(baseUrl + methodUrl + queries)
         .then((response) => {
             console.log("last marks resp", response.data);
-            dispatcher({
-                type: "GET_LAST_MARKS_SUCCESS",
-                data: response.data
-            })
+            if (response.data.error) {
+                dispatcher({
+                    type: "GET_LAST_MARKS_FAIL",
+                    data: response.data.error
+                })
+            } else {
+                dispatcher({
+                    type: "GET_LAST_MARKS_SUCCESS",
+                    data: response.data
+                })
+            }
         })
         .catch(error => {
             console.log("last marks error", error);

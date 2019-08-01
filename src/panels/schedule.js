@@ -12,7 +12,7 @@ class Schedule extends React.Component {
 
         this.dayDates = scheduleGetDates();
         this.scheduleData = this.props.appData.journal;
-        let flag = this.props.appData.journal.data.days.length === 0;
+        let flag = this.props.appData.journal.data.length === 0;
 
         this.state = {
             currentDay: (this.props.currentDay ? this.props.currentDay === 0 ? 6 : this.props.currentDay : 1),
@@ -37,7 +37,7 @@ class Schedule extends React.Component {
                 this.setState({error: true});
                 this.setState({ready: true});
             } else {
-                if (this.props.appData.journal.data.days.length !== 0) {
+                if (this.props.appData.journal.data.length !== 0) {
                     this.scheduleData = this.props.appData.journal;
                     clearInterval(id);
                     this.setState({
@@ -249,9 +249,9 @@ class Schedule extends React.Component {
                         <span className="scheduleSubjectTaleSubjectName">
                             {subject.name}
                         </span>
-                        <span className="scheduleSubjectTaleHomework">
+                        <div className="scheduleSubjectTaleHomework">
                             {homework}
-                        </span>
+                        </div>
                         <span className="scheduleSubjectTaleTimetable">
                             {subject.time[0]} - {subject.time[1]}
                         </span>
@@ -311,6 +311,8 @@ class Schedule extends React.Component {
                 tales.push(this.generateScheduleTale(day));
             });
         }
+
+        console.log("tales", tales);
 
         if (tales.length === 0) {
             console.log("lal");

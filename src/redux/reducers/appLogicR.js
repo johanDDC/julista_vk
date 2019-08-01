@@ -1,8 +1,6 @@
 const initialState = {
     journal: {
-        data: {
-            days: []
-        }
+        data: []
     },
     marks: {
         data : []

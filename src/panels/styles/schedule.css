@@ -5,7 +5,7 @@
 
 
 #schedule {
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 #schedule > .Panel__in {
