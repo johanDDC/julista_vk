@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./styles/choose_diary.css"
 
+import MosRuIcon from "../custom_components/icon-pack/MosRuIcon"
+import MosregIcon from "../custom_components/icon-pack/MosregIcon"
+
 class ChooseDiary extends React.Component {
     constructor(props) {
         super(props);
@@ -29,7 +32,8 @@ class ChooseDiary extends React.Component {
                                     this.choose(this.d);
                                 }}>
                             <div className="chooseDiaryScreenDiaryContainerIcon"
-                                 style={{backgroundColor: "#ff3000"}}></div>
+                                 style={{backgroundColor: "#ff3000"}}>
+                            </div>
                             <span className="chooseDiaryScreenDiaryContainerTitle">МЭШ (mos.ru)</span>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
@@ -40,7 +44,8 @@ class ChooseDiary extends React.Component {
                                     this.choose(this.d);
                                 }}>
                             <div className="chooseDiaryScreenDiaryContainerIcon"
-                                 style={{backgroundColor: "#ffa000"}}></div>
+                                 style={{backgroundColor: "#ffa000"}}>
+                            </div>
                             <span className="chooseDiaryScreenDiaryContainerTitle">mosreg.ru</span>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>

@@ -4,6 +4,11 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./styles/auth.css"
 
+import AuthAccount from "../custom_components/icon-pack/AuthAccount"
+import AuthPassword from "../custom_components/icon-pack/AuthPassword"
+import AuthGift from "../custom_components/icon-pack/AuthGift"
+import AuthRestore from "../custom_components/icon-pack/AuthRestore"
+
 import CustomInput from "../custom_components/customInput"
 
 class Auth extends React.Component {
@@ -19,19 +24,19 @@ class Auth extends React.Component {
     };
 
     buttonClick = () => {
-        this.props.setSpinner(true);
         let login = document.getElementById("loginInput-i").value;
         let password = document.getElementById("passInput-i").value;
         let inviteCode = document.getElementById("inviteCodeInput-i").value;
 
-        if (login.trim() !== "" && password.trim() !== "") {
+        if (login.trim().length !== 0 && password.trim().length !== 0) {
+            this.props.setSpinner(true);
             this.props.getProfile(login, password, this.props.profile.diary);
 
             let id = setInterval(() => {
                 if (this.props.profile.error) {
                     clearInterval(id);
                     this.props.setSpinner(false);
-                    if (this.props.profile.id instanceof Error){
+                    if (this.props.profile.id instanceof Error) {
                         this.props.openError();
                     } else {
                         this.props.openIncorrect();
@@ -41,7 +46,14 @@ class Auth extends React.Component {
                     if (this.props.profile.secret) {
                         clearInterval(id);
                         this.props.setSpinner(false);
-                        this.props.setView("MainView", "account");
+                        if (this.props.profile.student === null) {
+                            this.props.setPanel("choose_student");
+                        } else {
+                            this.props.setPresentation({
+                                view: "MainView",
+                                panel: "account"
+                            });
+                        }
                     }
                 }
             }, 200);
@@ -62,7 +74,9 @@ class Auth extends React.Component {
                         Войдите с помощью данных аккаунта mos.ru
                     </Div>
                     <Div className="inputContainer">
-                        <div className="inputIcon"></div>
+                        <div className="inputIcon">
+                            <AuthAccount/>
+                        </div>
                         <div className="inputInput">
                             <CustomInput id="loginInput"
                                          type="text"
@@ -71,7 +85,9 @@ class Auth extends React.Component {
                         </div>
                     </Div>
                     <Div className="inputContainer">
-                        <div className="inputIcon"></div>
+                        <div className="inputIcon">
+                            <AuthPassword/>
+                        </div>
                         <div className="inputInput">
                             <CustomInput id="passInput"
                                          type="password"
@@ -84,6 +100,9 @@ class Auth extends React.Component {
                             className="medium_tip">Введите код приглашения, при его наличии, или оставьте поле пустым</span>
                     </Div>
                     <Div className="inviteInput">
+                        <div className="inputIcon">
+                            <AuthGift/>
+                        </div>
                         <CustomInput id="inviteCodeInput"
                                      type="text"
                         />
@@ -95,11 +114,15 @@ class Auth extends React.Component {
                                                                                          target="_blank">политика конфиденциальности</Link></span>
                     </Div>
                     <Div className="restorePassword">
-                        <span>Забыли данные учетной записи?</span>
-                        <Link
-                            href="https://google.com"
-                            target="_blank"
-                            className="restoreLink">Восстановить</Link>
+                        <div className="inputIcon">
+                            <AuthRestore/>
+                        </div>
+                        <span>Забыли данные учетной записи?
+                                <Link
+                                    href="https://google.com"
+                                    target="_blank"
+                                    className="restoreLink">Восстановить</Link>
+                            </span>
                     </Div>
                     <Div>
                         <Button level="tertiary" className="getInButton"
@@ -125,8 +148,8 @@ Auth.propTypes = {
         }),
     }),
     profile: PropTypes.any.isRequired,
-    setView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
+    setPresentation: PropTypes.func.isRequired,
     getProfile: PropTypes.func.isRequired,
     setSpinner: PropTypes.func,
     openError: PropTypes.func.isRequired,

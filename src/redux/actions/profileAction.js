@@ -8,6 +8,8 @@ export function doAuthorize(login, password, diary) {
             data: {
                 id: null,
                 secret: null,
+                students: [],
+                student: null,
             },
         });
 
@@ -32,12 +34,18 @@ function auth(login, password, diary, dispatcher) {
     axios.post(baseUrl + methodUrl, json)
         .then((response) => {
             console.log("resp", response.data);
+            let students = [];
+            response.data.students.list.forEach(e => {
+                students.push(e);
+            });
             if (response.data.status) {
                 dispatcher({
                     type: "DO_AUTHORIZATION_SUCCESS",
                     data: {
                         id: response.data.id,
                         secret: response.data.secret,
+                        students: students,
+                        student: (students.length === 1 ? students[0]: null),
                     },
                 })
             } else {
@@ -59,6 +67,13 @@ function auth(login, password, diary, dispatcher) {
 export function setDiary(diary) {
     return {
         type: "SET_DIARY",
-        data: diary
+        data: diary,
+    }
+}
+
+export function setStudent(student) {
+    return {
+        type: "SET_STUDENT",
+        data: student,
     }
 }

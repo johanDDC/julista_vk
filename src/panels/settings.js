@@ -4,7 +4,7 @@ import React from "react";
 import "./styles/settings.css"
 import VKSettingsIcon from "../custom_components/icon-pack/VKSettingsIcon"
 import AdvancesIcon from "../custom_components/icon-pack/AdvancesIcon"
-import NewMarksIcon from "../custom_components/icon-pack/NewMarksIcon"
+import DarkThemeIcon from "../custom_components/icon-pack/DarkThemeIcon"
 import Mark from "../custom_components/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
 
@@ -70,7 +70,7 @@ class Settings extends React.Component {
                     </div>
                     <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}
                          onClick={() => this.setState({tooltip: true})}>
-                        <NewMarksIcon/>
+                        <DarkThemeIcon/>
                         <div className="settingsSettingInfo">
                         <span className="settingsSettingTitle">
                             Тёмная тема

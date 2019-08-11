@@ -27,7 +27,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <Root activeView={this.props.activeView}>
+            <Root activeView={this.props.appPresentation.activeView}>
                 <AuthorizationView
                     id="AuthorizationView"
                 >
@@ -41,10 +41,7 @@ class App extends React.Component {
 const mapStateToProps = store => {
     console.log("App", store);
     return {
-        activeView: store.activeView,
-        activePanel: store.activePanel,
-        userId: store.userId,
-        userSecret: store.userSecret,
+        appPresentation: store.appPresentation,
     }
 };
 

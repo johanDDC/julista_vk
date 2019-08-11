@@ -2,6 +2,8 @@ const initialState = {
     id: null,
     secret: null,
     diary: null,
+    students: [],
+    student: null,
     isFetching: false,
     error: false,
 };
@@ -13,6 +15,8 @@ function profile(state = initialState, action) {
                 ...state,
                 id: action.data.id,
                 secret: action.data.secret,
+                students: action.data.students,
+                student: action.data.studentId,
                 isFetching: true,
                 error: false,
             };
@@ -22,6 +26,8 @@ function profile(state = initialState, action) {
                 ...state,
                 id: action.data.id,
                 secret: action.data.secret,
+                students: action.data.students,
+                student: action.data.student,
                 isFetching: false,
                 error: false,
             };
@@ -37,6 +43,12 @@ function profile(state = initialState, action) {
                 ...state,
                 diary: action.data,
                 isFetching: false
+            };
+
+        case "SET_STUDENT":
+            return {
+              ...state,
+              student: action.data
             };
 
         default:

@@ -5,7 +5,8 @@ import React from "react";
 import "./styles/plus.css"
 
 import InviteUserContainer from "../custom_components/inviteUserContainer"
-import PlusIcon from "../custom_components/icon-pack/PlusIcon"
+import BigPlusIcon from "../custom_components/icon-pack/bigPlusIcon"
+import TGbot from "../custom_components/icon-pack/TGbot"
 
 
 class Plus extends React.Component {
@@ -48,7 +49,7 @@ class Plus extends React.Component {
                 <FixedLayout style={{width: "100%"}}>
                     <Div className="plusBlueBack">
                         <span>Расширь возможности своего дневника</span>
-                        <PlusIcon selected={true} size="42" stroke_color={"#ffffff"}/>
+                        <BigPlusIcon/>
                     </Div>
                 </FixedLayout>
                 <div style={{padding: "0 16px 0 16px", marginBottom: "8px"}}>
@@ -59,6 +60,7 @@ class Plus extends React.Component {
                 <div style={{padding: "0 16px 0 16px", marginBottom: "8px"}}>
                     <Button level="tertiary" className="plusTelegramContainer">
                         Бот для Телеграм
+                        <TGbot/>
                     </Button>
                 </div>
                 <div style={{padding: "0 16px 0 16px", marginBottom: "8px"}}>

@@ -14,7 +14,7 @@ import MarksView from "./MarksView";
 import ScheduleView from "./ScheduleView";
 import PlusView from "./PlusView";
 import SettingsView from "./SettingsView";
-import {setPanel} from "../redux/actions/PanelAction";
+import {setPanel} from "../redux/actions/appPresentationAction";
 import {connect} from "react-redux";
 
 
