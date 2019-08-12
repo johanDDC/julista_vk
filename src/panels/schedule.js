@@ -142,13 +142,13 @@ class Schedule extends React.Component {
                     subject.marks.forEach(mark => {
                         marks.push( //Append weight here
                             <Mark size="24" val={mark.score.toString()} is_routine={false} fontSize="14"
-                                  weight={mark.weight.toString()}/>
+                                  weight={(mark.weight ? mark.weight.toString() : "1")}/>
                         );
                         modalMarksPresentation.push(
                             <div className="modalScheduleInfoRow">
                                 <div className="modalScheduleInfoRowLeft">
                                     <Mark size="22" val={mark.score.toString()} is_routine={false} fontSize="14"
-                                          weight={mark.weight.toString()}/>
+                                          weight={(mark.weight ? mark.weight.toString() : "1")}/>
                                 </div>
                                 <div className="modalScheduleInfoRowText">
                                 </div>
@@ -168,7 +168,7 @@ class Schedule extends React.Component {
             }
             console.log("building modal");
             let modal = (
-                subject.label.title ?
+                subject.time ?
                     <div>
                         {subject.marks ?
                             <div>
@@ -208,34 +208,38 @@ class Schedule extends React.Component {
                                 </div>
                             </div>
                             : null}
-                        <div>
-                            <div className="modalScheduleTitle">
-                                Тема урока
-                            </div>
-                            <div className="modalScheduleInfoRow">
-                                <div className="modalScheduleInfoRowLeft">
-                                    -
-                                </div>
-                                {subject.label.title}
-                                <div className="modalScheduleInfoRowText">
-                                </div>
-                            </div>
-                        </div>
-                        {(subject.label.module ?
+                        {subject.label ?
                             <div>
                                 <div className="modalScheduleTitle">
-                                    Модуль
+                                    Тема урока
                                 </div>
                                 <div className="modalScheduleInfoRow">
                                     <div className="modalScheduleInfoRowLeft">
                                         -
                                     </div>
+                                    {subject.label.title}
                                     <div className="modalScheduleInfoRowText">
-                                        {subject.label.module}
                                     </div>
                                 </div>
                             </div>
-                            : null)}
+                        : null}
+                        {subject.label ?
+                            (subject.label.module ?
+                                <div>
+                                    <div className="modalScheduleTitle">
+                                        Модуль
+                                    </div>
+                                    <div className="modalScheduleInfoRow">
+                                        <div className="modalScheduleInfoRowLeft">
+                                            -
+                                        </div>
+                                        <div className="modalScheduleInfoRowText">
+                                            {subject.label.module}
+                                        </div>
+                                    </div>
+                                </div>
+                                : null)
+                            :null}
                     </div>
                     : null
             );

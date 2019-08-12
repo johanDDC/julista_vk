@@ -10,10 +10,12 @@
 
 #schedule > .Panel__in {
     padding-bottom: 0 !important;
+    overflow-y: hidden;
 }
 
 #schedule > div {
     background-color: rgb(86 144 255) !important;
+    overflow-y: hidden;
 }
 
 .scheduleHeaderMonth {
@@ -129,7 +131,7 @@
 
 .scheduleSliderContainer {
     height: calc(100vh - 48px - 12px - 56px);
-    overflow: scroll;
+    overflow: hidden;
     /*border-radius: 14px 14px 0 0;*/
     margin-top: 62px;
 }

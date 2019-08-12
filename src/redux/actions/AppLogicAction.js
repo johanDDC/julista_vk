@@ -22,7 +22,7 @@ function getSchedule(id, secret, start, end, dispatcher) {
     let queries = `?id=${id}&secret=${secret}&start=${setCorrectYear(start.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(end.toLocaleDateString("ru-RU"))}`;
     // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(start.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(end.toLocaleDateString("ru-RU"))}`;
 
-    console.log("q", queries);
+    console.log("schedule request", baseUrl + methodUrl + queries);
 
     axios.get(baseUrl + methodUrl + queries)
         .then((response) => {
@@ -66,7 +66,7 @@ function getAndAggregateMarks(id, secret, dispatcher) {
 
     axios.get(baseUrl + methodUrl + queries)
         .then((response) => {
-            console.log("resp", response.data);
+            console.log("marks resp", response.data);
             if (response.data.data === null){
                 dispatcher({
                     type: "GET_MARKS_FAIL",

@@ -42,30 +42,34 @@ class Marks extends React.Component {
 
         let id = setInterval(() => {
             if (this.props.appData.error) {
+                console.log("err marks");
                 clearInterval(id);
                 this.setState({error: true, ready: true});
             }
             if (!this.state.error && this.props.appData.marks.data.length !== 0) {
                 this.marksData = this.props.appData.marks;
                 clearInterval(id);
+                console.log("GONNA RENDER", this.marksData);
                 this.startRender();
             }
         }, 200);
         let id2 = setInterval(() => {
             if (this.props.appData.errorLastMarks) {
+                console.log("err last");
                 clearInterval(id);
                 this.setState({errorLastMarks: true, ready: true});
             }
-            if (this.props.appData.lastMarks.data.length !== 0 && !this.state.errorLastMarks) {
-                this.lastMarksData = this.props.appData.lastMarks;
-                clearInterval(id2);
-                this.startRender();
-            }
+            // if (this.props.appData.lastMarks.data.length !== 0 && !this.state.errorLastMarks) {
+            //     this.lastMarksData = this.props.appData.lastMarks;
+            //     clearInterval(id2);
+            //     this.startRender();
+            // }
         }, 200);
     };
 
     startRender = () => {
         let periods = this.marksData.data[0].periods.length;
+        console.log("periods length", periods);
         for (let i = 0; i < periods; i++) {
             this.tabs.push(this.drawTab(i));
         }
@@ -108,17 +112,17 @@ class Marks extends React.Component {
             let marksModal = [];
             let avg = 0;
             period.marks.forEach(mark => {
-                avg += mark.value * mark.weight;
+                avg += mark.value * (mark.weight ? mark.weight : 1);
                 marks.push(
                     <div>
-                        <Mark size="16" val={mark.value} is_routine={true} fontSize="12"/>
+                        <Mark size="16" val={mark.value.toString()} is_routine={true} fontSize="12"/>
                     </div>
                 );
                 marksModal.push(
                     <div className="modalMarkMarksInfo">
                         <div className="modalMarkMarksInfoLeft">
-                            <Mark size="22" is_routine={false} val={mark.value} fontSize="14"
-                                  weight={mark.weight.toString()}/>
+                            <Mark size="22" is_routine={false} val={mark.value.toString()} fontSize="14"
+                                  weight={(mark.weight ? mark.weight.toString() : "1")}/>
                         </div>
                         <div className="modalMarkMarksInfoContainer">
                             <div className="modalMarkMarksInfoForm">
