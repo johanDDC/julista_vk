@@ -49,10 +49,7 @@ class Auth extends React.Component {
                         if (this.props.profile.student === null) {
                             this.props.setPanel("choose_student");
                         } else {
-                            this.props.setPresentation({
-                                view: "MainView",
-                                panel: "account"
-                            });
+                            this.props.setView("MainView", "account");
                         }
                     }
                 }
@@ -148,8 +145,8 @@ Auth.propTypes = {
         }),
     }),
     profile: PropTypes.any.isRequired,
+    setView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
-    setPresentation: PropTypes.func.isRequired,
     getProfile: PropTypes.func.isRequired,
     setSpinner: PropTypes.func,
     openError: PropTypes.func.isRequired,

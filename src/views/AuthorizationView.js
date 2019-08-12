@@ -4,9 +4,10 @@ import Auth from '../panels/auth'
 import ChooseDiary from '../panels/choose_diary'
 import ChooseStudent from '../panels/choose_student'
 import "./styles/Authorization.css"
-import {setPanel, setPresentation} from "../redux/actions/appPresentationAction";
 import {connect} from 'react-redux'
 import {doAuthorize, setDiary, setStudent} from "../redux/actions/profileAction";
+import {setPanel} from "../redux/actions/PanelAction";
+import {setView} from "../redux/actions/ViewAction";
 
 
 class AuthorizationView extends React.Component {
@@ -69,7 +70,7 @@ class AuthorizationView extends React.Component {
                       fetchedUser={this.props.fetchedUser}
                       setSpinner={this.viewScreenSpinner}
                       setPanel={this.props.setPanelAction}
-                      setPresentation={this.props.setPresentationAction}
+                      setView={this.props.setViewAction}
                       profile={this.props.profile}
                       getProfile={this.props.getProfileAction}
                       openError={this.callError}
@@ -78,7 +79,8 @@ class AuthorizationView extends React.Component {
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}
                                setStudent={this.props.setStudentAction}
-                               setPresentation={this.props.setPresentationAction}
+                               setView={this.props.setViewAction}
+                               setPanel={this.props.setPanelAction}
                 />
             </View>
         )
@@ -89,7 +91,7 @@ class AuthorizationView extends React.Component {
 const mapStateToProps = store => {
     console.log("Auth View", store);
     return {
-        activePanel: store.appPresentation.activePanel,
+        activePanel: store.activePanel,
         diary: store.diary,
         fetchedUser: store.fetchedUser,
         profile: store.profile,
@@ -103,7 +105,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(doAuthorize(login, password, diary));
         },
         setPanelAction: panel => dispatch(setPanel(panel)),
-        setPresentationAction: presentation => dispatch(setPresentation(presentation)),
+        setViewAction: view => dispatch(setView(view)),
         setStudentAction: student => dispatch(setStudent(student)),
     }
 };

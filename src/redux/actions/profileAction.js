@@ -19,16 +19,20 @@ export function doAuthorize(login, password, diary) {
 
 function auth(login, password, diary, dispatcher) {
     let methodUrl = "api/auth/";
-    let json ={
-        diary : diary,
-        login : login,
-        password : password
-    };
-    // let json = {
-    //     diary: "mosru",
-    //     login: "zzoorm@gmail.com",
-    //     password: "YaLol123"
+    // let json ={
+    //     diary : diary,
+    //     login : login,
+    //     password : password
     // };
+    let json = {
+        region: 40,
+        province: -1,
+        city: 1,
+        school: 293,
+        login: "ПетроваВ2",
+        password: "Петрова302",
+        diary: "netschool",
+    };
     console.log(baseUrl + methodUrl, json);
 
     axios.post(baseUrl + methodUrl, json)

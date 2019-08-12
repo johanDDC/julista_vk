@@ -13,10 +13,6 @@ class ChooseStudent extends React.Component {
     }
 
     choose = (student) => {
-        this.props.setPresentation({
-            view: "MainView",
-            panel: "account"
-        });
         // this.props.setStudent(student)
     };
 
@@ -52,7 +48,8 @@ ChooseStudent.propTypes = {
     id: PropTypes.string.isRequired,
     profile: PropTypes.any.isRequired,
     setStudent: PropTypes.func.isRequired,
-    setPresentation: PropTypes.func.isRequired,
+    setView: PropTypes.func.isRequired,
+    setPanel: PropTypes.func.isRequired,
 };
 
 export default ChooseStudent;
