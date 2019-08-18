@@ -3,6 +3,7 @@ import {View, ScreenSpinner, Alert} from '@vkontakte/vkui';
 import Auth from '../panels/auth'
 import ChooseDiary from '../panels/choose_diary'
 import ChooseStudent from '../panels/choose_student'
+import NetschoolMap from "../panels/netschoolAdditionalPanel"
 import "./styles/Authorization.css"
 import {connect} from 'react-redux'
 import {doAuthorize, setDiary, setStudent} from "../redux/actions/profileAction";
@@ -53,7 +54,8 @@ class AuthorizationView extends React.Component {
                     onClose={() => this.setState({popout: null})}
                 >
                     <h2>Ошибка авторизации</h2>
-                    <p>Проблемы с подключением. Пожалуйста, перепроверьте правильность введённых данных и попробуйте ещё раз.</p>
+                    <p>Проблемы с подключением. Пожалуйста, перепроверьте правильность введённых данных и попробуйте ещё
+                        раз.</p>
                 </Alert>
         })
     };
@@ -75,6 +77,9 @@ class AuthorizationView extends React.Component {
                       getProfile={this.props.getProfileAction}
                       openError={this.callError}
                       openIncorrect={this.callIncorrect}
+                />
+                <NetschoolMap id="netschool_map"
+                              setPanel={this.props.setPanelAction}
                 />
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}

@@ -255,7 +255,7 @@ class Marks extends React.Component {
                 if (mark)
                     renderedMarks.push(
                         <div className="resultMarksContainerMark">
-                            <Mark size="24" val={mark} is_routine={true} fontSize="12"/>
+                            <Mark size="24" val={mark.toString()} is_routine={true} fontSize="12" short={true}/>
                         </div>
                     )
             });
@@ -266,7 +266,8 @@ class Marks extends React.Component {
                     <div className="resultMarksContainerMarks">
                         {renderedMarks}
                         <div className="resultMarksContainerResultedMark">
-                            <Mark size="24" val={subject.year_mark} is_routine={false} fontSize="12"/>
+                            <Mark size="24" val={subject.year_mark.toString()} is_routine={false} fontSize="12"
+                                  short={true}/>
                         </div>
                     </div>
                 </Div>

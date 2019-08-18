@@ -1,0 +1,11 @@
+#panel-header-netschool_map > *, #header-bg-netschool_map > *, #header-right-netschool_map > *, #header-left-netschool_map > *, #header-title-netschool_map > *{
+    background-color: #5690ff !important;
+}
+
+.netschoolMapScreen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    height: calc(100vh - 44px);
+}

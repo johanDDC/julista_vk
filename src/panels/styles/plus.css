@@ -110,11 +110,17 @@
     border: 0;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
     margin: 0;
 }
 
 .plusTelegramContainer > div > div{
     font-size: 16px !important;
+}
+
+.plusBotTextContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

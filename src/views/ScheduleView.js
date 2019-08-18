@@ -4,7 +4,7 @@ import Schedule from '../panels/schedule'
 import {connect} from "react-redux";
 import {getJournal} from "../redux/actions/AppLogicAction";
 import "./styles/Schedule.css"
-import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
+import SubjectCloseIcon from "../custom_components/icon-pack/SubjectCloseIcon"
 
 class ScheduleView extends React.Component {
     constructor(props) {
@@ -31,7 +31,7 @@ class ScheduleView extends React.Component {
                         header={
                             <ModalPageHeader
                                 left={IS_PLATFORM_ANDROID &&
-                                <HeaderButton onClick={this.closeModal}><Icon24Cancel style={{color:"#999999"}}/></HeaderButton>}
+                                <HeaderButton onClick={this.closeModal}><SubjectCloseIcon   /></HeaderButton>}
                             >
                                 {name}
                             </ModalPageHeader>

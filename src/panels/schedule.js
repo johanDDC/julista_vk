@@ -6,6 +6,10 @@ import Mark from "../custom_components/mark"
 import CustomSpinner from "../custom_components/customSpinner"
 import {scheduleGetDates, getRusMonthName} from "../utils/utils"
 
+import SubjectCloseIcon from "../custom_components/icon-pack/SubjectCloseIcon"
+import SubjectHWIcon from "../custom_components/icon-pack/SubjectHWIcon"
+import SubjectRoomIcon from "../custom_components/icon-pack/SubjectRoomIcon"
+
 class Schedule extends React.Component {
     constructor(props) {
         super(props);
@@ -185,7 +189,7 @@ class Schedule extends React.Component {
                                 </div>
                                 <div className="modalScheduleInfoRow">
                                     <div className="modalScheduleInfoRowLeft">
-                                        -
+                                        <SubjectHWIcon/>
                                     </div>
                                     <div className="modalScheduleInfoRowText">
                                         {homework}
@@ -200,7 +204,7 @@ class Schedule extends React.Component {
                                 </div>
                                 <div className="modalScheduleInfoRow">
                                     <div className="modalScheduleInfoRowLeft">
-                                        -
+                                        <SubjectRoomIcon/>
                                     </div>
                                     <div className="modalScheduleInfoRowText">
                                         {subject.room}

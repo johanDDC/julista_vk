@@ -59,8 +59,10 @@ class Plus extends React.Component {
                 </div>
                 <div style={{padding: "0 16px 0 16px", marginBottom: "8px"}}>
                     <Button level="tertiary" className="plusTelegramContainer">
-                        Бот для Телеграм
                         <TGbot/>
+                        <div className="plusBotTextContainer">
+                            Бот для Телеграм
+                        </div>
                     </Button>
                 </div>
                 <div style={{padding: "0 16px 0 16px", marginBottom: "8px"}}>
