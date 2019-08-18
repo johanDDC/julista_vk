@@ -7,6 +7,12 @@ import "./styles/plus.css"
 import InviteUserContainer from "../custom_components/inviteUserContainer"
 import BigPlusIcon from "../custom_components/icon-pack/bigPlusIcon"
 import TGbot from "../custom_components/icon-pack/TGbot"
+import VKbot from "../custom_components/icon-pack/VKbot"
+import AliceBot from "../custom_components/icon-pack/AliceBot"
+
+import Shaverma from "../custom_components/icon-pack/Shaverma"
+import PlusInvitationIcon from "../custom_components/icon-pack/PlusInvitaionIcon"
+import PlusNotificationIcon from "../custom_components/icon-pack/PlusNotificationIcon"
 
 
 class Plus extends React.Component {
@@ -54,12 +60,19 @@ class Plus extends React.Component {
                 </FixedLayout>
                 <div style={{padding: "0 16px 0 16px", marginBottom: "8px"}}>
                     <Button level="tertiary" className="plusVkContainer">
-                        Бот для ВКонтакте
+                        <div style={{height: "34px", display: "flex", alignItems: "end"}}>
+                            <VKbot/>
+                        </div>
+                        <div className="plusBotTextContainer">
+                            Бот для ВКонтакте
+                        </div>
                     </Button>
                 </div>
                 <div style={{padding: "0 16px 0 16px", marginBottom: "8px"}}>
                     <Button level="tertiary" className="plusTelegramContainer">
-                        <TGbot/>
+                        <div style={{height: "34px", display: "flex", alignItems: "end"}}>
+                            <TGbot/>
+                        </div>
                         <div className="plusBotTextContainer">
                             Бот для Телеграм
                         </div>
@@ -67,12 +80,20 @@ class Plus extends React.Component {
                 </div>
                 <div style={{padding: "0 16px 0 16px", marginBottom: "8px"}}>
                     <Button level="tertiary" className="plusAliceContainer">
-                        Навык для Алисы
+                        <div style={{height: "34px", display: "flex", alignItems: "end"}}>
+                            <AliceBot/>
+                        </div>
+                        <div className="plusBotTextContainer">
+                            Навык для Алисы
+                        </div>
                     </Button>
                 </div>
                 <div className="plusOfferContainer">
                     <Div className="plusOfferInfo">
                         <span className="plusOfferTitle">
+                            <div style={{marginRight: "10px"}}>
+                                <PlusInvitationIcon/>
+                            </div>
                             Бесплатный доступ к уведомлениям
                         </span>
                         <span className="plusOfferText">
@@ -80,6 +101,7 @@ class Plus extends React.Component {
                         </span>
                         <div className="plusOfferAdditional">
                             <InviteUserContainer inputColor={["rgb(21 237 237)", "rgb(2 156 245)"]}
+                                                 is_invited={true}
                                                  shadowColor="rgb(17 221 239)"/>
                             <InviteUserContainer inputColor={["rgb(32 217 110)", "rgb(39 174 96)"]}
                                                  shadowColor="rgb(32 217 110)"/>
@@ -99,6 +121,9 @@ class Plus extends React.Component {
                 <div className="plusOfferContainer">
                     <Div className="plusOfferInfo">
                         <span className="plusOfferTitle">
+                            <div style={{marginRight: "10px"}}>
+                                <PlusNotificationIcon/>
+                            </div>
                             Уведомления
                         </span>
                         <span className="plusOfferText">
@@ -114,6 +139,9 @@ class Plus extends React.Component {
                             — Отчётность за день
                         </span>
                         <div className="plusOfferAdditional">
+                            <div className="plusShaverma">
+                                <Shaverma/>
+                            </div>
                             <span className="plusOfferText">
                                 149 рублей за год — как шаверма в центре Москвы
                             </span>

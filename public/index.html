@@ -9,23 +9,7 @@
     <script src="https://api-maps.yandex.ru/2.1/?apikey=fbc15a57-6801-4993-9d23-9b313b0f3ad1&lang=ru_RU"
             type="text/javascript"></script>
     <script type="text/javascript">
-        ymaps.ready(function () {
-            let geolocation = ymaps.geolocation;
-            let position;
-            let map;
-            geolocation.get({
-                provider: 'yandex',
-                mapStateAutoApply: true
-            }).then(function (result) {
-                position = result.geoObjects.position;
-                map = new ymaps.Map("netschoolMap", {
-                    center: [position[0], position[1]],
-                    zoom: 10,
-                    controls: ['zoomControl']
-                });
-                map.behaviors.enable(['ruler', 'drag'])
-            });
-        });
+        window.ymaps = ymaps;
     </script>
     <title>VK App Boilerplate</title>
 </head>

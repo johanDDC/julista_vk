@@ -1,4 +1,4 @@
-const activePanel = (state = "netschool_map", action) => {
+const activePanel = (state = "choose_diary", action) => {
     switch (action.type) {
         case "SET_PANEL":
             return action.value;
