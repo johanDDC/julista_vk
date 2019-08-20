@@ -29,31 +29,37 @@ class Auth extends React.Component {
         let inviteCode = document.getElementById("inviteCodeInput-i").value;
 
         if (login.trim().length !== 0 && password.trim().length !== 0) {
-            this.props.setSpinner(true);
-            this.props.getProfile(login, password, this.props.profile.diary);
+            if (this.props.profile.diary === "netschool"){
+                this.props.netschoolSave(login, password);
+                this.props.setPanel("netschool_map");
+            } else {
 
-            let id = setInterval(() => {
-                if (this.props.profile.error) {
-                    clearInterval(id);
-                    this.props.setSpinner(false);
-                    if (this.props.profile.id instanceof Error) {
-                        this.props.openError();
-                    } else {
-                        this.props.openIncorrect();
-                    }
-                    this.setState({error: true});
-                } else {
-                    if (this.props.profile.secret) {
+                this.props.setSpinner(true);
+                this.props.getProfile(login, password, this.props.profile.diary);
+
+                let id = setInterval(() => {
+                    if (this.props.profile.error) {
                         clearInterval(id);
                         this.props.setSpinner(false);
-                        if (this.props.profile.student === null) {
-                            this.props.setPanel("choose_student");
+                        if (this.props.profile.id instanceof Error) {
+                            this.props.openError();
                         } else {
-                            this.props.setView("MainView", "account");
+                            this.props.openIncorrect();
+                        }
+                        this.setState({error: true});
+                    } else {
+                        if (this.props.profile.secret) {
+                            clearInterval(id);
+                            this.props.setSpinner(false);
+                            if (this.props.profile.student === null) {
+                                this.props.setPanel("choose_student");
+                            } else {
+                                this.props.setView("MainView", "account");
+                            }
                         }
                     }
-                }
-            }, 200);
+                }, 200);
+            }
         }
     };
 
@@ -151,6 +157,7 @@ Auth.propTypes = {
     setSpinner: PropTypes.func,
     openError: PropTypes.func.isRequired,
     openIncorrect: PropTypes.func.isRequired,
+    netschoolSave: PropTypes.func,
 };
 
 export default Auth;

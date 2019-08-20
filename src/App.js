@@ -19,7 +19,8 @@ class App extends React.Component {
                     this.setState({fetchedUser: e.detail.data});
                     break;
                 default:
-                    console.log(e.detail.type);
+                    // console.log(e.detail.type);
+                    break;
             }
         });
         VKconnect.send('VKWebAppGetUserInfo', {});

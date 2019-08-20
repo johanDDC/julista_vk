@@ -9,6 +9,11 @@ const axios = require('axios');
 class NetschoolMap extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            isButtonSpawned: false,
+        };
+
         this.map = null;
     }
 
@@ -17,34 +22,47 @@ class NetschoolMap extends React.Component {
     };
 
     setMap = () => {
-        // console.log(window.ymaps);
-        window.ymaps.ready(function () {
+        window.ymaps.ready(() => {
             let geolocation = window.ymaps.geolocation;
             let position;
-            let map;
             geolocation.get({
                 provider: 'yandex',
                 mapStateAutoApply: true
-            }).then(function (result) {
+            }).then((result) => {
                 position = result.geoObjects.position;
-                map = new window.ymaps.Map("netschoolMap", {
-                    center: [position[0], position[1]],
-                    zoom: 15,
-                    controls: ['zoomControl']
-                });
-                map.behaviors.enable(['drag']);
+                if (this.map === null) {
+                    this.map = new window.ymaps.Map("netschoolMap", {
+                        center: [position[0], position[1]],
+                        zoom: 15,
+                        controls: ['zoomControl']
+                    });
+                    this.map.behaviors.enable(['drag']);
 
-                map.events.add('click', function (e) {
-                    var coords = e.get('coords');
-                    console.log(coords);
-                    axios.get("https://geocode-maps.yandex.ru/1.x/?format=json&apikey=fbc15a57-6801-4993-9d23-9b313b0f3ad1&geocode=" +
-                        coords[1].toPrecision(6) + "," + coords[0].toPrecision(6))
-                        .then(resp => {
-                            console.log("click", resp);
-                        })
+                    this.map.events.add('click', (e) => {
+                        var coords = e.get('coords');
+                        console.log("click-click", coords);
+                        axios.get("https://geocode-maps.yandex.ru/1.x/?format=json&apikey=fbc15a57-6801-4993-9d23-9b313b0f3ad1&geocode=" +
+                            coords[1].toPrecision(6) + "," + coords[0].toPrecision(6))
+                            .then(resp => {
+                                console.log("click", resp);
+                                if (!this.isButtonSpawned)
+                                    this.spawnButton()
+                            })
+                            .catch(err => {
+                                console.log("click error");
+                            })
+                    });
+                }
+            })
+                .catch(err => {
+                    console.log("geo getting error")
                 });
-            });
         });
+    };
+
+    spawnButton = () => {
+        this.setState({isButtonSpawned: true});
+        console.log("spawning button");
     };
 
     render() {
@@ -55,6 +73,11 @@ class NetschoolMap extends React.Component {
                 </PanelHeader>
                 <div className="netschoolMapScreen" id="netschoolMap">
                 </div>
+                {this.state.isButtonSpawned ?
+                    <Button level="tertiary" className="chooseSchool">
+                        Выбрать школу
+                    </Button>
+                    : null}
                 {this.setMap()}
             </Panel>
         )

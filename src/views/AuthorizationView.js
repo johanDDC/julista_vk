@@ -16,7 +16,11 @@ class AuthorizationView extends React.Component {
         super(props);
 
         this.state = {
-            popout: null
+            popout: null,
+            netschoolData: {
+                login: null,
+                password: null,
+            }
         }
     }
 
@@ -60,6 +64,15 @@ class AuthorizationView extends React.Component {
         })
     };
 
+    netschoolSaving = (login, password) => {
+        this.setState({
+            netschoolData: {
+                login: login,
+                password: password,
+            }
+        })
+    };
+
     render() {
         return (
             <View popout={this.state.popout} activePanel={this.props.activePanel}>
@@ -77,9 +90,11 @@ class AuthorizationView extends React.Component {
                       getProfile={this.props.getProfileAction}
                       openError={this.callError}
                       openIncorrect={this.callIncorrect}
+                      netschoolSave={this.netschoolSaving}
                 />
                 <NetschoolMap id="netschool_map"
                               setPanel={this.props.setPanelAction}
+                              netschoolData={this.state.netschoolData}
                 />
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}

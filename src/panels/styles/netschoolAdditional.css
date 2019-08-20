@@ -8,4 +8,21 @@
     align-items: center;
     background-color: #fff;
     height: calc(100vh - 44px);
+    position: relative;
+}
+
+.chooseSchool{
+    position: absolute;
+    top: 87%;
+    margin: 0;
+    padding: 0;
+    color: #568ffd;
+    background: #ffffff;
+    border-radius:12px !important;
+    box-shadow: 0 4px 16px 0 #bcbabc;
+    height: 55px !important;
+    width: 100%;
+    border: 0;
+    font-weight: bold;
+    z-index: 1;
 }
