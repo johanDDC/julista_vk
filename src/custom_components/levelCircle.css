@@ -1,11 +1,12 @@
 .levelCircleContainer{
-    width: 26px;
-    height: 26px;
+    width: 36px;
+    height: 36px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     color: white;
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: bold;
 }

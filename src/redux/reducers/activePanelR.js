@@ -1,4 +1,4 @@
-const activePanel = (state = "choose_diary", action) => {
+const activePanel = (state = "account", action) => {
     switch (action.type) {
         case "SET_PANEL":
             return action.value;

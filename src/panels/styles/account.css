@@ -6,6 +6,11 @@
     background-color: rgb(86 144 255) !important;
 }
 
+#account > .Panel__in{
+    padding-bottom: 0 !important;
+}
+
+
 .studentInfoContainer{
     display: flex;
     flex-direction: row;
@@ -65,6 +70,15 @@
     margin: 15px 10px 0 10px ;
 }
 
+
+.accountTasks{
+    background-color: #fff;
+}
+
+.accountGradeTop{
+    background-color: #f6f6f6;
+}
+
 #successTitleContainer{
     background-color: rgb(255 65 108);
     border-radius: 200px;
@@ -77,10 +91,18 @@
     font-weight: bold;
 }
 
+.accountStudentInfo{
+    background-color: #ffffff;
+}
+
+.accountImportantantNotifications{
+    background-color: #ffffff;
+}
+
 .accountBlockTitle{
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
-    color: rgb(86 144 255);
+    color: #568ffd;
 }
 
 .userTopElement{
@@ -93,7 +115,7 @@
 
 .lastNotificationsContainer{
     background-color: rgb(86 144 255);
-    padding: 10px 10px 10px 10px;
+    padding: 10px 10px 58px 10px;
 }
 
 .inversedTitle{
