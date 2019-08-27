@@ -1,4 +1,6 @@
-const activePanel = (state = "account", action) => {
+let initialState = (localStorage.getItem("userData") ? "account" : "choose_diary");
+
+const activePanel = (state = initialState, action) => {
     switch (action.type) {
         case "SET_PANEL":
             return action.value;

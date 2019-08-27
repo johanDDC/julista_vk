@@ -1,12 +1,27 @@
-const initialState = {
-    id: null,
-    secret: null,
-    diary: null,
-    students: [],
-    student: null,
-    isFetching: false,
-    error: false,
-};
+let localData = JSON.parse(localStorage.getItem("userData"));
+let initialState;
+
+if (localData) {
+    initialState = {
+        id: (localData.id ? localData.id : null),
+        secret: (localData.secret ? localData.secret : null),
+        diary: (localData.diary ? localData.diary : null),
+        students: (localData.students ? localData.students : null),
+        student: (localData.student ? localData.student : null),
+        isFetching: false,
+        error: false,
+    }
+} else {
+    initialState = {
+        id: null,
+        secret:null,
+        diary: null,
+        students: null,
+        student: null,
+        isFetching: false,
+        error: false,
+    }
+}
 
 function profile(state = initialState, action) {
     switch (action.type) {

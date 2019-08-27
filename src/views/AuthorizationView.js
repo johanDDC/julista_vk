@@ -95,6 +95,10 @@ class AuthorizationView extends React.Component {
                 <NetschoolMap id="netschool_map"
                               setPanel={this.props.setPanelAction}
                               netschoolData={this.state.netschoolData}
+                              getProfile={this.props.getProfileAction}
+                              setSpinner={this.viewScreenSpinner}
+                              profile={this.props.profile}
+                              setView={this.props.setViewAction}
                 />
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}

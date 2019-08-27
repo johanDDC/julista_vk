@@ -48,7 +48,7 @@ ChooseStudent.propTypes = {
     id: PropTypes.string.isRequired,
     profile: PropTypes.any.isRequired,
     setStudent: PropTypes.func.isRequired,
-    setView: PropTypes.func.isRequired,
+    setView: PropTypes.func,
     setPanel: PropTypes.func.isRequired,
 };
 

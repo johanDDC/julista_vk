@@ -1,4 +1,4 @@
-import {Div, Panel, Button, PanelHeader} from '@vkontakte/vkui';
+import {Select, Panel, Button, PanelHeader} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/netschoolAdditional.css"
@@ -11,14 +11,76 @@ class NetschoolMap extends React.Component {
         super(props);
 
         this.state = {
-            isButtonSpawned: false,
+            ready: false,
+            schools: null,
+            isButtonSpawned: false
         };
 
         this.map = null;
+        this.region = null;
+        this.province = null;
+        this.city = null;
+        this.school = null;
     }
 
     btnBack = () => {
         this.props.setPanel("auth")
+    };
+
+    getMetaData = (data) => {
+        const members = data.data.response.GeoObjectCollection.featureMember;
+        if (members) {
+            let components = members[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components;
+            console.log("com", components);
+            for (let component of components) {
+                if (component.kind === 'province') {
+                    this.region = component.name;
+                } else if (component.kind === 'area') {
+                    this.province = component.name;
+                } else if (component.kind === 'locality') {
+                    this.city = component.name;
+                }
+            }
+        }
+    };
+
+    parseData = () => {
+        let regionId;
+        let provinceId;
+        let cityId;
+        axios.get("http://bklet.ml/api/auth/get_data")
+            .then(reg_resp => {
+                reg_resp.data.data.forEach(reg => {
+                    if (reg.name === this.region)
+                        regionId = reg.id;
+                });
+                axios.get("http://bklet.ml/api/auth/get_data/?region=" + regionId)
+                    .then(province_resp => {
+                        province_resp.data.data.forEach(province => {
+                            if (province.name.toLowerCase() === this.province.toLowerCase())
+                                provinceId = province.id;
+                        });
+                        axios.get(`http://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}`)
+                            .then(city_resp => {
+                                city_resp.data.data.forEach(city => {
+                                    if (city.name.toLowerCase().substring(0, city.name.length - 4) === this.city.toLowerCase())
+                                        cityId = city.id;
+                                });
+                                console.log("regions", `http://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}&city=${cityId}`);
+                                axios.get(`http://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}&city=${cityId}`)
+                                    .then(school_resp => {
+                                        this.region = regionId;
+                                        this.province = provinceId;
+                                        this.city = cityId;
+                                        this.setState({
+                                            "schools": school_resp.data.data,
+                                            "ready": true,
+                                        });
+                                    })
+                            })
+                    })
+            })
+            .catch(err => console.log(err));
     };
 
     setMap = () => {
@@ -33,7 +95,7 @@ class NetschoolMap extends React.Component {
                 if (this.map === null) {
                     this.map = new window.ymaps.Map("netschoolMap", {
                         center: [position[0], position[1]],
-                        zoom: 15,
+                        zoom: 7,
                         controls: ['zoomControl']
                     });
                     this.map.behaviors.enable(['drag']);
@@ -45,8 +107,11 @@ class NetschoolMap extends React.Component {
                             coords[1].toPrecision(6) + "," + coords[0].toPrecision(6))
                             .then(resp => {
                                 console.log("click", resp);
+                                this.getMetaData(resp);
+                                this.parseData();
+                                console.log(this.region, this.province, this.city);
                                 if (!this.isButtonSpawned)
-                                    this.spawnButton()
+                                    this.drawSelector()
                             })
                             .catch(err => {
                                 console.log("click error");
@@ -60,9 +125,62 @@ class NetschoolMap extends React.Component {
         });
     };
 
-    spawnButton = () => {
+    drawSelector = () => {
+        let options = [];
+        this.state.schools.forEach(school => {
+            options.push(
+                <option value={school.id}>{school.name}</option>
+            )
+        });
+        return (
+            <Select className="schoolSelect"
+                    id="schoolSelect"
+                    placeholder="выберите вашу школу"
+                    onChange={this.drawButton}>
+                {options}
+            </Select>
+        )
+    };
+
+    drawButton = () => {
+        this.school = document.getElementById("schoolSelect").value;
         this.setState({isButtonSpawned: true});
-        console.log("spawning button");
+        console.log("netshcoolData",
+            this.region,
+            this.province,
+            this.city,
+            this.school)
+    };
+
+    signIn = () => {
+        this.props.setSpinner(true);
+        this.props.getProfile(this.props.netschoolData.login, this.props.netschoolData.password, this.props.profile.diary,
+            this.region, this.province, this.city, this.school);
+
+        let id = setInterval(() => {
+            if (this.props.profile.error) {
+                clearInterval(id);
+                this.props.setSpinner(false);
+                if (this.props.profile.id instanceof Error) {
+                    this.props.openError();
+                } else {
+                    this.props.openIncorrect(); //FIXME
+                }
+            } else {
+                if (this.props.profile.secret) {
+                    let geoData = [this.region, this.province, this.city, this.school];
+                    localStorage.setItem("userGeoData", JSON.stringify(geoData));
+
+                    clearInterval(id);
+                    this.props.setSpinner(false);
+                    if (this.props.profile.student === null) {
+                        this.props.setPanel("choose_student");
+                    } else {
+                        this.props.setView("MainView");
+                    }
+                }
+            }
+        }, 200);
     };
 
     render() {
@@ -73,9 +191,11 @@ class NetschoolMap extends React.Component {
                 </PanelHeader>
                 <div className="netschoolMapScreen" id="netschoolMap">
                 </div>
+                {this.state.ready ? this.drawSelector() : null}
+                {this.setMap()}
                 {this.state.isButtonSpawned ?
-                    <Button level="tertiary" className="chooseSchool">
-                        Выбрать школу
+                    <Button level="tertiary" className="chooseSchool" onClick={this.signIn}>
+                        Войти
                     </Button>
                     : null}
                 {this.setMap()}
@@ -88,6 +208,8 @@ class NetschoolMap extends React.Component {
 NetschoolMap.propTypes = {
     id: PropTypes.string.isRequired,
     setPanel: PropTypes.func.isRequired,
+    setView: PropTypes.func.isRequired,
+    netschoolData: PropTypes.object.isRequired,
 };
 
 export default NetschoolMap;

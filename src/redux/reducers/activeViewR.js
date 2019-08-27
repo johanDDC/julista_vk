@@ -1,4 +1,6 @@
-const activeView = (state = "MainView", action) => {
+let initialState = (localStorage.getItem("userData") ? "MainView" : "AuthorizationView");
+
+const activeView = (state = initialState, action) => {
     switch (action.type) {
         case "SET_VIEW":
             return action.value;

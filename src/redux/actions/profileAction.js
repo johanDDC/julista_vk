@@ -1,7 +1,7 @@
 const axios = require('axios');
-let baseUrl = "https://bklet.ml/";
+let baseUrl = "http://bklet.ml/";
 
-export function doAuthorize(login, password, diary) {
+export function doAuthorize(login, password, diary, region, province, city, school) {
     return dispatch => {
         dispatch({
             type: "DO_AUTHORIZATION_REQUEST",
@@ -17,12 +17,16 @@ export function doAuthorize(login, password, diary) {
     }
 }
 
-function auth(login, password, diary, dispatcher) {
+function auth(login, password, diary, dispatcher, region, province, city, school) {
     let methodUrl = "api/auth/";
     // let json ={
     //     diary : diary,
     //     login : login,
-    //     password : password
+    //     password : password,
+    //     region: region,
+    //     province: province,
+    //     city: city,
+    //     school: school,
     // };
     let json = {
         region: 40,
@@ -43,6 +47,14 @@ function auth(login, password, diary, dispatcher) {
                 students.push(e);
             });
             if (response.data.status) {
+                let localData = {
+                    id: response.data.id,
+                    secret: response.data.secret,
+                    students: students,
+                    diary: diary,
+                    student: (students.length === 1 ? students[0]: null),
+                };
+                localStorage.setItem("userData", JSON.stringify(localData));
                 dispatcher({
                     type: "DO_AUTHORIZATION_SUCCESS",
                     data: {
