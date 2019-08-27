@@ -9,11 +9,36 @@ import MosregIcon from "../custom_components/icon-pack/MosregIcon"
 class ChooseStudent extends React.Component {
     constructor(props) {
         super(props);
-        this.d = ""
+        this.d = "";
+
+        this.students = [];
     }
 
     choose = (student) => {
-        // this.props.setStudent(student)
+        this.props.setStudent(student);
+        this.props.setView("MainView");
+        this.props.setPanel("account");
+    };
+
+    drawStudents = () => {
+        this.props.profile.students.forEach(student => {
+           this.students.push(
+               <Button level="tertiary" className="chooseStudentScreenStudentContainer"
+                       onClick={() => {
+                           this.d = student;
+                           this.choose(this.d)
+                       }}>
+                   <div className="chooseStudentScreenStudentName">
+                       {student.name}
+                   </div>
+                   <div className="chooseStudentScreenStudentGrade">
+                       {student.class} класс
+                   </div>
+               </Button>
+           )
+        });
+
+        return this.students;
     };
 
     render() {
@@ -24,18 +49,7 @@ class ChooseStudent extends React.Component {
                         Выберите ученика
                     </span>
                     <div className="chooseStudentScreenStudents">
-                        <Button level="tertiary" className="chooseStudentScreenStudentContainer"
-                                onClick={() => {
-                                    // this.d = "mosru";
-                                    // this.choose(this.d);
-                                }}>
-                            <div className="chooseStudentScreenStudentName">
-                                Ваня Пупкин
-                            </div>
-                            <div className="chooseStudentScreenStudentGrade">
-                                9 класс
-                            </div>
-                        </Button>
+                        {this.drawStudents()}
                     </div>
                 </Div>
             </Panel>
