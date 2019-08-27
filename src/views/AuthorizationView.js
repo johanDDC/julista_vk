@@ -75,7 +75,7 @@ class AuthorizationView extends React.Component {
 
     render() {
         return (
-            <View popout={this.state.popout} activePanel={this.props.activePanel}>
+            <View popout={this.state.popout} activePanel={this.props.activePanel === "settings" ? "choose_diary" : this.props.activePanel   }>
                 <ChooseDiary id="choose_diary"
                              setDiary={this.props.setDiaryAction}
                              setPanel={this.props.setPanelAction}

@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import {setMark} from "../redux/actions/expectedMarkAction";
 import Mark from "../custom_components/mark"
 import "./styles/Settings.css"
+import {setPanel} from "../redux/actions/PanelAction";
+import {setView} from "../redux/actions/ViewAction";
 
 class SettingsView extends React.Component {
     constructor(props) {
@@ -65,7 +67,10 @@ class SettingsView extends React.Component {
             <View activePanel={this.props.activePanel} popout={this.state.popout}>
                 <Settings id="settings"
                           expectedMark={this.props.expectedMark}
-                          chooseMark={this.chooseMark}/>
+                          chooseMark={this.chooseMark}
+                          setView={this.props.setViewAction}
+                          setPanel={this.props.setPanelAction}
+                />
             </View>
         )
     }
@@ -83,6 +88,8 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
     return {
         setMarkAction: mark => dispatch(setMark(mark)),
+        setPanelAction: panel => dispatch(setPanel(panel)),
+        setViewAction: view => dispatch(setView(view)),
     }
 };
 

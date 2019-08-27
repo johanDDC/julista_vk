@@ -18,6 +18,12 @@ class Settings extends React.Component {
         };
     }
 
+    signOut = () => {
+        localStorage.removeItem("userData");
+        this.props.setView("AuthorizationView");
+        this.props.setPanel("choose_diary");
+    };
+
     render() {
         return (
             <Panel id={this.props.id}>
@@ -89,7 +95,8 @@ class Settings extends React.Component {
                     </div>
                 </div>
                 <div className="groupSettingsContainer">
-                    <Button level="tertiary" className="settingsSettingContainer" style={{marginTop: "35px"}}>
+                    <Button level="tertiary" className="settingsSettingContainer" style={{marginTop: "35px"}}
+                            onClick={this.signOut}>
                         <GetOutIcon/>
                         <div className="settingsSettingInfo">
                         <span className="settingsSettingTitle" style={{color: "#ff4939", fontWeight: "bold"}}>
@@ -107,6 +114,8 @@ Settings.propTypes = {
     id: PropTypes.string.isRequired,
     expectedMark: PropTypes.number.isRequired,
     chooseMark: PropTypes.func.isRequired,
+    setView: PropTypes.func.isRequired,
+    setPanel: PropTypes.func.isRequired,
 };
 
 export default Settings;
