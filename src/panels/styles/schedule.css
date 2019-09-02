@@ -141,6 +141,10 @@
     margin-right: 10px;
 }
 
+.Gallery__slide:last-child{
+    width: 40px;
+}
+
 .scheduleSliderContainer > div:last-child {
     transition: transform 0.24s cubic-bezier(0.1, 0, 0.25, 1) 0s !important;
 }
@@ -148,7 +152,7 @@
 .scheduleTaleError{
     font-size: 16px;
     font-weight: bold;
-    color: #E80A1E;
+    color: #ef464d;
     padding: 50% 16px 0 16px;
     text-align: center;
 }

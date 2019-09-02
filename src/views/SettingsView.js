@@ -50,7 +50,7 @@ class SettingsView extends React.Component {
                         <div className="markChooseMarkContainer">
                             <Mark size="28" val="3" is_routine={false}/>
                         </div>
-                        <span className="markChooseLabel">Ёбаный инвалид, ты безнадёжен :(</span> /*Никогда не отчаивайся*/
+                        <span className="markChooseLabel">Никогда не отчаивайся</span>
                     </div>
                 </ActionSheetItem>
                 {osname === IOS && <ActionSheetItem autoclose theme="cancel">Cancel</ActionSheetItem>}
@@ -64,7 +64,7 @@ class SettingsView extends React.Component {
 
     render() {
         return (
-            <View activePanel={this.props.activePanel} popout={this.state.popout}>
+            <View activePanel={(this.props.activePanel === "auth" ? "settings" : this.props.activePanel)} popout={this.state.popout}>
                 <Settings id="settings"
                           expectedMark={this.props.expectedMark}
                           chooseMark={this.chooseMark}

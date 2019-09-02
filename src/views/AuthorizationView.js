@@ -63,6 +63,25 @@ class AuthorizationView extends React.Component {
                 </Alert>
         })
     };
+    callUnsupported = () => {
+        this.setState({
+            popout:
+                <Alert
+                    actionsLayout="vertical"
+                    actions={[{
+                        title: 'ОК',
+                        autoclose: true,
+                        style: 'cancel'
+                    }]}
+                    onClose={() => this.setState({popout: null})}
+                >
+                    <h2>Ошибка авторизации</h2>
+                    <p>Опс, войти не получилось. Вполне возможно, что ваша школа ещё не поддерживается нашим дневником.
+                        К сожалению вам приёдтся подождать, пока мы не добавим вашу школу. Об обновлениях поддержки
+                        мы обязательно напишем в нашей группе в ВК.</p>
+                </Alert>
+        })
+    };
 
     netschoolSaving = (login, password) => {
         this.setState({
@@ -99,6 +118,8 @@ class AuthorizationView extends React.Component {
                               setSpinner={this.viewScreenSpinner}
                               profile={this.props.profile}
                               setView={this.props.setViewAction}
+                              openError={this.callError}
+                              openUnsupported={this.callUnsupported}
                 />
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}

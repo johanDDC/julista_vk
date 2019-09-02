@@ -48,26 +48,26 @@ class NetschoolMap extends React.Component {
         let regionId;
         let provinceId;
         let cityId;
-        axios.get("http://bklet.ml/api/auth/get_data")
+        axios.get("https://bklet.ml/api/auth/get_data")
             .then(reg_resp => {
                 reg_resp.data.data.forEach(reg => {
                     if (reg.name === this.region)
                         regionId = reg.id;
                 });
-                axios.get("http://bklet.ml/api/auth/get_data/?region=" + regionId)
+                axios.get("https://bklet.ml/api/auth/get_data/?region=" + regionId)
                     .then(province_resp => {
                         province_resp.data.data.forEach(province => {
                             if (province.name.toLowerCase() === this.province.toLowerCase())
                                 provinceId = province.id;
                         });
-                        axios.get(`http://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}`)
+                        axios.get(`https://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}`)
                             .then(city_resp => {
                                 city_resp.data.data.forEach(city => {
                                     if (city.name.toLowerCase().substring(0, city.name.length - 4) === this.city.toLowerCase())
                                         cityId = city.id;
                                 });
-                                console.log("regions", `http://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}&city=${cityId}`);
-                                axios.get(`http://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}&city=${cityId}`)
+                                console.log("regions", `https://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}&city=${cityId}`);
+                                axios.get(`https://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}&city=${cityId}`)
                                     .then(school_resp => {
                                         this.region = regionId;
                                         this.province = provinceId;
@@ -164,7 +164,7 @@ class NetschoolMap extends React.Component {
                 if (this.props.profile.id instanceof Error) {
                     this.props.openError();
                 } else {
-                    this.props.openIncorrect(); //FIXME
+                    this.props.openUnsupported();
                 }
             } else {
                 if (this.props.profile.secret) {
@@ -187,7 +187,7 @@ class NetschoolMap extends React.Component {
         return (
             <Panel id={this.props.id}>
                 <PanelHeader left={<PanelHeaderBack onClick={this.btnBack}/>}>
-                    Найдите вашу школу
+                    Найдите ваш город
                 </PanelHeader>
                 <div className="netschoolMapScreen" id="netschoolMap">
                 </div>
@@ -210,6 +210,8 @@ NetschoolMap.propTypes = {
     setPanel: PropTypes.func.isRequired,
     setView: PropTypes.func.isRequired,
     netschoolData: PropTypes.object.isRequired,
+    openError: PropTypes.func.isRequired,
+    openUnsupported: PropTypes.func.isRequired,
 };
 
 export default NetschoolMap;

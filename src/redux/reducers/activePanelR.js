@@ -1,4 +1,4 @@
-let initialState = (localStorage.getItem("userData") ? "account" : "choose_diary");
+let initialState = (localStorage.getItem("userData") ? "schedule" : "choose_diary");
 
 const activePanel = (state = initialState, action) => {
     switch (action.type) {

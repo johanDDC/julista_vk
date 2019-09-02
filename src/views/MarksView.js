@@ -68,11 +68,11 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getMarksAction: (userId, secret) => {
-            dispatch(getMarks(userId, secret))
+        getMarksAction: (userId, secret, student_id) => {
+            dispatch(getMarks(userId, secret, student_id))
         },
-        getLastMarksAction: (userId, secret) => {
-            dispatch(getLastMarks(userId, secret))
+        getLastMarksAction: (userId, secret, student_id) => {
+            dispatch(getLastMarks(userId, secret, student_id))
         }
     }
 };

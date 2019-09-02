@@ -54,7 +54,7 @@ class Auth extends React.Component {
                             if (this.props.profile.student === null) {
                                 this.props.setPanel("choose_student");
                             } else {
-                                this.props.setView("MainView", "account");
+                                this.props.setView("MainView", "schedule");
                             }
                         }
                     }
@@ -74,7 +74,7 @@ class Auth extends React.Component {
                         Добро пожаловать,
                     </Div>
                     <Div className="large_tip">
-                        Войдите с помощью данных аккаунта mos.ru
+                        Войдите с помощью данных аккаунта вашего дневника
                     </Div>
                     <Div className="inputContainer">
                         <div className="inputIcon">
@@ -130,7 +130,7 @@ class Auth extends React.Component {
                     <Div>
                         <Button level="tertiary" className="getInButton"
                                 onClick={this.buttonClick}>
-                            {this.props.profile.diary === "netschool" ? "Указать школу" : "Войти"}
+                            {this.props.profile.diary === "netschool" ? "Указать город" : "Войти"}
                         </Button>
                     </Div>
                 </div>

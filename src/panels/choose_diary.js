@@ -26,26 +26,28 @@ class ChooseDiary extends React.Component {
                             Выберите ваш дневник
                         </span>
                     <div className="chooseDiaryScreenDiaryDiaries">
-                        <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
-                                onClick={() => {
-                                    this.d = "mosru";
-                                    this.choose(this.d);
-                                }}>
-                            <div className="chooseDiaryScreenDiaryContainerIcon"
-                                 style={{backgroundColor: "#ff3000"}}>
-                            </div>
-                            <span className="chooseDiaryScreenDiaryContainerTitle">МЭШ (mos.ru)</span>
-                            <div className="chooseDiaryScreenDiaryContainerChecker">
-                            </div>
-                        </Button>
+                        {/*<Button level="tertiary" className="chooseDiaryScreenDiaryContainer"*/}
+                        {/*        onClick={() => {*/}
+                        {/*            this.d = "mosru";*/}
+                        {/*            this.choose(this.d);*/}
+                        {/*        }}>*/}
+                        {/*    /!*<div className="chooseDiaryScreenDiaryContainerIcon"*!/*/}
+                        {/*    /!*     // style={{backgroundColor: "#ff3000"}}*!/*/}
+                        {/*    /!*>*!/*/}
+                        {/*    /!*</div>*!/*/}
+                        {/*    <span className="chooseDiaryScreenDiaryContainerTitle">МЭШ (mos.ru)</span>*/}
+                        {/*    <div className="chooseDiaryScreenDiaryContainerChecker">*/}
+                        {/*    </div>*/}
+                        {/*</Button>*/}
                         <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
                                 onClick={() => {
                                     this.d = "mosregru";
                                     this.choose(this.d);
                                 }}>
-                            <div className="chooseDiaryScreenDiaryContainerIcon"
-                                 style={{backgroundColor: "#ffa000"}}>
-                            </div>
+                            {/*<div className="chooseDiaryScreenDiaryContainerIcon"*/}
+                            {/*     // style={{backgroundColor: "#ffa000"}}*/}
+                            {/*>*/}
+                            {/*</div>*/}
                             <span className="chooseDiaryScreenDiaryContainerTitle">mosreg.ru</span>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
@@ -55,8 +57,10 @@ class ChooseDiary extends React.Component {
                                     this.d = "netschool";
                                     this.choose(this.d);
                                 }}>
-                            <div className="chooseDiaryScreenDiaryContainerIcon"
-                                 style={{backgroundColor: "#ffff00"}}></div>
+                            {/*<div className="chooseDiaryScreenDiaryContainerIcon"*/}
+                            {/*     // style={{backgroundColor: "#ffff00"}}*/}
+                            {/*>*/}
+                            {/*</div>*/}
                             <span className="chooseDiaryScreenDiaryContainerTitle">netschool</span>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
@@ -66,8 +70,10 @@ class ChooseDiary extends React.Component {
                                     this.d = "dnevnikru";
                                     this.choose(this.d);
                                 }}>
-                            <div className="chooseDiaryScreenDiaryContainerIcon"
-                                 style={{backgroundColor: "#30ff00"}}></div>
+                            {/*<div className="chooseDiaryScreenDiaryContainerIcon"*/}
+                            {/*     // style={{backgroundColor: "#30ff00"}}*/}
+                            {/*>*/}
+                            {/*</div>*/}
                             <span className="chooseDiaryScreenDiaryContainerTitle">dnevnick.ru</span>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
@@ -77,8 +83,10 @@ class ChooseDiary extends React.Component {
                                     this.d = "edutatar";
                                     this.choose(this.d);
                                 }}>
-                            <div className="chooseDiaryScreenDiaryContainerIcon"
-                                 style={{backgroundColor: "#0080ff"}}></div>
+                            {/*<div className="chooseDiaryScreenDiaryContainerIcon"*/}
+                            {/*     // style={{backgroundColor: "#0080ff"}}*/}
+                            {/*>*/}
+                            {/*</div>*/}
                             <span className="chooseDiaryScreenDiaryContainerTitle">edutatar</span>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>

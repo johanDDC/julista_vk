@@ -9,7 +9,6 @@ import SubjectCloseIcon from "../custom_components/icon-pack/SubjectCloseIcon"
 class ScheduleView extends React.Component {
     constructor(props) {
         super(props);
-        this.currentDay = new Date().getDay();
 
         this.state = {
             modalSchedule: "modalSchedule",
@@ -44,9 +43,8 @@ class ScheduleView extends React.Component {
 
     render() {
         return (
-            <View activePanel={this.props.activePanel} modal={this.state.modalSchedule}>
+            <View activePanel={(this.props.activePanel === "auth" ? "schedule" : this.props.activePanel)} modal={this.state.modalSchedule}>
                 <Schedule id="schedule"
-                          currentDay={this.currentDay}
                           profile={this.props.profile}
                           getJournal={this.props.getJournalAction}
                           appData={this.props.appLogic}
@@ -68,8 +66,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getJournalAction: (journal, userId, secret, start, end) => {
-            dispatch(getJournal(journal, userId, secret, start, end))
+        getJournalAction: (journal, userId, secret, start, end, student_id) => {
+            dispatch(getJournal(journal, userId, secret, start, end, student_id))
         }
     }
 };

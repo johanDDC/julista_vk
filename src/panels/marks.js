@@ -37,8 +37,8 @@ class Marks extends React.Component {
     }
 
     loadData = async () => {
-        this.props.getMarks(this.props.profile.id, this.props.profile.secret);
-        this.props.getLastMarks(this.props.profile.id, this.props.profile.secret);
+        this.props.getMarks(this.props.profile.id, this.props.profile.secret, this.props.profile.student.id);
+        this.props.getLastMarks(this.props.profile.id, this.props.profile.secret, this.props.profile.student.id);
 
         let id = setInterval(() => {
             if (this.props.appData.error) {
@@ -56,7 +56,7 @@ class Marks extends React.Component {
         let id2 = setInterval(() => {
             if (this.props.appData.errorLastMarks) {
                 console.log("err last");
-                clearInterval(id);
+                clearInterval(id2);
                 this.setState({errorLastMarks: true, ready: true});
             }
             // if (this.props.appData.lastMarks.data.length !== 0 && !this.state.errorLastMarks) {
@@ -147,7 +147,7 @@ class Marks extends React.Component {
                     </div>
                     <div className="modalMarkSubjectInfo">
                         <div className="modalMarkSubjectInfoLeft">
-                            {avg}
+                            {(isNaN(avg) ? "0.00" : avg)}
                         </div>
                         <div className="modalMarkSubjectInfoText">
                             Средний балл
@@ -182,11 +182,11 @@ class Marks extends React.Component {
                     <div className="marksRow">
                         {marks}
                     </div>
-                    <div className="advicesRow">
-                        <div className="adviceContainer">
-                            Получите 1 пятерку
-                        </div>
-                    </div>
+                    {/*<div className="advicesRow">*/}
+                    {/*    <div className="adviceContainer">*/}
+                    {/*        Получите 1 пятерку*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
             );
         };
@@ -232,7 +232,7 @@ class Marks extends React.Component {
 
         return (
             <div id={currentTab}>
-                {drawLastMarks()}
+                {/*{drawLastMarks()}*/}
                 <Div className="marksBlocksTitle">
                     ВСЕ ОЦЕНКИ
                 </Div>

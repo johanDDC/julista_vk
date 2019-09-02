@@ -1,4 +1,4 @@
-import {Panel, PanelHeader, Button, Switch, Tooltip} from '@vkontakte/vkui';
+import {Panel, PanelHeader, Button, Switch, Tooltip, Link} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/settings.css"
@@ -7,7 +7,7 @@ import AdvancesIcon from "../custom_components/icon-pack/AdvancesIcon"
 import DarkThemeIcon from "../custom_components/icon-pack/DarkThemeIcon"
 import Mark from "../custom_components/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
-
+import connect from '@vkontakte/vkui-connect';
 
 class Settings extends React.Component {
     constructor(props) {
@@ -16,12 +16,32 @@ class Settings extends React.Component {
         this.state = {
             tooltip: false,
         };
+
+        this.settings = (localStorage.getItem("appSettings") ? JSON.parse(localStorage.getItem("appSettings")) : null)
     }
 
     signOut = () => {
         localStorage.removeItem("userData");
         this.props.setView("AuthorizationView");
         this.props.setPanel("choose_diary");
+    };
+
+    askForNotifications = () => {
+        if (!this.settings) {
+            this.settings = {};
+        }
+        if (this.settings.notifications) {
+            connect.send("VKWebAppDenyNotifications", {})
+                .then(answer => {
+                    this.settings.notifications = false
+                });
+        } else {
+            connect.send("VKWebAppAllowNotifications", {})
+                .then(answer => {
+                    this.settings.notifications = true;
+                })
+        }
+        localStorage.setItem("appSettings", JSON.stringify(this.settings))
     };
 
     render() {
@@ -40,7 +60,11 @@ class Settings extends React.Component {
                         <VKSettingsIcon/>
                         <div className="settingsSettingInfo">
                             <span className="settingsSettingTitle" style={{color: "#5181b8", fontWeight: "bold"}}>
-                                Группа ВК
+                                <Link
+                                    href="https://vk.com/dmedu/"
+                                    target="_blank">
+                                    Группа ВК
+                                </Link>
                             </span>
                             <span className="settingsSettingSwitch">
                         </span>
@@ -70,7 +94,8 @@ class Settings extends React.Component {
                             Уведомления
                         </span>
                             <span>
-                            <Switch className="settingsSettingSwitcher"/>
+                            <Switch className="settingsSettingSwitcher" id="settingsNotificationsSwitcher"
+                                    onChange={this.askForNotifications}/>
                         </span>
                         </div>
                     </div>
@@ -83,10 +108,12 @@ class Settings extends React.Component {
                         </span>
                             <span>
                             <Tooltip
-                                text="Потом добавлю, отъебись."
+                                text="Обязательно появится в релизе :)"
                                 isShown={this.state.tooltip}
                                 onClose={() => this.setState({tooltip: false})}
-                                offsetX={-5}
+                                offsetX={-50}
+                                offsetY={5}
+                                cornerOffset={55}
                             >
                                 <Switch className="settingsSettingSwitcher" disabled/>
                             </Tooltip>

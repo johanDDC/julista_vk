@@ -17,7 +17,7 @@ class ChooseStudent extends React.Component {
     choose = (student) => {
         this.props.setStudent(student);
         this.props.setView("MainView");
-        this.props.setPanel("account");
+        this.props.setPanel("schedule");
     };
 
     drawStudents = () => {

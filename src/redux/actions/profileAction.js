@@ -1,5 +1,5 @@
 const axios = require('axios');
-let baseUrl = "http://bklet.ml/";
+let baseUrl = "https://bklet.ml/";
 
 export function doAuthorize(login, password, diary, region, province, city, school) {
     return dispatch => {
@@ -52,8 +52,8 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                     secret: response.data.secret,
                     students: students,
                     diary: diary,
-                    // student: (students.length === 1 ? students[0]: null),
-                    student: null,
+                    student: (students.length === 1 ? students[0]: null),
+                    // student: null,
                 };
                 localStorage.setItem("userData", JSON.stringify(localData));
                 dispatcher({
@@ -62,8 +62,8 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                         id: response.data.id,
                         secret: response.data.secret,
                         students: students,
-                        // student: (students.length === 1 ? students[0]: null),
-                        student: null,
+                        student: (students.length === 1 ? students[0]: null),
+                        // student: null,
                     },
                 })
             } else {

@@ -3,7 +3,7 @@ import {getStartDateForLastMarks, setCorrectYear} from "../../utils/utils"
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/";
 
-export function getJournal(id, secret, start, end) {
+export function getJournal(id, secret, start, end, student_id) {
     return dispatch => {
         dispatch({
             type: "GET_JOURNAL_REQUEST",
@@ -12,14 +12,14 @@ export function getJournal(id, secret, start, end) {
             },
         });
 
-        getSchedule(id, secret, start, end, dispatch);
+        getSchedule(id, secret, start, end, student_id, dispatch);
     }
 }
 
-function getSchedule(id, secret, start, end, dispatcher) {
+function getSchedule(id, secret, start, end, student_id, dispatcher) {
     let methodUrl = "api/diary/journal/dates/";
 
-    let queries = `?id=${id}&secret=${secret}&start=${setCorrectYear(start.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(end.toLocaleDateString("ru-RU"))}`;
+    let queries = `?student_id=${student_id}&id=${id}&secret=${secret}&start=${setCorrectYear(start.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(end.toLocaleDateString("ru-RU"))}`;
     // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(start.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(end.toLocaleDateString("ru-RU"))}`;
 
     console.log("schedule request", baseUrl + methodUrl + queries);
@@ -27,10 +27,17 @@ function getSchedule(id, secret, start, end, dispatcher) {
     axios.get(baseUrl + methodUrl + queries)
         .then((response) => {
             console.log("resp", response.data);
-            dispatcher({
-                type: "GET_JOURNAL_SUCCESS",
-                data: response.data
-            })
+            if (response.data.data === null || response.data.error){
+                dispatcher({
+                    type: "GET_JOURNAL_FAIL",
+                    data: []
+                })
+            } else {
+                dispatcher({
+                    type: "GET_JOURNAL_SUCCESS",
+                    data: response.data
+                })
+            }
         })
         .catch(error => {
             console.log("schedule error", error);
@@ -41,7 +48,8 @@ function getSchedule(id, secret, start, end, dispatcher) {
         });
 }
 
-export function getMarks(id, secret) {
+export function getMarks(id, secret, student_id,) {
+    console.log("STUDENT ID", student_id);
     return dispatch => {
         dispatch({
             type: "GET_MARKS_REQUEST",
@@ -50,16 +58,16 @@ export function getMarks(id, secret) {
             },
         });
 
-        getAndAggregateMarks(id, secret, dispatch)
+        getAndAggregateMarks(id, secret, student_id, dispatch)
     }
 }
 
-function getAndAggregateMarks(id, secret, dispatcher) {
+function getAndAggregateMarks(id, secret, student_id, dispatcher) {
     let methodUrl = "api/diary/marks/all/";
-    let startDate = new Date(2018, 9, 3);
-    let endDate = new Date();
+    let startDate = new Date(2019, 8, 2);
+    let endDate = new Date(2019, 8, 8);
 
-    let queries = `?id=${id}&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
+    let queries = `?student_id=${student_id}&id=${id}&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
     // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
 
     console.log(baseUrl + methodUrl + queries);
@@ -67,7 +75,7 @@ function getAndAggregateMarks(id, secret, dispatcher) {
     axios.get(baseUrl + methodUrl + queries)
         .then((response) => {
             console.log("marks resp", response.data);
-            if (response.data.data === null){
+            if (response.data.data === null || response.data.error){
                 dispatcher({
                     type: "GET_MARKS_FAIL",
                     data: []
@@ -88,7 +96,7 @@ function getAndAggregateMarks(id, secret, dispatcher) {
         });
 }
 
-export function getLastMarks(id, secret) {
+export function getLastMarks(id, secret, student_id) {
 
     return dispatch => {
         dispatch({
@@ -98,16 +106,16 @@ export function getLastMarks(id, secret) {
             },
         });
 
-        getLMarks(id, secret, dispatch);
+        getLMarks(id, secret, student_id, dispatch);
     }
 }
 
-function getLMarks(id, secret, dispatcher) {
+function getLMarks(id, secret, student_id, dispatcher) {
     let methodUrl = "api/diary/marks/dates/";
-    let endDate = new Date(2019, 3, 15);
+    let endDate = new Date();
     let startDate = getStartDateForLastMarks(endDate);
 
-    let queries = `?id=${id}&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
+    let queries = `?student_id=${student_id}&id=${id}&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
     // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
 
     console.log("start", startDate, startDate.toLocaleDateString("ru-RU"));

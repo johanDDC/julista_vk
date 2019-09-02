@@ -23,7 +23,7 @@ class BottomBar extends React.Component {
         super(props);
 
         this.state = {
-            activeStory: 'Account',
+            activeStory: 'Schedule',
         };
         this.onStoryChange = this.onStoryChange.bind(this);
     }
@@ -53,11 +53,11 @@ class BottomBar extends React.Component {
         return (
             <Epic className="bottomBarItself" activeStory={this.state.activeStory} tabbar={
                 <Tabbar>
-                    <TabbarItem
-                        onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'Account'}
-                        data-story="Account">
-                        <AccountIcon size="24" selected={this.state.activeStory === 'Account'}/></TabbarItem>
+                    {/*<TabbarItem*/}
+                    {/*    onClick={this.onStoryChange}*/}
+                    {/*    selected={this.state.activeStory === 'Account'}*/}
+                    {/*    data-story="Account">*/}
+                    {/*    <AccountIcon size="24" selected={this.state.activeStory === 'Account'}/></TabbarItem>*/}
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Marks'}
@@ -69,11 +69,11 @@ class BottomBar extends React.Component {
                         selected={this.state.activeStory === 'Schedule'}
                         data-story="Schedule"
                     ><ScheduleIcon size="24" selected={this.state.activeStory === 'Schedule'}/></TabbarItem>
-                    <TabbarItem
-                        onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'Plus'}
-                        data-story="Plus"
-                    ><PlusIcon size="24" selected={this.state.activeStory === 'Plus'}/></TabbarItem>
+                    {/*<TabbarItem*/}
+                    {/*    onClick={this.onStoryChange}*/}
+                    {/*    selected={this.state.activeStory === 'Plus'}*/}
+                    {/*    data-story="Plus"*/}
+                    {/*><PlusIcon size="24" selected={this.state.activeStory === 'Plus'}/></TabbarItem>*/}
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Settings'}
