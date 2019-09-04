@@ -12,6 +12,7 @@ class ChooseStudent extends React.Component {
         this.d = "";
 
         this.students = [];
+        this.drawStudents();
     }
 
     choose = (student) => {
@@ -37,8 +38,6 @@ class ChooseStudent extends React.Component {
                </Button>
            )
         });
-
-        return this.students;
     };
 
     render() {
@@ -49,7 +48,7 @@ class ChooseStudent extends React.Component {
                         Выберите ученика
                     </span>
                     <div className="chooseStudentScreenStudents">
-                        {this.drawStudents()}
+                        {this.students}
                     </div>
                 </Div>
             </Panel>

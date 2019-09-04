@@ -24,28 +24,35 @@ function getSchedule(id, secret, start, end, student_id, dispatcher) {
 
     console.log("schedule request", baseUrl + methodUrl + queries);
 
-    axios.get(baseUrl + methodUrl + queries)
-        .then((response) => {
-            console.log("resp", response.data);
-            if (response.data.data === null || response.data.error){
-                dispatcher({
-                    type: "GET_JOURNAL_FAIL",
-                    data: []
-                })
-            } else {
-                dispatcher({
-                    type: "GET_JOURNAL_SUCCESS",
-                    data: response.data
-                })
-            }
+    let intervalId;
+
+    var timeoutID = setTimeout(() => {
+        console.log("schedule error");
+        clearInterval(intervalId);
+        dispatcher({
+            type: "GET_JOURNAL_FAIL",
+            data: Error("end timeout"),
         })
-        .catch(error => {
-            console.log("schedule error", error);
-            dispatcher({
-                type: "GET_JOURNAL_FAIL",
-                data: error
+    }, 10000);
+    intervalId = setInterval(() => {
+        axios.get(baseUrl + methodUrl + queries)
+            .then((response) => {
+                console.log("resp", response.data);
+                if (response.data.data === null || response.data.error) {
+                    dispatcher({
+                        type: "GET_JOURNAL_FAIL",
+                        data: []
+                    })
+                } else {
+                    clearTimeout(timeoutID);
+                    clearInterval(intervalId);
+                    dispatcher({
+                        type: "GET_JOURNAL_SUCCESS",
+                        data: response.data
+                    })
+                }
             })
-        });
+    }, 200)
 }
 
 export function getMarks(id, secret, student_id,) {
@@ -72,28 +79,35 @@ function getAndAggregateMarks(id, secret, student_id, dispatcher) {
 
     console.log(baseUrl + methodUrl + queries);
 
-    axios.get(baseUrl + methodUrl + queries)
-        .then((response) => {
-            console.log("marks resp", response.data);
-            if (response.data.data === null || response.data.error){
-                dispatcher({
-                    type: "GET_MARKS_FAIL",
-                    data: []
-                })
-            } else {
-                dispatcher({
-                    type: "GET_MARKS_SUCCESS",
-                    data: response.data
-                })
-            }
+    let intervalId;
+
+    var timeoutID = setTimeout(() => {
+        console.log("marks error");
+        clearInterval(intervalId);
+        dispatcher({
+            type: "GET_MARKS_FAIL",
+            data: Error("end timeout")
         })
-        .catch(error => {
-            console.log("marks error", error);
-            dispatcher({
-                type: "GET_MARKS_FAIL",
-                data: error
+    }, 10000);
+    intervalId = setInterval(() => {
+        axios.get(baseUrl + methodUrl + queries)
+            .then((response) => {
+                console.log("marks resp", response.data);
+                if (response.data.data === null || response.data.error) {
+                    dispatcher({
+                        type: "GET_MARKS_FAIL",
+                        data: []
+                    })
+                } else {
+                    clearTimeout(timeoutID);
+                    clearInterval(intervalId);
+                    dispatcher({
+                        type: "GET_MARKS_SUCCESS",
+                        data: response.data
+                    })
+                }
             })
-        });
+    }, 200);
 }
 
 export function getLastMarks(id, secret, student_id) {

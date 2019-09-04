@@ -67,19 +67,6 @@ class ChooseDiary extends React.Component {
                         </Button>
                         <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
                                 onClick={() => {
-                                    this.d = "dnevnikru";
-                                    this.choose(this.d);
-                                }}>
-                            {/*<div className="chooseDiaryScreenDiaryContainerIcon"*/}
-                            {/*     // style={{backgroundColor: "#30ff00"}}*/}
-                            {/*>*/}
-                            {/*</div>*/}
-                            <span className="chooseDiaryScreenDiaryContainerTitle">dnevnick.ru</span>
-                            <div className="chooseDiaryScreenDiaryContainerChecker">
-                            </div>
-                        </Button>
-                        <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
-                                onClick={() => {
                                     this.d = "edutatar";
                                     this.choose(this.d);
                                 }}>

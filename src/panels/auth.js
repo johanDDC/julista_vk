@@ -26,7 +26,11 @@ class Auth extends React.Component {
     buttonClick = () => {
         let login = document.getElementById("loginInput-i").value;
         let password = document.getElementById("passInput-i").value;
-        let inviteCode = document.getElementById("inviteCodeInput-i").value;
+        try {
+            let inviteCode = document.getElementById("inviteCodeInput-i").value;
+        } catch (e) {
+            let  inviteCode = "";
+        }
 
         if (login.trim().length !== 0 && password.trim().length !== 0) {
             if (this.props.profile.diary === "netschool"){
@@ -98,18 +102,18 @@ class Auth extends React.Component {
                             />
                         </div>
                     </Div>
-                    <Div>
-                        <span
-                            className="medium_tip">Введите код приглашения, при его наличии, или оставьте поле пустым</span>
-                    </Div>
-                    <Div className="inviteInput">
-                        <div className="inputIcon">
-                            <AuthGift/>
-                        </div>
-                        <CustomInput id="inviteCodeInput"
-                                     type="text"
-                        />
-                    </Div>
+                    {/*<Div>*/}
+                    {/*    <span*/}
+                    {/*        className="medium_tip">Введите код приглашения, при его наличии, или оставьте поле пустым</span>*/}
+                    {/*</Div>*/}
+                    {/*<Div className="inviteInput">*/}
+                    {/*    <div className="inputIcon">*/}
+                    {/*        <AuthGift/>*/}
+                    {/*    </div>*/}
+                    {/*    <CustomInput id="inviteCodeInput"*/}
+                    {/*                 type="text"*/}
+                    {/*    />*/}
+                    {/*</Div>*/}
                     <Div>
             <span className="annotate">Нажимая войти, вы соглашаетесь на обработку, хранение, передачу ваших персональных данных.
                 <br/>

@@ -61,10 +61,6 @@ function profile(state = initialState, action) {
             };
 
         case "SET_STUDENT":
-            let locData = JSON.parse(localStorage.getItem("userData"));
-            console.log("set student", action.data);
-            locData.student = action.data;
-            localStorage.setItem("userData", JSON.stringify(locData));
             return {
               ...state,
               student: action.data
