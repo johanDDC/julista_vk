@@ -305,7 +305,7 @@ class Auth extends React.Component {
                     <Div>
                         <Button level="tertiary" className="getInButton"
                                 onClick={this.buttonClick}>
-                            {this.props.profile.diary === "netschool" ? "Указать город" : "Войти"}
+                            Войти
                         </Button>
                     </Div>
                 </div>

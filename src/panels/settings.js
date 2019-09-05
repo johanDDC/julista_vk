@@ -59,7 +59,7 @@ class Settings extends React.Component {
                     <Button level="tertiary" className="settingsSettingContainer">
                         <VKSettingsIcon/>
                         <div className="settingsSettingInfo">
-                            <span className="settingsSettingTitle" style={{color: "#5181b8", fontWeight: "bold"}}>
+                            <span className="settingsSettingTitle" style={{color: "#5181b8"}}>
                                 <Link
                                     href="https://vk.com/dmedu/"
                                     target="_blank">
