@@ -3,7 +3,6 @@ import {View, ScreenSpinner, Alert} from '@vkontakte/vkui';
 import Auth from '../panels/auth'
 import ChooseDiary from '../panels/choose_diary'
 import ChooseStudent from '../panels/choose_student'
-import NetschoolMap from "../panels/netschoolAdditionalPanel"
 import "./styles/Authorization.css"
 import {connect} from 'react-redux'
 import {doAuthorize, setDiary, setStudent} from "../redux/actions/profileAction";
@@ -17,10 +16,6 @@ class AuthorizationView extends React.Component {
 
         this.state = {
             popout: null,
-            netschoolData: {
-                login: null,
-                password: null,
-            }
         }
     }
 
@@ -110,16 +105,7 @@ class AuthorizationView extends React.Component {
                       openError={this.callError}
                       openIncorrect={this.callIncorrect}
                       netschoolSave={this.netschoolSaving}
-                />
-                <NetschoolMap id="netschool_map"
-                              setPanel={this.props.setPanelAction}
-                              netschoolData={this.state.netschoolData}
-                              getProfile={this.props.getProfileAction}
-                              setSpinner={this.viewScreenSpinner}
-                              profile={this.props.profile}
-                              setView={this.props.setViewAction}
-                              openError={this.callError}
-                              openUnsupported={this.callUnsupported}
+                      openUnsupported={this.callUnsupported}
                 />
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}
@@ -146,8 +132,8 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
     return {
         setDiaryAction: diary => dispatch(setDiary(diary)),
-        getProfileAction: (login, password, diary) => {
-            dispatch(doAuthorize(login, password, diary));
+        getProfileAction: (login, password, diary, region, province, city, school) => {
+            dispatch(doAuthorize(login, password, diary, region, province, city, school));
         },
         setPanelAction: panel => dispatch(setPanel(panel)),
         setViewAction: view => dispatch(setView(view)),

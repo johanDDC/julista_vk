@@ -62,8 +62,8 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                         id: response.data.id,
                         secret: response.data.secret,
                         students: students,
-                        // student: (students.length === 1 ? students[0]: null),
-                        student: null,
+                        student: (students.length === 1 ? students[0]: null),
+                        // student: null,
                     },
                 })
             } else {
