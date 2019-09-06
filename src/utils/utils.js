@@ -26,6 +26,36 @@ export function scheduleGetDates() {
     return dates;
 }
 
+export function schedulePrevWeek(currentStart) {
+    let newStart = new Date(currentStart.getFullYear(), currentStart.getMonth(), currentStart.getDate() - 7);
+    let newEnd = currentStart;
+    let resArr = [];
+
+    for(let i = 0; i < 7; i++){
+        let date = new Date(newStart.getFullYear(), newStart.getMonth(), newStart.getDate() + i);
+        resArr.push(date.getDate())
+    }
+    resArr.push(newStart);
+    resArr.push(newEnd);
+
+    return resArr;
+}
+
+export function scheduleNextWeek(currentStart) {
+    let newStart = new Date(currentStart.getFullYear(), currentStart.getMonth(), currentStart.getDate() + 7);
+    let newEnd = new Date(newStart.getFullYear(), newStart.getMonth(), newStart.getDate() + 7);
+    let resArr = [];
+
+    for(let i = 0; i < 7; i++){
+        let date = new Date(newStart.getFullYear(), newStart.getMonth(), newStart.getDate() + i);
+        resArr.push(date.getDate())
+    }
+    resArr.push(newStart);
+    resArr.push(newEnd);
+
+    return resArr;
+}
+
 export function setCorrectYear(str){
     let correctYear = str.slice(8);
     str = str.slice(0, 6);

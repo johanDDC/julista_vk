@@ -4,7 +4,11 @@ import React from "react";
 import "./styles/schedule.css"
 import Mark from "../custom_components/mark"
 import CustomSpinner from "../custom_components/customSpinner"
-import {scheduleGetDates, getRusMonthName} from "../utils/utils"
+import {scheduleGetDates, getRusMonthName, schedulePrevWeek, scheduleNextWeek} from "../utils/utils"
+import ScheduleWeekBar from "../custom_components/scheduleTopBar"
+import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
+import Icon24BrowserForward from '@vkontakte/icons/dist/24/browser_forward';
+import {getPrevWeek} from "../redux/actions/AppLogicAction";
 
 import SubjectCloseIcon from "../custom_components/icon-pack/SubjectCloseIcon"
 import SubjectHWIcon from "../custom_components/icon-pack/SubjectHWIcon"
@@ -22,12 +26,10 @@ class Schedule extends React.Component {
 
         this.state = {
             currentDay: new Date().getDay() - 1,
-            month: getRusMonthName(new Date().getMonth()),
+            month: getRusMonthName(this.dayDates[7].getMonth()),
             weekDuration: (!flag ? this.scheduleData.data.days.length : 5),
             ready: !flag,
-            heights: [],
             error: false,
-            slideIndex: 0,
         };
 
         if (flag)
@@ -64,76 +66,14 @@ class Schedule extends React.Component {
     };
 
     drawTopBar = () => { //FIXME
+        let clickFunc = day => {
+            this.setState({currentDay: day});
+        };
         return (
-            <FixedLayout className="scheduleWeekTopBarContainer">
-                <Div className="scheduleWeekTopBar">
-                    <div className="scheduleWeekDay">
-                        <span>ПН</span>
-                        <Button level="tertiary" style={{margin: 0, padding: 0, color: "#fff"}}
-                                onClick={() => this.setState({currentDay: 0})}>
-                            <div
-                                className={`scheduleWeekDayDate ${this.state.currentDay === 0 ? 'scheduleWeekDaySelected' : null}`}>
-                                {this.dayDates[0]}
-                            </div>
-                        </Button>
-                    </div>
-                    <div className="scheduleWeekDay">
-                        <span>ВТ</span>
-                        <Button level="tertiary" style={{margin: 0, padding: 0, color: "#fff"}}
-                                onClick={() => this.setState({currentDay: 1})}>
-                            <div
-                                className={`scheduleWeekDayDate ${this.state.currentDay === 1 ? 'scheduleWeekDaySelected' : null}`}>
-                                {this.dayDates[1]}
-                            </div>
-                        </Button>
-                    </div>
-                    <div className="scheduleWeekDay">
-                        <span>СР</span>
-                        <Button level="tertiary" style={{margin: 0, padding: 0, color: "#fff"}}
-                                onClick={() => this.setState({currentDay: 2})}>
-                            <div
-                                className={`scheduleWeekDayDate ${this.state.currentDay === 2 ? 'scheduleWeekDaySelected' : null}`}>
-                                {this.dayDates[2]}
-                            </div>
-                        </Button>
-                    </div>
-                    <div className="scheduleWeekDay">
-                        <span>ЧТ</span>
-                        <Button level="tertiary" style={{margin: 0, padding: 0, color: "#fff"}}
-                                onClick={() => this.setState({currentDay: 3})}>
-                            <div
-                                className={`scheduleWeekDayDate ${this.state.currentDay === 3 ? 'scheduleWeekDaySelected' : null}`}>
-                                {this.dayDates[3]}
-                            </div>
-                        </Button>
-                    </div>
-                    <div className="scheduleWeekDay">
-                        <span>ПТ</span>
-                        <Button level="tertiary" style={{margin: 0, padding: 0, color: "#fff"}}
-                                onClick={() => this.setState({currentDay: 4})}>
-                            <div
-                                className={`scheduleWeekDayDate ${this.state.currentDay === 4 ? 'scheduleWeekDaySelected' : null}`}>
-                                {this.dayDates[4]}
-                            </div>
-                        </Button>
-                    </div>
-                    {(
-                        this.state.weekDuration === 6 ?
-                            <div className="scheduleWeekDay">
-                                <span>СБ</span>
-                                <Button level="tertiary" style={{margin: 0, padding: 0, color: "#fff"}}
-                                        onClick={() => this.setState({currentDay: 5})}>
-                                    <div
-                                        className={`scheduleWeekDayDate ${this.state.currentDay === 5 ? 'scheduleWeekDaySelected' : null}`}>
-                                        {this.dayDates[5]}
-                                    </div>
-                                </Button>
-                            </div>
-                            :
-                            null
-                    )}
-                </Div>
-            </FixedLayout>
+            <ScheduleWeekBar selectedDay={this.state.currentDay}
+                             weekDuration={(this.state.weekDuration === 0 ? 5 : this.state.weekDuration)}
+                             dates={this.dayDates}
+                             clickFunc={clickFunc}/>
         );
     };
 
@@ -346,6 +286,73 @@ class Schedule extends React.Component {
         );
     };
 
+
+    prevWeek = () => {
+        let newDatesArr = schedulePrevWeek(this.dayDates[7]);
+        this.props.getJournal(this.props.profile.id,
+            this.props.profile.secret,
+            newDatesArr[7],
+            newDatesArr[8],
+            this.props.profile.student.id);
+        this.dayDates = newDatesArr;
+        this.setState({
+            ready: false,
+            month: getRusMonthName(this.dayDates[7].getMonth()),
+        });
+
+        let id = setInterval(() => {
+                if (this.props.appData.error) {
+                    clearInterval(id);
+                    this.setState({error: true});
+                    this.setState({ready: true});
+                } else {
+                    if (this.props.appData.journal.data.length !== 0) {
+                        this.scheduleData = this.props.appData.journal;
+                        clearInterval(id);
+                        this.setState({
+                            ready: true,
+                            weekDuration: (this.scheduleData.data.days.length > 5 ? 6 : 5) // if holidays, length is equal to 0
+                        });
+
+                    }
+                }
+            },
+            200
+        );
+
+    };
+
+    nextWeek = () => {
+        let newDatesArr = scheduleNextWeek(this.dayDates[7]);
+        this.props.getJournal(this.props.profile.id,
+            this.props.profile.secret,
+            newDatesArr[7],
+            newDatesArr[8],
+            this.props.profile.student.id);
+        this.dayDates = newDatesArr;
+        this.setState({
+            ready: false,
+            month: getRusMonthName(this.dayDates[7].getMonth()),
+        });
+
+        let id = setInterval(() => {
+            if (this.props.appData.error) {
+                clearInterval(id);
+                this.setState({error: true});
+                this.setState({ready: true});
+            } else {
+                if (this.props.appData.journal.data.length !== 0) {
+                    this.scheduleData = this.props.appData.journal;
+                    clearInterval(id);
+                    this.setState({
+                        ready: true,
+                        weekDuration: (this.scheduleData.data.days.length > 5 ? 6 : 5) // if holidays, length is equal to 0
+                    });
+                }
+            }
+        }, 200);
+    };
+
     render() {
         return (
             <Panel id={this.props.id} style={{backgroundColor: "rgb(86, 144, 255)"}}>
@@ -354,6 +361,12 @@ class Schedule extends React.Component {
                     <span className="scheduleHeaderMonth">{this.state.month}</span>
                 </PanelHeader>
                 {this.drawTopBar()}
+                <div id="scheduleWeekSwiperLeft" onClick={this.prevWeek}>
+                    <Icon24BrowserBack/>
+                </div>
+                <div id="scheduleWeekSwiperRight" onClick={this.nextWeek}>
+                    <Icon24BrowserForward/>
+                </div>
                 {
                     (this.state.ready ? this.drawShedule() : this.drawSpinner())
                 }

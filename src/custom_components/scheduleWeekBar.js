@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import "./scheduleSlider.css.css"
 
-class ScheduleSlider extends React.Component {
+class ScheduleWeekBar extends React.Component {
     constructor() {
         super();
     }
@@ -12,8 +12,8 @@ class ScheduleSlider extends React.Component {
     }
 }
 
-ScheduleSlider.propTypes = {
+ScheduleWeekBar.propTypes = {
 
 };
 
-export default ScheduleSlider;
+export default ScheduleWeekBar;

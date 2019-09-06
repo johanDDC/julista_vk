@@ -66,8 +66,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getJournalAction: (journal, userId, secret, start, end, student_id) => {
-            dispatch(getJournal(journal, userId, secret, start, end, student_id))
+        getJournalAction: (userId, secret, start, end, student_id) => {
+            dispatch(getJournal(userId, secret, start, end, student_id))
         }
     }
 };
