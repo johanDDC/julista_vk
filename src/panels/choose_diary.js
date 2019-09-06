@@ -26,19 +26,19 @@ class ChooseDiary extends React.Component {
                             Выберите ваш дневник
                         </span>
                     <div className="chooseDiaryScreenDiaryDiaries">
-                        {/*<Button level="tertiary" className="chooseDiaryScreenDiaryContainer"*/}
-                        {/*        onClick={() => {*/}
-                        {/*            this.d = "mosru";*/}
-                        {/*            this.choose(this.d);*/}
-                        {/*        }}>*/}
-                        {/*    /!*<div className="chooseDiaryScreenDiaryContainerIcon"*!/*/}
-                        {/*    /!*     // style={{backgroundColor: "#ff3000"}}*!/*/}
-                        {/*    /!*>*!/*/}
-                        {/*    /!*</div>*!/*/}
-                        {/*    <span className="chooseDiaryScreenDiaryContainerTitle">МЭШ (mos.ru)</span>*/}
-                        {/*    <div className="chooseDiaryScreenDiaryContainerChecker">*/}
-                        {/*    </div>*/}
-                        {/*</Button>*/}
+                        <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
+                                onClick={() => {
+                                    this.d = "mosru";
+                                    this.choose(this.d);
+                                }}>
+                            {/*<div className="chooseDiaryScreenDiaryContainerIcon"*/}
+                            {/*     // style={{backgroundColor: "#ff3000"}}*/}
+                            {/*>*/}
+                            {/*</div>*/}
+                            <span className="chooseDiaryScreenDiaryContainerTitle">МЭШ (mos.ru)</span>
+                            <div className="chooseDiaryScreenDiaryContainerChecker">
+                            </div>
+                        </Button>
                         <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
                                 onClick={() => {
                                     this.d = "mosregru";
