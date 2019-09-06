@@ -277,8 +277,23 @@ class Schedule extends React.Component {
                 className="scheduleSliderContainer"
                 slideIndex={this.state.currentDay}
                 onChange={slideIndex => {
-                    console.log(this.state.weekDuration);
-                    this.setState({currentDay: (slideIndex >= (this.state.weekDuration === 0 ? 5 : this.state.weekDuration) ? slideIndex - 1 : slideIndex)});
+                    this.setState({
+                        currentDay: (slideIndex >= (this.state.weekDuration === 0 ?
+                            5 :
+                            this.state.weekDuration) ? slideIndex - 1 : slideIndex)
+                    });
+                    if (slideIndex === 0)
+                        document.getElementById("scheduleWeekSwiperLeft")
+                            .style.display = "flex";
+                    else
+                        document.getElementById("scheduleWeekSwiperLeft")
+                            .style.display = "none";
+                    if (slideIndex === (this.state.weekDuration !== 0 ? this.state.weekDuration - 1 : 4))
+                        document.getElementById("scheduleWeekSwiperRight")
+                            .style.display = "flex";
+                    else
+                        document.getElementById("scheduleWeekSwiperRight")
+                            .style.display = "none";
                 }}
             >
                 {this.generateSchedule()}
@@ -298,7 +313,12 @@ class Schedule extends React.Component {
         this.setState({
             ready: false,
             month: getRusMonthName(this.dayDates[7].getMonth()),
+            currentDay: (this.state.weekDuration !== 0 ? this.state.weekDuration - 1 : 4)
         });
+        document.getElementById("scheduleWeekSwiperLeft")
+            .style.display = "none";
+        document.getElementById("scheduleWeekSwiperRight")
+            .style.display = "flex";
 
         let id = setInterval(() => {
                 if (this.props.appData.error) {
@@ -321,7 +341,6 @@ class Schedule extends React.Component {
         );
 
     };
-
     nextWeek = () => {
         let newDatesArr = scheduleNextWeek(this.dayDates[7]);
         this.props.getJournal(this.props.profile.id,
@@ -333,7 +352,12 @@ class Schedule extends React.Component {
         this.setState({
             ready: false,
             month: getRusMonthName(this.dayDates[7].getMonth()),
+            currentDay: 0,
         });
+        document.getElementById("scheduleWeekSwiperRight")
+            .style.display = "none";
+        document.getElementById("scheduleWeekSwiperLeft")
+            .style.display = "flex";
 
         let id = setInterval(() => {
             if (this.props.appData.error) {
