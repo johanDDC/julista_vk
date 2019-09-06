@@ -350,6 +350,7 @@ class Schedule extends React.Component {
             newDatesArr[8],
             this.props.profile.student.id);
         this.dayDates = newDatesArr;
+        console.log("new dates", this.dayDates);
         this.setState({
             ready: false,
             month: getRusMonthName(this.dayDates[7].getMonth()),

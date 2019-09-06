@@ -71,7 +71,7 @@ class ScheduleWeekBar extends React.Component {
                                     onClick={() => this.props.clickFunc(5)}>
                                 <div
                                     className={`scheduleWeekDayDate ${this.props.selectedDay === 5 ? 'scheduleWeekDaySelected' : null}`}>
-                                    {this.dayDates[5]}
+                                    {this.props.dates[5]}
                                 </div>
                             </Button>
                         </div>
