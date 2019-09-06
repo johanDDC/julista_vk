@@ -136,26 +136,33 @@ function getLMarks(id, secret, student_id, dispatcher) {
     console.log("end", endDate, endDate.toLocaleDateString("ru-RU"));
     console.log("error here", baseUrl + methodUrl + queries);
 
-    axios.get(baseUrl + methodUrl + queries)
-        .then((response) => {
-            console.log("last marks resp", response.data);
-            if (response.data.error) {
-                dispatcher({
-                    type: "GET_LAST_MARKS_FAIL",
-                    data: response.data.error
-                })
-            } else {
-                dispatcher({
-                    type: "GET_LAST_MARKS_SUCCESS",
-                    data: response.data
-                })
-            }
+    let intervalId;
+
+    var timeoutID = setTimeout(() => {
+        console.log("marks error");
+        clearInterval(intervalId);
+        dispatcher({
+            type: "GET_LAST_MARKS_FAIL",
+            data: Error("end timeout")
         })
-        .catch(error => {
-            console.log("last marks error", error);
-            dispatcher({
-                type: "GET_LAST_MARKS_FAIL",
-                data: error
+    }, 10000);
+    intervalId = setInterval(() => {
+        axios.get(baseUrl + methodUrl + queries)
+            .then((response) => {
+                console.log("last marks resp", response.data);
+                if (response.data.error) {
+                    dispatcher({
+                        type: "GET_LAST_MARKS_FAIL",
+                        data: response.data.error
+                    })
+                } else {
+                    clearTimeout(timeoutID);
+                    clearInterval(intervalId);
+                    dispatcher({
+                        type: "GET_LAST_MARKS_SUCCESS",
+                        data: response.data
+                    })
+                }
             })
-        });
+    }, 200);
 }

@@ -87,14 +87,15 @@ class Schedule extends React.Component {
                 if (subject.marks) {
                     console.log("subject", subject.marks);
                     subject.marks.forEach(mark => {
+                        console.log("mark", mark);
                         marks.push( //Append weight here
-                            <Mark size="24" val={mark.score.toString()} is_routine={false} fontSize="14"
+                            <Mark size="24" val={(mark.score ? mark.score.toString() : mark.value.toString())} is_routine={false} fontSize="14"
                                   weight={(mark.weight ? mark.weight.toString() : "1")}/>
                         );
                         modalMarksPresentation.push(
                             <div className="modalScheduleInfoRow">
                                 <div className="modalScheduleInfoRowLeft">
-                                    <Mark size="22" val={mark.score.toString()} is_routine={false} fontSize="14"
+                                    <Mark size="22" val={(mark.score ? mark.score.toString() : mark.value.toString())} is_routine={false} fontSize="14"
                                           weight={(mark.weight ? mark.weight.toString() : "1")}/>
                                 </div>
                                 <div className="modalScheduleInfoRowText">

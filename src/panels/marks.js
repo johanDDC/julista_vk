@@ -232,7 +232,7 @@ class Marks extends React.Component {
 
         return (
             <div id={currentTab}>
-                {/*{drawLastMarks()}*/}
+                {drawLastMarks()}
                 <Div className="marksBlocksTitle">
                     ВСЕ ОЦЕНКИ
                 </Div>
@@ -266,8 +266,9 @@ class Marks extends React.Component {
                     <div className="resultMarksContainerMarks">
                         {renderedMarks}
                         <div className="resultMarksContainerResultedMark">
-                            <Mark size="24" val={subject.year_mark.toString()} is_routine={false} fontSize="12"
-                                  short={true}/>
+                            {subject.year_mark ? <Mark size="24" val={subject.year_mark.toString()} is_routine={false} fontSize="12"
+                                                       short={true}/>
+                            : null}
                         </div>
                     </div>
                 </Div>

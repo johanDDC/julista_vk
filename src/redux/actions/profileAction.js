@@ -30,12 +30,12 @@ function auth(login, password, diary, dispatcher, region, province, city, school
     // };
     let json = {
         region: 40,
-        province: -1,
-        city: 1,
+        province: -3,
+        city: 3,
         school: 293,
-        login: "ПетроваВ2",
-        password: "Петрова302",
-        diary: "netschool",
+        login: "banshi_shi@yahoo.com",
+        password: "Ibubyf19811",
+        diary: "mosru",
     };
     console.log(baseUrl + methodUrl, json);
 
