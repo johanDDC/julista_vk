@@ -35,7 +35,7 @@ class ChooseDiary extends React.Component {
                             {/*     // style={{backgroundColor: "#ff3000"}}*/}
                             {/*>*/}
                             {/*</div>*/}
-                            <span className="chooseDiaryScreenDiaryContainerTitle">МЭШ (mos.ru)</span>
+                            <span className="chooseDiaryScreenDiaryContainerTitle">Дневник МЭШ (mos.ru)</span>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
                         </Button>
@@ -48,7 +48,7 @@ class ChooseDiary extends React.Component {
                             {/*     // style={{backgroundColor: "#ffa000"}}*/}
                             {/*>*/}
                             {/*</div>*/}
-                            <span className="chooseDiaryScreenDiaryContainerTitle">mosreg.ru</span>
+                            <span className="chooseDiaryScreenDiaryContainerTitle">Школьный портал Московской области</span>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
                         </Button>
@@ -61,7 +61,7 @@ class ChooseDiary extends React.Component {
                             {/*     // style={{backgroundColor: "#ffff00"}}*/}
                             {/*>*/}
                             {/*</div>*/}
-                            <span className="chooseDiaryScreenDiaryContainerTitle">netschool</span>
+                            <span className="chooseDiaryScreenDiaryContainerTitle">Сетевой Город</span>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
                         </Button>
@@ -74,7 +74,7 @@ class ChooseDiary extends React.Component {
                             {/*     // style={{backgroundColor: "#0080ff"}}*/}
                             {/*>*/}
                             {/*</div>*/}
-                            <span className="chooseDiaryScreenDiaryContainerTitle">edutatar</span>
+                            <span className="chooseDiaryScreenDiaryContainerTitle">Электронное образование в Республике Татарстан</span>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
                         </Button>

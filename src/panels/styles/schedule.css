@@ -104,7 +104,7 @@
 }
 
 .Gallery__slide:last-child{
-    width: 40px;
+    width: 45px;
 }
 
 .scheduleSliderContainer > div:last-child {
@@ -122,12 +122,13 @@
 .modalScheduleTitle{
     color: #5690ff;
     font-size: 14px;
-    margin: 16px 0 16px 0;
+    margin: 0 0 16px 0;
 }
 
 .modalScheduleInfoRow{
     display: flex;
     flex-direction: row;
+    margin-bottom: 16px;
 }
 
 .modalScheduleInfoRowLeft{

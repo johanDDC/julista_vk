@@ -32,10 +32,10 @@ function auth(login, password, diary, dispatcher, region, province, city, school
         region: 40,
         province: -3,
         city: 3,
-        school: 293,
+        school: 527,
         login: "banshi_shi@yahoo.com",
         password: "Ibubyf19811",
-        diary: "mosru",
+        diary: "mosru"
     };
     console.log(baseUrl + methodUrl, json);
 

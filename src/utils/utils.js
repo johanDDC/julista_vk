@@ -28,7 +28,7 @@ export function scheduleGetDates() {
 
 export function schedulePrevWeek(currentStart) {
     let newStart = new Date(currentStart.getFullYear(), currentStart.getMonth(), currentStart.getDate() - 7);
-    let newEnd = currentStart;
+    let newEnd = new Date(currentStart.getFullYear(), currentStart.getMonth(), currentStart.getDate() - 1);
     let resArr = [];
 
     for(let i = 0; i < 7; i++){
@@ -43,7 +43,7 @@ export function schedulePrevWeek(currentStart) {
 
 export function scheduleNextWeek(currentStart) {
     let newStart = new Date(currentStart.getFullYear(), currentStart.getMonth(), currentStart.getDate() + 7);
-    let newEnd = new Date(newStart.getFullYear(), newStart.getMonth(), newStart.getDate() + 7);
+    let newEnd = new Date(newStart.getFullYear(), newStart.getMonth(), newStart.getDate() + 6);
     let resArr = [];
 
     for(let i = 0; i < 7; i++){

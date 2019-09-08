@@ -26,6 +26,8 @@
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
+
+    justify-content: center;
 }
 
 .chooseDiaryScreenDiaryContainer > div > div{
@@ -53,6 +55,9 @@
 .chooseDiaryScreenDiaryContainerTitle{
     font-size: 16px;
     color: #1f1f1f;
+
+    line-height: 1.2;
+    text-align: center;
 }
 
 #buttonContainer{

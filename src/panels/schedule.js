@@ -25,7 +25,7 @@ class Schedule extends React.Component {
         let flag = this.props.appData.journal.data.length === 0;
 
         this.state = {
-            currentDay: new Date().getDay() - 1,
+            currentDay: (new Date().getDay() <= 6 && new Date().getDay() > 0? new Date().getDay() - 1 : 0),
             month: getRusMonthName(this.dayDates[7].getMonth()),
             weekDuration: (!flag ? this.scheduleData.data.days.length : 5),
             ready: !flag,
@@ -49,9 +49,11 @@ class Schedule extends React.Component {
                 if (this.props.appData.journal.data.length !== 0) {
                     this.scheduleData = this.props.appData.journal;
                     clearInterval(id);
+                    console.log("wwww", this.props.appData.journal.data.days.length);
+                    console.log("wwww", this.dayDates);
                     this.setState({
                         ready: true,
-                        weekDuration: (this.scheduleData.data.days.length > 5 ? 6 : 5) // if holidays, length is equal to 0
+                        weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length) // if holidays, length is equal to 0
                     });
                 }
             }
@@ -85,7 +87,7 @@ class Schedule extends React.Component {
             let modalMarksPresentation = [];
             if (subject) {
                 if (subject.marks) {
-                    console.log("subject", subject.marks);
+                    console.log("subject", subject);
                     subject.marks.forEach(mark => {
                         console.log("mark", mark);
                         marks.push( //Append weight here
@@ -279,7 +281,7 @@ class Schedule extends React.Component {
                 slideIndex={this.state.currentDay}
                 onChange={slideIndex => {
                     this.setState({
-                        currentDay: (slideIndex >= (this.state.weekDuration === 0 ?
+                        currentDay: (slideIndex >= (this.state.weekDuration < 5 ?
                             5 :
                             this.state.weekDuration) ? slideIndex - 1 : slideIndex)
                     });
@@ -289,7 +291,7 @@ class Schedule extends React.Component {
                     else
                         document.getElementById("scheduleWeekSwiperLeft")
                             .style.display = "none";
-                    if (slideIndex === (this.state.weekDuration !== 0 ? this.state.weekDuration - 1 : 4))
+                    if (slideIndex >= (this.state.weekDuration < 5 ? this.state.weekDuration - 1 : 4))
                         document.getElementById("scheduleWeekSwiperRight")
                             .style.display = "flex";
                     else
@@ -311,10 +313,11 @@ class Schedule extends React.Component {
             newDatesArr[8],
             this.props.profile.student.id);
         this.dayDates = newDatesArr;
+        console.log("n_d", this.dayDates);
         this.setState({
             ready: false,
             month: getRusMonthName(this.dayDates[7].getMonth()),
-            currentDay: (this.state.weekDuration !== 0 ? this.state.weekDuration - 1 : 4)
+            currentDay: (this.state.weekDuration < 5 ? this.state.weekDuration - 1 : 4),
         });
         document.getElementById("scheduleWeekSwiperLeft")
             .style.display = "none";
@@ -329,10 +332,11 @@ class Schedule extends React.Component {
                 } else {
                     if (this.props.appData.journal.data.length !== 0) {
                         this.scheduleData = this.props.appData.journal;
+                        console.log("week dur", this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length);
                         clearInterval(id);
                         this.setState({
                             ready: true,
-                            weekDuration: (this.scheduleData.data.days.length > 5 ? 6 : 5) // if holidays, length is equal to 0
+                            weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length),
                         });
 
                     }
@@ -372,7 +376,7 @@ class Schedule extends React.Component {
                     clearInterval(id);
                     this.setState({
                         ready: true,
-                        weekDuration: (this.scheduleData.data.days.length > 5 ? 6 : 5) // if holidays, length is equal to 0
+                        weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length),
                     });
                 }
             }
