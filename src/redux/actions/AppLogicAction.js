@@ -38,12 +38,7 @@ function getSchedule(id, secret, start, end, student_id, dispatcher) {
         axios.get(baseUrl + methodUrl + queries)
             .then((response) => {
                 console.log("resp", response.data);
-                if (response.data.data === null || response.data.error) {
-                    dispatcher({
-                        type: "GET_JOURNAL_FAIL",
-                        data: []
-                    })
-                } else {
+                if (!response.data.data === null || !response.data.error) {
                     clearTimeout(timeoutID);
                     clearInterval(intervalId);
                     dispatcher({
@@ -71,10 +66,8 @@ export function getMarks(id, secret, student_id,) {
 
 function getAndAggregateMarks(id, secret, student_id, dispatcher) {
     let methodUrl = "api/diary/marks/all/";
-    let startDate = new Date(2019, 8, 2);
-    let endDate = new Date(2019, 8, 8);
 
-    let queries = `?student_id=${student_id}&id=${id}&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
+    let queries = `?student_id=${student_id}&id=${id}&secret=${secret}`;
     // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
 
     console.log(baseUrl + methodUrl + queries);
@@ -93,12 +86,7 @@ function getAndAggregateMarks(id, secret, student_id, dispatcher) {
         axios.get(baseUrl + methodUrl + queries)
             .then((response) => {
                 console.log("marks resp", response.data);
-                if (response.data.data === null || response.data.error) {
-                    dispatcher({
-                        type: "GET_MARKS_FAIL",
-                        data: []
-                    })
-                } else {
+                if (!response.data.data === null || !response.data.error) {
                     clearTimeout(timeoutID);
                     clearInterval(intervalId);
                     dispatcher({

@@ -232,7 +232,7 @@ class Marks extends React.Component {
 
         return (
             <div id={currentTab}>
-                {drawLastMarks()}
+                {/*{drawLastMarks()}*/}
                 <Div className="marksBlocksTitle">
                     ВСЕ ОЦЕНКИ
                 </Div>

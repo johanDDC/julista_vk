@@ -19,10 +19,10 @@ export function doAuthorize(login, password, diary, region, province, city, scho
 
 function auth(login, password, diary, dispatcher, region, province, city, school) {
     let methodUrl = "api/auth/";
-    let json ={
-        diary : diary,
-        login : login,
-        password : password,
+    let json = {
+        diary: diary,
+        login: login,
+        password: password,
         region: region,
         province: province,
         city: city,
@@ -52,17 +52,18 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                     secret: response.data.secret,
                     students: students,
                     diary: diary,
-                    student: (students.length === 1 ? students[0]: null),
+                    student: (students.length === 1 ? students[0] : null),
                     // student: null,
                 };
                 localStorage.setItem("userData", JSON.stringify(localData));
+                bind_user(response.data.id, response.data.secret);
                 dispatcher({
                     type: "DO_AUTHORIZATION_SUCCESS",
                     data: {
                         id: response.data.id,
                         secret: response.data.secret,
                         students: students,
-                        student: (students.length === 1 ? students[0]: null),
+                        student: (students.length === 1 ? students[0] : null),
                         // student: null,
                     },
                 })
@@ -96,6 +97,26 @@ export function setStudent(student) {
     }
 }
 
-function bind_user(id, secret, vk_user_id, token) {
+function bind_user(id, secret) {
+    let methodUrl = "/api/auth/bind_account/vk/";
+    let json = window.location.search.slice(1).split('&')
+        .map((queryParam) => {
+            let kvp = queryParam.split('=');
+            return {key: kvp[0], value: kvp[1]}
+        })
+        .reduce((query, kvp) => {
+            query[kvp.key] = decodeURIComponent(kvp.value);
+            return query
+        }, {});
+    json.id = id;
+    json.secret = secret;
+    console.log("bind data", json);
 
+    axios.post(baseUrl + methodUrl, json)
+        .then(res => {
+            console.log("bind result", res)
+        })
+        .catch(err => {
+            console.log("bind fail", err)
+        });
 }
