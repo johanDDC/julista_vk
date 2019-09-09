@@ -13,30 +13,30 @@ export function doAuthorize(login, password, diary, region, province, city, scho
             },
         });
 
-        auth(login, password, diary, dispatch)
+        auth(login, password, diary, dispatch, region, province, city, school)
     }
 }
 
 function auth(login, password, diary, dispatcher, region, province, city, school) {
     let methodUrl = "api/auth/";
-    // let json ={
-    //     diary : diary,
-    //     login : login,
-    //     password : password,
-    //     region: region,
-    //     province: province,
-    //     city: city,
-    //     school: school,
-    // };
-    let json = {
-        region: 40,
-        province: -3,
-        city: 3,
-        school: 527,
-        login: "banshi_shi@yahoo.com",
-        password: "Ibubyf19811",
-        diary: "mosru"
+    let json ={
+        diary : diary,
+        login : login,
+        password : password,
+        region: region,
+        province: province,
+        city: city,
+        school: school,
     };
+    // let json = {
+    //     region: 40,
+    //     province: -3,
+    //     city: 3,
+    //     school: 527,
+    //     login: "banshi_shi@yahoo.com",
+    //     password: "Ibubyf19811",
+    //     diary: "mosru"
+    // };
     console.log(baseUrl + methodUrl, json);
 
     axios.post(baseUrl + methodUrl, json)
@@ -94,4 +94,8 @@ export function setStudent(student) {
         type: "SET_STUDENT",
         data: student,
     }
+}
+
+function bind_user(id, secret, vk_user_id, token) {
+
 }

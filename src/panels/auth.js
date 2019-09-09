@@ -19,16 +19,20 @@ class Auth extends React.Component {
         this.state = {
             error: false,
             schools: null,
+            provinces: null,
+            cities: null,
             ready: false,
             netschoolSelector: (this.props.profile.diary === "netschool" ? <Spinner size="medium"/> : null),
+            regions: <Spinner size="medium"/>
         };
 
-        this.region = "";
-        this.province = "";
-        this.city = "";
+        this.region = null;
+        this.province = null;
+        this.city = null;
         this.school = "";
 
-        this.netschoolChoose();
+        // this.netschoolChoose();
+        this.drawRegionsSelector()
     }
 
     btnBack = () => {
@@ -51,6 +55,8 @@ class Auth extends React.Component {
 
         if (login.trim().length !== 0 && password.trim().length !== 0) {
             this.props.setSpinner(true);
+            console.log("per data", login, password, this.props.profile.diary,
+                this.region, this.province, this.city, this.school);
             this.props.getProfile(login, password, this.props.profile.diary,
                 this.region, this.province, this.city, this.school);
 
@@ -82,158 +88,116 @@ class Auth extends React.Component {
         }
     };
 
-    netschoolChoose = () => {
-        let regionId;
-        let provinceId;
-        let cityId;
-        let getMetaData = (data) => {
-            const members = data.data.response.GeoObjectCollection.featureMember;
-            if (members) {
-                let components = members[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components;
-                console.log("com", components);
-                for (let component of components) {
-                    if (component.kind === 'province') {
-                        this.region = component.name;
-                    } else if (component.kind === 'area') {
-                        this.province = component.name;
-                    } else if (component.kind === 'locality') {
-                        this.city = component.name;
-                    }
-                }
-                console.log("metaData", this.region, this.province, this.city)
-            }
-        };
-        let parseData = () => {
-            axios.get("https://bklet.ml/api/auth/get_data")
-                .then(reg_resp => {
-                    reg_resp.data.data.forEach(reg => {
-                        if (reg.name === this.region)
-                            regionId = reg.id;
-                        if (reg.name === this.province)
-                            regionId = reg.id;
-                        if (reg.name === this.city)
-                            regionId = reg.id;
-
-                        if (this.region === "Санкт-Петербург" && reg.name === "Санкт-Петербург (Лицей ФТШ)")
-                            regionId = reg.id
-                    });
-                    console.log("regionId", regionId);
-                    axios.get("https://bklet.ml/api/auth/get_data/?region=" + regionId)
-                        .then(province_resp => {
-                            province_resp.data.data.forEach(province => {
-                                if (province.name.toLowerCase() === this.province.toLowerCase() || province.name.toLowerCase() === "все")
-                                    provinceId = province.id;
-                            });
-                            console.log("provinceId", provinceId);
-                            axios.get(`https://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}`)
-                                .then(city_resp => {
-                                    console.log("this city", this.city);
-                                    city_resp.data.data.forEach(city => {
-                                        console.log(city.name);
-                                        if (city.name.toLowerCase().substring(0, city.name.length - 4) === this.city.toLowerCase() ||
-                                            city.name.toLowerCase() === this.city.toLowerCase())
-                                            cityId = city.id;
-                                    });
-                                    console.log("cityId", cityId);
-                                    axios.get(`https://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}&city=${cityId}`)
-                                        .then(school_resp => {
-                                            console.log("schools", `https://bklet.ml/api/auth/get_data/?region=${regionId}&province=${provinceId}&city=${cityId}`);
-                                            this.region = regionId;
-                                            this.province = provinceId;
-                                            this.city = cityId;
-                                            this.setState({
-                                                schools: school_resp.data.data,
-                                                ready: true,
-                                            });
-                                        })
-                                })
-                        })
-                        .catch(err => {
-                            this.setState({
-                                netschoolSelector:
-                                    (<span style={{color: "#ef464d", fontSize: "16px"}}>
-                                            К сожалению в вашем регионе пока нет подключеных к дневнику школ.
-                                        </span>)
-                            });
-                            console.log("school determination error", err);
-                        });
-                })
-                .catch(err => {
-                    this.setState({
-                        netschoolSelector:
-                            (<span style={{color: "#ef464d", fontSize: "16px"}}>
-                                            К сожалению в вашем регионе пока нет подключеных к дневнику школ.
-                                        </span>)
-                    });
-                    console.log("school determination error", err);
+    drawRegionsSelector = () => {
+        let options = [];
+        axios.get("https://bklet.ml/api/auth/get_data")
+            .then(reg_resp => {
+                reg_resp.data.data.forEach(reg => {
+                    options.push(
+                        <option value={reg.id}>{reg.name}</option>
+                    )
                 });
-        };
-        if (this.props.profile.diary !== "netschool") {
-            return null;
-        } else {
-            window.ymaps.ready(() => {
-                let geolocation = window.ymaps.geolocation;
-                let position;
-                geolocation.get({
-                    provider: 'yandex',
-                    mapStateAutoApply: true
-                }).then((result) => {
-                    position = result.geoObjects.position;
-                    axios.get("https://geocode-maps.yandex.ru/1.x/?format=json&apikey=fbc15a57-6801-4993-9d23-9b313b0f3ad1&geocode=" +
-                        position[1].toPrecision(6) + "," + position[0].toPrecision(6))
-                        .then(resp => {
-                            console.log("geolocation resp", resp);
-                            getMetaData(resp);
-                            parseData();
-                            let id = setInterval(() => {
-                                if (this.state.ready) {
-                                    console.log(this.region, "\n", this.province, "\n", this.city);
-                                    console.log(this.state.schools);
-                                    clearInterval(id);
-
-                                    if (this.state.schools.length === 0) {
-                                        console.log("empty schools");
-                                        this.setState({
-                                            netschoolSelector:
-                                                (<span style={{color: "#ef464d", fontSize: "16px"}}>
-                                            К сожалению в вашем регионе пока нет подключеных к дневнику школ.
-                                        </span>)
-                                        });
-                                    } else {
-                                        let options = [];
-                                        this.state.schools.forEach(school => {
-                                            options.push(
-                                                <option value={school.id}>{school.name}</option>
-                                            )
-                                        });
-                                        this.setState({
-                                            netschoolSelector:
-                                                (<Select
-                                                    id="schoolSelect"
-                                                    placeholder="выберите вашу школу"
-                                                    >
-                                                    {options}
-                                                </Select>)
-                                        });
-                                    }
-                                }
-                            }, 200);
-                        })
+                this.setState({
+                    regions:
+                        <Select
+                            id="regionSelect"
+                            placeholder="Выберите ваш регион"
+                            onChange={() => {
+                                this.region = document.getElementById("regionSelect").value;
+                                this.setState({
+                                    provinces:
+                                        <Spinner size="medium"/>
+                                });
+                                this.drawProvincesSelector();
+                            }}
+                        >
+                            {options}
+                        </Select>
                 })
-                    .catch(err => {
-                        console.log("geo getting error");
-                        this.setState({
-                            netschoolSelector:
-                                (<span style={{color: "#ef464d", fontSize: "16px"}}>
-                                    К сожалению в вашем регионе пока нет подключеных к дневнику школ.
-                                </span>)
-                        });
-                    });
-            });
-            console.log("result", this.state.netschoolSelector);
-        }
-
+            })
     };
+    drawProvincesSelector = () => {
+        let options = [];
+        axios.get("https://bklet.ml/api/auth/get_data/?region=" + this.region)
+            .then(province_resp => {
+                province_resp.data.data.forEach(province => {
+                    options.push(
+                        <option value={province.id}>{province.name}</option>
+                    )
+                });
+                this.setState({
+                    provinces:
+                        <Select
+                            id="provinceSelect"
+                            placeholder="Выберите ваш район"
+                            onChange={() => {
+                                this.province = document.getElementById("provinceSelect").value;
+                                this.setState({
+                                    cities:
+                                        <Spinner size="medium"/>
+                                });
+                                this.drawCitiesSelector();
+                            }}
+                        >
+                            {options}
+                        </Select>
+                });
+            })
+    };
+    drawCitiesSelector = () => {
+        let options = [];
+        axios.get(`https://bklet.ml/api/auth/get_data/?region=${this.region}&province=${this.province}`)
+            .then(city_resp => {
+                city_resp.data.data.forEach(city => {
+                    options.push(
+                        <option value={city.id}>{city.name}</option>
+                    )
+                });
+                console.log("lalalala", options);
+                this.setState({
+                    cities:
+                        <Select
+                            id="citySelect"
+                            placeholder="Выберите ваш город"
+                            onChange={() => {
+                                this.city = document.getElementById("citySelect").value;
+                                this.setState({
+                                    schools:
+                                        <Spinner size="medium"/>
+                                });
+                                this.drawSchoolsSelector();
+                            }}
+                        >
+                            {options}
+                        </Select>
+                });
+            })
+    };
+    drawSchoolsSelector = () => {
+        let options = [];
+        axios.get(`https://bklet.ml/api/auth/get_data/?region=${this.region}&province=${this.province}&city=${this.city}`)
+            .then(school_resp => {
+                school_resp.data.data.forEach(school => {
+                    options.push(
+                        <option value={school.id}>{school.name}</option>
+                    )
+                });
+                console.log("lalalala", options);
+                this.setState({
+                    schools:
+                        <Select
+                            id="schoolSelect"
+                            placeholder="Выберите вашу школу"
+                            onChange={() => {
+                                this.school = document.getElementById("schoolSelect").value;
+                            }}
+                        >
+                            {options}
+                        </Select>
+                });
+            })
+    };
+
 
     render() {
         return (
@@ -270,9 +234,26 @@ class Auth extends React.Component {
                             />
                         </div>
                     </Div>
-                    <Div>
-                        {this.state.netschoolSelector}
-                    </Div>
+                    {(this.props.profile.diary === "netschool" ?
+                        <Div>
+                            {this.state.regions}
+                        </Div>
+                        : null)}
+                    {(this.state.provinces ?
+                        <Div>
+                            {this.state.provinces}
+                        </Div>
+                        : null)}
+                    {(this.state.cities ?
+                        <Div>
+                            {this.state.cities}
+                        </Div>
+                        : null)}
+                    {(this.state.schools ?
+                        <Div>
+                            {this.state.schools}
+                        </Div>
+                        : null)}
                     {/*<Div>*/}
                     {/*    <span*/}
                     {/*        className="medium_tip">Введите код приглашения, при его наличии, или оставьте поле пустым</span>*/}
