@@ -103,7 +103,7 @@
     margin-right: 10px;
 }
 
-.Gallery__slide:last-child{
+.Gallery__slide:last-child {
     width: 45px;
 }
 
@@ -111,7 +111,7 @@
     transition: transform 0.24s cubic-bezier(0.1, 0, 0.25, 1) 0s !important;
 }
 
-.scheduleTaleError{
+.scheduleTaleError {
     font-size: 16px;
     font-weight: bold;
     color: #ef464d;
@@ -119,19 +119,19 @@
     text-align: center;
 }
 
-.modalScheduleTitle{
+.modalScheduleTitle {
     color: #5690ff;
     font-size: 14px;
     margin: 0 0 16px 0;
 }
 
-.modalScheduleInfoRow{
+.modalScheduleInfoRow {
     display: flex;
     flex-direction: row;
     margin-bottom: 16px;
 }
 
-.modalScheduleInfoRowLeft{
+.modalScheduleInfoRowLeft {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -139,14 +139,14 @@
     margin-right: 25px;
 }
 
-.modalScheduleInfoRowText{
+.modalScheduleInfoRowText {
     display: flex;
     font-size: 14px;
     color: #535353;
 }
 
 
-#scheduleWeekSwiperLeft{
+#scheduleWeekSwiperLeft {
     display: none;
     flex-direction: row;
     justify-content: center;
@@ -162,7 +162,7 @@
     color: #5690ff;
 }
 
-#scheduleWeekSwiperRight{
+#scheduleWeekSwiperRight {
     display: none;
     flex-direction: row;
     justify-content: center;
@@ -176,4 +176,62 @@
     height: 28px;
     font-size: 20px;
     color: #5690ff;
+}
+
+#scheduleWeekSwiperLeft:before {
+    width: 100%;
+    height: 40px;
+    border-radius: 0;
+    background-color: #FFF;
+    display: inline-block;
+    content: '';
+}
+
+#scheduleWeekSwiperLeft > .up {
+    position: absolute;
+    background: #5690ff;
+    width: 6px;
+    height: 6px;
+    top: -6px;
+    left: 0;
+    border-radius: 0 0 0 999px;
+}
+
+#scheduleWeekSwiperLeft > .down {
+    position: absolute;
+    background: #5690ff;
+    width: 6px;
+    height: 6px;
+    bottom: -6px;
+    left: 0;
+    border-radius: 999px 0 0 0;
+}
+
+#scheduleWeekSwiperRight:after {
+    width: 100%;
+    height: 40px;
+    border-radius: 0;
+    background-color: #FFF;
+    display: inline-block;
+    content: '';
+}
+
+#scheduleWeekSwiperRight > .up {
+    position: absolute;
+    background: #5690ff;
+    width: 6px;
+    height: 6px;
+    top: -6px;
+    right: 0;
+    border-radius: 0 0 999px 0;
+}
+
+#scheduleWeekSwiperRight > .down {
+    position: absolute;
+    background: #5690ff;
+    width: 6px;
+    height: 6px;
+    bottom: -6px;
+    right: 0;
+    border-radius: 0 999px 0 0;
 }
