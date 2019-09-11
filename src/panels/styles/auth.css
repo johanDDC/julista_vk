@@ -65,14 +65,12 @@
     padding-bottom: 0;
 }
 
-#buttonContainer{
-}
 
 .getInButton{
     margin: 0;
     padding: 0;
     color: #fff;
-    background: linear-gradient(#3aa9ff, #8364ff, #8465ff);
+    background: linear-gradient(#3aa9ff, #8465ff);
     box-shadow: 0 5px 15px 0 #4c5690ff;
     border-radius:12px !important;
     height: 55px !important;

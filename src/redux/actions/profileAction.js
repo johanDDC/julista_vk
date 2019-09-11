@@ -98,7 +98,7 @@ export function setStudent(student) {
 }
 
 function bind_user(id, secret) {
-    let methodUrl = "/api/auth/bind_account/vk/";
+    let methodUrl = "api/auth/bind_account/vk/";
     let json = window.location.search.slice(1).split('&')
         .map((queryParam) => {
             let kvp = queryParam.split('=');
