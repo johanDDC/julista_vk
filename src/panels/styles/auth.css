@@ -72,7 +72,8 @@
     margin: 0;
     padding: 0;
     color: #fff;
-    background: linear-gradient(rgb(58 169 255), rgb(131 100 255), rgb(132 101 255));
+    background: linear-gradient(#3aa9ff, #8364ff, #8465ff);
+    box-shadow: 0 5px 15px 0 #4c5690ff;
     border-radius:12px !important;
     height: 55px !important;
     width: 100%;
@@ -87,7 +88,7 @@
 .restorePassword{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     font-size: 12px;
     color: #6d6d6d;

@@ -273,15 +273,15 @@ class Auth extends React.Component {
                                                                                          target="_blank">политика конфиденциальности</Link></span>
                     </Div>
                     <Div className="restorePassword">
-                        <div className="inputIcon">
+                        <div className="inputIcon" style={{margin: 0}}>
                             <AuthRestore/>
                         </div>
-                        <span>Забыли данные учетной записи?
+                        <div>Забыли данные учетной записи?
                                 <Link
                                     href="https://google.com"
                                     target="_blank"
                                     className="restoreLink">Восстановить</Link>
-                            </span>
+                            </div>
                     </Div>
                     <Div>
                         <Button level="tertiary" className="getInButton"
