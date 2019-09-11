@@ -75,7 +75,6 @@ class Schedule extends React.Component {
     };
 
     generateScheduleTale = (day) => {
-        console.log("here");
         let generateSubjectTale = (subject) => {
             let marks = [];
             let homework = null;
@@ -113,7 +112,6 @@ class Schedule extends React.Component {
                     });
                 }
             }
-            console.log("building modal");
             let modal = (
                 subject.time ?
                     <div>
@@ -205,9 +203,13 @@ class Schedule extends React.Component {
                         <div className="scheduleSubjectTaleHomework">
                             {homework}
                         </div>
-                        <span className="scheduleSubjectTaleTimetable">
-                            {subject.time[0]} - {subject.time[1]}
-                        </span>
+                        {
+                            subject.time ?
+                                <span className="scheduleSubjectTaleTimetable">
+                                    {subject.time[0]} - {subject.time[1]}
+                                </span>
+                                : null
+                        }
                     </div>
                     <div className="scheduleSubjectTaleMarks">
                         {marks}
@@ -291,12 +293,15 @@ class Schedule extends React.Component {
                     else
                         document.getElementById("scheduleWeekSwiperLeft")
                             .style.display = "none";
-                    if (slideIndex >= (this.state.weekDuration < 5 ? this.state.weekDuration - 1 : 4))
+                    if (slideIndex >= (this.state.weekDuration < 5 ? 4 : this.state.weekDuration - 1))
                         document.getElementById("scheduleWeekSwiperRight")
                             .style.display = "flex";
                     else
                         document.getElementById("scheduleWeekSwiperRight")
                             .style.display = "none";
+
+                    if (this.state.weekDuration === 6)
+                        document.querySelector(".Gallery__slide:last-child").style.width = "50px";
                 }}
             >
                 {this.generateSchedule()}

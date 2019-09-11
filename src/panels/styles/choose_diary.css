@@ -26,7 +26,6 @@
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-
     justify-content: center;
 }
 
@@ -35,6 +34,7 @@
     flex-direction: row !important;
     align-items: center !important;
     color: black !important;
+    padding: 4px 0 4px 0;
 }
 
 .chooseDiaryScreenDiaryContainerIcon{
@@ -55,7 +55,6 @@
 .chooseDiaryScreenDiaryContainerTitle{
     font-size: 16px;
     color: #1f1f1f;
-
     line-height: 1.2;
     text-align: center;
 }

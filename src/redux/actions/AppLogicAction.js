@@ -4,26 +4,26 @@ const axios = require('axios');
 let baseUrl = "https://bklet.ml/";
 
 export function getJournal(id, secret, start, end, student_id) {
-    axios.post("http://bklet.ml/api/auth/bind_account/vk/",
-        {
-            id: 6379190441891350,
-            secret: "40ad7525e75e8c8d8e236b79d4dc3cb8002c7d66e639c181f9d2b932ec712e6cddf551cfd81632efb4735bea23f46c81d1c490a51a9d6dcd25193ac61186099d",
-            sign: "eUnIJk8jewVG--4iXpTA2wAa7aAvI_HhHTqNL1S0-9Q",
-            vk_access_token_settings: "",
-            vk_app_id: "6967676",
-            vk_are_notifications_enabled: "1",
-            vk_is_app_user: "1",
-            vk_language: "ru",
-            vk_platform: "desktop_web",
-            vk_ref: "other",
-            vk_user_id: "143305590",
-        })
-        .then(res => {
-            console.log("BIND BIND", res)
-        })
-        .catch(err => {
-            console.log("BIND BIND", err)
-        });
+    // axios.post("http://bklet.ml/api/auth/bind_account/vk/",
+    //     {
+    //         id: 6379190441891350,
+    //         secret: "40ad7525e75e8c8d8e236b79d4dc3cb8002c7d66e639c181f9d2b932ec712e6cddf551cfd81632efb4735bea23f46c81d1c490a51a9d6dcd25193ac61186099d",
+    //         sign: "eUnIJk8jewVG--4iXpTA2wAa7aAvI_HhHTqNL1S0-9Q",
+    //         vk_access_token_settings: "",
+    //         vk_app_id: "6967676",
+    //         vk_are_notifications_enabled: "1",
+    //         vk_is_app_user: "1",
+    //         vk_language: "ru",
+    //         vk_platform: "desktop_web",
+    //         vk_ref: "other",
+    //         vk_user_id: "143305590",
+    //     })
+    //     .then(res => {
+    //         console.log("BIND BIND", res)
+    //     })
+    //     .catch(err => {
+    //         console.log("BIND BIND", err)
+    //     });
         return dispatch => {
         dispatch({
             type: "GET_JOURNAL_REQUEST",
