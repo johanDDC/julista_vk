@@ -38,7 +38,6 @@ class Schedule extends React.Component {
 
     loadData = async () => {
         this.props.getJournal(this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8], this.props.profile.student.id);
-        let journal = this.props.appData.journal;
 
         let id = setInterval(() => {
             if (this.props.appData.error) {
@@ -58,7 +57,6 @@ class Schedule extends React.Component {
                 }
             }
         }, 200);
-
     };
 
     drawSpinner = () => {
@@ -190,6 +188,8 @@ class Schedule extends React.Component {
                                 </div>
                                 : null)
                             : null}
+                        <div className="modalEmptyElement">
+                        </div>
                     </div>
                     : null
             );
@@ -274,6 +274,7 @@ class Schedule extends React.Component {
     };
 
     drawShedule = () => {
+        document.getElementsByTagName("section")[0].style.overflow = "hidden";
         return (
             <Gallery
                 slideWidth="100%"

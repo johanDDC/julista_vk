@@ -7,6 +7,8 @@ import App from './App';
 import store from "./redux/store/main";
 import {Provider} from "react-redux"
 import registerServiceWorker from './sw';
+import './index.css'
+import WebFont from 'webfontloader';
 
 // Init VK App
 connect.send('VKWebAppInit', {});
@@ -15,6 +17,12 @@ connect.send('VKWebAppInit', {});
 // расскомментируйте строку с registerServiceWorker();
 // Но не забывайте, что на данный момент у технологии есть достаточно подводных камней
 // Подробнее про сервис воркеры можно почитать тут — https://vk.cc/8MHpmT
+
+WebFont.load({
+    google: {
+        families: ['Roboto:300,400,700', 'sans-serif']
+    }
+});
 
 ReactDOM.render(
     <Provider store={store}>

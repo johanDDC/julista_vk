@@ -17,10 +17,6 @@
     text-align: center;
 }
 
-#header-title-marks{
-    width: 100% !important;
-}
-
 .marksTabs{
     display: flex;
     flex-direction: row;
@@ -48,11 +44,6 @@
 .marksTabs > .TabsItem--selected > div{
     color: #fff !important;
 }
-
-#header-right-marks > *, #header-left-marks > *{
-    display: none;
-}
-
 
 .marksBlocksTitle{
     font-size: 14px;

@@ -290,9 +290,7 @@ class Marks extends React.Component {
     render() {
         return (
             <Panel id={this.props.id}>
-                <PanelHeader
-                    noShadow={true}
-                >
+                <PanelHeader noShadow={true}>
                     Оценки
                 </PanelHeader>
                 {this.state.error ?

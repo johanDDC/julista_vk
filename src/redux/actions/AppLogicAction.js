@@ -47,7 +47,7 @@ function getSchedule(id, secret, start, end, student_id, dispatcher) {
                     })
                 }
             })
-    }, 200)
+    }, 1000)
 }
 
 export function getMarks(id, secret, student_id,) {
@@ -95,7 +95,7 @@ function getAndAggregateMarks(id, secret, student_id, dispatcher) {
                     })
                 }
             })
-    }, 200);
+    }, 1000);
 }
 
 export function getLastMarks(id, secret, student_id) {
@@ -152,5 +152,5 @@ function getLMarks(id, secret, student_id, dispatcher) {
                     })
                 }
             })
-    }, 200);
+    }, 1000);
 }
