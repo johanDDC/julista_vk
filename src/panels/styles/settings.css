@@ -1,6 +1,3 @@
-#panel-header-settings > *, #header-bg-settings > *, #header-right-settings > *, #header-left-settings > *, #header-title-settings > *{
-    background-color: #5690ff !important;
-}
 .settingsTitleContainer{
     padding: 0 0 16px 0;
 }

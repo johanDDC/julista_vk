@@ -1,7 +1,7 @@
 .scheduleWeekTopBar {
     width: 90%;
     height: 46px;
-    background-color: rgb(86 144 255);
+    background-color: #5690ff !important;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -28,7 +28,7 @@
 .scheduleWeekDaySelected {
     background-color: #fff;
     border-radius: 100%;
-    color: rgb(86 144 255);
+    color: #5690FF;
 }
 
 

@@ -1,3 +1,7 @@
+#panel-header-choose_diary * {
+    background-color: #FFFFFF;
+}
+
 .chooseDiaryScreen{
     display: flex;
     flex-direction: column;
@@ -67,7 +71,7 @@
     margin: 0;
     padding: 0;
     color: #fff;
-    background: linear-gradient(rgb(58 169 255), rgb(131 100 255), rgb(132 101 255));
+    background: linear-gradient(#3AA9FF, #8364FF, #8465FF);
     border-radius:12px !important;
     height: 55px !important;
     width: 100%;

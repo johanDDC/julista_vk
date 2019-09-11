@@ -390,7 +390,7 @@ class Schedule extends React.Component {
 
     render() {
         return (
-            <Panel id={this.props.id} style={{backgroundColor: "rgb(86, 144, 255)"}}>
+            <Panel id={this.props.id} style={{backgroundColor: "#5690ff"}}>
                 <PanelHeader
                     noShadow>
                     <span className="scheduleHeaderMonth">{this.state.month}</span>

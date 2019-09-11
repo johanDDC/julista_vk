@@ -6,17 +6,17 @@ function defineColor(val) {
     let colors = [];
 
     if (val === "5" || val.toLowerCase() === "зачёт" || val === "Зч") {
-        colors[1] = "rgb(114 222 32)";
-        colors[0] = "rgb(28 179 54)";
+        colors[1] = "#1cb336";
+        colors[0] = "#72de20";
     } else if (val === "4") {
-        colors[0] = "rgb(0 225 157)";
-        colors[1] = "rgb(2 205 132)";
+        colors[0] = "#02cd84";
+        colors[1] = "#00e19d";
     } else if (val === "3") {
-        colors[0] = "rgb(255 81 47)";
-        colors[1] = "rgb(240 152 25)";
+        colors[0] = "#ff512f";
+        colors[1] = "#f09819";
     } else if (val === "2" || val.toLowerCase() === "незачёт" || val === "Нзч") {
-        colors[0] = "rgb(255 75 43)";
-        colors[1] = "rgb(255 65 108)";
+        colors[0] = "#ff4b2b";
+        colors[1] = "#ff416c";
     }
     return colors;
 } //TODO add 10 system support
@@ -41,7 +41,7 @@ const Mark = props => {
         <div className="markContainer" style={{
             width: (container ? "68px" : `${props.size}px `),
             height: (container ? "22px" : `${props.size}px `),
-            background: (props.is_routine ? "rgb(86 144 255)"
+            background: (props.is_routine ? "#5690ff"
                 : `linear-gradient(90deg, ${defineColor(props.val)[0]}, ${defineColor(props.val)[1]})`),
             fontSize: (props.fontSize ? `${props.fontSize}px` : "14px"),
             borderRadius: (container ? "11px" : "50%")

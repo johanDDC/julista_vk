@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import "./scheduleWeekBar.css"
-import {Button, Div, FixedLayout} from "@vkontakte/vkui";
-import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
-import Icon24BrowserForward from '@vkontakte/icons/dist/24/browser_forward';
+import {Button, Div} from "@vkontakte/vkui";
 
 class ScheduleWeekBar extends React.Component {
     constructor() {

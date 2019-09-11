@@ -32,12 +32,12 @@
 }
 
 .marksTabs > .TabsItem--selected{
-    background-color:  rgb(86 144 255) !important;
+    background-color:  #5690ff !important;
     color: #fff !important;
 }
 
 .marksTabs > .TabsItem > div{
-    color: rgb(86 144 255) !important;
+    color: #5690ff !important;
     font-weight: bold !important;
 }
 
@@ -53,9 +53,6 @@
 }
 
 .allMarksContainer{
-    /*width: calc(100% - 32px);*/
-    /*border: 0;*/
-    /*display: flex;*/
     flex-direction: column;
     background-color: #f6f6f6;
     border-radius: 20px;
@@ -76,7 +73,7 @@
 
 .avg{
     font-size: 13px;
-    color: rgb(140 140 140);
+    color: #8C8C8C;
 }
 
 .marksRow{
@@ -101,17 +98,11 @@
 
 .adviceContainer{
     padding: 1px 7px 1px 7px;
-    background: linear-gradient(90deg, rgb(28 179 54), rgb(114 222 32));
+    background: linear-gradient(90deg, #1CB336, #72DE20);
     border-radius: 10px;
     color: #fff;
     font-size: 14px;
 }
-
-#panel-header-marks > *, #header-bg-marks > *, #header-right-marks > *, #header-left-marks > *, #header-title-marks > *{
-    background-color: rgb(86 144 255) !important;
-    color: white !important;
-}
-
 
 .lastMarksContainer{
     height:108px;
@@ -137,13 +128,13 @@
 
 .lastMarkSubject{
     font-size: 9px;
-    color: rgb(86 144 255);
+    color: #5690ff;
 }
 
 .lastMarkDate{
     font-size: 9px;
     color: white;
-    background-color: rgb(86 144 255);
+    background-color: #5690ff;
     border-radius: 7px;
     margin: 0 5px 0 4px;
     padding: 0 5px 0 4px;
@@ -174,7 +165,7 @@
     display: flex;
     flex-grow: 1;
     justify-content: center;
-    border-right: 2px solid rgb(246 246 246);
+    border-right: 2px solid #F6F6F6;
 }
 
 .resultMarksContainerResultedMark{

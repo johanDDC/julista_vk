@@ -219,7 +219,7 @@ class Auth extends React.Component {
                         <div className="inputInput">
                             <CustomInput id="loginInput"
                                          type="text"
-                                         placeholder="Номер телефона или email"
+                                         placeholder="Логин"
                             />
                         </div>
                     </Div>

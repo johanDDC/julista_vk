@@ -1,3 +1,8 @@
+.View__header *{
+    background-color: #5690ff;
+    color: #ffffff;
+}
+
 * {
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
     font-family: 'Roboto', sans-serif !important;
