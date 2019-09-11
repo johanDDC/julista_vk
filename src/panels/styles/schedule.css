@@ -178,9 +178,66 @@
     color: #5690ff;
 }
 
-
 .modalEmptyElement{
     display: flex;
     width: 100%;
     height: 32px;
+}
+
+#scheduleWeekSwiperLeft:before {
+    width: 100%;
+    height: 40px;
+    border-radius: 0;
+    background-color: #FFF;
+    display: inline-block;
+    content: '';
+}
+
+#scheduleWeekSwiperLeft > .up {
+    position: absolute;
+    background: #5690ff;
+    width: 6px;
+    height: 6px;
+    top: -6px;
+    left: 0;
+    border-radius: 0 0 0 999px;
+}
+
+#scheduleWeekSwiperLeft > .down {
+    position: absolute;
+    background: #5690ff;
+    width: 6px;
+    height: 6px;
+    bottom: -6px;
+    left: 0;
+    border-radius: 999px 0 0 0;
+}
+
+#scheduleWeekSwiperRight:after {
+    width: 100%;
+    height: 40px;
+    border-radius: 0;
+    background-color: #FFF;
+    display: inline-block;
+    content: '';
+}
+
+#scheduleWeekSwiperRight > .up {
+    position: absolute;
+    background: #5690ff;
+    width: 6px;
+    height: 6px;
+    top: -6px;
+    right: 0;
+    border-radius: 0 0 999px 0;
+}
+
+#scheduleWeekSwiperRight > .down {
+    position: absolute;
+    background: #5690ff;
+    width: 6px;
+    height: 6px;
+    bottom: -6px;
+    right: 0;
+    border-radius: 0 999px 0 0;
 }

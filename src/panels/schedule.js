@@ -1,16 +1,13 @@
-import {Div, Button, Panel, PanelHeader, FixedLayout, Gallery,} from '@vkontakte/vkui';
+import {Gallery, Panel, PanelHeader,} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
 import Mark from "../custom_components/mark"
 import CustomSpinner from "../custom_components/customSpinner"
-import {scheduleGetDates, getRusMonthName, schedulePrevWeek, scheduleNextWeek} from "../utils/utils"
+import {getRusMonthName, scheduleGetDates, scheduleNextWeek, schedulePrevWeek} from "../utils/utils"
 import ScheduleWeekBar from "../custom_components/scheduleTopBar"
 import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
 import Icon24BrowserForward from '@vkontakte/icons/dist/24/browser_forward';
-import {getPrevWeek} from "../redux/actions/AppLogicAction";
-
-import SubjectCloseIcon from "../custom_components/icon-pack/SubjectCloseIcon"
 import SubjectHWIcon from "../custom_components/icon-pack/SubjectHWIcon"
 import SubjectRoomIcon from "../custom_components/icon-pack/SubjectRoomIcon"
 
@@ -25,7 +22,7 @@ class Schedule extends React.Component {
         let flag = this.props.appData.journal.data.length === 0;
 
         this.state = {
-            currentDay: (new Date().getDay() <= 6 && new Date().getDay() > 0? new Date().getDay() - 1 : 0),
+            currentDay: (new Date().getDay() <= 6 && new Date().getDay() > 0 ? new Date().getDay() - 1 : 0),
             month: getRusMonthName(this.dayDates[7].getMonth()),
             weekDuration: (!flag ? this.scheduleData.data.days.length : 5),
             ready: !flag,
@@ -89,13 +86,15 @@ class Schedule extends React.Component {
                     subject.marks.forEach(mark => {
                         console.log("mark", mark);
                         marks.push( //Append weight here
-                            <Mark size="24" val={(mark.score ? mark.score.toString() : mark.value.toString())} is_routine={false} fontSize="14"
+                            <Mark size="24" val={(mark.score ? mark.score.toString() : mark.value.toString())}
+                                  is_routine={false} fontSize="14"
                                   weight={(mark.weight ? mark.weight.toString() : "1")}/>
                         );
                         modalMarksPresentation.push(
                             <div className="modalScheduleInfoRow">
                                 <div className="modalScheduleInfoRowLeft">
-                                    <Mark size="22" val={(mark.score ? mark.score.toString() : mark.value.toString())} is_routine={false} fontSize="14"
+                                    <Mark size="22" val={(mark.score ? mark.score.toString() : mark.value.toString())}
+                                          is_routine={false} fontSize="14"
                                           weight={(mark.weight ? mark.weight.toString() : "1")}/>
                                 </div>
                                 <div className="modalScheduleInfoRowText">
@@ -393,9 +392,13 @@ class Schedule extends React.Component {
                 </PanelHeader>
                 {this.drawTopBar()}
                 <div id="scheduleWeekSwiperLeft" onClick={this.prevWeek}>
+                    <div className="up"></div>
+                    <div className="down"></div>
                     <Icon24BrowserBack/>
                 </div>
                 <div id="scheduleWeekSwiperRight" onClick={this.nextWeek}>
+                    <div className="up"></div>
+                    <div className="down"></div>
                     <Icon24BrowserForward/>
                 </div>
                 {
