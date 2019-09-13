@@ -172,12 +172,12 @@ class Marks extends React.Component {
             return (
                 <div className="allMarksContainer" onClick={() => this.props.openModal(modal, subject.name)}>
                     <div className="subjectRow">
-                        <span className="subject">
+                        <div className="subject">
                             {subject.name}
-                        </span>
-                        <span className="avg">
+                        </div>
+                        <div className="avg">
                             {isNaN(avg) ? null : avg}
-                        </span>
+                        </div>
                     </div>
                     <div className="marksRow">
                         {marks}
@@ -262,7 +262,7 @@ class Marks extends React.Component {
 
             return (
                 <Div className="resultMarksContainer">
-                    <span className="resultMarksContainerSubject">{subject.name}</span>
+                    <div className="resultMarksContainerSubject">{subject.name}</div>
                     <div className="resultMarksContainerMarks">
                         {renderedMarks}
                         <div className="resultMarksContainerResultedMark">

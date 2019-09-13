@@ -200,17 +200,19 @@ class Schedule extends React.Component {
                         {subject.number}
                     </div>
                     <div className="scheduleSubjectTaleInfo">
-                        <span className="scheduleSubjectTaleSubjectName">
+                        <div className="scheduleSubjectTaleSubjectName">
                             {subject.name}
-                        </span>
-                        <div className="scheduleSubjectTaleHomework">
-                            {homework}
                         </div>
+                        {homework ?
+                            <div className="scheduleSubjectTaleHomework">
+                                {homework}
+                            </div>
+                            : null}
                         {
                             subject.time ?
-                                <span className="scheduleSubjectTaleTimetable">
+                                <div className="scheduleSubjectTaleTimetable">
                                     {subject.time[0]} - {subject.time[1]}
-                                </span>
+                                </div>
                                 : null
                         }
                     </div>
@@ -396,15 +398,15 @@ class Schedule extends React.Component {
             <Panel id={this.props.id} style={{backgroundColor: "#5690ff"}}>
                 <PanelHeader
                     noShadow>
-                    <span className="scheduleHeaderMonth">{this.state.month}</span>
+                    <div className="scheduleHeaderMonth">{this.state.month}</div>
                 </PanelHeader>
                 {this.drawTopBar()}
                 <div id="scheduleWeekSwiperLeft" onClick={this.prevWeek}>
                     <div className="up"></div>
                     <div className="down"></div>
-                    <span style={{transform: "scaleX(-1)"}}>
+                    <div style={{transform: "scaleX(-1)"}}>
                         <Icon24Chevron/>
-                    </span>
+                    </div>
                 </div>
                 <div id="scheduleWeekSwiperRight" onClick={this.nextWeek}>
                     <div className="up"></div>
