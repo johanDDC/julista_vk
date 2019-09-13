@@ -185,6 +185,8 @@
     background-color: #FFF;
     display: inline-block;
     content: '';
+
+    margin-left: -28px;
 }
 
 #scheduleWeekSwiperLeft > .up {
@@ -214,6 +216,8 @@
     background-color: #FFF;
     display: inline-block;
     content: '';
+
+    margin-right: -27px;
 }
 
 #scheduleWeekSwiperRight > .up {

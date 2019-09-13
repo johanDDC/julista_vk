@@ -16,50 +16,48 @@ class SettingsView extends React.Component {
             popout: null,
         };
 
-        const osname = platform();
-
-        this.choise =
-            <ActionSheet
-                onClose={() => this.setState({popout: null})}
-                title="Выбери желаемую оценку"
-            >
-                <ActionSheetItem autoclose onClick={() => {
-                    this.props.setMarkAction(5)
-                }}>
-                    <div className="markChooseLabelContainer">
-                        <div className="markChooseMarkContainer">
-                            <Mark size="28" val="5" is_routine={false}/>
-                        </div>
-                        <span className="markChooseLabel">Всегда стремись к лучшему :)</span>
-                    </div>
-                </ActionSheetItem>
-                <ActionSheetItem autoclose onClick={() => {
-                    this.props.setMarkAction(4)
-                }}>
-                    <div className="markChooseLabelContainer">
-                        <div className="markChooseMarkContainer">
-                            <Mark size="28" val="4" is_routine={false}/>
-                        </div>
-                        <span className="markChooseLabel">Адекватно оценивай свои возможности ;)</span>
-                    </div>
-                </ActionSheetItem>
-                <ActionSheetItem autoclose onClick={() => {
-                    this.props.setMarkAction(3)
-                }}>
-                    <div className="markChooseLabelContainer">
-                        <div className="markChooseMarkContainer">
-                            <Mark size="28" val="3" is_routine={false}/>
-                        </div>
-                        <span className="markChooseLabel">Никогда не отчаивайся</span>
-                    </div>
-                </ActionSheetItem>
-                {osname === IOS && <ActionSheetItem autoclose theme="cancel">Cancel</ActionSheetItem>}
-            </ActionSheet>
-        ;
+        this.osname = platform();
     }
 
     chooseMark = () => {
-        this.setState({popout: this.choise})
+        this.setState({popout:
+                <ActionSheet
+                    onClose={() => this.setState({popout: null})}
+                    title="Выбери желаемую оценку"
+                >
+                    <ActionSheetItem autoclose onClick={() => {
+                        this.props.setMarkAction(5)
+                    }}>
+                        <div className="markChooseLabelContainer">
+                            <div className="markChooseMarkContainer">
+                                <Mark size="28" val="5" is_routine={false}/>
+                            </div>
+                            <span className="markChooseLabel">Всегда стремись к лучшему :)</span>
+                        </div>
+                    </ActionSheetItem>
+                    <ActionSheetItem autoclose onClick={() => {
+                        this.props.setMarkAction(4)
+                    }}>
+                        <div className="markChooseLabelContainer">
+                            <div className="markChooseMarkContainer">
+                                <Mark size="28" val="4" is_routine={false}/>
+                            </div>
+                            <span className="markChooseLabel">Адекватно оценивай свои возможности ;)</span>
+                        </div>
+                    </ActionSheetItem>
+                    <ActionSheetItem autoclose onClick={() => {
+                        this.props.setMarkAction(3)
+                    }}>
+                        <div className="markChooseLabelContainer">
+                            <div className="markChooseMarkContainer">
+                                <Mark size="28" val="3" is_routine={false}/>
+                            </div>
+                            <span className="markChooseLabel">Никогда не отчаивайся</span>
+                        </div>
+                    </ActionSheetItem>
+                    {this.osname === IOS && <ActionSheetItem autoclose theme="cancel">Cancel</ActionSheetItem>}
+                </ActionSheet>
+        })
     };
 
     render() {

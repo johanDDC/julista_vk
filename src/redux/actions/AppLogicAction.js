@@ -3,6 +3,8 @@ import {getStartDateForLastMarks, setCorrectYear} from "../../utils/utils"
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/";
 
+let normalTimeout = 100;
+
 export function getJournal(id, secret, start, end, student_id) {
     // axios.post("http://bklet.ml/api/auth/bind_account/vk/",
     //     {
@@ -101,7 +103,7 @@ function getAndAggregateMarks(id, secret, student_id, dispatcher) {
             type: "GET_MARKS_FAIL",
             data: Error("end timeout")
         })
-    }, 10000);
+    }, normalTimeout);
     intervalId = setInterval(() => {
         axios.get(baseUrl + methodUrl + queries)
             .then((response) => {
@@ -153,7 +155,7 @@ function getLMarks(id, secret, student_id, dispatcher) {
             type: "GET_LAST_MARKS_FAIL",
             data: Error("end timeout")
         })
-    }, 10000);
+    }, normalTimeout);
     intervalId = setInterval(() => {
         axios.get(baseUrl + methodUrl + queries)
             .then((response) => {

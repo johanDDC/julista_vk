@@ -7,7 +7,7 @@ import SettingsNotificationsIcon from "../custom_components/icon-pack/SettingsNo
 import DarkThemeIcon from "../custom_components/icon-pack/DarkThemeIcon"
 import Mark from "../custom_components/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
-import connect from '@vkontakte/vkui-connect';
+import connect from '@vkontakte/vk-connect-promise';
 
 class Settings extends React.Component {
     constructor(props) {
@@ -15,6 +15,7 @@ class Settings extends React.Component {
 
         this.state = {
             tooltip: false,
+            ready: false,
         };
 
         this.settings = (localStorage.getItem("appSettings") ? JSON.parse(localStorage.getItem("appSettings")) : null)
@@ -33,12 +34,23 @@ class Settings extends React.Component {
         if (this.settings.notifications) {
             connect.send("VKWebAppDenyNotifications", {})
                 .then(answer => {
-                    this.settings.notifications = false
+                    this.settings.notifications = false;
+                    document.getElementById("settingsNotificationsSwitcher").
+                        _valueTracker.setValue("false");
+                    this.setState({ready : !this.state.ready})
+                })
+                .catch(err => {
+                    document.getElementById("settingsNotificationsSwitcher").
+                        _valueTracker.setValue("true");
+                    this.setState({ready : !this.state.ready})
                 });
         } else {
             connect.send("VKWebAppAllowNotifications", {})
                 .then(answer => {
                     this.settings.notifications = true;
+                    document.getElementById("settingsNotificationsSwitcher").
+                        _valueTracker.setValue("true");
+                    this.setState({ready : !this.state.ready})
                 })
         }
         localStorage.setItem("appSettings", JSON.stringify(this.settings))
@@ -94,7 +106,8 @@ class Settings extends React.Component {
                             Уведомления
                         </span>
                             <span>
-                            <Switch className="settingsSettingSwitcher" id="settingsNotificationsSwitcher"
+                                <Switch className="settingsSettingSwitcher" id="settingsNotificationsSwitcher"
+                                        getRef={(ref) => console.log("ref", ref)}
                                     onChange={this.askForNotifications}/>
                         </span>
                         </div>

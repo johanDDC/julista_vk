@@ -8,8 +8,11 @@ import {getRusMonthName, scheduleGetDates, scheduleNextWeek, schedulePrevWeek} f
 import ScheduleWeekBar from "../custom_components/scheduleTopBar"
 import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
 import Icon24BrowserForward from '@vkontakte/icons/dist/24/browser_forward';
+import Icon24Chevron from '@vkontakte/icons/dist/24/chevron';
 import SubjectHWIcon from "../custom_components/icon-pack/SubjectHWIcon"
 import SubjectRoomIcon from "../custom_components/icon-pack/SubjectRoomIcon"
+import SwipeLeftWeek from "../custom_components/icon-pack/SwipeLeftWeek"
+import SwipeRightWeek from "../custom_components/icon-pack/SwipeRightWeek"
 
 
 class Schedule extends React.Component {
@@ -399,12 +402,14 @@ class Schedule extends React.Component {
                 <div id="scheduleWeekSwiperLeft" onClick={this.prevWeek}>
                     <div className="up"></div>
                     <div className="down"></div>
-                    <Icon24BrowserBack/>
+                    <span style={{transform: "scaleX(-1)"}}>
+                        <Icon24Chevron/>
+                    </span>
                 </div>
                 <div id="scheduleWeekSwiperRight" onClick={this.nextWeek}>
                     <div className="up"></div>
                     <div className="down"></div>
-                    <Icon24BrowserForward/>
+                    <Icon24Chevron/>
                 </div>
                 {
                     (this.state.ready ? this.drawShedule() : this.drawSpinner())
