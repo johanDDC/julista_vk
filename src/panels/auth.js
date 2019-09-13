@@ -178,8 +178,19 @@ class Auth extends React.Component {
         axios.get(`https://bklet.ml/api/auth/get_data/?region=${this.region}&province=${this.province}&city=${this.city}`)
             .then(school_resp => {
                 school_resp.data.data.forEach(school => {
+                    let name = school.name.replace("МБОУ ", "");
+                    name = name.replace("НОУ ", "");
+                    name = name.replace("ЧОУ ", "");
+                    name = name.replace("ГКОУКО ", "");
+                    name = name.replace("ГКУ ", "");
+                    name = name.replace("ГБУКО ", "");
+                    name = name.replace("ГКУКО ", "");
+                    name = name.replace("АНО ", "");
+                    name = name.replace("СОШ", "Школа");
+                    name = name.replace("\"Средняя общеобразовательная школа",
+                        "Школа").replace("\"", "");
                     options.push(
-                        <option value={school.id}>{school.name}</option>
+                        <option value={school.id}>{name}</option>
                     )
                 });
                 console.log("lalalala", options);
@@ -269,20 +280,22 @@ class Auth extends React.Component {
                     <Div>
             <span className="annotate">Нажимая войти, вы соглашаетесь на обработку, хранение, передачу ваших персональных данных.
                 <br/>
-                <Link href="https://google.com" target="_blank">Регламент</Link> и <Link href="https://google.com"
-                                                                                         target="_blank">политика конфиденциальности</Link></span>
+                <Link href="https://docs.google.com/document/d/1BjSTb_bgwHermREHdZlcwTDf6WowADiHIrjcDSC24OI"
+                      target="_blank">Регламент</Link> и <Link
+                    href="https://docs.google.com/document/d/1Pt5dvKHB8404oGnpd8rVi7yVmsjM5P0hIPBV9FnrQuQ"
+                    target="_blank">политика конфиденциальности</Link></span>
                     </Div>
-                    <Div className="restorePassword">
-                        <div className="inputIcon" style={{margin: 0}}>
-                            <AuthRestore/>
-                        </div>
-                        <div>Забыли данные учетной записи?
-                                <Link
-                                    href="https://google.com"
-                                    target="_blank"
-                                    className="restoreLink">Восстановить</Link>
-                            </div>
-                    </Div>
+                    {/*<Div className="restorePassword">*/}
+                    {/*    <div className="inputIcon" style={{margin: 0}}>*/}
+                    {/*        <AuthRestore/>*/}
+                    {/*    </div>*/}
+                    {/*    <div>Забыли данные учетной записи?*/}
+                    {/*            <Link*/}
+                    {/*                href="https://google.com"*/}
+                    {/*                target="_blank"*/}
+                    {/*                className="restoreLink">Восстановить</Link>*/}
+                    {/*        </div>*/}
+                    {/*</Div>*/}
                     <Div>
                         <Button level="tertiary" className="getInButton"
                                 onClick={this.buttonClick}>

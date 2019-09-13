@@ -31,29 +31,30 @@ class Settings extends React.Component {
         if (!this.settings) {
             this.settings = {};
         }
-        if (this.settings.notifications) {
+        let switcher = document.getElementById("settingsNotificationsSwitcher");
+        if (this.settings.notifications && switcher._valueTracker.getValue()) {
             connect.send("VKWebAppDenyNotifications", {})
                 .then(answer => {
                     this.settings.notifications = false;
-                    document.getElementById("settingsNotificationsSwitcher").
-                        _valueTracker.setValue("false");
-                    this.setState({ready : !this.state.ready})
+                    switcher._valueTracker.setValue(false);
+                    this.setState({ready : true})
                 })
                 .catch(err => {
                     document.getElementById("settingsNotificationsSwitcher").
-                        _valueTracker.setValue("true");
-                    this.setState({ready : !this.state.ready})
+                        _valueTracker.setValue(true);
+                    this.setState({ready : true});
                 });
         } else {
             connect.send("VKWebAppAllowNotifications", {})
                 .then(answer => {
                     this.settings.notifications = true;
                     document.getElementById("settingsNotificationsSwitcher").
-                        _valueTracker.setValue("true");
-                    this.setState({ready : !this.state.ready})
+                        _valueTracker.setValue(true);
+                    this.setState({ready : true});
                 })
         }
-        localStorage.setItem("appSettings", JSON.stringify(this.settings))
+        localStorage.setItem("appSettings", JSON.stringify(this.settings));
+        this.setState({ready : false});
     };
 
     render() {
@@ -74,7 +75,7 @@ class Settings extends React.Component {
                             <span className="settingsSettingTitle" style={{color: "#5181b8"}}>
                                 <Link
                                     href="https://vk.com/bklet/"
-                                    target="_blank">
+                                    target="_self">
                                     Группа ВК
                                 </Link>
                             </span>

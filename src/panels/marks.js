@@ -118,6 +118,7 @@ class Marks extends React.Component {
                         <Mark size="16" val={mark.value.toString()} is_routine={true} fontSize="12"/>
                     </div>
                 );
+                console.log("modal mark", mark);
                 marksModal.push(
                     <div className="modalMarkMarksInfo">
                         <div className="modalMarkMarksInfoLeft">
@@ -126,13 +127,13 @@ class Marks extends React.Component {
                         </div>
                         <div className="modalMarkMarksInfoContainer">
                             <div className="modalMarkMarksInfoForm">
-                                {mark.form}
+                                {mark.form ? mark.form : null}
                             </div>
                             <div className="modalMarkMarksInfoName">
-                                {mark.name}
+                                {mark.name ? mark.name : null}
                             </div>
                             <div className="modalMarkMarksInfoDate">
-                                14 никогдабря
+                                {mark.date ? mark.date : null}
                             </div>
                         </div>
                     </div>
@@ -167,6 +168,8 @@ class Marks extends React.Component {
                         Оценки
                     </div>
                     {marksModal}
+                    <div className="modalEmptyElement">
+                    </div>
                 </div>
             );
             return (
