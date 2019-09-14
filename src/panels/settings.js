@@ -32,18 +32,8 @@ class Settings extends React.Component {
             this.settings = {};
         }
         let switcher = document.getElementById("settingsNotificationsSwitcher");
-        if (this.settings.notifications && switcher._valueTracker.getValue()) {
-            connect.send("VKWebAppDenyNotifications", {})
-                .then(answer => {
-                    this.settings.notifications = false;
-                    switcher._valueTracker.setValue(false);
-                    this.setState({ready : true})
-                })
-                .catch(err => {
-                    document.getElementById("settingsNotificationsSwitcher").
-                        _valueTracker.setValue(true);
-                    this.setState({ready : true});
-                });
+        if (this.settings.notifications && switcher._valueTracker.getValue() === "true") {
+            this.settings.notifications = false;
         } else {
             connect.send("VKWebAppAllowNotifications", {})
                 .then(answer => {
@@ -65,62 +55,61 @@ class Settings extends React.Component {
                 </PanelHeader>
                 <div className="groupSettingsContainer">
                     <div className="settingsTitleContainer">
-                        <span className="settingsTitle">
+                        <div className="settingsTitle">
                             Ссылки
-                        </span>
+                        </div>
                     </div>
                     <Button level="tertiary" className="settingsSettingContainer">
                         <VKSettingsIcon/>
                         <div className="settingsSettingInfo">
-                            <span className="settingsSettingTitle" style={{color: "#5181b8"}}>
+                            <div className="settingsSettingTitle" style={{color: "#5181b8"}}>
                                 <Link
                                     href="https://vk.com/bklet/"
-                                    target="_self">
+                                    target="_parent">
                                     Группа ВК
                                 </Link>
-                            </span>
-                            <span className="settingsSettingSwitch">
-                        </span>
+                            </div>
+                            <div className="settingsSettingSwitch">
+                        </div>
                         </div>
                     </Button>
                 </div>
                 <div className="groupSettingsContainer">
                     <div className="settingsTitleContainer">
-                        <span className="settingsTitle">
+                        <div className="settingsTitle">
                             Дневник
-                        </span>
+                        </div>
                     </div>
                     <Button level="tertiary" className="settingsSettingContainer" onClick={this.props.chooseMark}>
                         <div style={{width: "24px"}}>
                             <Mark size="28" val={this.props.expectedMark.toString()} is_routine={false}/>
                         </div>
                         <div className="settingsSettingInfo">
-                        <span className="settingsSettingTitle">
+                        <div className="settingsSettingTitle">
                             Желаемая оценка
-                        </span>
+                        </div>
                         </div>
                     </Button>
                     <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}>
                         <SettingsNotificationsIcon/>
                         <div className="settingsSettingInfo">
-                        <span className="settingsSettingTitle">
+                        <div className="settingsSettingTitle">
                             Уведомления
-                        </span>
-                            <span>
+                        </div>
+                            <div>
                                 <Switch className="settingsSettingSwitcher" id="settingsNotificationsSwitcher"
-                                        getRef={(ref) => console.log("ref", ref)}
                                     onChange={this.askForNotifications}/>
-                        </span>
+                        </div>
                         </div>
                     </div>
                     <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}
                          onClick={() => this.setState({tooltip: true})}>
                         <DarkThemeIcon/>
                         <div className="settingsSettingInfo">
-                        <span className="settingsSettingTitle">
+                        <div className="settingsSettingTitle">
                             Тёмная тема
-                        </span>
-                            <span>
+                        </div>
+                            <div>
                             <Tooltip
                                 text="Обязательно появится в релизе :)"
                                 isShown={this.state.tooltip}
@@ -131,7 +120,7 @@ class Settings extends React.Component {
                             >
                                 <Switch className="settingsSettingSwitcher" disabled/>
                             </Tooltip>
-                        </span>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -140,9 +129,9 @@ class Settings extends React.Component {
                             onClick={this.signOut}>
                         <GetOutIcon/>
                         <div className="settingsSettingInfo">
-                        <span className="settingsSettingTitle" style={{color: "#ff4939", fontWeight: "bold"}}>
+                        <div className="settingsSettingTitle" style={{color: "#ff4939", fontWeight: "bold"}}>
                             Выйти
-                        </span>
+                        </div>
                         </div>
                     </Button>
                 </div>

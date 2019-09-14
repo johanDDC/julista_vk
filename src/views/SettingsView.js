@@ -32,7 +32,7 @@ class SettingsView extends React.Component {
                             <div className="markChooseMarkContainer">
                                 <Mark size="28" val="5" is_routine={false}/>
                             </div>
-                            <span className="markChooseLabel">Всегда стремись к лучшему :)</span>
+                            <div className="markChooseLabel">Всегда стремись к лучшему =)</div>
                         </div>
                     </ActionSheetItem>
                     <ActionSheetItem autoclose onClick={() => {
@@ -42,7 +42,7 @@ class SettingsView extends React.Component {
                             <div className="markChooseMarkContainer">
                                 <Mark size="28" val="4" is_routine={false}/>
                             </div>
-                            <span className="markChooseLabel">Адекватно оценивай свои возможности ;)</span>
+                            <div className="markChooseLabel">Правильно оценивай свои силы ;)</div>
                         </div>
                     </ActionSheetItem>
                     <ActionSheetItem autoclose onClick={() => {
@@ -52,7 +52,7 @@ class SettingsView extends React.Component {
                             <div className="markChooseMarkContainer">
                                 <Mark size="28" val="3" is_routine={false}/>
                             </div>
-                            <span className="markChooseLabel">Никогда не отчаивайся</span>
+                            <div className="markChooseLabel">Никогда не отчаивайся!</div>
                         </div>
                     </ActionSheetItem>
                     {this.osname === IOS && <ActionSheetItem autoclose theme="cancel">Cancel</ActionSheetItem>}
@@ -62,7 +62,8 @@ class SettingsView extends React.Component {
 
     render() {
         return (
-            <View activePanel={(this.props.activePanel === "auth" ? "settings" : this.props.activePanel)} popout={this.state.popout}>
+            <View activePanel={(this.props.activePanel === "auth" ? "settings" : this.props.activePanel)}
+                  popout={this.state.popout}>
                 <Settings id="settings"
                           expectedMark={this.props.expectedMark}
                           chooseMark={this.chooseMark}

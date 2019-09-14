@@ -232,7 +232,10 @@ class Schedule extends React.Component {
             subjectTales.push(sbj)
         });
 
-        subjectTales.push(<div className="scheduleSubjectLastChild"></div>);
+        subjectTales.push(
+            <div className="scheduleSubjectLastChild">
+            </div>
+        );
 
         return (
             <div className="scheduleTale">
