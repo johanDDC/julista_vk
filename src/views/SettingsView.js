@@ -28,32 +28,17 @@ class SettingsView extends React.Component {
                     <ActionSheetItem autoclose onClick={() => {
                         this.props.setMarkAction(5)
                     }}>
-                        <div className="markChooseLabelContainer">
-                            <div className="markChooseMarkContainer">
-                                <Mark size="28" val="5" is_routine={false}/>
-                            </div>
-                            <div className="markChooseLabel">Всегда стремись к лучшему =)</div>
-                        </div>
+                        "5" — Всегда стремись к лучшему =)
                     </ActionSheetItem>
                     <ActionSheetItem autoclose onClick={() => {
                         this.props.setMarkAction(4)
                     }}>
-                        <div className="markChooseLabelContainer">
-                            <div className="markChooseMarkContainer">
-                                <Mark size="28" val="4" is_routine={false}/>
-                            </div>
-                            <div className="markChooseLabel">Правильно оценивай свои силы ;)</div>
-                        </div>
+                        "4" — Правильно оценивай свои силы ;)
                     </ActionSheetItem>
                     <ActionSheetItem autoclose onClick={() => {
                         this.props.setMarkAction(3)
                     }}>
-                        <div className="markChooseLabelContainer">
-                            <div className="markChooseMarkContainer">
-                                <Mark size="28" val="3" is_routine={false}/>
-                            </div>
-                            <div className="markChooseLabel">Никогда не отчаивайся!</div>
-                        </div>
+                        "3" — Никогда не отчаивайся!
                     </ActionSheetItem>
                     {this.osname === IOS && <ActionSheetItem autoclose theme="cancel">Cancel</ActionSheetItem>}
                 </ActionSheet>

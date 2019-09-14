@@ -88,9 +88,11 @@ class Schedule extends React.Component {
                     subject.marks.forEach(mark => {
                         console.log("mark", mark);
                         marks.push( //Append weight here
+                            <div style={{marginRight: "4px"}}>
                             <Mark size="24" val={(mark.score ? mark.score.toString() : mark.value.toString())}
                                   is_routine={false} fontSize="14"
                                   weight={(mark.weight ? mark.weight.toString() : "1")}/>
+                            </div>
                         );
                         modalMarksPresentation.push(
                             <div className="modalScheduleInfoRow">

@@ -72,7 +72,7 @@ class Settings extends React.Component {
                             <div className="settingsSettingTitle" style={{color: "#5181b8"}}>
                                 <Link
                                     href="https://vk.com/bklet/"
-                                    target="_parent">
+                                    target="_top">
                                     Группа ВК
                                 </Link>
                             </div>
