@@ -136,7 +136,7 @@ class Settings extends React.Component {
                             onClick={this.signOut}>
                         <GetOutIcon/>
                         <div className="settingsSettingInfo">
-                            <div className="settingsSettingTitle" style={{color: "#ff4939", fontWeight: "bold"}}>
+                            <div className="settingsSettingTitle" style={{color: "#ff4939"}}>
                                 Выйти
                             </div>
                         </div>
