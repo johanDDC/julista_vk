@@ -15,7 +15,6 @@ class Settings extends React.Component {
 
         this.state = {
             tooltip: false,
-            ready: false,
         };
 
         this.settings = (localStorage.getItem("appSettings") ? JSON.parse(localStorage.getItem("appSettings")) : null)
@@ -31,20 +30,28 @@ class Settings extends React.Component {
         if (!this.settings) {
             this.settings = {};
         }
-        let switcher = document.getElementById("settingsNotificationsSwitcher");
-        if (this.settings.notifications && switcher._valueTracker.getValue() === "true") {
+        let vk_info = window.location.search.slice(1).split('&')
+            .map((queryParam) => {
+                let kvp = queryParam.split('=');
+                return {key: kvp[0], value: kvp[1]}
+            })
+            .reduce((query, kvp) => {
+                query[kvp.key] = decodeURIComponent(kvp.value);
+                return query
+            }, {});
+        if (this.settings.notifications) {
             this.settings.notifications = false;
         } else {
-            connect.send("VKWebAppAllowNotifications", {})
-                .then(answer => {
-                    this.settings.notifications = true;
-                    document.getElementById("settingsNotificationsSwitcher").
-                        _valueTracker.setValue(true);
-                    this.setState({ready : true});
-                })
+            console.log("vk info", vk_info, vk_info.vk_are_notifications_enabled);
+            if (vk_info.vk_are_notifications_enabled === 0) {
+                connect.send("VKWebAppAllowNotifications", {})
+                    .then(answer => {
+
+                    })
+            }
+            this.settings.notifications = true;
         }
         localStorage.setItem("appSettings", JSON.stringify(this.settings));
-        this.setState({ready : false});
     };
 
     render() {
@@ -70,7 +77,7 @@ class Settings extends React.Component {
                                 </Link>
                             </div>
                             <div className="settingsSettingSwitch">
-                        </div>
+                            </div>
                         </div>
                     </Button>
                 </div>
@@ -85,42 +92,42 @@ class Settings extends React.Component {
                             <Mark size="28" val={this.props.expectedMark.toString()} is_routine={false}/>
                         </div>
                         <div className="settingsSettingInfo">
-                        <div className="settingsSettingTitle">
-                            Желаемая оценка
-                        </div>
+                            <div className="settingsSettingTitle">
+                                Желаемая оценка
+                            </div>
                         </div>
                     </Button>
                     <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}>
                         <SettingsNotificationsIcon/>
                         <div className="settingsSettingInfo">
-                        <div className="settingsSettingTitle">
-                            Уведомления
-                        </div>
+                            <div className="settingsSettingTitle">
+                                Уведомления
+                            </div>
                             <div>
                                 <Switch className="settingsSettingSwitcher" id="settingsNotificationsSwitcher"
-                                    onChange={this.askForNotifications}/>
-                        </div>
+                                        onChange={this.askForNotifications}/>
+                            </div>
                         </div>
                     </div>
                     <div className="settingsSettingContainer" style={{paddingRight: "-16px"}}
                          onClick={() => this.setState({tooltip: true})}>
                         <DarkThemeIcon/>
                         <div className="settingsSettingInfo">
-                        <div className="settingsSettingTitle">
-                            Тёмная тема
-                        </div>
+                            <div className="settingsSettingTitle">
+                                Тёмная тема
+                            </div>
                             <div>
-                            <Tooltip
-                                text="Обязательно появится в релизе :)"
-                                isShown={this.state.tooltip}
-                                onClose={() => this.setState({tooltip: false})}
-                                offsetX={-50}
-                                offsetY={5}
-                                cornerOffset={55}
-                            >
-                                <Switch className="settingsSettingSwitcher" disabled/>
-                            </Tooltip>
-                        </div>
+                                <Tooltip
+                                    text="Обязательно появится в релизе :)"
+                                    isShown={this.state.tooltip}
+                                    onClose={() => this.setState({tooltip: false})}
+                                    offsetX={-50}
+                                    offsetY={5}
+                                    cornerOffset={55}
+                                >
+                                    <Switch className="settingsSettingSwitcher" disabled/>
+                                </Tooltip>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,9 +136,9 @@ class Settings extends React.Component {
                             onClick={this.signOut}>
                         <GetOutIcon/>
                         <div className="settingsSettingInfo">
-                        <div className="settingsSettingTitle" style={{color: "#ff4939", fontWeight: "bold"}}>
-                            Выйти
-                        </div>
+                            <div className="settingsSettingTitle" style={{color: "#ff4939", fontWeight: "bold"}}>
+                                Выйти
+                            </div>
                         </div>
                     </Button>
                 </div>
