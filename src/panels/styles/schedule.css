@@ -23,7 +23,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: calc(100% - 32px);
     min-height: 56px;
 }
 
@@ -42,11 +41,17 @@
 }
 
 .scheduleSubjectTaleInfo {
+    width: calc(90% - 55px);
     padding: 8px 0 8px 0;
 }
 
 .scheduleSubjectTaleMarks {
-    display: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 17px;
+    width: 10%;
 }
 
 .scheduleSubjectTaleSubjectName {
