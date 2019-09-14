@@ -1,4 +1,4 @@
-import {Gallery, Panel, PanelHeader,} from '@vkontakte/vkui';
+import {Gallery, Panel, PanelHeader, Div} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
@@ -89,9 +89,9 @@ class Schedule extends React.Component {
                         console.log("mark", mark);
                         marks.push( //Append weight here
                             <div style={{marginRight: "4px"}}>
-                            <Mark size="24" val={(mark.score ? mark.score.toString() : mark.value.toString())}
-                                  is_routine={false} fontSize="14"
-                                  weight={(mark.weight ? mark.weight.toString() : "1")}/>
+                                <Mark size="24" val={(mark.score ? mark.score.toString() : mark.value.toString())}
+                                      is_routine={false} fontSize="14"
+                                      weight={(mark.weight ? mark.weight.toString() : "1")}/>
                             </div>
                         );
                         modalMarksPresentation.push(
@@ -197,31 +197,33 @@ class Schedule extends React.Component {
             );
 
             return (
-                <div className="scheduleSubjectTale" onClick={() => this.props.openModal(modal, subject.name)}>
-                    <div className="scheduleSubjectTaleNumber">
-                        {subject.number}
-                    </div>
-                    <div className="scheduleSubjectTaleInfo">
-                        <div className="scheduleSubjectTaleSubjectName">
-                            {subject.name}
+                <Div className="scheduleSubjectTaleContainer">
+                    <div className="scheduleSubjectTale" onClick={() => this.props.openModal(modal, subject.name)}>
+                        <div className="scheduleSubjectTaleNumber">
+                            {subject.number}
                         </div>
-                        {homework ?
-                            <div className="scheduleSubjectTaleHomework">
-                                {homework}
+                        <div className="scheduleSubjectTaleInfo">
+                            <div className="scheduleSubjectTaleSubjectName">
+                                {subject.name}
                             </div>
-                            : null}
-                        {
-                            subject.time ?
-                                <div className="scheduleSubjectTaleTimetable">
-                                    {subject.time[0]} - {subject.time[1]}
+                            {homework ?
+                                <div className="scheduleSubjectTaleHomework">
+                                    {homework}
                                 </div>
-                                : null
-                        }
+                                : null}
+                            {
+                                subject.time ?
+                                    <div className="scheduleSubjectTaleTimetable">
+                                        {subject.time[0]} - {subject.time[1]}
+                                    </div>
+                                    : null
+                            }
+                        </div>
+                        <div className="scheduleSubjectTaleMarks">
+                            {marks}
+                        </div>
                     </div>
-                    <div className="scheduleSubjectTaleMarks">
-                        {marks}
-                    </div>
-                </div>
+                </Div>
             )
         };
 
