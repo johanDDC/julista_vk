@@ -80,6 +80,8 @@ class Marks extends React.Component {
     };
 
     drawTabsItem = () => {
+        document.getElementsByTagName("section")[0].style.overflowY = "scroll";
+        document.getElementsByTagName("section")[0].style.overflowX = "hidden";
         if (this.marksData.data[0]) {
             let periods = this.marksData.data[0].periods.length;
             this.tabsItems = [];

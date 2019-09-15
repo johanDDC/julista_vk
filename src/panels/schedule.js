@@ -285,32 +285,37 @@ class Schedule extends React.Component {
 
     drawShedule = () => {
         document.getElementsByTagName("section")[0].style.overflow = "hidden";
+        if (this.state.currentDay === 0)
+            document.getElementById("scheduleWeekSwiperLeft")
+                .style.display = "flex";
+        else
+            document.getElementById("scheduleWeekSwiperLeft")
+                .style.display = "none";
+        if (this.state.currentDay >= this.state.weekDuration - 1)
+            document.getElementById("scheduleWeekSwiperRight")
+                .style.display = "flex";
+        else
+            document.getElementById("scheduleWeekSwiperRight")
+                .style.display = "none";
+
+        if (this.state.weekDuration === 6)
+            document.querySelector(".Gallery__slide:last-child").style.width = "50px";
         return (
             <Gallery
                 slideWidth="100%"
                 className="scheduleSliderContainer"
                 slideIndex={this.state.currentDay}
                 onChange={slideIndex => {
+                    // this.setState({
+                    //     currentDay: (slideIndex >= (this.state.weekDuration < 5 ?
+                    //         5 :
+                    //         this.state.weekDuration) ? slideIndex - 1 : slideIndex)
+                    // });
                     this.setState({
-                        currentDay: (slideIndex >= (this.state.weekDuration < 5 ?
-                            5 :
-                            this.state.weekDuration) ? slideIndex - 1 : slideIndex)
+                        currentDay: (slideIndex >= this.state.weekDuration
+                            ? slideIndex - 1
+                            : slideIndex)
                     });
-                    if (slideIndex === 0)
-                        document.getElementById("scheduleWeekSwiperLeft")
-                            .style.display = "flex";
-                    else
-                        document.getElementById("scheduleWeekSwiperLeft")
-                            .style.display = "none";
-                    if (slideIndex >= (this.state.weekDuration < 5 ? 4 : this.state.weekDuration - 1))
-                        document.getElementById("scheduleWeekSwiperRight")
-                            .style.display = "flex";
-                    else
-                        document.getElementById("scheduleWeekSwiperRight")
-                            .style.display = "none";
-
-                    if (this.state.weekDuration === 6)
-                        document.querySelector(".Gallery__slide:last-child").style.width = "50px";
                 }}
             >
                 {this.generateSchedule()}
@@ -335,8 +340,6 @@ class Schedule extends React.Component {
         });
         document.getElementById("scheduleWeekSwiperLeft")
             .style.display = "none";
-        document.getElementById("scheduleWeekSwiperRight")
-            .style.display = "flex";
 
         let id = setInterval(() => {
                 if (this.props.appData.error) {
@@ -376,8 +379,6 @@ class Schedule extends React.Component {
         });
         document.getElementById("scheduleWeekSwiperRight")
             .style.display = "none";
-        document.getElementById("scheduleWeekSwiperLeft")
-            .style.display = "flex";
 
         let id = setInterval(() => {
             if (this.props.appData.error) {
