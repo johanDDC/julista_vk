@@ -3,7 +3,9 @@ import {View, ActionSheet, ActionSheetItem, platform, IOS} from '@vkontakte/vkui
 import Settings from '../panels/settings'
 import {connect} from "react-redux";
 import {setMark} from "../redux/actions/expectedMarkAction";
-import Mark from "../custom_components/mark"
+import PurposeMarkFive from "../custom_components/icon-pack/PurposeMarkFive"
+import PurposeMarkFour from "../custom_components/icon-pack/PurposeMarkFour"
+import PurposeMarkThree from "../custom_components/icon-pack/PurposeMarkThree"
 import "./styles/Settings.css"
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
@@ -20,25 +22,32 @@ class SettingsView extends React.Component {
     }
 
     chooseMark = () => {
-        this.setState({popout:
+        this.setState({
+            popout:
                 <ActionSheet
                     onClose={() => this.setState({popout: null})}
                     title="Выбери желаемую оценку"
                 >
-                    <ActionSheetItem autoclose onClick={() => {
-                        this.props.setMarkAction(5)
-                    }}>
-                        "5" — Всегда стремись к лучшему =)
+                    <ActionSheetItem autoclose
+                                     onClick={() => {
+                                         this.props.setMarkAction(5)
+                                     }}
+                                     before={<PurposeMarkFive/>}>
+                        Всегда стремись к лучшему =)
                     </ActionSheetItem>
-                    <ActionSheetItem autoclose onClick={() => {
-                        this.props.setMarkAction(4)
-                    }}>
-                        "4" — Правильно оценивай свои силы ;)
+                    <ActionSheetItem autoclose
+                                     onClick={() => {
+                                         this.props.setMarkAction(4)
+                                     }}
+                                     before={<PurposeMarkFour/>}>
+                        Правильно оценивай свои силы ;)
                     </ActionSheetItem>
-                    <ActionSheetItem autoclose onClick={() => {
-                        this.props.setMarkAction(3)
-                    }}>
-                        "3" — Никогда не отчаивайся!
+                    <ActionSheetItem autoclose
+                                     onClick={() => {
+                                         this.props.setMarkAction(3)
+                                     }}
+                                     before={<PurposeMarkThree/>}>
+                        Никогда не отчаивайся!
                     </ActionSheetItem>
                     {this.osname === IOS && <ActionSheetItem autoclose theme="cancel">Cancel</ActionSheetItem>}
                 </ActionSheet>

@@ -247,7 +247,7 @@ class Schedule extends React.Component {
     generateEmptyTale = () => {
         return (
             <div className="scheduleTale">
-                <p>Сегодня нет занятий</p>
+                <p style={{textAlign: "center"}}>Сегодня нет занятий</p>
             </div>
         )
     };
@@ -403,17 +403,17 @@ class Schedule extends React.Component {
     };
 
     render() {
-        if (JSON.parse(localStorage.getItem("appSettings")).isFavorite !== null) {
-            connect.send("VKWebAppAddToFavorites", {})
-                .then(res => {
-                    localStorage.setItem("appSettings",
-                        JSON.stringify(
-                            JSON.parse(localStorage.getItem("appSettings"))
-                                .isFavorite = true
-                        )
-                    )
-                })
-        }
+        // if (JSON.parse(localStorage.getItem("appSettings")).isFavorite !== null) {
+        //     connect.send("VKWebAppAddToFavorites", {})
+        //         .then(res => {
+        //             localStorage.setItem("appSettings",
+        //                 JSON.stringify(
+        //                     JSON.parse(localStorage.getItem("appSettings"))
+        //                         .isFavorite = true
+        //                 )
+        //             )
+        //         })
+        // }
 
         return (
             <Panel id={this.props.id} style={{backgroundColor: "#5690ff"}}>

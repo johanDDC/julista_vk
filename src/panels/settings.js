@@ -1,10 +1,11 @@
-import {Panel, PanelHeader, Button, Switch, Tooltip, Link} from '@vkontakte/vkui';
+import {Panel, PanelHeader, Button, Switch, Tooltip, Link, Snackbar} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/settings.css"
 import VKSettingsIcon from "../custom_components/icon-pack/VKSettingsIcon"
 import SettingsNotificationsIcon from "../custom_components/icon-pack/SettingsNotificationsIcon"
 import DarkThemeIcon from "../custom_components/icon-pack/DarkThemeIcon"
+import BookletCheck from "../custom_components/icon-pack/BookletCheck"
 import Mark from "../custom_components/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
 import connect from '@vkontakte/vk-connect-promise';
@@ -15,6 +16,7 @@ class Settings extends React.Component {
 
         this.state = {
             tooltip: false,
+            snackbar: null,
         };
 
         this.settings = (localStorage.getItem("appSettings") ? JSON.parse(localStorage.getItem("appSettings")) : null)
@@ -41,6 +43,17 @@ class Settings extends React.Component {
             }, {});
         if (this.settings.notifications) {
             this.settings.notifications = false;
+            this.setState({
+                snackbar:
+                    <Snackbar
+                        layout="vertical"
+                        onClose={() => this.setState({snackbar: null})}
+                        before={<SettingsNotificationsIcon/>}
+                        duration={1500}
+                    >
+                        Уведомления выключены
+                    </Snackbar>
+            });
         } else {
             console.log("vk info", vk_info, vk_info.vk_are_notifications_enabled);
             if (vk_info.vk_are_notifications_enabled === 0) {
@@ -50,12 +63,49 @@ class Settings extends React.Component {
                     })
             }
             this.settings.notifications = true;
+            this.setState({
+                snackbar:
+                    <Snackbar
+                        layout="vertical"
+                        onClose={() => this.setState({snackbar: null})}
+                        before={<SettingsNotificationsIcon/>}
+                        duration={1500}
+                    >
+                        Уведомления включены
+                    </Snackbar>
+            });
         }
         localStorage.setItem("appSettings", JSON.stringify(this.settings));
     };
 
     subscribeGroup = () => {
-        connect.send("VKWebAppJoinGroup", {"group_id": 171343913});
+        let vk_info = window.location.search.slice(1).split('&')
+            .map((queryParam) => {
+                let kvp = queryParam.split('=');
+                return {key: kvp[0], value: kvp[1]}
+            })
+            .reduce((query, kvp) => {
+                query[kvp.key] = decodeURIComponent(kvp.value);
+                return query
+            }, {});
+        try {
+            if (vk_info.vk_viewer_group_role && vk_info.vk_viewer_group_role === 'none')
+                connect.send("VKWebAppJoinGroup", {"group_id": 171343913});
+            else
+                this.setState({
+                    snackbar:
+                        <Snackbar
+                            layout="vertical"
+                            onClose={() => this.setState({snackbar: null})}
+                            before={<BookletCheck/>}
+                            duration={1500}
+                        >
+                            Вы уже подписались =)
+                        </Snackbar>
+                });
+        } catch (e) {
+
+        }
     };
 
     render() {
@@ -146,6 +196,7 @@ class Settings extends React.Component {
                         </div>
                     </Button>
                 </div>
+                {this.state.snackbar}
             </Panel>
         )
     }
