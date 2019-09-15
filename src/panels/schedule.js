@@ -6,13 +6,10 @@ import Mark from "../custom_components/mark"
 import CustomSpinner from "../custom_components/customSpinner"
 import {getRusMonthName, scheduleGetDates, scheduleNextWeek, schedulePrevWeek} from "../utils/utils"
 import ScheduleWeekBar from "../custom_components/scheduleTopBar"
-import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
-import Icon24BrowserForward from '@vkontakte/icons/dist/24/browser_forward';
 import Icon24Chevron from '@vkontakte/icons/dist/24/chevron';
 import SubjectHWIcon from "../custom_components/icon-pack/SubjectHWIcon"
 import SubjectRoomIcon from "../custom_components/icon-pack/SubjectRoomIcon"
-import SwipeLeftWeek from "../custom_components/icon-pack/SwipeLeftWeek"
-import SwipeRightWeek from "../custom_components/icon-pack/SwipeRightWeek"
+import connect from '@vkontakte/vk-connect-promise';
 
 
 class Schedule extends React.Component {
@@ -197,7 +194,7 @@ class Schedule extends React.Component {
             );
 
             return (
-                <Div className="scheduleSubjectTaleContainer">
+                <Div className="scheduleSubjectTaleContainer" style={{paddingBottom: 0}}>
                     <div className="scheduleSubjectTale" onClick={() => this.props.openModal(modal, subject.name)}>
                         <div className="scheduleSubjectTaleNumber">
                             {subject.number}
@@ -401,6 +398,18 @@ class Schedule extends React.Component {
     };
 
     render() {
+        if (JSON.parse(localStorage.getItem("appSettings")).isFavorite !== null) {
+            connect.send("VKWebAppAddToFavorites", {})
+                .then(res => {
+                    localStorage.setItem("appSettings",
+                        JSON.stringify(
+                            JSON.parse(localStorage.getItem("appSettings"))
+                                .isFavorite = true
+                        )
+                    )
+                })
+        }
+
         return (
             <Panel id={this.props.id} style={{backgroundColor: "#5690ff"}}>
                 <PanelHeader

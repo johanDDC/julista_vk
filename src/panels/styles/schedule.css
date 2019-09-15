@@ -41,7 +41,7 @@
 }
 
 .scheduleSubjectTaleInfo {
-    width: calc(90% - 55px);
+    width: calc((100% - 62px) / 10 * 9);
     padding: 8px 0 8px 0;
 }
 
@@ -51,7 +51,8 @@
     align-items: center;
     justify-content: center;
     margin-right: 17px;
-    width: 10%;
+    margin-left: 9px;
+    width: calc((100% - 62px) / 10);
 }
 
 .scheduleSubjectTaleSubjectName {
@@ -86,6 +87,7 @@
 }
 
 .scheduleSliderContainer {
+    position: relative;
     height: calc(100vh - 48px - 12px - 56px);
 }
 

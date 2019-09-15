@@ -57,6 +57,15 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                 };
                 localStorage.setItem("userData", JSON.stringify(localData));
                 bind_user(response.data.id, response.data.secret);
+                window.ga('diaryTracker.set', {
+                    diary: diary
+                });
+                window.ga('diaryTracker.send', {
+                    hitType: 'event',
+                    eventCategory: 'Sign in',
+                    eventAction: 'click',
+                    eventLabel: diary
+                });
                 dispatcher({
                     type: "DO_AUTHORIZATION_SUCCESS",
                     data: {

@@ -6,17 +6,19 @@
           content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#000000">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148017576-1"></script>
+    <!-- Google Analytics -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-148017576-1');
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'UA-148017576-1', 'auto');
+        ga('send', 'pageview');
+        ga('create', 'UA-148017576-1', {
+            name: 'diaryTracker'
+        })
     </script>
-    <title>VK App Boilerplate</title>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>Booklet App</title>
 </head>
 <body>
 <div id="root"></div>

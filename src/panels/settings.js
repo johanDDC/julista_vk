@@ -54,6 +54,10 @@ class Settings extends React.Component {
         localStorage.setItem("appSettings", JSON.stringify(this.settings));
     };
 
+    subscribeGroup = () => {
+        connect.send("VKWebAppJoinGroup", {"group_id": 171343913});
+    };
+
     render() {
         return (
             <Panel id={this.props.id}>
@@ -71,12 +75,12 @@ class Settings extends React.Component {
                         <div className="settingsSettingInfo">
                             <div className="settingsSettingTitle" style={{color: "#5181b8"}}>
                                 <Link
-                                    href="https://vk.com/bklet/"
-                                    target="_top">
+                                    href="https://vk.com/bklet/">
                                     Группа ВК
                                 </Link>
                             </div>
                             <div className="settingsSettingSwitch">
+                                <Button level="secondary" onClick={this.subscribeGroup}>Подписаться</Button>
                             </div>
                         </div>
                     </Button>
