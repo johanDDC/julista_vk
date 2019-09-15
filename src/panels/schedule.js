@@ -285,21 +285,25 @@ class Schedule extends React.Component {
 
     drawShedule = () => {
         document.getElementsByTagName("section")[0].style.overflow = "hidden";
-        if (this.state.currentDay === 0)
-            document.getElementById("scheduleWeekSwiperLeft")
-                .style.display = "flex";
-        else
-            document.getElementById("scheduleWeekSwiperLeft")
-                .style.display = "none";
-        if (this.state.currentDay >= this.state.weekDuration - 1)
-            document.getElementById("scheduleWeekSwiperRight")
-                .style.display = "flex";
-        else
-            document.getElementById("scheduleWeekSwiperRight")
-                .style.display = "none";
+        try {
+            if (this.state.currentDay === 0)
+                document.getElementById("scheduleWeekSwiperLeft")
+                    .style.display = "flex";
+            else
+                document.getElementById("scheduleWeekSwiperLeft")
+                    .style.display = "none";
+            if (this.state.currentDay >= this.state.weekDuration - 1)
+                document.getElementById("scheduleWeekSwiperRight")
+                    .style.display = "flex";
+            else
+                document.getElementById("scheduleWeekSwiperRight")
+                    .style.display = "none";
 
-        if (this.state.weekDuration === 6)
-            document.querySelector(".Gallery__slide:last-child").style.width = "50px";
+            if (this.state.weekDuration === 6)
+                document.querySelector(".Gallery__slide:last-child").style.width = "50px";
+        } catch (e) {
+
+        }
         return (
             <Gallery
                 slideWidth="100%"
