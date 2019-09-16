@@ -301,16 +301,17 @@ class Marks extends React.Component {
                     <p className="marksScreenError">Непредвиденная ошибка. Пожалуйста, попробуйте позже.</p>
                     :
                     <div className="marksScreen">
-                        <Tabs theme="header" type="buttons" className="marksTabs">
-                            {this.drawTabsItem()}
-                            <TabsItem
-                                onClick={() => this.setState({activeTab: 'result'})}
-                                selected={this.state.activeTab === 'result'}
-                            >
-                                Итоговые
-                            </TabsItem>
-                        </Tabs>
-
+                        <Div>
+                            <Tabs theme="header" type="buttons" className="marksTabs">
+                                {this.drawTabsItem()}
+                                <TabsItem
+                                    onClick={() => this.setState({activeTab: 'result'})}
+                                    selected={this.state.activeTab === 'result'}
+                                >
+                                    Итоговые
+                                </TabsItem>
+                            </Tabs>
+                        </Div>
                         {this.state.ready ? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
                         {this.state.activeTab === 'result' ? this.drawResultTab() : null}
                     </div>

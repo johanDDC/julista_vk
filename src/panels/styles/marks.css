@@ -29,13 +29,18 @@
     display: flex;
     flex-grow: 2;
     background-color: transparent !important;
-    border-radius: 7px !important;
+    border-radius: 10px !important;
     margin-bottom: 5px;
+    height: 32px;
 }
 
 .marksTabs > .TabsItem--selected{
     background-color:  #5690ff !important;
     color: #fff !important;
+}
+
+.marksTabs > .TabsItem--selected::after{
+    display: none;
 }
 
 .marksTabs > .TabsItem > div{
