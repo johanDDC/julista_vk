@@ -1,6 +1,24 @@
-.View__header * {
+.View__header  * {
     background-color: #5690ff;
     color: #ffffff;
+}
+
+.HeaderButton--android {
+    text-transform: uppercase !important;
+    height: 48px !important;
+    line-height: 48px !important;
+    border-radius: 50% !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    padding: 0 12px !important;
+}
+
+.Tappable__waves{
+    background-color: transparent !important;
+}
+.Tappable--android {
+    position: relative !important;
+    transition: background-color .15s ease-out !important;
 }
 
 * {
@@ -8,5 +26,5 @@
 }
 
 section, .View, .View--ios, .View--header {
-    height: calc(100vh - 24px)
+    height: calc(100vh - 32px)
 }

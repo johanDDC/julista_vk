@@ -89,8 +89,10 @@ class Settings extends React.Component {
                 return query
             }, {});
         try {
-            if (vk_info.vk_viewer_group_role === 'none')
+            if (vk_info.vk_viewer_group_role === 'none' && !this.settings.isSubscribed) {
                 connect.send("VKWebAppJoinGroup", {"group_id": 171343913});
+                this.settings.isSubscribed = true;
+            }
             else
                 this.setState({
                     snackbar:
@@ -106,6 +108,7 @@ class Settings extends React.Component {
         } catch (e) {
 
         }
+        localStorage.setItem("appSettings", JSON.stringify(this.settings));
     };
 
     render() {

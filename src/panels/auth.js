@@ -280,12 +280,13 @@ class Auth extends React.Component {
                     {/*    />*/}
                     {/*</Div>*/}
                     <Div>
-            <div className="annotate">Нажимая войти, вы соглашаетесь на обработку, хранение, передачу ваших персональных данных.
-                <br/>
-                <Link href="https://docs.google.com/document/d/1BjSTb_bgwHermREHdZlcwTDf6WowADiHIrjcDSC24OI"
-                      target="_blank">Регламент</Link> и <Link
-                    href="https://docs.google.com/document/d/1Pt5dvKHB8404oGnpd8rVi7yVmsjM5P0hIPBV9FnrQuQ"
-                    target="_blank">политика конфиденциальности</Link></div>
+                        <div className="annotate">Нажимая войти, вы соглашаетесь на обработку, хранение, передачу ваших
+                            персональных данных.
+                            <br/>
+                            <Link href="https://docs.google.com/document/d/1BjSTb_bgwHermREHdZlcwTDf6WowADiHIrjcDSC24OI"
+                                  target="_blank">Регламент</Link> и <Link
+                                href="https://docs.google.com/document/d/1Pt5dvKHB8404oGnpd8rVi7yVmsjM5P0hIPBV9FnrQuQ"
+                                target="_blank">политика конфиденциальности</Link></div>
                     </Div>
                     {/*<Div className="restorePassword">*/}
                     {/*    <div className="inputIcon" style={{margin: 0}}>*/}

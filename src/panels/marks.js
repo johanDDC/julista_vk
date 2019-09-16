@@ -269,9 +269,10 @@ class Marks extends React.Component {
                     <div className="resultMarksContainerMarks">
                         {renderedMarks}
                         <div className="resultMarksContainerResultedMark">
-                            {subject.year_mark ? <Mark size="24" val={subject.year_mark.toString()} is_routine={false} fontSize="12"
-                                                       short={true}/>
-                            : null}
+                            {subject.year_mark ?
+                                <Mark size="24" val={subject.year_mark.toString()} is_routine={false} fontSize="12"
+                                      short={true}/>
+                                : null}
                         </div>
                     </div>
                 </Div>
@@ -300,17 +301,16 @@ class Marks extends React.Component {
                     <p className="marksScreenError">Непредвиденная ошибка. Пожалуйста, попробуйте позже.</p>
                     :
                     <div className="marksScreen">
-                        <Div style={{paddingTop: "13px", paddingBottom: "13px",}}>
-                            <Tabs theme="header" type="buttons" className="marksTabs">
-                                {this.drawTabsItem()}
-                                <TabsItem
-                                    onClick={() => this.setState({activeTab: 'result'})}
-                                    selected={this.state.activeTab === 'result'}
-                                >
-                                    Итоговые
-                                </TabsItem>
-                            </Tabs>
-                        </Div>
+                        <Tabs theme="header" type="buttons" className="marksTabs">
+                            {this.drawTabsItem()}
+                            <TabsItem
+                                onClick={() => this.setState({activeTab: 'result'})}
+                                selected={this.state.activeTab === 'result'}
+                            >
+                                Итоговые
+                            </TabsItem>
+                        </Tabs>
+
                         {this.state.ready ? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
                         {this.state.activeTab === 'result' ? this.drawResultTab() : null}
                     </div>
