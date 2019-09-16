@@ -89,7 +89,7 @@ class Settings extends React.Component {
                 return query
             }, {});
         try {
-            if (vk_info.vk_viewer_group_role && vk_info.vk_viewer_group_role === 'none')
+            if (vk_info.vk_viewer_group_role === 'none')
                 connect.send("VKWebAppJoinGroup", {"group_id": 171343913});
             else
                 this.setState({
@@ -143,7 +143,7 @@ class Settings extends React.Component {
                     </div>
                     <Button level="tertiary" className="settingsSettingContainer" onClick={this.props.chooseMark}>
                         <div style={{width: "24px"}}>
-                            <Mark size="28" val={this.props.expectedMark.toString()} is_routine={false}/>
+                            <Mark size="24" val={this.props.expectedMark.toString()} is_routine={false}/>
                         </div>
                         <div className="settingsSettingInfo">
                             <div className="settingsSettingTitle">

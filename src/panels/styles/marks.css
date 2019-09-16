@@ -22,6 +22,7 @@
     flex-direction: row;
     width: 100%;
     background-color: transparent !important;
+    padding-bottom: 0 !important;
 }
 
 .marksTabs > .TabsItem{
@@ -29,6 +30,7 @@
     flex-grow: 2;
     background-color: transparent !important;
     border-radius: 7px !important;
+    margin-bottom: 5px;
 }
 
 .marksTabs > .TabsItem--selected{
@@ -49,7 +51,7 @@
     font-size: 14px;
     color: #5690ff;
     padding-bottom: 6px;
-    /*padding-top: 0;*/
+    padding-top: 0;
 }
 
 .allMarksContainer{

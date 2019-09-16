@@ -284,7 +284,6 @@ class Schedule extends React.Component {
     };
 
     drawShedule = () => {
-        document.getElementsByTagName("section")[0].style.overflow = "hidden";
         try {
             if (this.state.currentDay === 0)
                 document.getElementById("scheduleWeekSwiperLeft")

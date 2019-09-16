@@ -1,8 +1,12 @@
-.View__header *{
+.View__header * {
     background-color: #5690ff;
     color: #ffffff;
 }
 
 * {
     font-family: 'Roboto', sans-serif !important;
+}
+
+section, .View, .View--ios, .View--header {
+    height: calc(100vh - 24px)
 }
