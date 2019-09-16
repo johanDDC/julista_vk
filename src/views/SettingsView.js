@@ -30,28 +30,28 @@ class SettingsView extends React.Component {
                 >
                     <ActionSheetItem autoclose
                                      onClick={() => {
-                                         this.props.setMarkAction(5)
+                                         this.props.setMarkAction(5);
                                      }}
                                      before={<PurposeMarkFive/>}>
                         Всегда стремись к лучшему =)
                     </ActionSheetItem>
                     <ActionSheetItem autoclose
                                      onClick={() => {
-                                         this.props.setMarkAction(4)
+                                         this.props.setMarkAction(4);
                                      }}
                                      before={<PurposeMarkFour/>}>
                         Правильно оценивай свои силы ;)
                     </ActionSheetItem>
                     <ActionSheetItem autoclose
                                      onClick={() => {
-                                         this.props.setMarkAction(3)
+                                         this.props.setMarkAction(3);
                                      }}
                                      before={<PurposeMarkThree/>}>
                         Никогда не отчаивайся!
                     </ActionSheetItem>
                     {this.osname === IOS && <ActionSheetItem autoclose theme="cancel">Cancel</ActionSheetItem>}
                 </ActionSheet>
-        })
+        });
     };
 
     render() {

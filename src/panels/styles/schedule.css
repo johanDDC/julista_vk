@@ -92,7 +92,7 @@
 }
 
 .scheduleSliderContainer > div > div > .Gallery__slide {
-    overflow: scroll;
+    /*overflow: scroll;*/
     margin-right: 10px;
 }
 

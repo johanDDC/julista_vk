@@ -17,9 +17,19 @@ class Settings extends React.Component {
         this.state = {
             tooltip: false,
             snackbar: null,
+            ready: false,
         };
 
-        this.settings = (localStorage.getItem("appSettings") ? JSON.parse(localStorage.getItem("appSettings")) : null)
+        this.settings = (localStorage.getItem("appSettings") ? JSON.parse(localStorage.getItem("appSettings")) : null);
+
+        // setTimeout(() => {
+        //     if (this.settings.notifications) {
+        //         document.getElementById("settingsNotificationsSwitcher")
+        //             .setAttribute("defaultChecked");
+        //         this.setState({ready: true});
+        //         this.setState({ready: false});
+        //     }
+        // }, 800)
     }
 
     signOut = () => {
@@ -92,8 +102,7 @@ class Settings extends React.Component {
             if (vk_info.vk_viewer_group_role === 'none' && !this.settings.isSubscribed) {
                 connect.send("VKWebAppJoinGroup", {"group_id": 171343913});
                 this.settings.isSubscribed = true;
-            }
-            else
+            } else
                 this.setState({
                     snackbar:
                         <Snackbar
@@ -128,7 +137,9 @@ class Settings extends React.Component {
                         <div className="settingsSettingInfo">
                             <div className="settingsSettingTitle" style={{color: "#5181b8"}}>
                                 <Link
-                                    href="https://vk.com/bklet/">
+                                    href="app://vk.com/bklet/"
+                                    target="_blank"
+                                >
                                     Группа ВК
                                 </Link>
                             </div>
@@ -161,8 +172,16 @@ class Settings extends React.Component {
                                 Уведомления
                             </div>
                             <div>
-                                <Switch className="settingsSettingSwitcher" id="settingsNotificationsSwitcher"
-                                        onChange={this.askForNotifications}/>
+                                <Switch className="settingsSettingSwitcher"
+                                        id="settingsNotificationsSwitcher"
+                                        onChange={this.askForNotifications}
+                                        defaultChecked={this.settings
+                                            ? (this.settings.notifications
+                                                ? this.settings.notifications
+                                                : false)
+                                            : false
+                                        }
+                                />
                             </div>
                         </div>
                     </div>
