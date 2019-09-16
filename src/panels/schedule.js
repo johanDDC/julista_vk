@@ -291,7 +291,7 @@ class Schedule extends React.Component {
             else
                 document.getElementById("scheduleWeekSwiperLeft")
                     .style.display = "none";
-            if (this.state.currentDay >= this.state.weekDuration - 1)
+            if (this.state.currentDay >= (this.state.weekDuration < 5 ? 4 : this.state.weekDuration - 1))
                 document.getElementById("scheduleWeekSwiperRight")
                     .style.display = "flex";
             else
@@ -315,7 +315,7 @@ class Schedule extends React.Component {
                     //         this.state.weekDuration) ? slideIndex - 1 : slideIndex)
                     // });
                     this.setState({
-                        currentDay: (slideIndex >= this.state.weekDuration
+                        currentDay: (slideIndex >= (this.state.weekDuration < 5 ? 5 : this.state.weekDuration)
                             ? slideIndex - 1
                             : slideIndex)
                     });
