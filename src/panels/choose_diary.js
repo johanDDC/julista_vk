@@ -22,9 +22,9 @@ class ChooseDiary extends React.Component {
             <Panel id={this.props.id}>
                 {/*<PanelHeader noShadow={true}></PanelHeader>*/}
                 <Div className="chooseDiaryScreen">
-                        <span className="chooseDiaryScreenTitle">
+                        <div className="chooseDiaryScreenTitle">
                             Выберите ваш дневник
-                        </span>
+                        </div>
                     <div className="chooseDiaryScreenDiaryDiaries">
                         <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
                                 onClick={() => {
@@ -35,7 +35,7 @@ class ChooseDiary extends React.Component {
                             {/*     // style={{backgroundColor: "#ff3000"}}*/}
                             {/*>*/}
                             {/*</div>*/}
-                            <span className="chooseDiaryScreenDiaryContainerTitle">Дневник МЭШ (mos.ru)</span>
+                            <div className="chooseDiaryScreenDiaryContainerTitle">Дневник МЭШ (mos.ru)</div>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
                         </Button>
@@ -48,7 +48,7 @@ class ChooseDiary extends React.Component {
                             {/*     // style={{backgroundColor: "#ffa000"}}*/}
                             {/*>*/}
                             {/*</div>*/}
-                            <span className="chooseDiaryScreenDiaryContainerTitle">Школьный портал Московской области</span>
+                            <div className="chooseDiaryScreenDiaryContainerTitle">Школьный портал МО</div>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
                         </Button>
@@ -61,7 +61,7 @@ class ChooseDiary extends React.Component {
                             {/*     // style={{backgroundColor: "#ffff00"}}*/}
                             {/*>*/}
                             {/*</div>*/}
-                            <span className="chooseDiaryScreenDiaryContainerTitle">Сетевой Город</span>
+                            <div className="chooseDiaryScreenDiaryContainerTitle">Сетевой Город</div>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
                         </Button>
@@ -74,7 +74,7 @@ class ChooseDiary extends React.Component {
                             {/*     // style={{backgroundColor: "#0080ff"}}*/}
                             {/*>*/}
                             {/*</div>*/}
-                            <span className="chooseDiaryScreenDiaryContainerTitle">Электронное образование в Республике Татарстан</span>
+                            <div className="chooseDiaryScreenDiaryContainerTitle">Образование в респ. Татарстан</div>
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
                         </Button>

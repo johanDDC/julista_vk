@@ -148,7 +148,7 @@
     border-radius: 0 20px 20px 0;
     position: absolute;
     left: 0;
-    top: 64px;
+    top: 76px;
     width: 28px;
     height: 28px;
     font-size: 20px;
@@ -164,7 +164,7 @@
     border-radius: 20px 0 0 20px;
     position: absolute;
     left: calc(100% - 28px);
-    top: 64px;
+    top: 76px;
     width: 28px;
     height: 28px;
     font-size: 20px;
@@ -191,9 +191,9 @@
 #scheduleWeekSwiperLeft > .up {
     position: absolute;
     background: #5690ff;
-    width: 6px;
-    height: 6px;
-    top: -6px;
+    width: 8px;
+    height: 8px;
+    top: -8px;
     left: 0;
     border-radius: 0 0 0 999px;
 }
@@ -201,9 +201,9 @@
 #scheduleWeekSwiperLeft > .down {
     position: absolute;
     background: #5690ff;
-    width: 6px;
-    height: 6px;
-    bottom: -6px;
+    width: 8px;
+    height: 8px;
+    bottom: -8px;
     left: 0;
     border-radius: 999px 0 0 0;
 }
@@ -222,9 +222,9 @@
 #scheduleWeekSwiperRight > .up {
     position: absolute;
     background: #5690ff;
-    width: 6px;
-    height: 6px;
-    top: -6px;
+    width: 8px;
+    height: 8px;
+    top: -8px;
     right: 0;
     border-radius: 0 0 999px 0;
 }
@@ -232,9 +232,9 @@
 #scheduleWeekSwiperRight > .down {
     position: absolute;
     background: #5690ff;
-    width: 6px;
-    height: 6px;
-    bottom: -6px;
+    width: 8px;
+    height: 8px;
+    bottom: -8px;
     right: 0;
     border-radius: 0 999px 0 0;
 }

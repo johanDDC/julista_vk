@@ -16,5 +16,5 @@
 }
 
 section, .View, .View--ios, .View--header {
-    height: calc(100vh - 44px);
+    height: calc(100vh - 52px);
 }
