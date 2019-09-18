@@ -1,5 +1,14 @@
 import React from 'react';
-import {HeaderButton, IS_PLATFORM_ANDROID, ModalPage, ModalPageHeader, ModalRoot, View} from '@vkontakte/vkui';
+import {
+    HeaderButton,
+    withPlatform,
+    ANDROID,
+    IOS,
+    ModalPage,
+    ModalPageHeader,
+    ModalRoot,
+    View,
+} from '@vkontakte/vkui';
 import Schedule from '../panels/schedule'
 import {connect} from "react-redux";
 import {getJournal} from "../redux/actions/AppLogicAction";
@@ -29,7 +38,7 @@ class ScheduleView extends React.Component {
                         settlingHeight={50}
                         header={
                             <ModalPageHeader
-                                left={IS_PLATFORM_ANDROID &&
+                                left={this.props.platform === ANDROID &&
                                 <HeaderButton onClick={this.closeModal}><Icon24Cancel/></HeaderButton>}
                             >
                                 {name}
@@ -54,6 +63,8 @@ class ScheduleView extends React.Component {
         )
     }
 }
+
+withPlatform(ScheduleView);
 
 const mapStateToProps = store => {
     console.log("Schedule View", store);

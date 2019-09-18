@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ActionSheet, ActionSheetItem, platform, IOS} from '@vkontakte/vkui';
+import {View, ActionSheet, ActionSheetItem, withPlatform, ANDROID, IOS,} from '@vkontakte/vkui';
 import Settings from '../panels/settings'
 import {connect} from "react-redux";
 import {setMark} from "../redux/actions/expectedMarkAction";
@@ -17,8 +17,6 @@ class SettingsView extends React.Component {
         this.state = {
             popout: null,
         };
-
-        this.osname = platform();
     }
 
     chooseMark = () => {
@@ -49,7 +47,7 @@ class SettingsView extends React.Component {
                                      before={<PurposeMarkThree/>}>
                         Никогда не отчаивайся!
                     </ActionSheetItem>
-                    {this.osname === IOS && <ActionSheetItem autoclose theme="cancel">Cancel</ActionSheetItem>}
+                    {this.props.platform === IOS && <ActionSheetItem autoclose theme="cancel">Cancel</ActionSheetItem>}
                 </ActionSheet>
         });
     };
@@ -68,6 +66,8 @@ class SettingsView extends React.Component {
         )
     }
 }
+
+withPlatform(SettingsView);
 
 const mapStateToProps = store => {
     console.log("Settings View", store);

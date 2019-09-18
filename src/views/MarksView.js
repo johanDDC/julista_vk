@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ModalRoot, ModalPageHeader, IS_PLATFORM_ANDROID, HeaderButton, ModalPage} from '@vkontakte/vkui';
+import {View, ModalRoot, ModalPageHeader, withPlatform, ANDROID, IOS, HeaderButton, ModalPage} from '@vkontakte/vkui';
 import Marks from '../panels/marks'
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import "./styles/Marks.css"
@@ -20,6 +20,7 @@ class MarksView extends React.Component {
     }
 
     setModalMark = (modal, name) => {
+        console.log("platform", this.props.platform);
         this.setState({
             modalMarks:
                 <ModalRoot activeModal="modalMark">
@@ -27,10 +28,12 @@ class MarksView extends React.Component {
                         id="modalMark"
                         onClose={this.closeModal}
                         settlingHeight={50}
+                        dynamicContentHeight={true}
                         header={
                             <ModalPageHeader
-                                left={IS_PLATFORM_ANDROID &&
-                                <HeaderButton onClick={this.closeModal}><Icon24Cancel style={{color:"#999999"}}/></HeaderButton>}
+                                left={this.props.platform === ANDROID &&
+                                <HeaderButton onClick={this.closeModal}><Icon24Cancel
+                                    style={{color: "#999999"}}/></HeaderButton>}
                             >
                                 {name}
                             </ModalPageHeader>
@@ -77,6 +80,7 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
+withPlatform(MarksView);
 
 export default connect(
     mapStateToProps,

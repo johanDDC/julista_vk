@@ -42,20 +42,17 @@ class Marks extends React.Component {
 
         let id = setInterval(() => {
             if (this.props.appData.error) {
-                console.log("err marks");
                 clearInterval(id);
                 this.setState({error: true, ready: true});
             }
             if (!this.state.error && this.props.appData.marks.data.length !== 0) {
                 this.marksData = this.props.appData.marks;
                 clearInterval(id);
-                console.log("GONNA RENDER", this.marksData);
                 this.startRender();
             }
         }, 200);
         let id2 = setInterval(() => {
             if (this.props.appData.errorLastMarks) {
-                console.log("err last");
                 clearInterval(id2);
                 this.setState({errorLastMarks: true, ready: true});
             }
@@ -69,7 +66,6 @@ class Marks extends React.Component {
 
     startRender = () => {
         let periods = this.marksData.data[0].periods.length;
-        console.log("periods length", periods);
         for (let i = 0; i < periods; i++) {
             this.tabs.push(this.drawTab(i));
         }
@@ -118,7 +114,6 @@ class Marks extends React.Component {
                         <Mark size="16" val={mark.value.toString()} is_routine={true} fontSize="12"/>
                     </div>
                 );
-                console.log("modal mark", mark);
                 marksModal.push(
                     <div className="modalMarkMarksInfo">
                         <div className="modalMarkMarksInfoLeft">
@@ -157,7 +152,7 @@ class Marks extends React.Component {
                     <div className="modalMarkSubjectInfo">
                         <div className="modalMarkSubjectInfoLeft">
                             {subject.year_mark ?
-                                <Mark size="22" val={subject.year_mark.toString()} is_routine={false} fontSize="14"/>
+                                <Mark size="22" val={period.final_mark.toString()} is_routine={false} fontSize="14"/>
                                 : "-"}
                         </div>
                         <div className="modalMarkSubjectInfoText">

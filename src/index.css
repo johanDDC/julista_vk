@@ -16,5 +16,11 @@
 }
 
 section, .View, .View--ios, .View--header {
-    height: calc(100vh - 52px);
+    height: calc(100vh - 42px);
+}
+
+:root{
+    --overlay_status_background: #5690ff;
+    --overlay_status_foreground: #5690ff;
+    --overlay_status_icon: #5690ff;
 }

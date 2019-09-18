@@ -21,14 +21,16 @@ function defineColor(val) {
     return colors;
 } //TODO add 10 system support
 
-String.prototype.capitalize = function() {
-    return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+String.prototype.capitalize = function () {
+    return this.replace(/(?:^|\s)\S/g, function (a) {
+        return a.toUpperCase();
+    });
 };
 
 const Mark = props => {
     let container = false;
     let mark_value = props.val.toLowerCase();
-    if (props.short){
+    if (props.short) {
         if (mark_value === "зачёт") mark_value = "Зч";
         if (mark_value === "незачёт") mark_value = "Нзч";
     } else {
@@ -44,9 +46,10 @@ const Mark = props => {
             background: (props.is_routine ? "#5690ff"
                 : `linear-gradient(90deg, ${defineColor(props.val)[0]}, ${defineColor(props.val)[1]})`),
             fontSize: (props.fontSize ? `${props.fontSize}px` : "14px"),
-            borderRadius: (container ? "11px" : "50%")
+            borderRadius: (container ? "11px" : "50%"),
+            border: (props.is_border ? "2px solid #f6f6f6" : "0px")
         }}>
-            <span>{mark_value}</span>
+            <div>{mark_value}</div>
             {(props.weight && props.weight > 1 ?
                 <div className="markWeight">
                     {props.weight}
@@ -63,6 +66,7 @@ Mark.propTypes = {
     weight: PropTypes.string,
     fontSize: PropTypes.string,
     short: PropTypes.bool,
+    is_border: PropTypes.bool
 };
 
 export default Mark;

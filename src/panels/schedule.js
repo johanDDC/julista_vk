@@ -15,7 +15,6 @@ import connect from '@vkontakte/vk-connect-promise';
 class Schedule extends React.Component {
     constructor(props) {
         super(props);
-        console.log("RENDER AGAIN");
 
         this.dayDates = scheduleGetDates();
         this.scheduleData = this.props.appData.journal;
@@ -45,8 +44,6 @@ class Schedule extends React.Component {
                 if (this.props.appData.journal.data.length !== 0) {
                     this.scheduleData = this.props.appData.journal;
                     clearInterval(id);
-                    console.log("wwww", this.props.appData.journal.data.days.length);
-                    console.log("wwww", this.dayDates);
                     this.setState({
                         ready: true,
                         weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length) // if holidays, length is equal to 0
@@ -81,14 +78,13 @@ class Schedule extends React.Component {
             let modalMarksPresentation = [];
             if (subject) {
                 if (subject.marks) {
-                    console.log("subject", subject);
                     subject.marks.forEach(mark => {
-                        console.log("mark", mark);
                         marks.push( //Append weight here
                             <div style={{marginRight: "4px"}}>
                                 <Mark size="24" val={(mark.score ? mark.score.toString() : mark.value.toString())}
                                       is_routine={false} fontSize="14"
-                                      weight={(mark.weight ? mark.weight.toString() : "1")}/>
+                                      weight={(mark.weight ? mark.weight.toString() : "1")}
+                                      is_border={true}/>
                             </div>
                         );
                         modalMarksPresentation.push(
@@ -217,6 +213,14 @@ class Schedule extends React.Component {
                             }
                         </div>
                         <div className="scheduleSubjectTaleMarks">
+                            {
+                                marks.length > 2
+                                    ? marks.forEach((markDiv, iter) => {
+                                        markDiv.props.style.position = "absolute";
+                                        markDiv.props.style.left = 9 * iter;
+                                    })
+                                    : null
+                            }
                             {marks}
                         </div>
                     </div>
@@ -229,7 +233,6 @@ class Schedule extends React.Component {
         let subjects = day.subjects;
         subjects.forEach((subject) => {
             let sbj = generateSubjectTale(subject);
-            // console.log("sbj", sbj);
             subjectTales.push(sbj)
         });
 
@@ -335,7 +338,6 @@ class Schedule extends React.Component {
             newDatesArr[8],
             this.props.profile.student.id);
         this.dayDates = newDatesArr;
-        console.log("n_d", this.dayDates);
         this.setState({
             ready: false,
             month: getRusMonthName(this.dayDates[7].getMonth()),
@@ -352,7 +354,6 @@ class Schedule extends React.Component {
                 } else {
                     if (this.props.appData.journal.data.length !== 0) {
                         this.scheduleData = this.props.appData.journal;
-                        console.log("week dur", this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length);
                         clearInterval(id);
                         this.setState({
                             ready: true,
@@ -374,7 +375,6 @@ class Schedule extends React.Component {
             newDatesArr[8],
             this.props.profile.student.id);
         this.dayDates = newDatesArr;
-        console.log("new dates", this.dayDates);
         this.setState({
             ready: false,
             month: getRusMonthName(this.dayDates[7].getMonth()),
