@@ -128,7 +128,7 @@ class Settings extends React.Component {
         let json = {
             id: this.props.profile.id,
             secret: this.props.profile.secret,
-            vk_id: vk_info.vk_user_id
+            vk_user_id: vk_info.vk_user_id
         };
 
         axios.post(method, json)
@@ -235,16 +235,17 @@ class Settings extends React.Component {
                     </div>
                 </div>
                 <div className="groupSettingsContainer">
-                    <Button level="tertiary" className="settingsSettingContainer" onClick={this.redButtonPush}>
+                    <Button level="tertiary" className="settingsSettingContainer">
                         <Icon24Error style={{color: "#ef464d"}}/>
                         <div className="settingsSettingInfo">
-                            <div className="settingsSettingTitle" style={{color: "#ef464d"}}>
+                            <div className="settingsSettingTitle" style={{color: "#ef464d"}}
+                                 onClick={this.redButtonPush}>
                                 Красная кнопка
                             </div>
                             <div className="settingsSettingSwitch">
                                 <Button level="secondary">
                                     <Link
-                                        href="vk://vk.com/wall-171343913_126"
+                                        href="vk://vk.com/wall-171343913_127"
                                         target="_blank"
 
                                     >
