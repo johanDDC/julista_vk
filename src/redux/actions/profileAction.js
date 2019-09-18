@@ -1,3 +1,5 @@
+import connect from '@vkontakte/vk-connect-promise';
+
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/";
 
@@ -56,6 +58,15 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                     // student: null,
                 };
                 localStorage.setItem("userData", JSON.stringify(localData));
+                connect.send("VKWebAppStorageSet", {
+                    "key": "userData",
+                    "value": JSON.stringify(localData),
+                })
+                    .then(res => console.log("VK Storage Set Success", res))
+                    .catch(err => {
+                        console.log("VK Storage Set Fail", err);
+                        localStorage.setItem("userData", JSON.stringify(localData));
+                    });
                 bind_user(response.data.id, response.data.secret);
                 window.ga('diaryTracker.set', {
                     diary: diary

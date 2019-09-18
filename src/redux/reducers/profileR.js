@@ -1,4 +1,21 @@
-let localData = JSON.parse(localStorage.getItem("userData"));
+import connect from '@vkontakte/vk-connect-promise';
+
+let localData;
+
+connect.send("VKWebAppStorageGet", {
+    "keys": ["userData"],
+})
+    .then(res => {
+        console.log("VK Storage Get Success", res);
+        localData = JSON.parse(
+            res.data.keys[0].value
+        )
+    })
+    .catch(err => {
+        console.log("VK Storage Get Fail", err);
+        localData = JSON.parse(localStorage.getItem("userData"));
+    });
+
 let initialState;
 
 if (localData) {
@@ -14,7 +31,7 @@ if (localData) {
 } else {
     initialState = {
         id: null,
-        secret:null,
+        secret: null,
         diary: null,
         students: null,
         student: null,
@@ -66,8 +83,8 @@ function profile(state = initialState, action) {
             locData.student = action.data;
             localStorage.setItem("userData", JSON.stringify(locData));
             return {
-              ...state,
-              student: action.data
+                ...state,
+                student: action.data
             };
 
         default:
