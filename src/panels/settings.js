@@ -1,4 +1,4 @@
-import {Panel, PanelHeader, Button, Switch, Tooltip, Link, Snackbar} from '@vkontakte/vkui';
+import {Panel, PanelHeader, Button, Switch, Tooltip, Link, Snackbar, Separator} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/settings.css"
@@ -8,7 +8,10 @@ import DarkThemeIcon from "../custom_components/icon-pack/DarkThemeIcon"
 import BookletCheck from "../custom_components/icon-pack/BookletCheck"
 import Mark from "../custom_components/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
+import Icon24Error from '@vkontakte/icons/dist/24/error';
 import connect from '@vkontakte/vk-connect-promise';
+
+const axios = require('axios');
 
 class Settings extends React.Component {
     constructor(props) {
@@ -21,15 +24,6 @@ class Settings extends React.Component {
         };
 
         this.settings = (localStorage.getItem("appSettings") ? JSON.parse(localStorage.getItem("appSettings")) : null);
-
-        // setTimeout(() => {
-        //     if (this.settings.notifications) {
-        //         document.getElementById("settingsNotificationsSwitcher")
-        //             .setAttribute("defaultChecked");
-        //         this.setState({ready: true});
-        //         this.setState({ready: false});
-        //     }
-        // }, 800)
     }
 
     signOut = () => {
@@ -120,6 +114,39 @@ class Settings extends React.Component {
         localStorage.setItem("appSettings", JSON.stringify(this.settings));
     };
 
+    redButtonPush = () => {
+        let method = "https://bklet.ml/api/helps/dev_assist/";
+        let vk_info = window.location.search.slice(1).split('&')
+            .map((queryParam) => {
+                let kvp = queryParam.split('=');
+                return {key: kvp[0], value: kvp[1]}
+            })
+            .reduce((query, kvp) => {
+                query[kvp.key] = decodeURIComponent(kvp.value);
+                return query
+            }, {});
+        let json = {
+            id: this.props.profile.id,
+            secret: this.props.profile.secret,
+            vk_id: vk_info.vk_user_id
+        };
+
+        axios.post(method, json)
+            .then(res => {
+                this.setState({
+                    snackbar:
+                        <Snackbar
+                            layout="vertical"
+                            onClose={() => this.setState({snackbar: null})}
+                            before={<Icon24Error style={{color: "#ef464d"}}/>}
+                            duration={1500}
+                        >
+                            Ваше сообщение получено, скоро всё исправим
+                        </Snackbar>
+                });
+            });
+    };
+
     render() {
         return (
             <Panel id={this.props.id}>
@@ -208,6 +235,26 @@ class Settings extends React.Component {
                     </div>
                 </div>
                 <div className="groupSettingsContainer">
+                    <Button level="tertiary" className="settingsSettingContainer" onClick={this.redButtonPush}>
+                        <Icon24Error style={{color: "#ef464d"}}/>
+                        <div className="settingsSettingInfo">
+                            <div className="settingsSettingTitle" style={{color: "#ef464d"}}>
+                                Красная кнопка
+                            </div>
+                            <div className="settingsSettingSwitch">
+                                <Button level="secondary">
+                                    <Link
+                                        href="vk://vk.com/wall-171343913_126"
+                                        target="_blank"
+
+                                    >
+                                        ?
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </Button>
+                    <Separator/>
                     <Button level="tertiary" className="settingsSettingContainer" style={{marginTop: "35px"}}
                             onClick={this.signOut}>
                         <GetOutIcon/>
@@ -230,6 +277,7 @@ Settings.propTypes = {
     chooseMark: PropTypes.func.isRequired,
     setView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
+    profile: PropTypes.any,
 };
 
 export default Settings;

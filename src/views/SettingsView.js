@@ -61,6 +61,7 @@ class SettingsView extends React.Component {
                           chooseMark={this.chooseMark}
                           setView={this.props.setViewAction}
                           setPanel={this.props.setPanelAction}
+                          profile={this.props.profile}
                 />
             </View>
         )

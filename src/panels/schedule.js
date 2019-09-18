@@ -33,6 +33,7 @@ class Schedule extends React.Component {
     }
 
     loadData = async () => {
+        console.log("STUDENT", this.props.profile.student);
         this.props.getJournal(this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8], this.props.profile.student.id);
 
         let id = setInterval(() => {

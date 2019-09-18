@@ -1,6 +1,7 @@
 import connect from '@vkontakte/vk-connect-promise';
 
-let localData;
+let localData = JSON.parse(localStorage.getItem("userData"));
+;
 
 connect.send("VKWebAppStorageGet", {
     "keys": ["userData"],
@@ -19,6 +20,7 @@ connect.send("VKWebAppStorageGet", {
 let initialState;
 
 if (localData) {
+    console.log("LOCAL DATA", localData);
     initialState = {
         id: (localData.id ? localData.id : null),
         secret: (localData.secret ? localData.secret : null),
@@ -78,10 +80,33 @@ function profile(state = initialState, action) {
             };
 
         case "SET_STUDENT":
+            console.log("SETTING STUDENT", action.data);
             let locData = JSON.parse(localStorage.getItem("userData"));
             console.log("set student", action.data);
             locData.student = action.data;
             localStorage.setItem("userData", JSON.stringify(locData));
+            let userData;
+            // connect.send("VKWebAppStorageGet", {
+            //     "keys": ["userData"],
+            // })
+            //     .then(res => {
+            //         console.log("VK Storage Get Success", res);
+            //         userData = JSON.parse(
+            //             res.data.keys[0].value
+            //         );
+            //         userData.student = action.data;
+            //         connect.send("VKWebAppStorageSet", {
+            //             "key": "userData",
+            //             "value": JSON.stringify(userData),
+            //         })
+            //             .then(res => console.log("VK Storage Set Success", res))
+            //             .catch(err => {
+            //                 console.log("VK Storage Set Fail", err);
+            //             });
+            //     })
+            //     .catch(err => {
+            //         console.log("VK Storage Get Fail", err);
+            //     });
             return {
                 ...state,
                 student: action.data
