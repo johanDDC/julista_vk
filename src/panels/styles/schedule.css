@@ -103,8 +103,14 @@
     margin-right: 10px;
 }
 
-.Gallery__slide:last-child {
-    width: 40px;
+.Gallery.Gallery--android .Gallery__slide:last-child {
+    display: flex;
+    width: 39px;
+}
+
+.Gallery.Gallery--ios .Gallery__slide:last-child {
+    display: flex;
+    width: 42px;
 }
 
 .scheduleSliderContainer > div:last-child {
@@ -187,6 +193,7 @@
 #scheduleWeekSwiperRight.Div--ios {
     top: 64px;
 }
+
 .modalEmptyElement {
     display: flex;
     width: 100%;
@@ -253,4 +260,12 @@
     bottom: -8px;
     right: 0;
     border-radius: 0 999px 0 0;
+}
+
+.PullToRefresh.PullToRefresh--ios .PullToRefresh__spinner {
+    color: #ffffff !important;
+}
+
+.PullToRefresh.PullToRefresh--android .PullToRefresh__spinner {
+    color: #5690ff !important;
 }

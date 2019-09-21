@@ -13,40 +13,47 @@ class MarksView extends React.Component {
 
         this.state = {
             modalMarks: null,
+            modalSubject: "",
+            modalContent: {},
+            activeModal: null,
         };
         this.closeModal = () => {
-            this.setState({modalMarks: null})
+            this.setState({activeModal: null})
         };
     }
 
     setModalMark = (modal, name) => {
-        console.log("platform", this.props.platform);
         this.setState({
-            modalMarks:
-                <ModalRoot activeModal="modalMark">
-                    <ModalPage
-                        id="modalMark"
-                        onClose={this.closeModal}
-                        settlingHeight={50}
-                        dynamicContentHeight={true}
-                        header={
-                            <ModalPageHeader
-                                left={this.props.platform === ANDROID &&
-                                <HeaderButton onClick={this.closeModal}><Icon24Cancel
-                                    style={{color: "#999999"}}/></HeaderButton>}
-                            >
-                                {name}
-                            </ModalPageHeader>
-                        }>
-                        {modal}
-                    </ModalPage>
-                </ModalRoot>
+            modalSubject: name,
+            modalContent: modal,
+            activeModal: "modalMark",
         })
     };
 
     render() {
+        let modal =
+            <ModalRoot activeModal={this.state.activeModal}>
+                <ModalPage
+                    id="modalMark"
+                    onClose={this.closeModal}
+                    settlingHeight={50}
+                    dynamicContentHeight={true}
+                    header={
+                        <ModalPageHeader
+                            left={
+                                <HeaderButton onClick={this.closeModal}><Icon24Cancel
+                                    style={{color: "#999999"}}/></HeaderButton>}
+                        >
+                            {this.state.modalSubject}
+                        </ModalPageHeader>
+                    }>
+                    {this.state.modalContent}
+                </ModalPage>
+            </ModalRoot>
+        ;
         return (
-            <View activePanel={this.props.activePanel} modal={this.state.modalMarks}>
+            <View activePanel={this.props.activePanel}
+                  modal={modal}>
                 <Marks id="marks"
                        profile={this.props.profile}
                        appData={this.props.appLogic}

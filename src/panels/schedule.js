@@ -1,4 +1,4 @@
-import {Gallery, Panel, PanelHeader, Div} from '@vkontakte/vkui';
+import {Gallery, Panel, PanelHeader, Div, PullToRefresh} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
@@ -26,6 +26,7 @@ class Schedule extends React.Component {
             weekDuration: (!flag ? this.scheduleData.data.days.length : 5),
             ready: !flag,
             error: false,
+            fetching: false,
         };
 
         if (flag)
@@ -38,15 +39,19 @@ class Schedule extends React.Component {
         let id = setInterval(() => {
             if (this.props.appData.error) {
                 clearInterval(id);
-                this.setState({error: true});
-                this.setState({ready: true});
+                this.setState({
+                    error: true,
+                    ready: true,
+                    fetching: false,
+                });
             } else {
                 if (this.props.appData.journal.data.length !== 0) {
                     this.scheduleData = this.props.appData.journal;
                     clearInterval(id);
                     this.setState({
                         ready: true,
-                        weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length) // if holidays, length is equal to 0
+                        weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length), // if holidays, length is equal to 0
+                        fetching: false,
                     });
                 }
             }
@@ -242,9 +247,9 @@ class Schedule extends React.Component {
         );
 
         return (
-            <Div className="scheduleTale">
+            <div className="scheduleTale">
                 {subjectTales}
-            </Div>
+            </div>
         );
     };
     generateEmptyTale = () => {
@@ -282,7 +287,7 @@ class Schedule extends React.Component {
             }
         }
 
-        tales.push(<div style={{width: "40px", display: "flex"}}></div>);
+        tales.push(<div></div>);
         return tales
     };
 
@@ -401,19 +406,12 @@ class Schedule extends React.Component {
         }, 200);
     };
 
-    render() {
-        // if (JSON.parse(localStorage.getItem("appSettings")).isFavorite !== null) {
-        //     connect.send("VKWebAppAddToFavorites", {})
-        //         .then(res => {
-        //             localStorage.setItem("appSettings",
-        //                 JSON.stringify(
-        //                     JSON.parse(localStorage.getItem("appSettings"))
-        //                         .isFavorite = true
-        //                 )
-        //             )
-        //         })
-        // }
+    refresh = () => {
+        this.loadData();
+        this.setState({fetching: true});
+    };
 
+    render() {
         return (
             <Panel id={this.props.id} style={{backgroundColor: "#5690ff"}}>
                 <PanelHeader
@@ -434,7 +432,14 @@ class Schedule extends React.Component {
                     <Icon24Chevron/>
                 </Div>
                 {
-                    (this.state.ready ? this.drawShedule() : this.drawSpinner())
+                    (this.state.ready
+                        ?
+                        <PullToRefresh onRefresh={this.refresh}
+                                       isFetching={this.state.fetching}
+                                       style={{color: "#ffffff"}}>
+                            {this.drawShedule()}
+                        </PullToRefresh>
+                        : this.drawSpinner())
                 }
             </Panel>
         )

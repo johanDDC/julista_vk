@@ -20,38 +20,45 @@ class ScheduleView extends React.Component {
         super(props);
 
         this.state = {
-            modalSchedule: "modalSchedule",
+            modalSubject: "",
+            modalContent: {},
+            activeModal: null,
         };
         this.closeModal = () => {
-            this.setState({modalSchedule: null})
+            this.setState({activeModal: null})
         };
     }
 
     setModalSchedule = (modal, name) => {
         this.setState({
-            modalSchedule:
-                <ModalRoot activeModal="modalSchedule">
-                    <ModalPage
-                        id="modalSchedule"
-                        onClose={this.closeModal}
-                        settlingHeight={50}
-                        header={
-                            <ModalPageHeader
-                                left={this.props.platform === ANDROID &&
-                                <HeaderButton onClick={this.closeModal}><Icon24Cancel/></HeaderButton>}
-                            >
-                                {name}
-                            </ModalPageHeader>
-                        }>
-                        {modal}
-                    </ModalPage>
-                </ModalRoot>
+            modalSubject: name,
+            modalContent: modal,
+            activeModal: "modalSchedule",
         })
     };
 
     render() {
+        let modal =
+            <ModalRoot activeModal={this.state.activeModal}>
+                <ModalPage
+                    id="modalSchedule"
+                    onClose={this.closeModal}
+                    settlingHeight={50}
+                    header={
+                        <ModalPageHeader
+                            left={
+                                <HeaderButton onClick={this.closeModal}><Icon24Cancel/></HeaderButton>}
+                        >
+                            {this.state.modalSubject}
+                        </ModalPageHeader>
+                    }>
+                    {this.state.modalContent}
+                </ModalPage>
+            </ModalRoot>
+        ;
         return (
-            <View activePanel={(this.props.activePanel === "auth" ? "schedule" : this.props.activePanel)} modal={this.state.modalSchedule}>
+            <View activePanel={(this.props.activePanel === "auth" ? "schedule" : this.props.activePanel)}
+                  modal={modal}>
                 <Schedule id="schedule"
                           profile={this.props.profile}
                           getJournal={this.props.getJournalAction}

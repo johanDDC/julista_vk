@@ -19,10 +19,6 @@ section.View {
     height: calc(100vh - 24px);
 }
 
-/*section.View--android{*/
-/*    height: calc(100vh - 24px);*/
-/*}*/
-
 :root{
     --overlay_status_background: #5690ff;
     --overlay_status_foreground: #5690ff;
