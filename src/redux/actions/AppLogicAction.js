@@ -4,7 +4,7 @@ const axios = require('axios');
 let baseUrl = "https://bklet.ml/";
 
 let normalTimeout = 10000;
-let normalInterval = 2500;
+let normalInterval = 3000;
 
 export function getJournal(id, secret, start, end, student_id) {
         return dispatch => {
@@ -25,12 +25,11 @@ function getSchedule(id, secret, start, end, student_id, dispatcher) {
     let queries = `?student_id=${student_id}&id=${id}&secret=${secret}&start=${setCorrectYear(start.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(end.toLocaleDateString("ru-RU"))}`;
     // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(start.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(end.toLocaleDateString("ru-RU"))}`;
 
-    console.log("schedule request", baseUrl + methodUrl + queries);
+    // console.log("schedule request", baseUrl + methodUrl + queries);
 
     let intervalId;
 
     var timeoutID = setTimeout(() => {
-        console.log("schedule error");
         clearInterval(intervalId);
         dispatcher({
             type: "GET_JOURNAL_FAIL",
@@ -40,7 +39,7 @@ function getSchedule(id, secret, start, end, student_id, dispatcher) {
     intervalId = setInterval(() => {
         axios.get(baseUrl + methodUrl + queries)
             .then((response) => {
-                console.log("resp", response.data);
+                // console.log("resp", response.data);
                 if (!response.data.data === null || !response.data.error_msg) {
                     clearTimeout(timeoutID);
                     clearInterval(intervalId);
@@ -54,7 +53,6 @@ function getSchedule(id, secret, start, end, student_id, dispatcher) {
 }
 
 export function getMarks(id, secret, student_id,) {
-    console.log("STUDENT ID", student_id);
     return dispatch => {
         dispatch({
             type: "GET_MARKS_REQUEST",
@@ -73,12 +71,11 @@ function getAndAggregateMarks(id, secret, student_id, dispatcher) {
     let queries = `?student_id=${student_id}&id=${id}&secret=${secret}`;
     // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
 
-    console.log(baseUrl + methodUrl + queries);
+    // console.log(baseUrl + methodUrl + queries);
 
     let intervalId;
 
     var timeoutID = setTimeout(() => {
-        console.log("marks error");
         clearInterval(intervalId);
         dispatcher({
             type: "GET_MARKS_FAIL",
@@ -123,14 +120,11 @@ function getLMarks(id, secret, student_id, dispatcher) {
     let queries = `?student_id=${student_id}&id=${id}&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
     // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
 
-    console.log("start", startDate, startDate.toLocaleDateString("ru-RU"));
-    console.log("end", endDate, endDate.toLocaleDateString("ru-RU"));
-    console.log("error here", baseUrl + methodUrl + queries);
+    // console.log("error here", baseUrl + methodUrl + queries);
 
     let intervalId;
 
     var timeoutID = setTimeout(() => {
-        console.log("marks error");
         clearInterval(intervalId);
         dispatcher({
             type: "GET_LAST_MARKS_FAIL",
@@ -140,7 +134,7 @@ function getLMarks(id, secret, student_id, dispatcher) {
     intervalId = setInterval(() => {
         axios.get(baseUrl + methodUrl + queries)
             .then((response) => {
-                console.log("last marks resp", response.data);
+                // console.log("last marks resp", response.data);
                 if (response.data.error) {
                     dispatcher({
                         type: "GET_LAST_MARKS_FAIL",

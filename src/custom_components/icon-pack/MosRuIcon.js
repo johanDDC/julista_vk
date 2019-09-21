@@ -28,8 +28,8 @@ const MosRuIcon = props => (
         </g>
         <defs>
             <linearGradient id="paint2_linear" x1="36" y1="36" x2="0" y2="0" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#115EC2"/>
-                <stop offset="1" stop-color="#3D73BA" stop-opacity="0.47"/>
+                <stop stopColor="#115EC2"/>
+                <stop offset="1" stopColor="#3D73BA" stopOpacity="0.47"/>
             </linearGradient>
         </defs>
     </svg>

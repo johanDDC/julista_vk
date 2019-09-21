@@ -74,8 +74,8 @@ const MosregIcon = props => (
             fill="white"/>
         <defs>
             <linearGradient id="paint0_linear" x1="36" y1="36" x2="0" y2="0" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#FF2111"/>
-                <stop offset="1" stop-color="#FF2111" stop-opacity="0.47"/>
+                <stop stopColor="#FF2111"/>
+                <stop offset="1" stopColor="#FF2111" stopOpacity="0.47"/>
             </linearGradient>
         </defs>
     </svg>

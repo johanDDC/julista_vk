@@ -108,7 +108,9 @@ class Marks extends React.Component {
             let marksModal = [];
             let avg = 0;
             period.marks.forEach(mark => {
-                avg += mark.value * (mark.weight ? mark.weight : 1);
+                avg += (!isNaN(mark.value)
+                    ? mark.value * (mark.weight ? mark.weight : 1)
+                    : 0);
                 marks.push(
                     <div>
                         <Mark size="16" val={mark.value.toString()} is_routine={true} fontSize="12"/>

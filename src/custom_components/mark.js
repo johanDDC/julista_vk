@@ -5,7 +5,7 @@ import "./mark.css"
 function defineColor(val) {
     let colors = [];
 
-    if (val === "5" || val.toLowerCase() === "зачёт" || val === "Зч") {
+    if (val === "5" || val.toLowerCase() === "зачёт" || val.toLowerCase() === "зч") {
         colors[1] = "#1cb336";
         colors[0] = "#72de20";
     } else if (val === "4") {
@@ -14,7 +14,7 @@ function defineColor(val) {
     } else if (val === "3") {
         colors[0] = "#ff512f";
         colors[1] = "#f09819";
-    } else if (val === "2" || val.toLowerCase() === "незачёт" || val === "Нзч") {
+    } else if (val === "2" || val.toLowerCase() === "незачёт" || val.toLowerCase() === "нз") {
         colors[0] = "#ff4b2b";
         colors[1] = "#ff416c";
     }

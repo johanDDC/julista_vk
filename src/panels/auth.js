@@ -209,8 +209,10 @@ class Auth extends React.Component {
     };
 
     componentDidMount() {
-        // if (this.props.profile.id)
-        this.props.openModal();
+        console.log("id", this.props.profile);
+        if (this.props.profile.id) {
+            this.props.openModal();
+        }
     }
 
     render() {

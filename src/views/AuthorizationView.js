@@ -5,7 +5,7 @@ import ChooseDiary from '../panels/choose_diary'
 import ChooseStudent from '../panels/choose_student'
 import "./styles/Authorization.css"
 import {connect} from 'react-redux'
-import {doAuthorize, setDiary, setStudent} from "../redux/actions/profileAction";
+import {doAuthorize, setDiary, setStudent, vkAuth} from "../redux/actions/profileAction";
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
 
@@ -41,7 +41,7 @@ class AuthorizationView extends React.Component {
     };
 
     openModal = () => {
-        // this.setActiveModal("authThroughVk");
+        this.setActiveModal("authThroughVk");
     };
 
     viewScreenSpinner = async (switcher) => {
@@ -116,11 +116,13 @@ class AuthorizationView extends React.Component {
                         title: 'Войти',
                         type: 'primary',
                         action: () => {
+                            console.log("students", this.props.profile.student);
                             if (this.props.profile.student === null) {
                                 this.props.setPanelAction("choose_student");
                             } else {
                                 this.props.setViewAction("MainView", "schedule");
                             }
+                            this.setActiveModal(null)
                         }
                     }]}
                 >
@@ -134,6 +136,7 @@ class AuthorizationView extends React.Component {
                 <ChooseDiary id="choose_diary"
                              setDiary={this.props.setDiaryAction}
                              setPanel={this.props.setPanelAction}
+                             vkAuth={this.props.doVkAuth}
                 />
                 <Auth id="auth"
                       fetchedUser={this.props.fetchedUser}
@@ -178,6 +181,7 @@ const mapDispatchToProps = dispatch => {
         setPanelAction: panel => dispatch(setPanel(panel)),
         setViewAction: view => dispatch(setView(view)),
         setStudentAction: student => dispatch(setStudent(student)),
+        doVkAuth: params => dispatch(vkAuth(params)),
     }
 };
 

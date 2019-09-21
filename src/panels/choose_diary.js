@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./styles/choose_diary.css"
 
-import {vkAuth} from "../redux/actions/profileAction"
-
 import MosRuIcon from "../custom_components/icon-pack/MosRuIcon"
 import MosregIcon from "../custom_components/icon-pack/MosregIcon"
 import NetschoolIcon from "../custom_components/icon-pack/NetschoolIcon"
@@ -42,7 +40,7 @@ class ChooseDiary extends React.Component {
             vk_viewer_group_role: "admin",
         };
 
-        vkAuth(vk_info);
+        this.props.vkAuth(vk_info)
     };
 
     choose = (diary) => {
@@ -120,6 +118,7 @@ ChooseDiary.propTypes = {
     id: PropTypes.string.isRequired,
     setPanel: PropTypes.func.isRequired,
     setDiary: PropTypes.func.isRequired,
+    vkAuth: PropTypes.func.isRequired,
 };
 
 export default ChooseDiary;

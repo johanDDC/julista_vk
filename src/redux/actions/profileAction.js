@@ -9,19 +9,39 @@ export function vkAuth(vk_params) {
     for (let key in vk_params) {
         url += `${key}=${vk_params[key]}&`
     }
-    console.log("VK URL", url);
-    axios.get(url)
-        .then(resp => {
-            console.log("VK AUTH SUCCESS", resp.data);
-            // if (resp.data.status)
-        })
-        .catch(err => {
-            console.log("VK AUTH FAIL");
-        })
+
+    return dispatch => {
+        axios.get(url)
+            .then(resp => {
+                console.log("VK AUTH SUCCESS", resp.data);
+                if (resp.data.status) {
+                    let students = [];
+                    resp.data.students.list.forEach(e => {
+                        students.push(e);
+                    });
+                    dispatch({
+                        type: "DO_AUTHORIZATION_SUCCESS",
+                        data: {
+                            id: resp.data.id,
+                            secret: resp.data.secret,
+                            students: students,
+                            student: (students.length === 1 ? students[0] : null),
+                        },
+                    });
+                }
+            })
+            .catch(err => {
+                console.log("VK AUTH FAIL");
+                dispatch({
+                    type: "DO_VK_AUTHORIZATION_FAIL",
+                });
+            });
+    }
 }
 
 export function doAuthorize(login, password, diary, region, province, city, school) {
     return dispatch => {
+        console.log("dispatch", dispatch);
         dispatch({
             type: "DO_AUTHORIZATION_REQUEST",
             data: {
@@ -47,19 +67,10 @@ function auth(login, password, diary, dispatcher, region, province, city, school
         city: city,
         school: school,
     };
-    // let json = {
-    //     region: 40,
-    //     province: -3,
-    //     city: 3,
-    //     school: 527,
-    //     login: "banshi_shi@yahoo.com",
-    //     password: "Ibubyf19811",
-    //     diary: "mosru"
-    // };
 
     axios.post(baseUrl + methodUrl, json)
         .then((response) => {
-            console.log("resp", response.data);
+            // console.log("resp", response.data);
             let students = [];
             response.data.students.list.forEach(e => {
                 students.push(e);
@@ -111,7 +122,6 @@ function auth(login, password, diary, dispatcher, region, province, city, school
             }
         })
         .catch(error => {
-            console.log("auth error", error);
             dispatcher({
                 type: "DO_AUTHORIZATION_FAIL",
                 data: error
@@ -144,6 +154,19 @@ function bind_user(id, secret) {
             query[kvp.key] = decodeURIComponent(kvp.value);
             return query
         }, {});
+    json = {
+        sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
+        vk_access_token_settings: "",
+        vk_app_id: "6967676",
+        vk_are_notifications_enabled: "0",
+        vk_group_id: "171343913",
+        vk_is_app_user: "1",
+        vk_language: "ru",
+        vk_platform: "desktop_web",
+        vk_ref: "other",
+        vk_user_id: "143305590",
+        vk_viewer_group_role: "admin",
+    };
     json.id = id;
     json.secret = secret;
     console.log("bind data", json);

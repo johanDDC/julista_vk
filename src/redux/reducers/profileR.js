@@ -56,8 +56,23 @@ function profile(state = initialState, action) {
                 isFetching: true,
                 error: false,
             };
+        case "DO_VK_AUTHORIZATION_FAIL":
+            return {
+                ...state,
+            };
 
         case "DO_AUTHORIZATION_SUCCESS":
+            let localData = {
+                id: action.data.id,
+                secret: action.data.secret,
+                students: action.data.students,
+                student: (action.data.student
+                    ? action.data.student
+                    : (action.data.students.length === 1
+                        ? action.data.students[0]
+                        : null)),
+            };
+            localStorage.setItem("userData", JSON.stringify(localData));
             return {
                 ...state,
                 id: action.data.id,
@@ -75,6 +90,11 @@ function profile(state = initialState, action) {
                 error: true,
             };
         case "SET_DIARY":
+            let locDataDiary = localStorage.getItem("userData")
+                ? JSON.parse(localStorage.getItem("userData"))
+                : {};
+            locDataDiary.diary = action.data;
+            localStorage.setItem("userData", JSON.stringify(locDataDiary));
             return {
                 ...state,
                 diary: action.data,
@@ -82,7 +102,9 @@ function profile(state = initialState, action) {
             };
 
         case "SET_STUDENT":
-            let locData = JSON.parse(localStorage.getItem("userData"));
+            let locData = localStorage.getItem("userData")
+                ? JSON.parse(localStorage.getItem("userData"))
+                : {};
             locData.student = action.data;
             localStorage.setItem("userData", JSON.stringify(locData));
             let userData;
