@@ -18,7 +18,7 @@ class PlusView extends React.Component {
 }
 
 const mapStateToProps = store => {
-    console.log("Plus View", store);
+    // console.log("Plus View", store);
     return {
         activePanel: store.activePanel,
         profile: store.profile,

@@ -1,15 +1,15 @@
-#marks > .Panel__in{
+#marks > .Panel__in {
     padding-bottom: 0 !important;
 }
 
-.marksScreen{
+.marksScreen {
     background-color: #ffffff;
     min-height: 100vh;
     height: 100%;
     padding-bottom: 56px;
 }
 
-.marksScreenError{
+.marksScreenError {
     font-size: 16px;
     font-weight: bold;
     color: #E80A1E;
@@ -17,7 +17,7 @@
     text-align: center;
 }
 
-.marksTabs{
+.marksTabs {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -25,7 +25,7 @@
     padding-bottom: 0 !important;
 }
 
-.marksTabs > .TabsItem{
+.marksTabs > .TabsItem {
     display: flex;
     flex-grow: 2;
     background-color: transparent !important;
@@ -34,32 +34,32 @@
     height: 32px;
 }
 
-.marksTabs > .TabsItem--selected{
-    background-color:  #5690ff !important;
+.marksTabs > .TabsItem--selected {
+    background-color: #5690ff !important;
     color: #fff !important;
 }
 
-.marksTabs > .TabsItem--selected::after{
+.marksTabs > .TabsItem--selected::after {
     display: none;
 }
 
-.marksTabs > .TabsItem > div{
+.marksTabs > .TabsItem > div {
     color: #5690ff !important;
     font-weight: bold !important;
 }
 
-.marksTabs > .TabsItem--selected > div{
+.marksTabs > .TabsItem--selected > div {
     color: #fff !important;
 }
 
-.marksBlocksTitle{
+.marksBlocksTitle {
     font-size: 14px;
     color: #5690ff;
     padding-bottom: 6px;
     padding-top: 0;
 }
 
-.allMarksContainer{
+.allMarksContainer {
     flex-direction: column;
     background-color: #f6f6f6;
     border-radius: 20px;
@@ -67,24 +67,35 @@
     padding: 8px 12px 8px 12px;
 }
 
-.subjectRow{
+.subjectRow {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 8px;
 }
 
-.subject{
+.subject {
     font-size: 16px;
+    color: #292929;
     text-align: start;
 }
 
-.avg{
-    font-size: 13px;
-    color: #8C8C8C;
+.subjectRowMarks {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-.marksRow{
+.subjectRowMarksFinalMark {
+    margin-right: 8px;
+}
+
+.avg {
+    font-size: 12px;
+    color: #999999;
+}
+
+.marksRow {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -92,19 +103,19 @@
     flex-wrap: wrap;
 }
 
-.marksRow > div{
+.marksRow > div {
     margin-right: 14px;
     margin-bottom: 8px;
 }
 
-.advicesRow{
+.advicesRow {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
 }
 
-.adviceContainer{
+.adviceContainer {
     padding: 1px 7px 1px 7px;
     background: linear-gradient(90deg, #1CB336, #72DE20);
     border-radius: 10px;
@@ -112,15 +123,15 @@
     font-size: 14px;
 }
 
-.lastMarksContainer{
-    height:108px;
+.lastMarksContainer {
+    height: 108px;
 }
 
-.lastMarksContainer > .HorizontalScroll__in{
+.lastMarksContainer > .HorizontalScroll__in {
     padding: 0;
 }
 
-.lastMarkContainer{
+.lastMarkContainer {
     width: 68px;
     height: 68px;
     display: flex;
@@ -134,12 +145,12 @@
     z-index: 5;
 }
 
-.lastMarkSubject{
+.lastMarkSubject {
     font-size: 9px;
     color: #5690ff;
 }
 
-.lastMarkDate{
+.lastMarkDate {
     font-size: 9px;
     color: white;
     background-color: #5690ff;
@@ -148,7 +159,7 @@
     padding: 0 5px 0 4px;
 }
 
-.resultMarksContainer{
+.resultMarksContainer {
     background-color: #f6f6f6;
     display: flex;
     flex-direction: column;
@@ -156,39 +167,46 @@
     border-radius: 17px;
 }
 
-.resultMarksContainerSubject{
-    font-size: 17px;
-    color: #000;
-    margin-bottom: 7px;
+.resultMarksContainerSubject {
+    font-size: 16px;
+    color: #292929;
+    margin-bottom: 11px;
 }
 
-.resultMarksContainerMarks{
+.resultMarksContainerMarks {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
 }
 
-.resultMarksContainerMark{
+.resultMarksContainerMark {
     display: flex;
     flex-grow: 1;
     justify-content: center;
-    border-right: 2px solid #F6F6F6;
+    border-right: 2px solid #e8e8e8;
 }
 
-.resultMarksContainerResultedMark{
+.resultMarksContainerResultedTitle {
+    font-size: 14px;
+    color: #999999;
+    margin-right: 17px;
+}
+
+.resultMarksContainerResultedMark {
     display: flex;
     flex-grow: 1;
     justify-content: center;
+    align-items: center;
 }
 
-.modalMarkTitle{
+.modalMarkTitle {
     font-size: 14px;
     color: #5690ff;
     margin-bottom: 23px;
 }
 
-.modalMarkSubjectInfo{
+.modalMarkSubjectInfo {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -197,21 +215,21 @@
     color: #535353;
 }
 
-.modalMarkSubjectInfoLeft{
+.modalMarkSubjectInfoLeft {
     margin-right: 25px;
     font-size: 14px;
     color: #999999;
     font-weight: bold;
 }
 
-.modalMarkMarksInfo{
+.modalMarkMarksInfo {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 19px;
 }
 
-.modalMarkMarksInfoLeft{
+.modalMarkMarksInfoLeft {
     height: 100%;
     margin-right: 25px;
     display: flex;
@@ -219,29 +237,29 @@
     justify-content: flex-start;
 }
 
-.modalMarkMarksInfoContainer{
+.modalMarkMarksInfoContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-.modalMarkMarksInfoForm{
+.modalMarkMarksInfoForm {
     font-size: 16px;
     color: #292929;
 }
 
-.modalMarkMarksInfoName{
+.modalMarkMarksInfoName {
     font-size: 14px;
     color: #535353;
     margin: 7px 0 7px 0;
 }
 
-.modalMarkMarksInfoDate{
+.modalMarkMarksInfoDate {
     font-size: 12px;
     color: #999999;
 }
 
-.errorLastMarks{
+.errorLastMarks {
     font-size: 12px;
     font-weight: bold;
     color: #E80A1E;

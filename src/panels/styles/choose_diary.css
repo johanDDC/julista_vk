@@ -5,15 +5,25 @@
 .chooseDiaryScreen{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     background-color: #fff;
-    height: calc(100vh - 68px);
+    padding-bottom: 0;
+}
+
+.chooseDiaryScreen.Div--android {
+    padding-top: 21px;
+    height: calc(100vh - 77px);
+}
+
+.chooseDiaryScreen.Div--ios {
+    padding-top: 33px;
+    height: calc(100vh - 77px);
 }
 
 .chooseDiaryScreenTitle{
     font-size: 21px;
     font-weight: bold;
+    margin-bottom: 32px;
 }
 
 .chooseDiaryScreenDiaryDiaries{
@@ -22,7 +32,7 @@
 
 .chooseDiaryScreenDiaryContainer{
     width: 100%;
-    height: 44px;
+    height: 58px;
     border-radius: 20px;
     /*border: 1px solid #efefef;*/
     background-color: #f6f6f6;
@@ -30,7 +40,7 @@
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    justify-content: center;
+    /*justify-content: center;*/
 }
 
 .chooseDiaryScreenDiaryContainer > div > div{
@@ -42,9 +52,6 @@
 }
 
 .chooseDiaryScreenDiaryContainerIcon{
-    border-radius: 100%;
-    width: 30px;
-    height: 30px;
     margin: 0 15px 0 0;
 }
 
@@ -61,24 +68,4 @@
     color: #1f1f1f;
     line-height: 1.2;
     text-align: center;
-}
-
-#buttonContainer{
-    width: 100%;
-}
-
-.getInButton{
-    margin: 0;
-    padding: 0;
-    color: #fff;
-    background: linear-gradient(#3AA9FF, #8364FF, #8465FF);
-    border-radius:12px !important;
-    height: 55px !important;
-    width: 100%;
-    border: 0;
-}
-
-.getInButton > div > div{
-    font-size: 17px !important;
-    font-weight: bold !important;
 }

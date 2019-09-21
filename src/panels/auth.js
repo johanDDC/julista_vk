@@ -31,7 +31,6 @@ class Auth extends React.Component {
         this.city = null;
         this.school = "";
 
-        // this.netschoolChoose();
         this.drawRegionsSelector()
     }
 
@@ -209,16 +208,22 @@ class Auth extends React.Component {
             })
     };
 
+    componentDidMount() {
+        // if (this.props.profile.id)
+        this.props.openModal();
+    }
 
     render() {
         return (
             <Panel id={this.props.id}>
-                <PanelHeader left={
-                    <PanelHeaderBack onClick={this.btnBack}/>
-                }>
+                <PanelHeader
+                    left={
+                        <PanelHeaderBack onClick={this.btnBack}/>
+                    }
+                    noShadow={true}>
                     Авторизация
                 </PanelHeader>
-                <div className="authGroup">
+                <Div className="authGroup">
                     <Div className="welcome">
                         Добро пожаловать,
                     </Div>
@@ -283,10 +288,10 @@ class Auth extends React.Component {
                         <div className="annotate">Нажимая войти, вы соглашаетесь на обработку, хранение, передачу ваших
                             персональных данных.
                             <br/>
-                            <Link href="https://docs.google.com/document/d/1BjSTb_bgwHermREHdZlcwTDf6WowADiHIrjcDSC24OI"
-                                  target="_blank">Регламент</Link> и <Link
-                                href="https://docs.google.com/document/d/1Pt5dvKHB8404oGnpd8rVi7yVmsjM5P0hIPBV9FnrQuQ"
-                                target="_blank">политика конфиденциальности</Link></div>
+                            <Link
+                                href="https://vk.com/dev/uprivacy"
+                                target="_blank">Политика конфиденциальности</Link>
+                        </div>
                     </Div>
                     {/*<Div className="restorePassword">*/}
                     {/*    <div className="inputIcon" style={{margin: 0}}>*/}
@@ -300,12 +305,12 @@ class Auth extends React.Component {
                     {/*        </div>*/}
                     {/*</Div>*/}
                     <Div>
-                        <Button level="tertiary" className="getInButton"
+                        <Button level="tertiary" className="authSignInButton"
                                 onClick={this.buttonClick}>
                             Войти
                         </Button>
                     </Div>
-                </div>
+                </Div>
             </Panel>
         )
     }
@@ -330,6 +335,7 @@ Auth.propTypes = {
     openError: PropTypes.func.isRequired,
     openIncorrect: PropTypes.func.isRequired,
     openUnsupported: PropTypes.func,
+    openModal: PropTypes.func,
 };
 
 export default Auth;

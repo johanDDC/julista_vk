@@ -2,8 +2,15 @@
     display: flex;
     flex-direction: column;
     background-color: #fff;
-    min-height: calc(100vh - 44px);
-    overflow-y: hidden;
+    padding: 0;
+}
+
+.authGroup.Div--ios {
+    height: calc(100vh - 44px);
+}
+
+.authGroup.Div--android {
+    height: calc(100vh - 56px);
 }
 
 .welcome{
@@ -11,6 +18,8 @@
     display: flex;
     flex-direction: row;
     font-size: 24px;
+    font-weight: 600;
+    padding-left: 22px;
     padding-bottom: 0;
 }
 .medium_tip{
@@ -23,12 +32,14 @@
     color: #767676;
     font-size: 20px;
     font-weight: normal;
-    /*margin-bottom: 22px;*/
+    padding-left: 22px;
+    padding-bottom: 0;
 }
 
 .annotate{
-    color: #8E8E93;
-    font-size: 12px;
+    text-align: start;
+    color: #6d6d6d;
+    font-size: 13px;
     font-weight: normal;
 }
 
@@ -61,20 +72,21 @@
 }
 
 
-.getInButton{
+.authSignInButton {
     margin: 0;
     padding: 0;
     color: #fff;
-    background: linear-gradient(#3aa9ff, #8465ff);
-    box-shadow: 0 5px 15px 0 #4c569099;
-    border-radius:12px !important;
-    height: 55px !important;
+    background: linear-gradient(#3aa9ff, #8364ff, #8465ff);
+    box-shadow: 0 5px 15px 0 #4c569088;
+    border-radius: 12px;
+    height: 55px;
     width: 100%;
-    border: 0;
+    outline: 0;
+    /*border: 0;*/
 }
 
-.getInButton > div > div{
-    font-size: 17px !important;
+.authSignInButton > div > div {
+    font-size: 20px !important;
     font-weight: bold !important;
 }
 

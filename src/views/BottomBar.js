@@ -101,7 +101,7 @@ class BottomBar extends React.Component {
 }
 
 const mapStateToProps = store => {
-    console.log("BottomBar", store);
+    // console.log("BottomBar", store);
     return {
         activePanel: store.activePanel,
         profile: store.profile,

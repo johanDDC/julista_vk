@@ -1,7 +1,6 @@
 import connect from '@vkontakte/vk-connect-promise';
 
 let localData = JSON.parse(localStorage.getItem("userData"));
-;
 
 connect.send("VKWebAppStorageGet", {
     "keys": ["userData"],
@@ -20,13 +19,16 @@ connect.send("VKWebAppStorageGet", {
 let initialState;
 
 if (localData) {
-    console.log("LOCAL DATA", localData);
     initialState = {
         id: (localData.id ? localData.id : null),
         secret: (localData.secret ? localData.secret : null),
         diary: (localData.diary ? localData.diary : null),
         students: (localData.students ? localData.students : null),
-        student: (localData.student ? localData.student : null),
+        student: (localData.student
+            ? localData.student
+            : (localData.students
+                ? localData.students[0]
+                : null)),
         isFetching: false,
         error: false,
     }
@@ -80,9 +82,7 @@ function profile(state = initialState, action) {
             };
 
         case "SET_STUDENT":
-            console.log("SETTING STUDENT", action.data);
             let locData = JSON.parse(localStorage.getItem("userData"));
-            console.log("set student", action.data);
             locData.student = action.data;
             localStorage.setItem("userData", JSON.stringify(locData));
             let userData;

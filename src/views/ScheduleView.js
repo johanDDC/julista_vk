@@ -28,7 +28,6 @@ class ScheduleView extends React.Component {
     }
 
     setModalSchedule = (modal, name) => {
-        console.log("here");
         this.setState({
             modalSchedule:
                 <ModalRoot activeModal="modalSchedule">
@@ -67,7 +66,7 @@ class ScheduleView extends React.Component {
 withPlatform(ScheduleView);
 
 const mapStateToProps = store => {
-    console.log("Schedule View", store);
+    // console.log("Schedule View", store);
     return {
         activePanel: store.activePanel,
         profile: store.profile,

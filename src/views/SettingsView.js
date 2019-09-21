@@ -71,7 +71,7 @@ class SettingsView extends React.Component {
 withPlatform(SettingsView);
 
 const mapStateToProps = store => {
-    console.log("Settings View", store);
+    // console.log("Settings View", store);
     return {
         activePanel: store.activePanel,
         profile: store.profile,

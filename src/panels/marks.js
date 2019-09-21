@@ -151,7 +151,7 @@ class Marks extends React.Component {
                     </div>
                     <div className="modalMarkSubjectInfo">
                         <div className="modalMarkSubjectInfoLeft">
-                            {subject.year_mark ?
+                            {period.final_mark ?
                                 <Mark size="22" val={period.final_mark.toString()} is_routine={false} fontSize="14"/>
                                 : "-"}
                         </div>
@@ -173,8 +173,15 @@ class Marks extends React.Component {
                         <div className="subject">
                             {subject.name}
                         </div>
-                        <div className="avg">
-                            {isNaN(avg) ? null : avg}
+                        <div className="subjectRowMarks">
+                            {period.final_mark &&
+                            <div className="subjectRowMarksFinalMark">
+                                <Mark size="16" val={period.final_mark.toString()} is_routine={false} fontSize="12"/>
+                            </div>
+                            }
+                            <div className="avg">
+                                {isNaN(avg) ? null : avg}
+                            </div>
                         </div>
                     </div>
                     <div className="marksRow">
@@ -264,6 +271,9 @@ class Marks extends React.Component {
                     <div className="resultMarksContainerMarks">
                         {renderedMarks}
                         <div className="resultMarksContainerResultedMark">
+                            <div className="resultMarksContainerResultedTitle">
+                                Итог
+                            </div>
                             {subject.year_mark ?
                                 <Mark size="24" val={subject.year_mark.toString()} is_routine={false} fontSize="12"
                                       short={true}/>

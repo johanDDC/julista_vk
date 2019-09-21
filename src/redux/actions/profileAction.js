@@ -3,6 +3,23 @@ import connect from '@vkontakte/vk-connect-promise';
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/";
 
+export function vkAuth(vk_params) {
+    let methodUrl = "api/auth/bind_account/vk/";
+    let url = baseUrl + methodUrl + "?";
+    for (let key in vk_params) {
+        url += `${key}=${vk_params[key]}&`
+    }
+    console.log("VK URL", url);
+    axios.get(url)
+        .then(resp => {
+            console.log("VK AUTH SUCCESS", resp.data);
+            // if (resp.data.status)
+        })
+        .catch(err => {
+            console.log("VK AUTH FAIL");
+        })
+}
+
 export function doAuthorize(login, password, diary, region, province, city, school) {
     return dispatch => {
         dispatch({
@@ -39,7 +56,6 @@ function auth(login, password, diary, dispatcher, region, province, city, school
     //     password: "Ibubyf19811",
     //     diary: "mosru"
     // };
-    console.log(baseUrl + methodUrl, json);
 
     axios.post(baseUrl + methodUrl, json)
         .then((response) => {
@@ -132,11 +148,14 @@ function bind_user(id, secret) {
     json.secret = secret;
     console.log("bind data", json);
 
-    axios.post(baseUrl + methodUrl, json)
-        .then(res => {
-            console.log("bind result", res)
-        })
-        .catch(err => {
-            console.log("bind fail", err)
-        });
+    let intervalId = setInterval(() => {
+        axios.post(baseUrl + methodUrl, json)
+            .then(res => {
+                clearInterval(intervalId);
+                console.log("bind result", res)
+            })
+            .catch(err => {
+                console.log("bind fail", err)
+            });
+    }, 3000);
 }

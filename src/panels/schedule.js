@@ -33,7 +33,6 @@ class Schedule extends React.Component {
     }
 
     loadData = async () => {
-        console.log("STUDENT", this.props.profile.student);
         this.props.getJournal(this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8], this.props.profile.student.id);
 
         let id = setInterval(() => {
@@ -243,9 +242,9 @@ class Schedule extends React.Component {
         );
 
         return (
-            <div className="scheduleTale">
+            <Div className="scheduleTale">
                 {subjectTales}
-            </div>
+            </Div>
         );
     };
     generateEmptyTale = () => {
@@ -422,18 +421,18 @@ class Schedule extends React.Component {
                     <div className="scheduleHeaderMonth">{this.state.month}</div>
                 </PanelHeader>
                 {this.drawTopBar()}
-                <div id="scheduleWeekSwiperLeft" onClick={this.prevWeek}>
+                <Div id="scheduleWeekSwiperLeft" onClick={this.prevWeek}>
                     <div className="up"></div>
                     <div className="down"></div>
                     <div style={{transform: "scaleX(-1)"}}>
                         <Icon24Chevron/>
                     </div>
-                </div>
-                <div id="scheduleWeekSwiperRight" onClick={this.nextWeek}>
+                </Div>
+                <Div id="scheduleWeekSwiperRight" onClick={this.nextWeek}>
                     <div className="up"></div>
                     <div className="down"></div>
                     <Icon24Chevron/>
-                </div>
+                </Div>
                 {
                     (this.state.ready ? this.drawShedule() : this.drawSpinner())
                 }

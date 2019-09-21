@@ -9,7 +9,6 @@ class ScheduleWeekBar extends React.Component {
     }
 
     render() {
-        console.log("selected day", this.props.selectedDay, this.props.weekDuration);
         this.day = (this.props.selectedDay <= this.props.weekDuration - 1 ?
             this.props.selectedDay
             :   this.props.weekDuration - 1);

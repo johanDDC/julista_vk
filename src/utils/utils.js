@@ -17,9 +17,6 @@ export function scheduleGetDates() {
         dates.push(date.getDate());
     }
 
-    console.log("tot", today);
-    console.log("mom", monday);
-
     dates.push(monday);
     dates.push(new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + 6));
 

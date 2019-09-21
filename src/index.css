@@ -15,9 +15,13 @@
     font-family: 'Roboto', sans-serif !important;
 }
 
-section, .View, .View--ios, .View--header {
-    height: calc(100vh - 42px);
+section.View {
+    height: calc(100vh - 24px);
 }
+
+/*section.View--android{*/
+/*    height: calc(100vh - 24px);*/
+/*}*/
 
 :root{
     --overlay_status_background: #5690ff;

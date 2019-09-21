@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ScreenSpinner, Alert} from '@vkontakte/vkui';
+import {View, ScreenSpinner, Alert, ModalRoot, ModalCard} from '@vkontakte/vkui';
 import Auth from '../panels/auth'
 import ChooseDiary from '../panels/choose_diary'
 import ChooseStudent from '../panels/choose_student'
@@ -16,8 +16,33 @@ class AuthorizationView extends React.Component {
 
         this.state = {
             popout: null,
-        }
+            activeModal: null,
+            modalHistory: [],
+        };
+
     }
+
+    setActiveModal(activeModal) {
+        activeModal = activeModal || null;
+        let modalHistory = this.state.modalHistory ? [...this.state.modalHistory] : [];
+
+        if (activeModal === null) {
+            modalHistory = [];
+        } else if (modalHistory.indexOf(activeModal) !== -1) {
+            modalHistory = modalHistory.splice(0, modalHistory.indexOf(activeModal) + 1);
+        } else {
+            modalHistory.push(activeModal);
+        }
+
+        this.setState({
+            activeModal,
+            modalHistory
+        });
+    };
+
+    openModal = () => {
+        // this.setActiveModal("authThroughVk");
+    };
 
     viewScreenSpinner = async (switcher) => {
         this.setState({popout: (switcher ? <ScreenSpinner/> : null)});
@@ -78,24 +103,39 @@ class AuthorizationView extends React.Component {
         })
     };
 
-    netschoolSaving = (login, password) => {
-        this.setState({
-            netschoolData: {
-                login: login,
-                password: password,
-            }
-        })
-    };
-
     render() {
+        const modal =
+            <ModalRoot activeModal={this.state.activeModal}>
+                <ModalCard
+                    id="authThroughVk"
+                    onClose={() => this.setActiveModal(null)}
+                    // icon={<Icon56MoneyTransferOutline/>}
+                    title="Мы уже знакомы!"
+                    caption="Вы ранее уже авторизовывались в приложении, теперь вам не нужно заново вводить данные."
+                    actions={[{
+                        title: 'Войти',
+                        type: 'primary',
+                        action: () => {
+                            if (this.props.profile.student === null) {
+                                this.props.setPanelAction("choose_student");
+                            } else {
+                                this.props.setViewAction("MainView", "schedule");
+                            }
+                        }
+                    }]}
+                >
+                </ModalCard>
+            </ModalRoot>;
+
         return (
-            <View popout={this.state.popout} activePanel={this.props.activePanel === "settings" ? "choose_diary" : this.props.activePanel   }>
+            <View popout={this.state.popout}
+                  modal={modal}
+                  activePanel={this.props.activePanel === "settings" ? "choose_diary" : this.props.activePanel}>
                 <ChooseDiary id="choose_diary"
                              setDiary={this.props.setDiaryAction}
                              setPanel={this.props.setPanelAction}
                 />
                 <Auth id="auth"
-                      diary={this.props.diary}
                       fetchedUser={this.props.fetchedUser}
                       setSpinner={this.viewScreenSpinner}
                       setPanel={this.props.setPanelAction}
@@ -104,8 +144,8 @@ class AuthorizationView extends React.Component {
                       getProfile={this.props.getProfileAction}
                       openError={this.callError}
                       openIncorrect={this.callIncorrect}
-                      netschoolSave={this.netschoolSaving}
                       openUnsupported={this.callUnsupported}
+                      openModal={this.openModal}
                 />
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}
@@ -120,7 +160,7 @@ class AuthorizationView extends React.Component {
 
 
 const mapStateToProps = store => {
-    console.log("Auth View", store);
+    // console.log("Auth View", store);
     return {
         activePanel: store.activePanel,
         diary: store.diary,
