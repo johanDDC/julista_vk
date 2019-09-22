@@ -38,7 +38,7 @@ class SettingsView extends React.Component {
                                          this.props.setMarkAction(4);
                                      }}
                                      before={<PurposeMarkFour/>}>
-                        Правильно оценивай свои силы ;)
+                        Не переоценивай себя ;)
                     </ActionSheetItem>
                     <ActionSheetItem autoclose
                                      onClick={() => {
