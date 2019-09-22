@@ -94,7 +94,7 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                         console.log("VK Storage Set Fail", err);
                         localStorage.setItem("userData", JSON.stringify(localData));
                     });
-                // bind_user(response.data.id, response.data.secret);
+                bind_user(response.data.id, response.data.secret);
                 window.ga('diaryTracker.set', {
                     diary: diary
                 });
@@ -154,31 +154,28 @@ function bind_user(id, secret) {
             query[kvp.key] = decodeURIComponent(kvp.value);
             return query
         }, {});
-    json = {
-        sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
-        vk_access_token_settings: "",
-        vk_app_id: "6967676",
-        vk_are_notifications_enabled: "0",
-        vk_group_id: "171343913",
-        vk_is_app_user: "1",
-        vk_language: "ru",
-        vk_platform: "desktop_web",
-        vk_ref: "other",
-        vk_user_id: "143305590",
-        vk_viewer_group_role: "admin",
-    };
+    // json = {
+    //     sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
+    //     vk_access_token_settings: "",
+    //     vk_app_id: "6967676",
+    //     vk_are_notifications_enabled: "0",
+    //     vk_group_id: "171343913",
+    //     vk_is_app_user: "1",
+    //     vk_language: "ru",
+    //     vk_platform: "desktop_web",
+    //     vk_ref: "other",
+    //     vk_user_id: "143305590",
+    //     vk_viewer_group_role: "admin",
+    // };
     json.id = id;
     json.secret = secret;
     console.log("bind data", json);
 
-    let intervalId = setInterval(() => {
-        axios.post(baseUrl + methodUrl, json)
-            .then(res => {
-                clearInterval(intervalId);
-                console.log("bind result", res)
-            })
-            .catch(err => {
-                console.log("bind fail", err)
-            });
-    }, 3000);
+    axios.post(baseUrl + methodUrl, json)
+        .then(res => {
+            console.log("bind result", res)
+        })
+        .catch(err => {
+            console.log("bind fail", err)
+        });
 }

@@ -9,7 +9,8 @@ import ScheduleWeekBar from "../custom_components/scheduleTopBar"
 import Icon24Chevron from '@vkontakte/icons/dist/24/chevron';
 import SubjectHWIcon from "../custom_components/icon-pack/SubjectHWIcon"
 import SubjectRoomIcon from "../custom_components/icon-pack/SubjectRoomIcon"
-import connect from '@vkontakte/vk-connect-promise';
+import SubjectTopicIcon from "../custom_components/icon-pack/SubjectTopicIcon"
+import SubjectModuleIcon from "../custom_components/icon-pack/SubjectModuleIcon"
 
 
 class Schedule extends React.Component {
@@ -116,82 +117,74 @@ class Schedule extends React.Component {
                 }
             }
             let modal = (
-                subject.time ?
+                subject.time &&
+                <div>
+                    {subject.marks &&
                     <div>
-                        {subject.marks ?
-                            <div>
-                                <div className="modalScheduleTitle">
-                                    Сведения о предмете
-                                </div>
-                                {modalMarksPresentation}
-                            </div>
-                            : null}
-                        {homework ?
-                            <div>
-                                <div className="modalScheduleTitle">
-                                    Домашнее задание
-                                </div>
-                                <div className="modalScheduleInfoRow">
-                                    <div className="modalScheduleInfoRowLeft">
-                                        <SubjectHWIcon/>
-                                    </div>
-                                    <div className="modalScheduleInfoRowText">
-                                        {homework}
-                                    </div>
-                                </div>
-                            </div>
-                            : null}
-                        {subject.room ?
-                            <div>
-                                <div className="modalScheduleTitle">
-                                    Кабинет
-                                </div>
-                                <div className="modalScheduleInfoRow">
-                                    <div className="modalScheduleInfoRowLeft">
-                                        <SubjectRoomIcon/>
-                                    </div>
-                                    <div className="modalScheduleInfoRowText">
-                                        {subject.room}
-                                    </div>
-                                </div>
-                            </div>
-                            : null}
-                        {subject.label ?
-                            <div>
-                                <div className="modalScheduleTitle">
-                                    Тема урока
-                                </div>
-                                <div className="modalScheduleInfoRow">
-                                    <div className="modalScheduleInfoRowLeft">
-                                        -
-                                    </div>
-                                    {subject.label.title}
-                                    <div className="modalScheduleInfoRowText">
-                                    </div>
-                                </div>
-                            </div>
-                            : null}
-                        {subject.label ?
-                            (subject.label.module ?
-                                <div>
-                                    <div className="modalScheduleTitle">
-                                        Модуль
-                                    </div>
-                                    <div className="modalScheduleInfoRow">
-                                        <div className="modalScheduleInfoRowLeft">
-                                            -
-                                        </div>
-                                        <div className="modalScheduleInfoRowText">
-                                            {subject.label.module}
-                                        </div>
-                                    </div>
-                                </div>
-                                : null)
-                            : null}
-                        <div className="modalEmptyElement">
+                        <div className="modalScheduleTitle">
+                            Сведения о предмете
                         </div>
+                        {modalMarksPresentation}
+                    </div>}
+                    {homework &&
+                    <div>
+                        <div className="modalScheduleTitle">
+                            Домашнее задание
+                        </div>
+                        <div className="modalScheduleInfoRow">
+                            <div className="modalScheduleInfoRowLeft">
+                                <SubjectHWIcon/>
+                            </div>
+                            <div className="modalScheduleInfoRowText">
+                                {homework}
+                            </div>
+                        </div>
+                    </div>}
+                    {subject.room &&
+                    <div>
+                        <div className="modalScheduleTitle">
+                            Кабинет
+                        </div>
+                        <div className="modalScheduleInfoRow">
+                            <div className="modalScheduleInfoRowLeft">
+                                <SubjectRoomIcon/>
+                            </div>
+                            <div className="modalScheduleInfoRowText">
+                                {subject.room}
+                            </div>
+                        </div>
+                    </div>}
+                    {subject.label.title &&
+                    <div>
+                        <div className="modalScheduleTitle">
+                            Тема урока
+                        </div>
+                        <div className="modalScheduleInfoRow">
+                            <div className="modalScheduleInfoRowLeft">
+                                <SubjectTopicIcon/>
+                            </div>
+                            {subject.label.title}
+                            <div className="modalScheduleInfoRowText">
+                            </div>
+                        </div>
+                    </div>}
+                    {subject.label.module &&
+                    <div>
+                        <div className="modalScheduleTitle">
+                            Модуль
+                        </div>
+                        <div className="modalScheduleInfoRow">
+                            <div className="modalScheduleInfoRowLeft">
+                                <SubjectModuleIcon/>
+                            </div>
+                            <div className="modalScheduleInfoRowText">
+                                {subject.label.module}
+                            </div>
+                        </div>
+                    </div>}
+                    <div className="modalEmptyElement">
                     </div>
-                    : null
+                </div>
             );
 
             return (

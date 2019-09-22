@@ -26,19 +26,19 @@ class ChooseDiary extends React.Component {
                 query[kvp.key] = decodeURIComponent(kvp.value);
                 return query
             }, {});
-        vk_info = {
-            sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
-            vk_access_token_settings: "",
-            vk_app_id: "6967676",
-            vk_are_notifications_enabled: "0",
-            vk_group_id: "171343913",
-            vk_is_app_user: "1",
-            vk_language: "ru",
-            vk_platform: "desktop_web",
-            vk_ref: "other",
-            vk_user_id: "143305590",
-            vk_viewer_group_role: "admin",
-        };
+        // vk_info = {
+        //     sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
+        //     vk_access_token_settings: "",
+        //     vk_app_id: "6967676",
+        //     vk_are_notifications_enabled: "0",
+        //     vk_group_id: "171343913",
+        //     vk_is_app_user: "1",
+        //     vk_language: "ru",
+        //     vk_platform: "desktop_web",
+        //     vk_ref: "other",
+        //     vk_user_id: "143305590",
+        //     vk_viewer_group_role: "admin",
+        // };
 
         this.props.vkAuth(vk_info)
     };
@@ -69,19 +69,19 @@ class ChooseDiary extends React.Component {
                             <div className="chooseDiaryScreenDiaryContainerChecker">
                             </div>
                         </Button>
-                        <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
-                                onClick={() => {
-                                    this.d = "mosregru";
-                                    this.choose(this.d);
-                                }}>
-                            <div className="chooseDiaryScreenDiaryContainerIcon"
-                            >
-                                <MosregIcon/>
-                            </div>
-                            <div className="chooseDiaryScreenDiaryContainerTitle">Школьный портал МО</div>
-                            <div className="chooseDiaryScreenDiaryContainerChecker">
-                            </div>
-                        </Button>
+                        {/*<Button level="tertiary" className="chooseDiaryScreenDiaryContainer"*/}
+                        {/*        onClick={() => {*/}
+                        {/*            this.d = "mosregru";*/}
+                        {/*            this.choose(this.d);*/}
+                        {/*        }}>*/}
+                        {/*    <div className="chooseDiaryScreenDiaryContainerIcon"*/}
+                        {/*    >*/}
+                        {/*        <MosregIcon/>*/}
+                        {/*    </div>*/}
+                        {/*    <div className="chooseDiaryScreenDiaryContainerTitle">Школьный портал МО</div>*/}
+                        {/*    <div className="chooseDiaryScreenDiaryContainerChecker">*/}
+                        {/*    </div>*/}
+                        {/*</Button>*/}
                         <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
                                 onClick={() => {
                                     this.d = "netschool";
