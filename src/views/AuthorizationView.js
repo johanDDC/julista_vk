@@ -111,18 +111,29 @@ class AuthorizationView extends React.Component {
                     onClose={() => this.setActiveModal(null)}
                     // icon={<Icon56MoneyTransferOutline/>}
                     title="Мы уже знакомы!"
-                    caption="Вы ранее уже авторизовывались в приложении, теперь вам не нужно заново вводить данные."
+                    caption="Вы можете войти в дневник не вводя данные."
                     actions={[{
                         title: 'Войти',
                         type: 'primary',
                         action: () => {
-                            console.log("students", this.props.profile.student);
                             if (this.props.profile.student === null) {
                                 this.props.setPanelAction("choose_student");
                             } else {
                                 this.props.setViewAction("MainView", "schedule");
                             }
-                            this.setActiveModal(null)
+                            let locData = localStorage.getItem("userData")
+                                ? JSON.parse(localStorage.getItem("userData"))
+                                : {};
+                            locData = {
+                                ...locData,
+                                id: this.props.profile.id,
+                                secret: this.props.profile.secret,
+                                diary: this.props.profile.diary,
+                                students: this.props.profile.students,
+                                student: this.props.profile.student,
+                            };
+                            localStorage.setItem("userData", JSON.stringify(locData));
+                            this.setActiveModal(null);
                         }
                     }]}
                 >

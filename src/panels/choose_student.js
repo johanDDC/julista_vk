@@ -44,9 +44,9 @@ class ChooseStudent extends React.Component {
         return (
             <Panel id={this.props.id}>
                 <Div className="chooseStudentScreen">
-                    <span className="chooseStudentTitle">
+                    <div className="chooseStudentTitle">
                         Выберите ученика
-                    </span>
+                    </div>
                     <div className="chooseStudentScreenStudents">
                         {this.students}
                     </div>

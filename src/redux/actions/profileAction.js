@@ -20,7 +20,7 @@ export function vkAuth(vk_params) {
                         students.push(e);
                     });
                     dispatch({
-                        type: "DO_AUTHORIZATION_SUCCESS",
+                        type: "DO_VK_AUTHORIZATION_SUCCESS",
                         data: {
                             id: resp.data.id,
                             secret: resp.data.secret,
@@ -94,7 +94,7 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                         console.log("VK Storage Set Fail", err);
                         localStorage.setItem("userData", JSON.stringify(localData));
                     });
-                bind_user(response.data.id, response.data.secret);
+                // bind_user(response.data.id, response.data.secret);
                 window.ga('diaryTracker.set', {
                     diary: diary
                 });

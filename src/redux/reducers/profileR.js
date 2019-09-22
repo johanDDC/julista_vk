@@ -56,6 +56,17 @@ function profile(state = initialState, action) {
                 isFetching: true,
                 error: false,
             };
+        case "DO_VK_AUTHORIZATION_SUCCESS":
+            return {
+                ...state,
+                id: action.data.id,
+                secret: action.data.secret,
+                students: action.data.students,
+                student: action.data.student,
+                isFetching: false,
+                error: false,
+            };
+
         case "DO_VK_AUTHORIZATION_FAIL":
             return {
                 ...state,
@@ -66,11 +77,6 @@ function profile(state = initialState, action) {
                 id: action.data.id,
                 secret: action.data.secret,
                 students: action.data.students,
-                student: (action.data.student
-                    ? action.data.student
-                    : (action.data.students.length === 1
-                        ? action.data.students[0]
-                        : null)),
             };
             localStorage.setItem("userData", JSON.stringify(localData));
             return {
@@ -91,10 +97,11 @@ function profile(state = initialState, action) {
             };
         case "SET_DIARY":
             let locDataDiary = localStorage.getItem("userData")
-                ? JSON.parse(localStorage.getItem("userData"))
-                : {};
-            locDataDiary.diary = action.data;
-            localStorage.setItem("userData", JSON.stringify(locDataDiary));
+            if (locDataDiary) {
+                locDataDiary = JSON.parse(locDataDiary);
+                locDataDiary.diary = action.data;
+                localStorage.setItem("userData", JSON.stringify(locDataDiary));
+            }
             return {
                 ...state,
                 diary: action.data,

@@ -23,4 +23,5 @@ section.View {
     --overlay_status_background: #5690ff;
     --overlay_status_foreground: #5690ff;
     --overlay_status_icon: #5690ff;
+    --statusbar_alternate_legacy_background: transparent;
 }

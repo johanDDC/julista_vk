@@ -23,7 +23,7 @@ class Settings extends React.Component {
             ready: false,
         };
 
-        this.settings = (localStorage.getItem("appSettings") ? JSON.parse(localStorage.getItem("appSettings")) : null);
+        this.settings = (localStorage.getItem("appSettings") ? JSON.parse(localStorage.getItem("appSettings")) : {});
     }
 
     signOut = () => {

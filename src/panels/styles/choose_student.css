@@ -7,11 +7,22 @@
     flex-direction: column;
     align-items: center;
     background-color: #fff;
-    height: calc(100vh - 68px);
+    padding-bottom: 0;
+}
+
+.chooseStudentScreen.Div--android {
+    padding-top: 21px;
+    height: calc(100vh - 77px);
+}
+
+.chooseStudentScreen.Div--ios {
+    padding-top: 33px;
+    height: calc(100vh - 77px);
 }
 
 .chooseStudentTitle{
-    font-size: 30px;
+    font-size: 24px;
+    color: #212121;
     font-weight: bold;
 }
 

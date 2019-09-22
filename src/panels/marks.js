@@ -123,15 +123,24 @@ class Marks extends React.Component {
                                   weight={(mark.weight ? mark.weight.toString() : "1")}/>
                         </div>
                         <div className="modalMarkMarksInfoContainer">
-                            <div className="modalMarkMarksInfoForm">
-                                {mark.form ? mark.form : null}
-                            </div>
-                            <div className="modalMarkMarksInfoName">
-                                {mark.name ? mark.name : null}
-                            </div>
-                            <div className="modalMarkMarksInfoDate">
-                                {mark.date ? mark.date : null}
-                            </div>
+                            {mark.form
+                                ?
+                                <div className="modalMarkMarksInfoForm">
+                                    {mark.form}
+                                </div>
+                                : null}
+                            {mark.name
+                                ?
+                                <div className="modalMarkMarksInfoName">
+                                    {mark.name}
+                                </div>
+                                : null}
+                            {mark.date
+                                ?
+                                <div className="modalMarkMarksInfoDate">
+                                    {mark.date}
+                                </div>
+                                : null}
                         </div>
                     </div>
                 );

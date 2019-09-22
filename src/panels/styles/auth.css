@@ -6,11 +6,11 @@
 }
 
 .authGroup.Div--ios {
-    height: calc(100vh - 44px);
+    height: calc(100% - 44px);
 }
 
 .authGroup.Div--android {
-    height: calc(100vh - 56px);
+    height: calc(100% - 56px);
 }
 
 .welcome{
