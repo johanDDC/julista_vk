@@ -60,6 +60,7 @@
 }
 
 .allMarksContainer {
+    display: flex;
     flex-direction: column;
     background-color: #f6f6f6;
     border-radius: 20px;
@@ -124,21 +125,24 @@
 }
 
 .lastMarksContainer {
-    height: 108px;
+    min-height: 108px;
 }
 
 .lastMarksContainer > .HorizontalScroll__in {
     padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 .lastMarkContainer {
-    width: 68px;
-    height: 68px;
+    min-width: 68px;
+    min-height: 68px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 4px 4px 11px 0 rgba(0, 0, 0, 0.15);
     background-color: #fff;
     border-radius: 20px;
     margin: 5px 0 10px 10px;
@@ -148,14 +152,15 @@
 .lastMarkSubject {
     font-size: 9px;
     color: #5690ff;
+    text-align: center;
+    margin-top: 9px;
 }
 
 .lastMarkDate {
     font-size: 9px;
     color: white;
-    background-color: #5690ff;
     border-radius: 7px;
-    margin: 0 5px 0 4px;
+    margin: 6px 5px 0 4px;
     padding: 0 5px 0 4px;
 }
 

@@ -61,6 +61,7 @@ class MarksView extends React.Component {
                        getLastMarks={this.props.getLastMarksAction}
                        openModal={this.setModalMark}
                        closeModal={this.closeModal}
+                       expectedMark={this.props.expectedMark}
                 />
             </View>
         )
@@ -73,6 +74,7 @@ const mapStateToProps = store => {
         activePanel: store.activePanel,
         profile: store.profile,
         appLogic: store.appLogic,
+        expectedMark: store.expectedMark,
     }
 };
 

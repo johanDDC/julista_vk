@@ -94,3 +94,11 @@ export function getStartDateForLastMarks(dueDate) {
     let startDate = new Date(dueDate.getFullYear(), dueDate.getMonth(), dueDate.getDate() - 7);
     return startDate;
 }
+
+
+export function turnIntoDate(string) {
+    let dateParams = string.split('.');
+    let date = new Date(dateParams[0] - 0, dateParams[1] - 1, dateParams[2] - 0);
+
+    return date;
+}

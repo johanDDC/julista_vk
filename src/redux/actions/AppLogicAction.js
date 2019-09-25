@@ -7,7 +7,7 @@ let normalTimeout = 10000;
 let normalInterval = 3000;
 
 export function getJournal(id, secret, start, end, student_id) {
-        return dispatch => {
+    return dispatch => {
         dispatch({
             type: "GET_JOURNAL_REQUEST",
             data: {
@@ -99,7 +99,6 @@ function getAndAggregateMarks(id, secret, student_id, dispatcher) {
 }
 
 export function getLastMarks(id, secret, student_id) {
-
     return dispatch => {
         dispatch({
             type: "GET_LAST_MARKS_REQUEST",
@@ -113,12 +112,7 @@ export function getLastMarks(id, secret, student_id) {
 }
 
 function getLMarks(id, secret, student_id, dispatcher) {
-    let methodUrl = "api/diary/marks/dates/";
-    let endDate = new Date();
-    let startDate = getStartDateForLastMarks(endDate);
-
-    let queries = `?student_id=${student_id}&id=${id}&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
-    // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
+    let methodUrl = `api/diary/marks/range/?before=5&after=0&id=${id}&secret=${secret}&student_id=${student_id}`;
 
     // console.log("error here", baseUrl + methodUrl + queries);
 
@@ -132,9 +126,9 @@ function getLMarks(id, secret, student_id, dispatcher) {
         })
     }, normalTimeout);
     intervalId = setInterval(() => {
-        axios.get(baseUrl + methodUrl + queries)
+        axios.get(baseUrl + methodUrl)
             .then((response) => {
-                // console.log("last marks resp", response.data);
+                console.log("last marks resp", response.data);
                 if (response.data.error) {
                     dispatcher({
                         type: "GET_LAST_MARKS_FAIL",

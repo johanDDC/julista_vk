@@ -162,12 +162,15 @@
     border-radius: 0 20px 20px 0;
     position: absolute;
     left: 0;
-    top: 76px;
     width: 28px;
     height: 28px;
     font-size: 20px;
     color: #5690ff;
     padding: 0;
+}
+
+#scheduleWeekSwiperLeft.Div--android {
+    top: 76px;
 }
 
 #scheduleWeekSwiperLeft.Div--ios {
@@ -183,12 +186,15 @@
     border-radius: 20px 0 0 20px;
     position: absolute;
     left: calc(100% - 28px);
-    top: 76px;
     width: 28px;
     height: 28px;
     font-size: 20px;
     color: #5690ff;
     padding: 0;
+}
+
+#scheduleWeekSwiperRight.Div--android {
+    top: 76px;
 }
 
 #scheduleWeekSwiperRight.Div--ios {
@@ -263,10 +269,6 @@
     border-radius: 0 999px 0 0;
 }
 
-.PullToRefresh.PullToRefresh--ios .PullToRefresh__spinner {
-    color: #ffffff !important;
-}
-
-.PullToRefresh.PullToRefresh--android .PullToRefresh__spinner {
-    color: #5690ff !important;
+#arrow {
+    display: none;
 }

@@ -1,4 +1,4 @@
-import {Gallery, Panel, PanelHeader, Div, PullToRefresh} from '@vkontakte/vkui';
+import {Gallery, Panel, PanelHeader, Div} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
@@ -11,6 +11,9 @@ import SubjectHWIcon from "../custom_components/icon-pack/SubjectHWIcon"
 import SubjectRoomIcon from "../custom_components/icon-pack/SubjectRoomIcon"
 import SubjectTopicIcon from "../custom_components/icon-pack/SubjectTopicIcon"
 import SubjectModuleIcon from "../custom_components/icon-pack/SubjectModuleIcon"
+import PullToRefreshContext from "../custom_components/pullToRefreshContext"
+
+import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
 
 
 class Schedule extends React.Component {
@@ -35,6 +38,7 @@ class Schedule extends React.Component {
     }
 
     loadData = async () => {
+        console.log("here");
         this.props.getJournal(this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8], this.props.profile.student.id);
 
         let id = setInterval(() => {
@@ -54,6 +58,7 @@ class Schedule extends React.Component {
                         weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length), // if holidays, length is equal to 0
                         fetching: false,
                     });
+                    return 0;
                 }
             }
         }, 200);
@@ -154,34 +159,38 @@ class Schedule extends React.Component {
                             </div>
                         </div>
                     </div>}
-                    {subject.label.title &&
-                    <div>
-                        <div className="modalScheduleTitle">
-                            Тема урока
-                        </div>
-                        <div className="modalScheduleInfoRow">
-                            <div className="modalScheduleInfoRowLeft">
-                                <SubjectTopicIcon/>
+                    {subject.label
+                        ? subject.label.title &&
+                        <div>
+                            <div className="modalScheduleTitle">
+                                Тема урока
                             </div>
-                            {subject.label.title}
-                            <div className="modalScheduleInfoRowText">
-                            </div>
-                        </div>
-                    </div>}
-                    {subject.label.module &&
-                    <div>
-                        <div className="modalScheduleTitle">
-                            Модуль
-                        </div>
-                        <div className="modalScheduleInfoRow">
-                            <div className="modalScheduleInfoRowLeft">
-                                <SubjectModuleIcon/>
-                            </div>
-                            <div className="modalScheduleInfoRowText">
-                                {subject.label.module}
+                            <div className="modalScheduleInfoRow">
+                                <div className="modalScheduleInfoRowLeft">
+                                    <SubjectTopicIcon/>
+                                </div>
+                                {subject.label.title}
+                                <div className="modalScheduleInfoRowText">
+                                </div>
                             </div>
                         </div>
-                    </div>}
+                        : null}
+                    {subject.label ?
+                        subject.label.module &&
+                        <div>
+                            <div className="modalScheduleTitle">
+                                Модуль
+                            </div>
+                            <div className="modalScheduleInfoRow">
+                                <div className="modalScheduleInfoRowLeft">
+                                    <SubjectModuleIcon/>
+                                </div>
+                                <div className="modalScheduleInfoRowText">
+                                    {subject.label.module}
+                                </div>
+                            </div>
+                        </div>
+                        : null}
                     <div className="modalEmptyElement">
                     </div>
                 </div>
@@ -248,7 +257,7 @@ class Schedule extends React.Component {
     generateEmptyTale = () => {
         return (
             <div className="scheduleTale">
-                <p style={{textAlign: "center"}}>Сегодня нет занятий</p>
+                <p style={{textAlign: "center", color: "#000000"}}>Сегодня нет занятий</p>
             </div>
         )
     };
@@ -400,8 +409,20 @@ class Schedule extends React.Component {
     };
 
     refresh = () => {
-        this.loadData();
-        this.setState({fetching: true});
+        return new Promise((resolve, reject) => {
+            this.setState({fetching: true});
+            this.loadData();
+            setTimeout(() => {
+                let id = setInterval(() => {
+                    if (!this.state.fetching) {
+                        clearInterval(id);
+                        resolve();
+                    }
+                }, 400);
+            }, 400);
+        })
+            .then(r => {
+            })
     };
 
     render() {
@@ -424,16 +445,28 @@ class Schedule extends React.Component {
                     <div className="down"></div>
                     <Icon24Chevron/>
                 </Div>
-                {
-                    (this.state.ready
-                        ?
-                        <PullToRefresh onRefresh={this.refresh}
-                                       isFetching={this.state.fetching}
-                                       style={{color: "#ffffff"}}>
-                            {this.drawShedule()}
-                        </PullToRefresh>
-                        : this.drawSpinner())
-                }
+                <div className="pullToRefreshContainer">
+                    {
+                        (this.state.ready
+                            ?
+                            <PullToRefresh
+                                pullDownContent={<PullDownContent
+                                    label=""
+                                />}
+                                releaseContent={<ReleaseContent
+                                    label=""
+                                />}
+                                refreshContent={<PullToRefreshContext/>}
+                                pullDownThreshold={75}
+                                onRefresh={this.refresh}
+                                triggerHeight={25}
+                                backgroundColor="#5690ff"
+                                startInvisible={true}>
+                                {this.drawShedule()}
+                            </PullToRefresh>
+                            : this.drawSpinner())
+                    }
+                </div>
             </Panel>
         )
     }

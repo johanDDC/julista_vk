@@ -9,9 +9,11 @@ import {
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/marks.css"
+import {turnIntoDate} from "../utils/utils"
 
 import Mark from "../custom_components/mark"
 import CustomSpinner from "../custom_components/customSpinner";
+import AdvisesRow from "../custom_components/advisesRow";
 
 class Marks extends React.Component {
     constructor(props) {
@@ -56,11 +58,11 @@ class Marks extends React.Component {
                 clearInterval(id2);
                 this.setState({errorLastMarks: true, ready: true});
             }
-            // if (this.props.appData.lastMarks.data.length !== 0 && !this.state.errorLastMarks) {
-            //     this.lastMarksData = this.props.appData.lastMarks;
-            //     clearInterval(id2);
-            //     this.startRender();
-            // }
+            if (this.props.appData.lastMarks.data.length !== 0 && !this.state.errorLastMarks) {
+                this.lastMarksData = this.props.appData.lastMarks;
+                clearInterval(id2);
+                // this.startRender();
+            }
         }, 200);
     };
 
@@ -107,7 +109,9 @@ class Marks extends React.Component {
             let marks = [];
             let marksModal = [];
             let avg = 0;
+            let marksDataframe = [];
             period.marks.forEach(mark => {
+                marksDataframe.push(mark.value - 0);
                 avg += (!isNaN(mark.value)
                     ? mark.value * (mark.weight ? mark.weight : 1)
                     : 0);
@@ -198,11 +202,11 @@ class Marks extends React.Component {
                     <div className="marksRow">
                         {marks}
                     </div>
-                    {/*<div className="advicesRow">*/}
-                    {/*    <div className="adviceContainer">*/}
-                    {/*        Получите 1 пятерку*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <AdvisesRow
+                        expectedMark={this.props.expectedMark}
+                        allMarks={marksDataframe}
+                        avg={(avg - 0)}
+                    />
                 </div>
             );
         };
@@ -224,19 +228,44 @@ class Marks extends React.Component {
                 )
             } else {
                 if (this.lastMarksData.data.length !== 0 && this.lastMarksData.data.lessons.length !== 0) {
+                    let lastMarks = [];
+                    Object.keys(this.lastMarksData.data.dates).forEach(date => {
+                        this.lastMarksData.data.dates[date].forEach(mark => {
+                            let label;
+
+                            let day = turnIntoDate(mark.date);
+                            let today = new Date();
+                            let shift = today.getDate() - day.getDate();
+
+                            if (shift === 0) label = "Сегодня";
+                            else if (shift === 1) label = "Вчера";
+                            else label = false;
+
+                            lastMarks.push(
+                                <Div className="lastMarkContainer">
+                                    <div className="lastMarkVal">
+                                        <Mark size="32" val={mark.value.toString()} is_routine={false} fontSize="20"/>
+                                    </div>
+                                    <div className="lastMarkSubject">{mark.subject}</div>
+                                    {label && <div className="lastMarkDate"
+                                                   style={{
+                                                       backgroundColor: label === "Сегодня"
+                                                           ? "#5690ff"
+                                                           : "#f6f6f6"
+                                                       , color: label === "Вчера" && "#999999"
+                                                   }}>{label}</div>}
+                                </Div>
+                            );
+                        });
+                    });
+                    console.log("components", lastMarks);
                     return (
                         <div>
                             <Div className="marksBlocksTitle">
                                 ПОСЛЕДНИЕ ОЦЕНКИ
                             </Div>
                             <HorizontalScroll className="lastMarksContainer">
-                                <Div className="lastMarkContainer">
-                                    <div className="lastMarkVal">
-                                        <Mark size="36" val="5" is_routine={false} fontSize="20"/>
-                                    </div>
-                                    <div className="lastMarkSubject">Математика</div>
-                                    <div className="lastMarkDate">Сегодня</div>
-                                </Div>
+                                {lastMarks.reverse()}
                             </HorizontalScroll>
                         </div>
                     );
@@ -248,7 +277,7 @@ class Marks extends React.Component {
 
         return (
             <div id={currentTab}>
-                {/*{drawLastMarks()}*/}
+                {drawLastMarks()}
                 <Div className="marksBlocksTitle">
                     ВСЕ ОЦЕНКИ
                 </Div>
@@ -346,6 +375,7 @@ Marks.propTypes = {
     appData: PropTypes.any.isRequired,
     openModal: PropTypes.func.isRequired,
     closeModal: PropTypes.func.isRequired,
+    expectedMark: PropTypes.string.isRequired,
 };
 
 export default Marks;
