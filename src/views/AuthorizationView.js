@@ -3,12 +3,14 @@ import {View, ScreenSpinner, Alert, ModalRoot, ModalCard} from '@vkontakte/vkui'
 import Auth from '../panels/auth'
 import ChooseDiary from '../panels/choose_diary'
 import ChooseStudent from '../panels/choose_student'
+import ChooseSchool from '../panels/choose_school'
 import "./styles/Authorization.css"
 import {connect} from 'react-redux'
 import {doAuthorize, setDiary, setStudent, vkAuth} from "../redux/actions/profileAction";
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
 
+let choose_schools_data = [];
 
 class AuthorizationView extends React.Component {
     constructor(props) {
@@ -160,6 +162,12 @@ class AuthorizationView extends React.Component {
                       openIncorrect={this.callIncorrect}
                       openUnsupported={this.callUnsupported}
                       openModal={this.openModal}
+                      stateData={choose_schools_data}
+                />
+                <ChooseSchool id="choose_school"
+                              setPanel={this.props.setPanelAction}
+                              schools={choose_schools_data[0]}
+                              chooser={choose_school}
                 />
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}
@@ -171,6 +179,11 @@ class AuthorizationView extends React.Component {
         )
     }
 }
+
+let choose_school = (school) => {
+    console.log("choosen", school);
+    choose_schools_data.push(school)
+};
 
 
 const mapStateToProps = store => {
@@ -189,7 +202,11 @@ const mapDispatchToProps = dispatch => {
         getProfileAction: (login, password, diary, region, province, city, school) => {
             dispatch(doAuthorize(login, password, diary, region, province, city, school));
         },
-        setPanelAction: panel => dispatch(setPanel(panel)),
+        setPanelAction: (panel, kwarg) => {
+            if (kwarg)
+                choose_schools_data = kwarg;
+            dispatch(setPanel(panel))
+        },
         setViewAction: view => dispatch(setView(view)),
         setStudentAction: student => dispatch(setStudent(student)),
         doVkAuth: params => dispatch(vkAuth(params)),

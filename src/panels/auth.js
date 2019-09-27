@@ -1,4 +1,4 @@
-import {Div, Panel, PanelHeader, Link, Button, Select, Spinner} from '@vkontakte/vkui';
+import {Div, Panel, PanelHeader, Link, Button, Select, Spinner, SelectMimicry} from '@vkontakte/vkui';
 import PanelHeaderBack from '@vkontakte/vkui/dist/components/PanelHeaderBack/PanelHeaderBack';
 import PropTypes from "prop-types";
 import React from "react";
@@ -23,13 +23,14 @@ class Auth extends React.Component {
             cities: null,
             ready: false,
             netschoolSelector: (this.props.profile.diary === "netschool" ? <Spinner size="medium"/> : null),
-            regions: <Spinner size="medium"/>
+            regions: <Spinner size="medium"/>,
+
+            choosenSchool: this.props.stateData[6],
         };
 
         this.region = null;
         this.province = null;
         this.city = null;
-        this.school = "";
 
         this.drawRegionsSelector()
     }
@@ -46,18 +47,13 @@ class Auth extends React.Component {
         } catch (e) {
             let inviteCode = "";
         }
-        try {
-            this.school = document.getElementById("schoolSelect").value;
-        } catch (e) {
-            this.school = ""
-        }
 
         if (login.trim().length !== 0 && password.trim().length !== 0) {
             this.props.setSpinner(true);
             console.log("per data", login, password, this.props.profile.diary,
-                this.region, this.province, this.city, this.school);
+                this.region, this.province, this.city, this.state.choosenSchool[0]);
             this.props.getProfile(login, password, this.props.profile.diary,
-                this.region, this.province, this.city, this.school);
+                this.region, this.province, this.city, this.state.choosenSchool[0]);
 
             let id = setInterval(() => {
                 if (this.props.profile.error) {
@@ -101,21 +97,29 @@ class Auth extends React.Component {
                         <Select
                             id="regionSelect"
                             placeholder="Выберите ваш регион"
+                            value={this.props.stateData[3]}
                             onChange={() => {
                                 this.region = document.getElementById("regionSelect").value;
                                 this.setState({
+                                    cities: null,
+                                    schools: null,
+                                    choosenSchool: null,
                                     provinces:
                                         <Spinner size="medium"/>
                                 });
-                                this.drawProvincesSelector();
+                                this.drawProvincesSelector(this.props.stateData[4]);
                             }}
                         >
                             {options}
                         </Select>
-                })
+                });
+                if (this.props.stateData[3]) {
+                    this.region = document.getElementById("regionSelect").value;
+                    this.drawProvincesSelector(this.props.stateData[4]);
+                }
             })
     };
-    drawProvincesSelector = () => {
+    drawProvincesSelector = (defaultVal) => {
         let options = [];
         axios.get("https://bklet.ml/api/auth/get_data/?region=" + this.region)
             .then(province_resp => {
@@ -129,21 +133,28 @@ class Auth extends React.Component {
                         <Select
                             id="provinceSelect"
                             placeholder="Выберите ваш район"
+                            value={defaultVal && defaultVal}
                             onChange={() => {
                                 this.province = document.getElementById("provinceSelect").value;
                                 this.setState({
+                                    schools: null,
+                                    choosenSchool: null,
                                     cities:
                                         <Spinner size="medium"/>
                                 });
-                                this.drawCitiesSelector();
+                                this.drawCitiesSelector(this.props.stateData[5]);
                             }}
                         >
                             {options}
                         </Select>
                 });
+                if (defaultVal) {
+                    this.province = document.getElementById("provinceSelect").value;
+                    this.drawCitiesSelector(this.props.stateData[5]);
+                }
             })
     };
-    drawCitiesSelector = () => {
+    drawCitiesSelector = (defaultVal) => {
         let options = [];
         axios.get(`https://bklet.ml/api/auth/get_data/?region=${this.region}&province=${this.province}`)
             .then(city_resp => {
@@ -152,17 +163,18 @@ class Auth extends React.Component {
                         <option value={city.id}>{city.name}</option>
                     )
                 });
-                console.log("lalalala", options);
                 this.setState({
                     cities:
                         <Select
                             id="citySelect"
                             placeholder="Выберите ваш город"
+                            value={defaultVal && defaultVal}
                             onChange={() => {
                                 this.city = document.getElementById("citySelect").value;
                                 this.setState({
                                     schools:
-                                        <Spinner size="medium"/>
+                                        <Spinner size="medium"/>,
+                                    choosenSchool: null,
                                 });
                                 this.drawSchoolsSelector();
                             }}
@@ -170,6 +182,10 @@ class Auth extends React.Component {
                             {options}
                         </Select>
                 });
+                if (defaultVal) {
+                    this.city = document.getElementById("citySelect").value;
+                    this.drawSchoolsSelector();
+                }
             })
     };
     drawSchoolsSelector = () => {
@@ -189,21 +205,29 @@ class Auth extends React.Component {
                     name = name.replace("\"Средняя общеобразовательная школа",
                         "Школа").replace("\"", "");
                     options.push(
-                        <option value={school.id}>{name}</option>
+                        {id: school.id, name: name}
                     )
                 });
-                console.log("lalalala", options);
+                console.log("state", this.props.stateData);
                 this.setState({
                     schools:
-                        <Select
-                            id="schoolSelect"
-                            placeholder="Выберите вашу школу"
-                            onChange={() => {
-                                this.school = document.getElementById("schoolSelect").value;
+                        <SelectMimicry
+                            top="Выберите вашу школу"
+                            placeholder="Не выбрана"
+                            onClick={() => {
+                                let data = [
+                                    options,
+                                    document.getElementById("loginInput-i").value,
+                                    document.getElementById("passInput-i").value,
+                                    this.region,
+                                    this.province,
+                                    this.city,
+                                ];
+                                this.props.setPanel("choose_school", data);
                             }}
                         >
-                            {options}
-                        </Select>
+                            {this.state.choosenSchool ? this.state.choosenSchool[1] : "Выберите вашу школу"}
+                        </SelectMimicry>
                 });
             })
     };
@@ -240,6 +264,7 @@ class Auth extends React.Component {
                             <CustomInput id="loginInput"
                                          type="text"
                                          placeholder="Логин"
+                                         value={this.props.stateData[1] && this.props.stateData[1]}
                             />
                         </div>
                     </Div>
@@ -251,6 +276,7 @@ class Auth extends React.Component {
                             <CustomInput id="passInput"
                                          type="password"
                                          placeholder="Пароль"
+                                         value={this.props.stateData[2] && this.props.stateData[2]}
                             />
                         </div>
                     </Div>
@@ -338,6 +364,7 @@ Auth.propTypes = {
     openIncorrect: PropTypes.func.isRequired,
     openUnsupported: PropTypes.func,
     openModal: PropTypes.func,
+    stateData: PropTypes.array,
 };
 
 export default Auth;

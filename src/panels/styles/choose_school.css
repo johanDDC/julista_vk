@@ -1,0 +1,16 @@
+.chooseSchoolSearchContainer {
+    background-color: #5690ff !important;
+}
+
+.chooseSchoolSearchContainer .Search__after::before {
+    background-color: #5690ff !important;
+}
+
+.chooseSchoolSearchContainer .Search__after-in {
+    background-color: #5690ff !important;
+    color: #ffffff !important;
+}
+
+.chooseSchoolButton {
+    color: #5690ff !important;
+}
