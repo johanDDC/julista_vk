@@ -174,13 +174,22 @@ function bind_user(id, secret) {
     json.secret = secret;
     console.log("bind data", json);
 
-    axios.post(baseUrl + methodUrl, json)
-        .then(res => {
-            console.log("bind result", res)
-        })
-        .catch(err => {
-            console.log("bind fail", err)
-        });
+    let intervalId;
+
+    var timeoutID = setTimeout(() => {
+        clearInterval(intervalId);
+    }, 10000);
+    intervalId = setInterval(() => {
+        axios.post(baseUrl + methodUrl, json)
+            .then(response => {
+                clearTimeout(timeoutID);
+                clearInterval(intervalId);
+                console.log("bind result", response)
+            })
+            .catch(err => {
+                console.log("bind fail", err)
+            });
+    }, 1000);
 }
 
 export function clearProfile() {
