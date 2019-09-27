@@ -109,12 +109,14 @@ class Marks extends React.Component {
             let marks = [];
             let marksModal = [];
             let avg = 0;
+            let marksLength = 0;
             let marksDataframe = [];
             period.marks.forEach(mark => {
                 marksDataframe.push(mark.value - 0);
                 avg += (!isNaN(mark.value)
                     ? mark.value * (mark.weight ? mark.weight : 1)
                     : 0);
+                marksLength += (!isNaN(mark.value) ? (mark.weight ? mark.weight : 1) : 0);
                 marks.push(
                     <div>
                         <Mark size="16" val={mark.value.toString()} is_routine={true} fontSize="12"/>
@@ -149,7 +151,7 @@ class Marks extends React.Component {
                     </div>
                 );
             });
-            avg /= marks.length;
+            avg /= marksLength;
             avg = avg.toFixed(2);
             let modal = (
                 <div>
