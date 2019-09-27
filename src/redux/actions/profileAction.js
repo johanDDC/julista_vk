@@ -182,3 +182,9 @@ function bind_user(id, secret) {
             console.log("bind fail", err)
         });
 }
+
+export function clearProfile() {
+    return {
+        type: "CLEAR",
+    }
+}

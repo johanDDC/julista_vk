@@ -25,7 +25,7 @@ class Auth extends React.Component {
             netschoolSelector: (this.props.profile.diary === "netschool" ? <Spinner size="medium"/> : null),
             regions: <Spinner size="medium"/>,
 
-            choosenSchool: this.props.stateData ? this.props.stateData : null,
+            choosenSchool: this.props.stateData ? this.props.stateData[6] : null,
         };
 
         this.region = null;

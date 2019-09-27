@@ -9,6 +9,8 @@ import PurposeMarkThree from "../custom_components/icon-pack/PurposeMarkThree"
 import "./styles/Settings.css"
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
+import {clearProfile} from "../redux/actions/profileAction";
+import {clearData} from "../redux/actions/AppLogicAction";
 
 class SettingsView extends React.Component {
     constructor(props) {
@@ -62,6 +64,7 @@ class SettingsView extends React.Component {
                           setView={this.props.setViewAction}
                           setPanel={this.props.setPanelAction}
                           profile={this.props.profile}
+                          signOutClear={this.props.signOutClear}
                 />
             </View>
         )
@@ -81,6 +84,10 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        signOutClear: () => {
+            dispatch(clearProfile());
+            dispatch(clearData());
+        },
         setMarkAction: mark => dispatch(setMark(mark)),
         setPanelAction: panel => dispatch(setPanel(panel)),
         setViewAction: view => dispatch(setView(view)),

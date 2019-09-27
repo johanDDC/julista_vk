@@ -3,10 +3,10 @@ const initialState = {
         data: []
     },
     marks: {
-        data : []
+        data: []
     },
     lastMarks: {
-        data : []
+        data: []
     },
     isFetching: false,
     error: false,
@@ -74,6 +74,21 @@ function appLogic(state = initialState, action) {
                 ...state,
                 isFetching: false,
                 errorLastMarks: true,
+            };
+        case "CLEAR":
+            return {
+                journal: {
+                    data: []
+                },
+                marks: {
+                    data: []
+                },
+                lastMarks: {
+                    data: []
+                },
+                isFetching: false,
+                error: false,
+                errorLastMarks: false,
             };
         default:
             return state

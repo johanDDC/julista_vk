@@ -143,6 +143,18 @@ function profile(state = initialState, action) {
                 student: action.data
             };
 
+        case "CLEAR":
+            return {
+                id: null,
+                secret: null,
+                diary: null,
+                students: null,
+                student: null,
+                errMessage: null,
+                isFetching: false,
+                error: false,
+            };
+
         default:
             return state
     }

@@ -28,6 +28,7 @@ class Settings extends React.Component {
 
     signOut = () => {
         localStorage.removeItem("userData");
+        this.props.signOutClear();
         this.props.setView("AuthorizationView");
         this.props.setPanel("choose_diary");
     };
@@ -278,6 +279,7 @@ Settings.propTypes = {
     chooseMark: PropTypes.func.isRequired,
     setView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
+    signOutClear: PropTypes.func.isRequired,
     profile: PropTypes.any,
 };
 

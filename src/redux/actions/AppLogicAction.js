@@ -145,3 +145,9 @@ function getLMarks(id, secret, student_id, dispatcher) {
             })
     }, normalInterval);
 }
+
+export function clearData() {
+    return {
+        type: "CLEAR",
+    }
+}
