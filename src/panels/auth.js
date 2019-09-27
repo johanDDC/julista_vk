@@ -25,7 +25,7 @@ class Auth extends React.Component {
             netschoolSelector: (this.props.profile.diary === "netschool" ? <Spinner size="medium"/> : null),
             regions: <Spinner size="medium"/>,
 
-            choosenSchool: this.props.stateData[6],
+            choosenSchool: this.props.stateData ? this.props.stateData : null,
         };
 
         this.region = null;
@@ -59,13 +59,10 @@ class Auth extends React.Component {
                 if (this.props.profile.error) {
                     clearInterval(id);
                     this.props.setSpinner(false);
-                    if (this.props.profile.id instanceof Error) {
-                        this.props.openError();
+                    if (this.props.profile.errMessage instanceof Error) {
+                        this.props.openIncorrect();
                     } else {
-                        if (this.props.profile.diary !== "netschool")
-                            this.props.openUnsupported();
-                        else
-                            this.props.openIncorrect();
+                        this.props.openError(this.props.profile.errMessage);
                     }
                     this.setState({error: true});
                 } else {

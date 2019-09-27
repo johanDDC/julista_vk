@@ -67,7 +67,7 @@ class AuthorizationView extends React.Component {
                 </Alert>
         })
     };
-    callError = () => {
+    callError = (message) => {
         this.setState({
             popout:
                 <Alert
@@ -80,8 +80,7 @@ class AuthorizationView extends React.Component {
                     onClose={() => this.setState({popout: null})}
                 >
                     <h2>Ошибка авторизации</h2>
-                    <p>Проблемы с подключением. Пожалуйста, перепроверьте правильность введённых данных и попробуйте ещё
-                        раз.</p>
+                    <p>{message}</p>
                 </Alert>
         })
     };

@@ -13,7 +13,6 @@ export function vkAuth(vk_params) {
     return dispatch => {
         axios.get(url)
             .then(resp => {
-                console.log("VK AUTH SUCCESS", resp.data);
                 if (resp.data.status) {
                     let students = [];
                     resp.data.students.list.forEach(e => {
@@ -31,7 +30,6 @@ export function vkAuth(vk_params) {
                 }
             })
             .catch(err => {
-                console.log("VK AUTH FAIL");
                 dispatch({
                     type: "DO_VK_AUTHORIZATION_FAIL",
                 });
@@ -41,7 +39,6 @@ export function vkAuth(vk_params) {
 
 export function doAuthorize(login, password, diary, region, province, city, school) {
     return dispatch => {
-        console.log("dispatch", dispatch);
         dispatch({
             type: "DO_AUTHORIZATION_REQUEST",
             data: {
@@ -58,6 +55,7 @@ export function doAuthorize(login, password, diary, region, province, city, scho
 
 function auth(login, password, diary, dispatcher, region, province, city, school) {
     let methodUrl = "api/auth/";
+    let ua = navigator.userAgent.toLowerCase();
     let json = {
         diary: diary,
         login: login,
@@ -66,16 +64,21 @@ function auth(login, password, diary, dispatcher, region, province, city, school
         province: province,
         city: city,
         school: school,
+
+        device_type: (ua.search('ios') > 0
+            ? 'ios'
+            : (ua.search('android') > 0
+                ? 'android'
+                : 'pc')),
     };
 
     axios.post(baseUrl + methodUrl, json)
         .then((response) => {
-            // console.log("resp", response.data);
             let students = [];
-            response.data.students.list.forEach(e => {
-                students.push(e);
-            });
             if (response.data.status) {
+                response.data.students.list.forEach(e => {
+                    students.push(e);
+                });
                 let localData = {
                     id: response.data.id,
                     secret: response.data.secret,
@@ -117,7 +120,7 @@ function auth(login, password, diary, dispatcher, region, province, city, school
             } else {
                 dispatcher({
                     type: "DO_AUTHORIZATION_FAIL",
-                    data: response.data
+                    data: response.data.message,
                 })
             }
         })

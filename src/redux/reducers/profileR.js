@@ -29,6 +29,7 @@ if (localData) {
             : (localData.students
                 ? localData.students[0]
                 : null)),
+        errMessage: null,
         isFetching: false,
         error: false,
     }
@@ -39,6 +40,7 @@ if (localData) {
         diary: null,
         students: null,
         student: null,
+        errMessage: null,
         isFetching: false,
         error: false,
     }
@@ -91,7 +93,7 @@ function profile(state = initialState, action) {
         case "DO_AUTHORIZATION_FAIL":
             return {
                 ...state,
-                id: action.data,
+                errMessage: action.data,
                 isFetching: false,
                 error: true,
             };
