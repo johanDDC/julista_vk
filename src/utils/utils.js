@@ -102,3 +102,10 @@ export function turnIntoDate(string) {
 
     return date;
 }
+
+export function reverseRuslanString(string) {
+    let str = string.substr(5);
+    str = str.substr(3) + '.' + str.substr(0, 2);
+
+    return str;
+}

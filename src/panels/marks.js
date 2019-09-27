@@ -9,7 +9,7 @@ import {
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/marks.css"
-import {turnIntoDate} from "../utils/utils"
+import {turnIntoDate, reverseRuslanString} from "../utils/utils"
 
 import Mark from "../custom_components/mark"
 import CustomSpinner from "../custom_components/customSpinner";
@@ -142,7 +142,7 @@ class Marks extends React.Component {
                             {mark.date
                                 ?
                                 <div className="modalMarkMarksInfoDate">
-                                    {mark.date}
+                                    {reverseRuslanString(mark.date)}
                                 </div>
                                 : null}
                         </div>
