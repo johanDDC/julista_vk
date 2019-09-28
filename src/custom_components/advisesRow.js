@@ -82,8 +82,10 @@ class AdvisesRow extends React.Component {
         let predictions = this.giveAdvice();
         let str = "Получите ";
         if (predictions && predictions[0] !== 0) str += `${predictions[0]} пятёрок`;
-        if (predictions && predictions[1] !== 0) str += `, ${predictions[1]} четвёрок`;
-        if (predictions && predictions[2] !== 0) str += `и ${predictions[2]} троек`;
+        if (predictions && predictions[0] !== 0 && predictions[1] !== 0) str += ',';
+        if (predictions && predictions[1] !== 0) str += `${predictions[1]} четвёрок`;
+        if (predictions && predictions[1] !== 0 && predictions[2] !== 0) str += ' и ';
+        if (predictions && predictions[2] !== 0) str += `${predictions[2]} троек`;
         return (
             <div style={{display: Boolean(predictions) === false && "none"}} className="advisesRowContainer">
                 <div className="advisesRowText">

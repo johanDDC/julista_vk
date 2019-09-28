@@ -180,7 +180,6 @@ class AuthorizationView extends React.Component {
 }
 
 let choose_school = (school) => {
-    console.log("choosen", school);
     choose_schools_data.push(school)
 };
 

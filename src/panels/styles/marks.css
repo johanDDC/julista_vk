@@ -270,3 +270,9 @@
     color: #E80A1E;
     text-align: center;
 }
+
+.marksAdviceRowContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}

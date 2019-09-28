@@ -204,11 +204,13 @@ class Marks extends React.Component {
                     <div className="marksRow">
                         {marks}
                     </div>
-                    <AdvisesRow
-                        expectedMark={this.props.expectedMark}
-                        allMarks={marksDataframe}
-                        avg={(avg - 0)}
-                    />
+                    <div className="marksAdviceRowContainer">
+                        <AdvisesRow
+                            expectedMark={this.props.expectedMark}
+                            allMarks={marksDataframe}
+                            avg={(avg - 0)}
+                        />
+                    </div>
                 </div>
             );
         };
@@ -223,7 +225,6 @@ class Marks extends React.Component {
         generateSubjectsFields(currentTab);
 
         let drawLastMarks = () => {
-            console.log("lastmarks", this.lastMarksData.data);
             if (this.state.errorLastMarks) {
                 return (
                     <p className="errorLastMarks">Не удалось загрузить последние оценки из-за непредвиденной ошибки.</p>
@@ -260,7 +261,6 @@ class Marks extends React.Component {
                             );
                         });
                     });
-                    console.log("components", lastMarks);
                     return (
                         <div>
                             <Div className="marksBlocksTitle">

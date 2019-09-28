@@ -25,7 +25,7 @@ class Auth extends React.Component {
             netschoolSelector: (this.props.profile.diary === "netschool" ? <Spinner size="medium"/> : null),
             regions: <Spinner size="medium"/>,
 
-            choosenSchool: this.props.stateData ? this.props.stateData[6] : null,
+            choosenSchool: this.props.stateData.length !== 0 ? this.props.stateData[6] : "",
         };
 
         this.region = null;
@@ -50,8 +50,8 @@ class Auth extends React.Component {
 
         if (login.trim().length !== 0 && password.trim().length !== 0) {
             this.props.setSpinner(true);
-            console.log("per data", login, password, this.props.profile.diary,
-                this.region, this.province, this.city, this.state.choosenSchool[0]);
+            // console.log("per data", login, password, this.props.profile.diary,
+            //     this.region, this.province, this.city, this.state.choosenSchool[0]);
             this.props.getProfile(login, password, this.props.profile.diary,
                 this.region, this.province, this.city, this.state.choosenSchool[0]);
 
@@ -60,7 +60,7 @@ class Auth extends React.Component {
                     clearInterval(id);
                     this.props.setSpinner(false);
                     if (this.props.profile.errMessage instanceof Error) {
-                        this.props.openIncorrect();
+                        this.props.openError("Непредвиденная ошибка. Пожалуйста, попробуйте позже.");
                     } else {
                         this.props.openError(this.props.profile.errMessage);
                     }
@@ -205,7 +205,6 @@ class Auth extends React.Component {
                         {id: school.id, name: name}
                     )
                 });
-                console.log("state", this.props.stateData);
                 this.setState({
                     schools:
                         <SelectMimicry
@@ -230,7 +229,6 @@ class Auth extends React.Component {
     };
 
     componentDidMount() {
-        console.log("id", this.props.profile);
         if (this.props.profile.id) {
             this.props.openModal();
         }

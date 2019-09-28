@@ -2,62 +2,116 @@ import React from 'react';
 import PropTypes from "prop-types";
 import "./mark.css"
 
-function defineColor(val) {
-    let colors = [];
+class Mark extends React.Component {
+    constructor() {
+        super();
 
-    if (val === "5" || val.toLowerCase() === "зачёт" || val.toLowerCase() === "зч") {
-        colors[1] = "#1cb336";
-        colors[0] = "#72de20";
-    } else if (val === "4") {
-        colors[0] = "#02cd84";
-        colors[1] = "#00e19d";
-    } else if (val === "3") {
-        colors[0] = "#ff512f";
-        colors[1] = "#f09819";
-    } else if (val === "2" || val.toLowerCase() === "незачёт" || val.toLowerCase() === "нз") {
-        colors[0] = "#ff4b2b";
-        colors[1] = "#ff416c";
+        this.gradientColorOne = "";
+        this.gradientColorTwo = "";
+        this.containerSize = [0, 0, 0];
+        this.routineColor = "#5690ff";
+        this.markValue = 0;
+
+        String.prototype.capitalize = function () {
+            return this.replace(/(?:^|\s)\S/g, function (a) {
+                return a.toUpperCase();
+            });
+        };
     }
-    return colors;
-} //TODO add 10 system support
 
-String.prototype.capitalize = function () {
-    return this.replace(/(?:^|\s)\S/g, function (a) {
-        return a.toUpperCase();
-    });
-};
 
-const Mark = props => {
-    let container = false;
-    let mark_value = props.val.toLowerCase();
-    if (props.short) {
-        if (mark_value === "зачёт") mark_value = "Зч";
-        if (mark_value === "незачёт") mark_value = "Нзч";
-    } else {
-        mark_value = mark_value.capitalize()
+    defineColors = () => {
+        let val = this.props.val.toLowerCase();
+        let gradeSystem = this.props.gradeSystem ? this.props.gradeSystem : 'five';
+
+        if (val === "зачёт" || val === "зч" || val === "зачет") {
+            this.gradientColorOne = "#1cb336";
+            this.gradientColorTwo = "#72de20";
+            if (this.props.short) {
+                this.containerSize = [`${this.props.size}px`, `${this.props.size}px`, "50%"];
+                val = "Зч";
+            } else {
+                this.containerSize = ["68px", "22px", "11px"];
+                val = "Зачёт";
+            }
+        } else if (val === "незачёт" || val === "нз" || val === "нзч" || val === "незачет") {
+            this.gradientColorOne = "#ff4b2b";
+            this.gradientColorTwo = "#ff416c";
+            if (this.props.short) {
+                this.containerSize = [`${this.props.size}px`, `${this.props.size}px`, "50%"];
+                val = "Нз";
+            } else {
+                this.containerSize = ["68px", "22px", "11px"];
+                val = "Незачёт";
+            }
+        } else if (!isNaN(parseInt(val))) {
+            this.containerSize = [`${this.props.size}px`, `${this.props.size}px`, "50%"];
+            if (gradeSystem === 'five')
+                val = 2 * val - 2;
+            if (gradeSystem === 'percent')
+                val /= 10;
+            // else {
+            //
+            // }
+            if (val >= 8) {
+                this.gradientColorOne = "#1cb336";
+                this.gradientColorTwo = "#72de20";
+            } else if (val >= 6) {
+                this.gradientColorOne = "#02cd84";
+                this.gradientColorTwo = "#00e19d";
+            } else if (val >= 3) {
+                this.gradientColorOne = "#ff512f";
+                this.gradientColorTwo = "#f09819";
+            } else {
+                this.gradientColorOne = "#ff4b2b";
+                this.gradientColorTwo = "#ff416c";
+            }
+            if (gradeSystem === 'five')
+                val = (val + 2) / 2;
+            if (gradeSystem === 'percent')
+                val *= 10
+        } else {
+            this.containerSize = [`${this.props.size}px`, `${this.props.size}px`, "50%"];
+            if (val === "не был") {
+                val = "Н";
+                this.gradientColorOne = "#86a8e7";
+                this.gradientColorTwo = "#5070e1";
+            } else if (val === "болел") {
+                val = "Б";
+                this.gradientColorOne = "#86a8e7";
+                this.gradientColorTwo = "#5070e1";
+            }
+        }
+
+        this.markValue = val;
+    };
+
+    render() {
+        this.defineColors();
+        return (
+            <div className="markContainer" style={{
+                width: this.containerSize[0],
+                height: this.containerSize[1],
+                background: (this.props.is_routine
+                    ? this.routineColor
+                    : `linear-gradient(90deg, ${this.gradientColorOne}, ${this.gradientColorTwo})`),
+                fontSize: (this.props.fontSize ? `${this.props.fontSize}px` : "14px"),
+                borderRadius: this.containerSize[2],
+                border: (this.props.is_border ? "2px solid #f6f6f6" : "0px")
+            }}>
+                <div>{this.markValue}</div>
+                {
+                    (this.props.weight && this.props.weight > 1
+                        ?
+                        <div className="markWeight">
+                            {this.props.weight}
+                        </div>
+                        : null)
+                }
+            </div>
+        )
     }
-    if (mark_value === "Зачёт" || mark_value === "Незачёт")
-        container = true;
-
-    return (
-        <div className="markContainer" style={{
-            width: (container ? "68px" : `${props.size}px `),
-            height: (container ? "22px" : `${props.size}px `),
-            background: (props.is_routine ? "#5690ff"
-                : `linear-gradient(90deg, ${defineColor(props.val)[0]}, ${defineColor(props.val)[1]})`),
-            fontSize: (props.fontSize ? `${props.fontSize}px` : "14px"),
-            borderRadius: (container ? "11px" : "50%"),
-            border: (props.is_border ? "2px solid #f6f6f6" : "0px")
-        }}>
-            <div>{mark_value}</div>
-            {(props.weight && props.weight > 1 ?
-                <div className="markWeight">
-                    {props.weight}
-                </div>
-                : null)}
-        </div>
-    )
-};
+}
 
 Mark.propTypes = {
     size: PropTypes.string.isRequired,
@@ -65,8 +119,9 @@ Mark.propTypes = {
     is_routine: PropTypes.bool.isRequired,
     weight: PropTypes.string,
     fontSize: PropTypes.string,
+    gradeSystem: PropTypes.string,
+    is_border: PropTypes.bool,
     short: PropTypes.bool,
-    is_border: PropTypes.bool
 };
 
 export default Mark;

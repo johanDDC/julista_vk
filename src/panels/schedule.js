@@ -38,7 +38,6 @@ class Schedule extends React.Component {
     }
 
     loadData = async () => {
-        console.log("here");
         this.props.getJournal(this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8], this.props.profile.student.id);
 
         let id = setInterval(() => {
@@ -93,9 +92,11 @@ class Schedule extends React.Component {
                         marks.push( //Append weight here
                             <div style={{marginRight: "4px"}}>
                                 <Mark size="24" val={(mark.score ? mark.score.toString() : mark.value.toString())}
-                                      is_routine={false} fontSize="14"
+                                      is_routine={false}
                                       weight={(mark.weight ? mark.weight.toString() : "1")}
-                                      is_border={true}/>
+                                      is_border={true}
+                                      short={true}
+                                      gradeSystem={mark.type}/>
                             </div>
                         );
                         modalMarksPresentation.push(
@@ -459,7 +460,7 @@ class Schedule extends React.Component {
                                 refreshContent={<PullToRefreshContext/>}
                                 pullDownThreshold={75}
                                 onRefresh={this.refresh}
-                                triggerHeight={25}
+                                triggerHeight={75}
                                 backgroundColor="#5690ff"
                                 startInvisible={true}>
                                 {this.drawShedule()}
