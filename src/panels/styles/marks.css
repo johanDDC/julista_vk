@@ -126,6 +126,7 @@
 
 .lastMarksContainer {
     min-height: 108px;
+    padding-bottom: 20px;
 }
 
 .lastMarksContainer > .HorizontalScroll__in {
@@ -272,7 +273,8 @@
 }
 
 .marksAdviceRowContainer {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: right;
 }

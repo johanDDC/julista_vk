@@ -1,12 +1,12 @@
 .advisesRowContainer {
     min-height: 16px;
     display: flex;
-    flex-direction: row;
+    /*flex-direction: row;*/
     justify-content: center;
     align-items: center;
     color: #ffffff;
     background: linear-gradient(#1cb336, #72de20);
     padding: 1px 7px 1px 7px;
     border-radius: 10px;
-    align-self: end;
+    /*align-self: end;*/
 }

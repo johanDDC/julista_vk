@@ -78,14 +78,30 @@ class AdvisesRow extends React.Component {
         return [fives, fours, threes];
     };
 
+    declinate = (amount, digit) => {
+        if (digit === 5) {
+            if (amount === 1) return "пятёрку";
+            else if (amount >= 2 && amount < 5) return "пятёрки";
+            else return "пятёрок"
+        } else if (digit === 4) {
+            if (amount === 1) return "четвёрку";
+            else if (amount >= 2 && amount < 5) return "четвёрки";
+            else return "четвёрок"
+        } else {
+            if (amount === 1) return "тройку";
+            else if (amount >= 2 && amount < 5) return "тройки";
+            else return "троек"
+        }
+    };
+
     render() {
         let predictions = this.giveAdvice();
         let str = "Получите ";
-        if (predictions && predictions[0] !== 0) str += `${predictions[0]} пятёрок`;
-        if (predictions && predictions[0] !== 0 && predictions[1] !== 0) str += ',';
-        if (predictions && predictions[1] !== 0) str += `${predictions[1]} четвёрок`;
+        if (predictions && predictions[0] !== 0) str += `${predictions[0]} ${this.declinate(predictions[0], 5)}`;
+        if (predictions && predictions[0] !== 0 && predictions[1] !== 0) str += ', ';
+        if (predictions && predictions[1] !== 0) str += `${predictions[1]} ${this.declinate(predictions[1], 4)}`;
         if (predictions && predictions[1] !== 0 && predictions[2] !== 0) str += ' и ';
-        if (predictions && predictions[2] !== 0) str += `${predictions[2]} троек`;
+        if (predictions && predictions[2] !== 0) str += `${predictions[2]} ${this.declinate(predictions[2], 3)}`;
         return (
             <div style={{display: Boolean(predictions) === false && "none"}} className="advisesRowContainer">
                 <div className="advisesRowText">

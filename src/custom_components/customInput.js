@@ -17,10 +17,10 @@ const CustomInput = props => {
 
     }
 
-    setTimeout(() => {
-        if (props.value)
+    if (props.value && props.value.trim() !== "")
+        setTimeout(() => {
             clickCapture();
-    }, 50);
+        }, 50);
 
     return (
         <div className="customInputContainer">
@@ -36,7 +36,7 @@ const CustomInput = props => {
                    onFocus={clickCapture}
                    onBlur={clickLost}
                    autoComplete="off"
-                   value={props.value && props.value}
+                   defaultValue={props.value && props.value}
             />
         </div>
     )
