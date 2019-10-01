@@ -2,14 +2,14 @@ import React from 'react';
 import {View, ActionSheet, ActionSheetItem, withPlatform, ANDROID, IOS,} from '@vkontakte/vkui';
 import Settings from '../panels/settings'
 import {connect} from "react-redux";
-import {setMark} from "../redux/actions/expectedMarkAction";
+import {setMark} from "../redux/actions/ExpectedMarkAction";
 import PurposeMarkFive from "../custom_components/icon-pack/PurposeMarkFive"
 import PurposeMarkFour from "../custom_components/icon-pack/PurposeMarkFour"
 import PurposeMarkThree from "../custom_components/icon-pack/PurposeMarkThree"
 import "./styles/Settings.css"
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
-import {clearProfile} from "../redux/actions/profileAction";
+import {clearProfile} from "../redux/actions/ProfileAction";
 import {clearData} from "../redux/actions/AppLogicAction";
 
 class SettingsView extends React.Component {

@@ -9,7 +9,9 @@ import BookletCheck from "../custom_components/icon-pack/BookletCheck"
 import Mark from "../custom_components/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
 import Icon24Error from '@vkontakte/icons/dist/24/error';
+import {unbind_user} from "../redux/actions/ProfileAction"
 import connect from '@vkontakte/vk-connect-promise';
+import {getVkParams} from "../utils/utils"
 
 const axios = require('axios');
 
@@ -28,6 +30,7 @@ class Settings extends React.Component {
 
     signOut = () => {
         localStorage.removeItem("userData");
+        unbind_user(this.props.id, this.props.secret);
         this.props.signOutClear();
         this.props.setView("AuthorizationView");
         this.props.setPanel("choose_diary");
@@ -84,35 +87,32 @@ class Settings extends React.Component {
     };
 
     subscribeGroup = () => {
-        let vk_info = window.location.search.slice(1).split('&')
-            .map((queryParam) => {
-                let kvp = queryParam.split('=');
-                return {key: kvp[0], value: kvp[1]}
+        connect.send("VKWebAppCallAPIMethod", {
+            method: "groups.isMember",
+            request_id: "group_subscription",
+            params: {
+                group_id: "171343913",
+                user_id: getVkParams().vk_user_id.toString(),
+            }
+        })
+            .then(resp => {
+                if (resp.member === 1) {
+                    this.setState({
+                        snackbar:
+                            <Snackbar
+                                layout="vertical"
+                                onClose={() => this.setState({snackbar: null})}
+                                before={<BookletCheck/>}
+                                duration={1500}
+                            >
+                                Вы уже подписались =)
+                            </Snackbar>
+                    });
+                } else {
+                    connect.send("VKWebAppJoinGroup", {"group_id": 171343913});
+                }
             })
-            .reduce((query, kvp) => {
-                query[kvp.key] = decodeURIComponent(kvp.value);
-                return query
-            }, {});
-        try {
-            if (vk_info.vk_viewer_group_role === 'none' && !this.settings.isSubscribed) {
-                connect.send("VKWebAppJoinGroup", {"group_id": 171343913});
-                this.settings.isSubscribed = true;
-            } else
-                this.setState({
-                    snackbar:
-                        <Snackbar
-                            layout="vertical"
-                            onClose={() => this.setState({snackbar: null})}
-                            before={<BookletCheck/>}
-                            duration={1500}
-                        >
-                            Вы уже подписались =)
-                        </Snackbar>
-                });
-        } catch (e) {
-
-        }
-        localStorage.setItem("appSettings", JSON.stringify(this.settings));
+            .catch(err => console.log(err));
     };
 
     redButtonPush = () => {

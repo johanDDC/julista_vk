@@ -26,7 +26,7 @@ class Schedule extends React.Component {
 
         this.state = {
             currentDay: (new Date().getDay() <= 6 && new Date().getDay() > 0 ? new Date().getDay() - 1 : 0),
-            month: getRusMonthName(this.dayDates[7].getMonth()),
+            month: getRusMonthName(new Date().getMonth()),
             weekDuration: (!flag ? this.scheduleData.data.days.length : 5),
             ready: !flag,
             error: false,

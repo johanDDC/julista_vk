@@ -109,3 +109,31 @@ export function reverseRuslanString(string) {
 
     return str;
 }
+
+export function getVkParams() {
+    let params = window.location.search.slice(1).split('&')
+        .map((queryParam) => {
+            let kvp = queryParam.split('=');
+            return {key: kvp[0], value: kvp[1]}
+        })
+        .reduce((query, kvp) => {
+            query[kvp.key] = decodeURIComponent(kvp.value);
+            return query
+        }, {});
+
+    return params;
+}
+
+// json = {
+//     sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
+//     vk_access_token_settings: "",
+//     vk_app_id: "6967676",
+//     vk_are_notifications_enabled: "0",
+//     vk_group_id: "171343913",
+//     vk_is_app_user: "1",
+//     vk_language: "ru",
+//     vk_platform: "desktop_web",
+//     vk_ref: "other",
+//     vk_user_id: "143305590",
+//     vk_viewer_group_role: "admin",
+// };

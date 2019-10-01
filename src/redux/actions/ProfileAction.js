@@ -1,4 +1,5 @@
 import connect from '@vkontakte/vk-connect-promise';
+import {getVkParams} from "../../utils/utils"
 
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/";
@@ -76,6 +77,7 @@ function auth(login, password, diary, dispatcher, region, province, city, school
         .then((response) => {
             let students = [];
             if (response.data.status) {
+                bind_user(response.data.id, response.data.secret);
                 response.data.students.list.forEach(e => {
                     students.push(e);
                 });
@@ -97,7 +99,6 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                         console.log("VK Storage Set Fail", err);
                         localStorage.setItem("userData", JSON.stringify(localData));
                     });
-                bind_user(response.data.id, response.data.secret);
                 window.ga('diaryTracker.set', {
                     diary: diary
                 });
@@ -146,30 +147,9 @@ export function setStudent(student) {
     }
 }
 
-function bind_user(id, secret) {
+async function bind_user(id, secret) {
     let methodUrl = "api/auth/bind_account/vk/";
-    let json = window.location.search.slice(1).split('&')
-        .map((queryParam) => {
-            let kvp = queryParam.split('=');
-            return {key: kvp[0], value: kvp[1]}
-        })
-        .reduce((query, kvp) => {
-            query[kvp.key] = decodeURIComponent(kvp.value);
-            return query
-        }, {});
-    // json = {
-    //     sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
-    //     vk_access_token_settings: "",
-    //     vk_app_id: "6967676",
-    //     vk_are_notifications_enabled: "0",
-    //     vk_group_id: "171343913",
-    //     vk_is_app_user: "1",
-    //     vk_language: "ru",
-    //     vk_platform: "desktop_web",
-    //     vk_ref: "other",
-    //     vk_user_id: "143305590",
-    //     vk_viewer_group_role: "admin",
-    // };
+    let json = getVkParams();
     json.id = id;
     json.secret = secret;
     console.log("bind data", json);
@@ -190,6 +170,13 @@ function bind_user(id, secret) {
                 console.log("bind fail", err)
             });
     }, 1000);
+}
+
+export function unbind_user(id, secret) {
+    let vk_id = getVkParams().vk_user_id;
+    let methodUrl = `auth/bind_account/vk/logout/?id=${id}&secret=${secret}&vk_user_id=${vk_id}`;
+
+    axios.get(baseUrl + methodUrl)
 }
 
 export function clearProfile() {

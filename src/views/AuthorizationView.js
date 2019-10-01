@@ -6,7 +6,7 @@ import ChooseStudent from '../panels/choose_student'
 import ChooseSchool from '../panels/choose_school'
 import "./styles/Authorization.css"
 import {connect} from 'react-redux'
-import {doAuthorize, setDiary, setStudent, vkAuth} from "../redux/actions/profileAction";
+import {doAuthorize, setDiary, setStudent, vkAuth} from "../redux/actions/ProfileAction";
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
 
