@@ -460,7 +460,7 @@ class Schedule extends React.Component {
                                 refreshContent={<PullToRefreshContext/>}
                                 pullDownThreshold={75}
                                 onRefresh={this.refresh}
-                                triggerHeight={75}
+                                triggerHeight={160}
                                 backgroundColor="#5690ff"
                                 startInvisible={true}>
                                 {this.drawShedule()}

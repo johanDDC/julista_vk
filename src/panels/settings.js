@@ -93,6 +93,8 @@ class Settings extends React.Component {
             params: {
                 group_id: "171343913",
                 user_id: getVkParams().vk_user_id.toString(),
+                v: "5.101",
+                access_token: "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402",
             }
         })
             .then(resp => {
