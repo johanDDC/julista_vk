@@ -1,5 +1,6 @@
 import connect from '@vkontakte/vk-connect-promise';
 import {getVkParams} from "../../utils/utils"
+import {async} from "q";
 
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/";
@@ -172,11 +173,13 @@ async function bind_user(id, secret) {
     }, 1000);
 }
 
-export function unbind_user(id, secret) {
+export async function unbind_user(id, secret) {
     let vk_id = getVkParams().vk_user_id;
     let methodUrl = `auth/bind_account/vk/logout/?id=${id}&secret=${secret}&vk_user_id=${vk_id}`;
 
     axios.get(baseUrl + methodUrl)
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err))
 }
 
 export function clearProfile() {

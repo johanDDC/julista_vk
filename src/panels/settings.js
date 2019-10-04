@@ -29,8 +29,9 @@ class Settings extends React.Component {
     }
 
     signOut = () => {
+        console.log("sign out data", this.props.profile.id, this.props.profile.secret);
+        unbind_user(this.props.profile.id, this.props.profile.secret);
         localStorage.removeItem("userData");
-        unbind_user(this.props.id, this.props.secret);
         this.props.signOutClear();
         this.props.setView("AuthorizationView");
         this.props.setPanel("choose_diary");
@@ -92,13 +93,15 @@ class Settings extends React.Component {
             request_id: "group_subscription",
             params: {
                 group_id: "171343913",
-                user_id: getVkParams().vk_user_id.toString(),
+                user_id: getVkParams().vk_user_id,
                 v: "5.101",
                 access_token: "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402",
             }
         })
             .then(resp => {
-                if (resp.member === 1) {
+                console.log("subscr", resp);
+                if (resp.data.response === 1 || resp.data.member === 1) {
+                    console.log("here");
                     this.setState({
                         snackbar:
                             <Snackbar
@@ -282,7 +285,7 @@ Settings.propTypes = {
     setView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
     signOutClear: PropTypes.func.isRequired,
-    profile: PropTypes.any,
+    profile: PropTypes.any.isRequired,
 };
 
 export default Settings;
