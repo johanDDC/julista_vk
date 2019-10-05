@@ -75,7 +75,7 @@ function appLogic(state = initialState, action) {
                 isFetching: false,
                 errorLastMarks: true,
             };
-        case "CLEAR":
+        case "CLEAR_DATA":
             return {
                 journal: {
                     data: []

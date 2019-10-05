@@ -1,49 +1,46 @@
-.header{
-    background-color: rgb(86 144 255);
-}
-
-#panel-header-account > *, #header-bg-account > *, #header-right-account > *, #header-left-account > *, #header-title-account > *{
+#panel-header-account > *, #header-bg-account > *, #header-right-account > *, #header-left-account > *, #header-title-account > * {
     background-color: rgb(86 144 255) !important;
 }
 
-#account > .Panel__in{
-    padding-bottom: 0 !important;
+#account > .Panel__in {
+    /*padding-bottom: 0 !important;*/
+    background-color: #ffffff;
 }
 
 
-.studentInfoContainer{
+.studentInfoContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#studentInfo{
+#studentInfo {
     display: flex;
     flex-direction: column;
 }
 
-#studentName{
+#studentName {
     color: #000;
     font-size: 15px;
     font-weight: bold;
 }
 
-#studentGrade{
+#studentGrade {
     color: #000;
     font-size: 13px;
 }
 
-.Group{
+.Group {
     margin: 0;
 }
 
-.blueBack{
+.blueBack {
     height: 49px;
     width: 100%;
     background-color: rgb(86 144 255);
 }
 
-.accountProgress{
+.accountProgress {
     background-color: rgb(246 246 246);
     border-radius: 14px;
     display: flex;
@@ -53,12 +50,12 @@
     margin: 0 10px 0 10px;
 }
 
-#progressBar{
+#progressBar {
     margin-left: 13px;
     width: 85%;
 }
 
-.successContainer{
+.successContainer {
     height: 49px;
     background: linear-gradient(90deg, rgb(204 0 255), rgb(86 120 239));
     display: flex;
@@ -67,45 +64,98 @@
     align-items: center;
     border-radius: 14px;
     color: white;
-    margin: 15px 10px 0 10px ;
+    margin: 15px 10px 0 10px;
 }
 
 
-.accountTasks{
+.accountTasks {
     background-color: #fff;
 }
 
-.accountGradeTop{
+.accountGradeTop, #classmatesList {
+    position: relative;
     background-color: #f6f6f6;
+    max-height: 170px;
+    transition: max-height 0.5s ease-in-out, padding-bottom 0.75s ease-in-out;
+    overflow: hidden;
 }
 
-#successTitleContainer{
+.accountClassmateContainer {
+    margin-top: 8px;
+}
+
+.accountClassmateContainer:nth-child(5) {
+    margin-top: 28px;
+    transition: margin-top 0.25s ease-in-out;
+}
+
+.accountShowMoreClassmates {
+    bottom: 5px;
+    position: absolute;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #a6a6a6;
+}
+
+#openClassmatesList {
+    display: flex;
+    transition: transform 0.25s ease-in-out;
+}
+
+#successTitleContainer {
     background-color: rgb(255 65 108);
     border-radius: 200px;
     font-size: 9px;
     padding: 5px 9px 7px 8px;
 }
 
-#successVal{
+#successVal {
     font-size: 21px;
     font-weight: bold;
 }
 
-.accountStudentInfo{
+.accountStudentInfo {
     background-color: #ffffff;
 }
 
-.accountImportantantNotifications{
+.accountImportantNotifications {
     background-color: #ffffff;
 }
 
-.accountBlockTitle{
+.accountImportantNotification {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: row;
+}
+
+.accountImportantNotificationIconBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-right: 12px;
+}
+
+.accountImportantNotificationTextBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    text-align: left;
+}
+
+.accountBlockTitle {
     font-size: 15px;
     font-weight: bold;
     color: #568ffd;
+    margin-bottom: 12px;
 }
 
-.userTopElement{
+.userTopElement {
     padding-top: 0;
     display: flex;
     flex-direction: row;
@@ -113,19 +163,19 @@
     align-items: center;
 }
 
-.lastNotificationsContainer{
+.lastNotificationsContainer {
     background-color: rgb(86 144 255);
     padding: 10px 10px 58px 10px;
 }
 
-.inversedTitle{
+.inversedTitle {
     font-size: 16px;
     font-weight: bold;
     color: white;
     padding-bottom: 10px;
 }
 
-.notification{
+.notification {
     background-color: rgb(128 172 255);
     color: white;
     font-size: 16px;
@@ -138,7 +188,7 @@
     margin-top: 10px;
 }
 
-.notificationBottom{
+.notificationBottom {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -148,6 +198,23 @@
     font-weight: bold;
 }
 
-.notificationBottom .Button__content{
+.notificationBottom .Button__content {
     padding: 0;
+}
+
+#switchStudentButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    background-color: #e6eeff;
+    border-radius: 50%;
+}
+
+.noClassmates {
+    text-align: left;
+    font-size: 14px;
+    color: #a6a6a6;
+    margin-top: 6px;
 }

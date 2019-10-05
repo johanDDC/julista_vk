@@ -3,7 +3,7 @@ export function scheduleGetDates() {
     let dayOfWeek = today.getDay();
     let monday = null;
 
-    if (dayOfWeek > 0){
+    if (dayOfWeek > 0) {
         let shift = dayOfWeek - 1;
         monday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - shift)
     } else
@@ -28,7 +28,7 @@ export function schedulePrevWeek(currentStart) {
     let newEnd = new Date(currentStart.getFullYear(), currentStart.getMonth(), currentStart.getDate() - 1);
     let resArr = [];
 
-    for(let i = 0; i < 7; i++){
+    for (let i = 0; i < 7; i++) {
         let date = new Date(newStart.getFullYear(), newStart.getMonth(), newStart.getDate() + i);
         resArr.push(date.getDate())
     }
@@ -43,7 +43,7 @@ export function scheduleNextWeek(currentStart) {
     let newEnd = new Date(newStart.getFullYear(), newStart.getMonth(), newStart.getDate() + 6);
     let resArr = [];
 
-    for(let i = 0; i < 7; i++){
+    for (let i = 0; i < 7; i++) {
         let date = new Date(newStart.getFullYear(), newStart.getMonth(), newStart.getDate() + i);
         resArr.push(date.getDate())
     }
@@ -53,7 +53,7 @@ export function scheduleNextWeek(currentStart) {
     return resArr;
 }
 
-export function setCorrectYear(str){
+export function setCorrectYear(str) {
     let correctYear = str.slice(8);
     str = str.slice(0, 6);
     str = str + correctYear;
@@ -122,6 +122,13 @@ export function getVkParams() {
         }, {});
 
     return params;
+}
+
+export function isBirthday(strDate) {
+    let tokens = strDate.split("-");
+    let birthDate = new Date(tokens[0], tokens[1] - 1, tokens[2]);
+    let today = new Date();
+    return (today.getMonth() === birthDate.getMonth() && today.getDate() === birthDate.getDate());
 }
 
 // json = {
