@@ -175,7 +175,6 @@ async function bind_user(id, secret) {
 
 export async function unbind_user(id, secret) {
     let vk_id = getVkParams().vk_user_id;
-    // let methodUrl = `api/auth/bind_account/vk/logout/?id=${id}&secret=${secret}&vk_user_id=${vk_id}`;
     let methodUrl = `api/auth/bind_account/vk/logout/`;
     let json = {
         id: id,
@@ -183,7 +182,6 @@ export async function unbind_user(id, secret) {
         vk_user_id: vk_id,
     };
 
-    // axios.get(baseUrl + methodUrl);
     axios.post(baseUrl + methodUrl, json)
         .then(resp => console.log(resp))
         .catch(err => console.log(err))
