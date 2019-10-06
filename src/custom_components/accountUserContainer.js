@@ -26,8 +26,9 @@ const AccountUserContainer = props => (
         {setCirclesColor(props.number)}
         <div className="accountUserNumeration">{props.number}</div>
         <Div className="accountUserInfo">
-            <span className="accountUserName">{props.name}</span>
-            <LevelCircle color={fill_color} outline_color={outline_color} val={props.level}/>
+            <div className="accountUserName">{props.name}</div>
+            {/*<LevelCircle color={fill_color} outline_color={outline_color} val={props.level}/>*/}
+            {props.is_birthday && <div className="accountUserContainerBirthday">С Днём Рождения!</div>}
         </Div>
     </div>
 );
@@ -35,7 +36,8 @@ const AccountUserContainer = props => (
 AccountUserContainer.propTypes = {
     number: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    level: PropTypes.string.isRequired
+    is_birthday: PropTypes.bool,
+    level: PropTypes.string
 };
 
 export default AccountUserContainer;

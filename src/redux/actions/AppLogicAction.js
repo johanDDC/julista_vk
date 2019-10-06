@@ -148,6 +148,6 @@ function getLMarks(id, secret, student_id, dispatcher) {
 
 export function clearData() {
     return {
-        type: "CLEAR",
+        type: "CLEAR_DATA",
     }
 }

@@ -143,7 +143,7 @@ function profile(state = initialState, action) {
                 student: action.data
             };
 
-        case "CLEAR":
+        case "CLEAR_PROFILE":
             return {
                 id: null,
                 secret: null,

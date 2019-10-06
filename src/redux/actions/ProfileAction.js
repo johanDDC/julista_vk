@@ -189,6 +189,6 @@ export async function unbind_user(id, secret) {
 
 export function clearProfile() {
     return {
-        type: "CLEAR",
+        type: "CLEAR_PROFILE",
     }
 }
