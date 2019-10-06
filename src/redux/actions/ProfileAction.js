@@ -179,7 +179,7 @@ export async function unbind_user(id, secret) {
     let json = {
         id: id,
         secret: secret,
-        vk_user_id: vk_id,
+        vk_user_id: vk_id - 0,
     };
 
     axios.post(baseUrl + methodUrl, json)

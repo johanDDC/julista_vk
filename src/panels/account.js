@@ -33,16 +33,34 @@ class Account extends React.Component {
                 console.log("cls", resp);
                 let clsmts = [];
                 resp.data.data.forEach((classmate, i) => {
-                    clsmts.push(
-                        <div className="accountClassmateContainer"
-                             onClick={() => window.open(`vk://vk.com/id${classmate.vk_account}`)}>
-                            <AccountUserContainer
-                                name={classmate.name}
-                                number={(i + 1).toString()}
-                                is_birthday={isBirthday(classmate.b_date)}
-                            />
-                        </div>
-                    );
+                    let is_link;
+                    try {
+                        is_link = classmate.vk_account;
+                    } catch (e) {
+                        is_link = false;
+                    }
+                    let inside =
+                        <AccountUserContainer
+                            name={classmate.name}
+                            number={(i + 1).toString()}
+                            is_birthday={classmate.b_date && isBirthday(classmate.b_date)}
+                        />;
+                    if (is_link) {
+                        clsmts.push(
+                            <div className="accountClassmateContainer"
+                                 onClick={() => window.location.href = `vk://vk.com/id${classmate.vk_account}`}
+                            >
+                                {inside}
+                            </div>
+                        );
+                    } else {
+                        clsmts.push(
+                            <div className="accountClassmateContainer"
+                            >
+                                {inside}
+                            </div>
+                        );
+                    }
                 });
                 this.setState({
                     classmates: clsmts,
@@ -59,7 +77,7 @@ class Account extends React.Component {
 
     openList = () => {
         if (!this.is_opened) {
-            document.getElementById("classmatesList").style.maxHeight = "4000px";
+            document.getElementById("classmatesList").style.maxHeight = `${46 * this.state.classmates.length + 29}px`;
             document.getElementById("classmatesList").style.paddingBottom = "24px";
             document.querySelector(".accountClassmateContainer:nth-child(5)").style.marginTop = "8px";
             document.querySelector(".accountShowMoreClassmatesText").innerHTML = "Скрыть весь список";
