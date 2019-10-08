@@ -227,7 +227,7 @@ class Settings extends React.Component {
                             </div>
                             <div>
                                 <Tooltip
-                                    text="Обязательно появится в релизе :)"
+                                    text="Обязательно появится в релизе"
                                     isShown={this.state.tooltip}
                                     onClose={() => this.setState({tooltip: false})}
                                     offsetX={-50}

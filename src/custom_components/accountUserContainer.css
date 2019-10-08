@@ -1,49 +1,29 @@
 .accountUserContainer{
-    width: 100%;
-    height: 38px;
+    height: 56px;
     display: flex;
     flex-direction: row;
     align-items: center;
     border-radius: 20px;
     background-color: #fff;
+    padding: 0 16px 0 16px;
 }
 
-.accountUserNumeration{
-    width: 26px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 13px;
-    color: #3c3c3c;
-    background-color: #efefef;
-    border-radius: 14px 0 0 14px;
+.accountUserContainerAvatar {
+    position: relative;
+    margin-right: 12px;
 }
 
-.accountUserInfo{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.accountUserName{
-    color: #212121;
+.accountUserContainerName {
     font-size: 16px;
-}
-
-#overPlace{
-    color: rgb(174 179 192);
-    font-size: 15px;
+    color: #212121;
 }
 
 .accountUserContainerBirthday {
-    min-width: 106px;
-    background-color: #fff9d9;
-    color: #ffb800;
-    font-size: 12px;
-    border-radius: 10px;
-    padding: 3px 8px 3px 8px;
+    margin-left: 4px;
+}
+
+.accountUserContainerPercent {
+    display: none;
+    flex-direction: row;
+    align-self: center;
 }

@@ -17,6 +17,7 @@ class AccountView extends React.Component {
         return (
             <View activePanel={(this.props.activePanel === "auth" ? "account" : this.props.activePanel)}>
                 <Account id="account"
+                         fetchedUser={this.props.fetchedUser}
                          profile={this.props.profile}
                          setPanel={this.props.setPanelAction}
                          clearJournalData={this.props.clearJournalData}
@@ -35,7 +36,8 @@ const mapStateToProps = store => {
     console.log("Account View", store);
     return {
         activePanel: store.activePanel,
-        profile: store.profile
+        profile: store.profile,
+        fetchedUser: store.fetchedUser,
     }
 };
 

@@ -10,7 +10,7 @@
     margin-left: calc(50% - 35px);
 }
 
-@-webkit-keyframes rotation /* Safari and Chrome */ {
+@-webkit-keyframes rotation {
     from {
         -webkit-transform: rotate(0deg);
         -o-transform: rotate(0deg);

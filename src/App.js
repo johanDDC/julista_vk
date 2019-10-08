@@ -1,5 +1,5 @@
 import React from 'react';
-import VKconnect from '@vkontakte/vkui-connect';
+import VKconnect from '@vkontakte/vk-connect-promise';
 import {Root} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux'
@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import AuthorizationView from "./views/AuthorizationView"
 import BottomBar from "./views/BottomBar"
 import {setUser} from "./redux/actions/FetchedUserAction";
+import {getVkParams} from "./utils/utils";
 
 class App extends React.Component {
     constructor(props) {
@@ -14,31 +15,17 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        let vk_params = window.location.search.slice(1).split('&')
-            .map((queryParam) => {
-                let kvp = queryParam.split('=');
-                return {key: kvp[0], value: kvp[1]}
-            })
-            .reduce((query, kvp) => {
-                query[kvp.key] = decodeURIComponent(kvp.value);
-                return query
-            }, {});
+        let vk_params = getVkParams();
 
-        VKconnect.subscribe((e) => {
-            switch (e.detail.type) {
-                case 'VKWebAppGetUserInfoResult':
-                    let user = e.detail.data;
-                    user.vk_user_id = vk_params.vk_user_id;
-                    user.notifications = vk_params.vk_are_notifications_enabled;
-                    user.group = vk_params.vk_viewer_group_role;
-                    this.props.setUserAction(user);
-                    break;
-                default:
-                    // console.log(e);
-                    break;
-            }
-        });
-        VKconnect.send('VKWebAppGetUserInfo', {});
+        VKconnect.send("VKWebAppGetUserInfo", {})
+            .then(resp => {
+                let user = resp.data;
+                user.vk_user_id = vk_params.vk_user_id;
+                user.notifications = vk_params.vk_are_notifications_enabled;
+                user.group = vk_params.vk_viewer_group_role;
+                this.props.setUserAction(user);
+            })
+            .catch(err => console.log(err))
     }
 
     render() {

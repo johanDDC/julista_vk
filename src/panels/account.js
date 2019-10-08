@@ -1,4 +1,4 @@
-import {Div, Group, Button, Panel, PanelHeader, InfoRow, Progress, Spinner} from '@vkontakte/vkui';
+import {Div, Group, Button, Panel, PanelHeader, InfoRow, Progress, Spinner, Avatar} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/account.css"
@@ -7,6 +7,7 @@ import AccountUserContainer from "../custom_components/accountUserContainer"
 import SwitchStudentIcon from "../custom_components/icon-pack/SwitchStudentIcon"
 import VK_important from "../custom_components/icon-pack/VK_important"
 import Icon16Dropdown from '@vkontakte/icons/dist/16/dropdown';
+import DefaultAvatarIcon from "../custom_components/icon-pack/DefaultAvatarIcon"
 import {isBirthday} from "../utils/utils"
 
 const axios = require('axios');
@@ -30,7 +31,6 @@ class Account extends React.Component {
     getClassMates = () => {
         axios.get(`https://bklet.ml/api/diary/classmates/?id=${this.props.profile.id}&secret=${this.props.profile.secret}`)
             .then(resp => {
-                console.log("cls", resp);
                 let clsmts = [];
                 resp.data.data.forEach((classmate, i) => {
                     let is_link;
@@ -44,6 +44,7 @@ class Account extends React.Component {
                             name={classmate.name}
                             number={(i + 1).toString()}
                             is_birthday={classmate.b_date && isBirthday(classmate.b_date)}
+                            vk_id={classmate.vk_account}
                         />;
                     if (is_link) {
                         clsmts.push(
@@ -77,14 +78,14 @@ class Account extends React.Component {
 
     openList = () => {
         if (!this.is_opened) {
-            document.getElementById("classmatesList").style.maxHeight = `${46 * this.state.classmates.length + 29}px`;
+            document.getElementById("classmatesList").style.maxHeight = `${64 * this.state.classmates.length + 29}px`;
             document.getElementById("classmatesList").style.paddingBottom = "24px";
             document.querySelector(".accountClassmateContainer:nth-child(5)").style.marginTop = "8px";
             document.querySelector(".accountShowMoreClassmatesText").innerHTML = "Скрыть весь список";
             document.getElementById("openClassmatesList").style.transform = "rotate(180deg)";
             this.is_opened = true;
         } else {
-            document.getElementById("classmatesList").style.maxHeight = "170px";
+            document.getElementById("classmatesList").style.maxHeight = "222px";
             document.getElementById("classmatesList").style.paddingBottom = "12px";
             document.querySelector(".accountClassmateContainer:nth-child(5)").style.marginTop = "28px";
             document.querySelector(".accountShowMoreClassmatesText").innerHTML = "Показать весь список";
@@ -102,6 +103,13 @@ class Account extends React.Component {
                 </PanelHeader>
                 <div className="accountStudentInfo">
                     <Div className="studentInfoContainer">
+                        <div className="accountProfileAvatar">
+                            {
+                                this.props.fetchedUser
+                                    ? <Avatar src={this.props.fetchedUser.photo_100}/>
+                                    : <DefaultAvatarIcon/>
+                            }
+                        </div>
                         <div id="studentInfo">
                             <div id="studentName">
                                 {this.props.profile.student.name}
@@ -145,18 +153,6 @@ class Account extends React.Component {
                                 : this.state.classmates)
                             : <Spinner size="medium"/>
                     }
-                    {/*<Div className="userTopElement">*/}
-                    {/*    <AccountUserContainer number="1" name="Наташа Мазнова" level="20"/>*/}
-                    {/*</Div>*/}
-                    {/*<Div className="userTopElement">*/}
-                    {/*    <AccountUserContainer number="2" name="Катя Стрёмная" level="20"/>*/}
-                    {/*</Div>*/}
-                    {/*<Div className="userTopElement">*/}
-                    {/*    <AccountUserContainer number="3" name="Иван Пешехонов" level="20"/>*/}
-                    {/*</Div>*/}
-                    {/*<Div className="userTopElement">*/}
-                    {/*    <div id="overPlace">Ты находишься на 6 месте</div>*/}
-                    {/*</Div>*/}
                     {this.state.classmates.length > 3 &&
                     <div className="accountShowMoreClassmates" onClick={this.openList}>
                         <div className="accountShowMoreClassmatesText">
@@ -181,7 +177,7 @@ class Account extends React.Component {
                         </div>
                         <div className="accountImportantNotificationTextBlock">
                             Попробуй нашего бота ВК, он очень умный, и сильно тебе поможет, если нет времени заходить в
-                            приложение =)
+                            приложение
                         </div>
                     </Div>
                 </Div>
@@ -216,6 +212,7 @@ Account.propTypes = {
     profile: PropTypes.any.isRequired,
     setPanel: PropTypes.func.isRequired,
     clearJournalData: PropTypes.func.isRequired,
+    fetchedUser: PropTypes.any,
 };
 
 export default Account;

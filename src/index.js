@@ -7,6 +7,7 @@ import App from './App';
 import store from "./redux/store/main";
 import {Provider} from "react-redux"
 import registerServiceWorker from './sw';
+import mVKMiniAppsScrollHelper from '@vkontakte/mvk-mini-apps-scroll-helper';
 import './index.css'
 
 // Init VK App
@@ -17,10 +18,14 @@ connect.send('VKWebAppInit', {});
 // Но не забывайте, что на данный момент у технологии есть достаточно подводных камней
 // Подробнее про сервис воркеры можно почитать тут — https://vk.cc/8MHpmT
 
+const root = document.getElementById('root');
+mVKMiniAppsScrollHelper(root);
+
+
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <App/>
     </Provider>
-    , document.getElementById('root'));
+    , root);
 
 registerServiceWorker();
