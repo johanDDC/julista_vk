@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/julista_vk/precache-manifest.860cd24ebe331b0c12eab7ec37986d6b.js"
+  "/julista_vk/precache-manifest.d1a673dbfc1c1986ad789371151ec4fe.js"
 );
 
 self.addEventListener('message', (event) => {
