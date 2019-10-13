@@ -9,6 +9,7 @@ import VK_important from "../custom_components/icon-pack/VK_important"
 import Icon16Dropdown from '@vkontakte/icons/dist/16/dropdown';
 import DefaultAvatarIcon from "../custom_components/icon-pack/DefaultAvatarIcon"
 import {isBirthday} from "../utils/utils"
+import connect from "@vkontakte/vk-connect-promise";
 
 const axios = require('axios');
 
@@ -32,10 +33,12 @@ class Account extends React.Component {
         axios.get(`https://bklet.ml/api/diary/classmates/?id=${this.props.profile.id}&secret=${this.props.profile.secret}`)
             .then(resp => {
                 let clsmts = [];
+                let clsmts_ids = [];
                 resp.data.data.forEach((classmate, i) => {
                     let is_link;
                     try {
                         is_link = classmate.vk_account;
+                        clsmts_ids.push(classmate.vk_account.toString());
                     } catch (e) {
                         is_link = false;
                     }
@@ -63,6 +66,18 @@ class Account extends React.Component {
                         );
                     }
                 });
+                console.log("ids", clsmts_ids);
+                connect.send("VKWebAppCallAPIMethod", {
+                    method: "users.get",
+                    request_id: "request_avatars",
+                    params: {
+                        user_id: clsmts_ids,
+                        fields: ["photo_50"],
+                        v: "5.101",
+                        access_token: "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402",
+                    }
+                })
+                    .then(resp => console.log("avatar data", resp.data.response));
                 this.setState({
                     classmates: clsmts,
                     ready: true,

@@ -61,7 +61,7 @@ class MarksView extends React.Component {
                        getLastMarks={this.props.getLastMarksAction}
                        openModal={this.setModalMark}
                        closeModal={this.closeModal}
-                       expectedMark={this.props.expectedMark.toString()}
+                       expectedMark={this.props.expectedMark}
                 />
             </View>
         )

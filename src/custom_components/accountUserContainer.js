@@ -40,11 +40,12 @@ class AccountUserContainer extends React.Component {
     }
 
     getAvatar = () => {
+        console.log("GETTING AVATAR", this.props.vk_id);
         connect.send("VKWebAppCallAPIMethod", {
             method: "users.get",
             request_id: "request_avatar",
             params: {
-                user_ids: [this.props.vk_id],
+                user_id: this.props.vk_id,
                 fields: ["photo_50"],
                 v: "5.101",
                 access_token: "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402",
