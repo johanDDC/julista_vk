@@ -109,14 +109,29 @@ function profile(state = initialState, action) {
                 diary: action.data,
                 isFetching: false
             };
-
+        case "SET_EXPERIENCE":
+            let locData1 = localStorage.getItem("userData")
+                ? JSON.parse(localStorage.getItem("userData"))
+                : {};
+            console.log("SET_EXPERIENCE", state.student, action.data, locData1);
+            locData1.student = {
+                ...state.student,
+                exp: action.data,
+            };
+            localStorage.setItem("userData", JSON.stringify(locData1));
+            return {
+                ...state,
+                student: {
+                    ...state.student,
+                    exp: action.data,
+                }
+            };
         case "SET_STUDENT":
             let locData = localStorage.getItem("userData")
                 ? JSON.parse(localStorage.getItem("userData"))
                 : {};
             locData.student = action.data;
             localStorage.setItem("userData", JSON.stringify(locData));
-            let userData;
             // connect.send("VKWebAppStorageGet", {
             //     "keys": ["userData"],
             // })

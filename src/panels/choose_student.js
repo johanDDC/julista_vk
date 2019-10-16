@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./styles/choose_student.css"
 
-import MosRuIcon from "../custom_components/icon-pack/MosRuIcon"
-import MosregIcon from "../custom_components/icon-pack/MosregIcon"
+const axios = require('axios');
 
 class ChooseStudent extends React.Component {
     constructor(props) {
@@ -16,6 +15,12 @@ class ChooseStudent extends React.Component {
     }
 
     choose = (student) => {
+        axios.get(`https://bklet.ml/api/profile/info/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${student.id}`)
+            .then(resp => {
+                console.log("exp", resp.data.data.exp);
+                this.props.setExp(resp.data.data.exp)
+            })
+            .catch(err => console.log("exp", err));
         this.props.setStudent(student);
         try {
             this.props.setView("MainView");
@@ -27,20 +32,20 @@ class ChooseStudent extends React.Component {
 
     drawStudents = () => {
         this.props.profile.students.forEach(student => {
-           this.students.push(
-               <Button level="tertiary" className="chooseStudentScreenStudentContainer"
-                       onClick={() => {
-                           this.d = student;
-                           this.choose(this.d)
-                       }}>
-                   <div className="chooseStudentScreenStudentName">
-                       {student.name}
-                   </div>
-                   <div className="chooseStudentScreenStudentGrade">
-                       {student.class} класс
-                   </div>
-               </Button>
-           )
+            this.students.push(
+                <Button level="tertiary" className="chooseStudentScreenStudentContainer"
+                        onClick={() => {
+                            this.d = student;
+                            this.choose(this.d)
+                        }}>
+                    <div className="chooseStudentScreenStudentName">
+                        {student.name}
+                    </div>
+                    <div className="chooseStudentScreenStudentGrade">
+                        {student.class} класс
+                    </div>
+                </Button>
+            )
         });
     };
 
@@ -67,6 +72,7 @@ ChooseStudent.propTypes = {
     setStudent: PropTypes.func.isRequired,
     setView: PropTypes.func,
     setPanel: PropTypes.func.isRequired,
+    setExp: PropTypes.func.isRequired,
 };
 
 export default ChooseStudent;

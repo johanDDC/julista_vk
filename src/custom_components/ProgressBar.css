@@ -1,0 +1,16 @@
+.customProgressBarContainer {
+    width: 100%;
+    height: 10px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    background-color: #dadada;
+}
+
+.customProgressBarContainer__in {
+    height: 10px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    background: linear-gradient(#05a732, #04d461);
+}

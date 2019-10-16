@@ -107,6 +107,8 @@ class Schedule extends React.Component {
                                           weight={(mark.weight ? mark.weight.toString() : "1")}/>
                                 </div>
                                 <div className="modalScheduleInfoRowText">
+                                    {(mark.score ? mark.score.toString() : mark.value.toString()) === "Болел" && "Болел"}
+                                    {(mark.score ? mark.score.toString() : mark.value.toString()) === "Не был" && "Пропуск"}
                                 </div>
                             </div>
                         );

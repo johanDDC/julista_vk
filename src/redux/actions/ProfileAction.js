@@ -118,7 +118,18 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                         student: (students.length === 1 ? students[0] : null),
                         // student: null,
                     },
-                })
+                });
+                if (localData.student) {
+                    axios.get(`https://bklet.ml/api/profile/info/?id=${response.data.id}&secret=${response.data.secret}&student_id=${localData.student.id}`)
+                        .then(resp => {
+                            console.log("exp", resp.data.data.exp);
+                            dispatcher({
+                                type: "SET_EXPERIENCE",
+                                data: resp.data.data.exp,
+                            });
+                        })
+                        .catch(err => console.log("exp", err));
+                }
             } else {
                 dispatcher({
                     type: "DO_AUTHORIZATION_FAIL",
@@ -145,6 +156,13 @@ export function setStudent(student) {
     return {
         type: "SET_STUDENT",
         data: student,
+    }
+}
+
+export function setExp(exp) {
+    return {
+        type: "SET_EXPERIENCE",
+        data: exp,
     }
 }
 

@@ -8,6 +8,7 @@ import DarkThemeIcon from "../custom_components/icon-pack/DarkThemeIcon"
 import BookletCheck from "../custom_components/icon-pack/BookletCheck"
 import Mark from "../custom_components/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
+import QuestionIcon from "../custom_components/icon-pack/QuestionIcon"
 import Icon24Error from '@vkontakte/icons/dist/24/error';
 import {unbind_user} from "../redux/actions/ProfileAction"
 import connect from '@vkontakte/vk-connect-promise';
@@ -249,15 +250,13 @@ class Settings extends React.Component {
                                 Красная кнопка
                             </div>
                             <div className="settingsSettingSwitch">
-                                <Button level="secondary">
-                                    <Link
-                                        href="vk://vk.com/wall-171343913_127"
-                                        target="_blank"
+                                <Link
+                                    href="vk://vk.com/wall-171343913_127"
+                                    target="_blank"
 
-                                    >
-                                        ?
-                                    </Link>
-                                </Button>
+                                >
+                                    <QuestionIcon/>
+                                </Link>
                             </div>
                         </div>
                     </Button>

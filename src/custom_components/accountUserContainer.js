@@ -12,17 +12,31 @@ import {getVkParams} from "../utils/utils";
 var fill_color;
 var outline_color;
 
-function setCirclesColor(num) {
-    if (num === "1") {
-        fill_color = "rgb(255 214 0)";
-        outline_color = "rgba(255, 214, 0, 0.5)"
-    } else if (num === "2") {
-        fill_color = "rgb(180 180 180)";
-        outline_color = "rgba(180, 180, 180, 0.5)"
-    } else if (num === "3") {
-        fill_color = "rgb(255 186 86)";
-        outline_color = "rgba(255, 186, 86, 0.5)"
+function setMedal(num) {
+    let styles = {};
+    if (num.toString() === "1") {
+        styles = {
+            background: "linear-gradient(#ff8359, #ffdf40)",
+        };
+    } else if (num.toString() === "2") {
+        styles = {
+            background: "linear-gradient(#f4f4f4, #707070)",
+        };
+    } else if (num.toString() === "3") {
+        styles = {
+            background: "linear-gradient(#f09819, #c76118)",
+        };
+    } else {
+        styles = {
+            display: "none"
+        }
     }
+
+    return (
+        <div className="accountUserContainerMedal" style={styles}>
+            {num}
+        </div>
+    );
 }
 
 class AccountUserContainer extends React.Component {
@@ -43,37 +57,44 @@ class AccountUserContainer extends React.Component {
         console.log("GETTING AVATAR", this.props.vk_id);
         connect.send("VKWebAppCallAPIMethod", {
             method: "users.get",
-            request_id: "request_avatar",
+            request_id: `request_avatar_${this.props.vk_id}`,
             params: {
                 user_id: this.props.vk_id,
-                fields: ["photo_50"],
+                fields: ["photo_100"],
                 v: "5.101",
                 access_token: "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402",
             }
         })
             .then(resp => {
-                console.log("GOT AVATAR", resp);
+                console.log("GOT AVATAR", resp.data.response[0]);
                 this.setState({
-                    avatar: <Avatar size={40} src={resp.data.response[0].photo_50}/>
+                    avatar: <Avatar size={40} src={resp.data.response[0].photo_100}/>
                 })
             })
             .catch(err => console.log(err))
     };
 
     render() {
+        let medal = setMedal(this.props.number);
         return (
             <div className="accountUserContainer">
                 <div className="accountUserContainerAvatar">
                     {this.state.avatar}
+                    {medal}
                 </div>
-                <div className="accountUserContainerName">
-                    {this.props.name}
-                </div>
-                {
-                    this.props.is_birthday &&
-                    <div className="accountUserContainerBirthday"><BirthdayIcon/></div>
-                }
-                <div className="accountUserContainerPercent">
+                <div className="accountUserContainerRow">
+                    <div className="accountUserContainerName">
+                        {this.props.name}
+                        {
+                            this.props.is_birthday &&
+                            <div className="accountUserContainerBirthday"><BirthdayIcon/></div>
+                        }
+                    </div>
+                    <div className="accountUserContainerPercent">
+                        {isNaN(parseInt(this.props.percent))
+                            ? 0
+                            : parseInt(this.props.percent)}%
+                    </div>
                 </div>
             </div>
         )
@@ -85,7 +106,7 @@ AccountUserContainer.propTypes = {
     name: PropTypes.string.isRequired,
     vk_id: PropTypes.number.isRequired,
     is_birthday: PropTypes.bool,
-    level: PropTypes.string,
+    percent: PropTypes.string,
 };
 
 export default AccountUserContainer;
