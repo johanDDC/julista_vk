@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "687b80c4e7befb4506c2ead6218bd1ca",
+    "revision": "6c617d6e4c2b2268ae1d47900cfa6ceb",
     "url": "/julista_vk/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/julista_vk/static/css/2.a83908c5.chunk.css"
   },
   {
-    "revision": "7c5c60d4ca0a1a1591df",
+    "revision": "47112c27ac51ddf5f970",
     "url": "/julista_vk/static/css/main.40546cf9.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/julista_vk/static/js/2.83ed1919.chunk.js"
   },
   {
-    "revision": "7c5c60d4ca0a1a1591df",
-    "url": "/julista_vk/static/js/main.5aa6e018.chunk.js"
+    "revision": "47112c27ac51ddf5f970",
+    "url": "/julista_vk/static/js/main.cd943f06.chunk.js"
   },
   {
     "revision": "386a623ce6c8f17e5991",
