@@ -97,7 +97,7 @@ class Mark extends React.Component {
                     : `linear-gradient(90deg, ${this.gradientColorOne}, ${this.gradientColorTwo})`),
                 fontSize: (this.props.fontSize ? `${this.props.fontSize}px` : "14px"),
                 borderRadius: this.containerSize[2],
-                border: (this.props.is_border ? "2px solid #f6f6f6" : "0px")
+                border: (this.props.is_border ? "2px solid var(--background-block)" : "0px")
             }}>
                 <div>{this.markValue}</div>
                 {

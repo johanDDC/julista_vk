@@ -1,4 +1,16 @@
-.Tabbar{
+.Tabbar {
     box-shadow: 0 0 8px 0 #a6a4a6;
     border-radius: 16px 16px 0 0;
+}
+
+.TabbarItem {
+    background: var(--background-bottom-bar);
+}
+
+.TabbarItem:first-child {
+    border-radius: 16px 0 0 0;
+}
+
+.TabbarItem:last-child {
+    border-radius: 0 16px 0 0;
 }

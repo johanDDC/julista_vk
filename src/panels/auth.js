@@ -82,7 +82,7 @@ class Auth extends React.Component {
 
     drawRegionsSelector = () => {
         let options = [];
-        axios.get("https://bklet.ml/api/auth/get_data")
+        axios.get("https://bklet.ml/api/auth/get_data/")
             .then(reg_resp => {
                 reg_resp.data.data.forEach(reg => {
                     options.push(

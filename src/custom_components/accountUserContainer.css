@@ -4,7 +4,7 @@
     flex-direction: row;
     align-items: center;
     border-radius: 20px;
-    background-color: #fff;
+    background-color: var(--background);
     padding: 0 16px 0 16px;
 }
 
@@ -28,7 +28,7 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    border: 2px solid #ffffff;
+    border: 2px solid var(--background);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,7 +55,7 @@
     justify-content: start;
     align-items: center;
     font-size: 16px;
-    color: #212121;
+    color: var(--text-color);
 }
 
 .accountUserContainerBirthday {
@@ -67,6 +67,6 @@
     flex-direction: row;
     justify-content: center;
     align-self: center;
-    color: #6d6d6d;
+    color: var(--additional-text-color);
     font-size: 14px;
 }

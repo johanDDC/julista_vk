@@ -145,6 +145,15 @@ export function isBirthday(strDate) {
     return (today.getMonth() === birthDate.getMonth() && today.getDate() === birthDate.getDate());
 }
 
+export function recursiveTheming(startElem) {
+    if (startElem) {
+        startElem.setAttribute("data-theme", "dark");
+        for (let child of startElem.children) {
+            recursiveTheming(child);
+        }
+    }
+};
+
 // json = {
 //     sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
 //     vk_access_token_settings: "",

@@ -11,7 +11,7 @@ import Icon16Dropdown from '@vkontakte/icons/dist/16/dropdown';
 import DefaultAvatarIcon from "../custom_components/icon-pack/DefaultAvatarIcon"
 import QuestionIcon from "../custom_components/icon-pack/QuestionIcon"
 import PerformanceIcon from "../custom_components/icon-pack/PerformanceIcon"
-import {isBirthday} from "../utils/utils"
+import {isBirthday, recursiveTheming} from "../utils/utils"
 import connect from "@vkontakte/vk-connect-promise";
 
 const axios = require('axios');
@@ -86,7 +86,7 @@ class Account extends React.Component {
                     request_id: "request_avatars",
                     params: {
                         user_id: clsmts_ids,
-                        fields: ["photo_100"],
+                        fields: "photo_100",
                         v: "5.101",
                         access_token: "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402",
                     }
@@ -134,6 +134,7 @@ class Account extends React.Component {
     };
 
     render() {
+        console.log("theme", this.props.theme === "dark");
         return (
             <Panel id={this.props.id}>
                 <PanelHeader
@@ -277,6 +278,7 @@ class Account extends React.Component {
                 {/*        </Button>*/}
                 {/*    </div>*/}
                 {/*</Group>*/}
+                {/*{this.props.theme === "dark" && recursiveTheming(document.querySelector("#account"))}*/}
             </Panel>
         );
     }
@@ -288,6 +290,8 @@ Account.propTypes = {
     setPanel: PropTypes.func.isRequired,
     clearJournalData: PropTypes.func.isRequired,
     fetchedUser: PropTypes.any,
+
+    theme: PropTypes.string.isRequired,
 };
 
 export default Account;

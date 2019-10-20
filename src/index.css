@@ -1,5 +1,5 @@
 .View__header * {
-    background-color: #5690ff;
+    background-color: var(--background-head);
     color: #ffffff;
 }
 
@@ -20,6 +20,32 @@ section.View {
     height: calc(100vh - 24px);
 }
 
-:root {
+:root, [data-theme="default"] {
     --statusbar_alternate_legacy_background: #5690ff;
+    --the-color: #5690ff;
+
+    --background: #ffffff;
+    --background-block: #f6f6f6;
+    --additional-background-block: #e8e8e8;
+    --background-bottom-bar: #fafafa;
+    --background-head: #5690ff;
+    --background-text-color: #5690ff;
+    --text-color: #292929;
+    --additional-text-color: #535353;
+    --third-text-color: #999999;
+    --warning-text: #e80a1e;
+}
+
+
+[data-theme="dark"] {
+    --background: #1b2936;
+    --background-block: #23323f;
+    --additional-background-block: #2a3d4c;
+    --background-bottom-bar: #283d4e;
+    --background-head: #132029;
+    --background-text-color: #132029;
+    --text-color: #ffffff;
+    --additional-text-color: #f4f4f4;
+    --third-text-color: #dbdbdb;
+    --warning-text: #ffffff;
 }

@@ -21,6 +21,7 @@ class AccountView extends React.Component {
                          profile={this.props.profile}
                          setPanel={this.props.setPanelAction}
                          clearJournalData={this.props.clearJournalData}
+                         theme={this.props.theme}
                 />
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}
@@ -39,6 +40,7 @@ const mapStateToProps = store => {
         activePanel: store.activePanel,
         profile: store.profile,
         fetchedUser: store.fetchedUser,
+        theme: store.theme,
     }
 };
 

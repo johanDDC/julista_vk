@@ -1,7 +1,7 @@
 .scheduleWeekTopBar {
     width: 90%;
     height: 54px;
-    background-color: #5690ff !important;
+    background-color: var(--background-head) !important;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -29,7 +29,7 @@
 .scheduleWeekDaySelected {
     background-color: #fff;
     border-radius: 100%;
-    color: #5690FF;
+    color: var(--background-text-color);
 }
 
 
@@ -46,7 +46,7 @@
     width: 28px;
     height: 28px;
     font-size: 20px;
-    color: #5690ff;
+    color: var(--background-text-color);
 }
 
 .scheduleWeekSwiperRight{
@@ -62,5 +62,5 @@
     width: 28px;
     height: 28px;
     font-size: 20px;
-    color: #5690ff;
+    color: var(--background-text-color);
 }

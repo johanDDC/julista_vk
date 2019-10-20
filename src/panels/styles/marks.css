@@ -1,9 +1,10 @@
 #marks > .Panel__in {
     padding-bottom: 0 !important;
+    background-color: var(--background);
 }
 
 .marksScreen {
-    background-color: #ffffff;
+    background-color: var(--background);
     min-height: 100vh;
     height: 100%;
     padding-bottom: 56px;
@@ -11,8 +12,7 @@
 
 .marksScreenError {
     font-size: 16px;
-    font-weight: bold;
-    color: #E80A1E;
+    color: var(--warning-text);
     padding: 50% 16px 0 16px;
     text-align: center;
 }
@@ -36,7 +36,7 @@
 
 .marksTabs > .TabsItem--selected {
     background-color: #5690ff !important;
-    color: #fff !important;
+    color: var(--background-text-color) !important;
 }
 
 .marksTabs > .TabsItem--selected::after {
@@ -44,7 +44,7 @@
 }
 
 .marksTabs > .TabsItem > div {
-    color: #5690ff !important;
+    color: var(--text-color) !important;
     font-weight: bold !important;
 }
 
@@ -62,7 +62,7 @@
 .allMarksContainer {
     display: flex;
     flex-direction: column;
-    background-color: #f6f6f6;
+    background-color: var(--background-block);
     border-radius: 20px;
     margin: 12px 16px 0 16px;
     padding: 8px 12px 8px 12px;
@@ -77,7 +77,7 @@
 
 .subject {
     font-size: 16px;
-    color: #292929;
+    color: var(--text-color);
     text-align: start;
 }
 
@@ -93,7 +93,7 @@
 
 .avg {
     font-size: 12px;
-    color: #999999;
+    color: var(--third-text-color);
 }
 
 .marksRow {
@@ -144,7 +144,7 @@
     justify-content: space-around;
     align-items: center;
     box-shadow: 4px 4px 11px 0 rgba(0, 0, 0, 0.15);
-    background-color: #fff;
+    background-color: var(--background);
     border-radius: 20px;
     margin: 5px 0 10px 10px;
     z-index: 5;
@@ -166,7 +166,7 @@
 }
 
 .resultMarksContainer {
-    background-color: #f6f6f6;
+    background-color: var(--background-block);
     display: flex;
     flex-direction: column;
     margin: 0 16px 12px 16px;
@@ -175,7 +175,7 @@
 
 .resultMarksContainerSubject {
     font-size: 16px;
-    color: #292929;
+    color: var(--text-color);
     margin-bottom: 11px;
 }
 
@@ -195,7 +195,7 @@
 
 .resultMarksContainerResultedTitle {
     font-size: 14px;
-    color: #999999;
+    color: var(--third-text-color);
     margin-right: 17px;
 }
 
@@ -218,14 +218,13 @@
     align-items: center;
     margin-bottom: 14px;
     font-size: 14px;
-    color: #535353;
+    color: var(--additional-text-color);
 }
 
 .modalMarkSubjectInfoLeft {
     margin-right: 25px;
     font-size: 14px;
-    color: #999999;
-    font-weight: bold;
+    color: var(--third-text-color);
 }
 
 .modalMarkMarksInfo {
@@ -251,23 +250,22 @@
 
 .modalMarkMarksInfoForm {
     font-size: 16px;
-    color: #292929;
+    color: var(--text-color);
 }
 
 .modalMarkMarksInfoName {
     font-size: 14px;
-    color: #535353;
+    color: var(--additional-text-color);
     margin: 7px 0 7px 0;
 }
 
 .modalMarkMarksInfoDate {
     font-size: 12px;
-    color: #999999;
+    color: var(--third-text-color);
 }
 
 .errorLastMarks {
     font-size: 12px;
-    font-weight: bold;
     color: #E80A1E;
     text-align: center;
 }

@@ -1,3 +1,7 @@
+#settings > .Panel__in {
+    background-color: var(--background-block);
+}
+
 .settingsTitleContainer{
     padding: 0 0 16px 0;
 }
@@ -8,7 +12,7 @@
 }
 
 .groupSettingsContainer{
-    background-color: #fff;
+    background-color: var(--background);
     box-shadow: 0 4px 4px 0 #26000033;
     padding: 15px 0 12px 16px;
     margin-bottom: 12px;
@@ -23,7 +27,7 @@
     width: 100%;
     min-height: 30px;
     /*padding: 0 0 0 16px;*/
-    background-color: white;
+    background-color: var(--background);
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -48,7 +52,7 @@
 }
 
 .settingsSettingContainer > div > div{
-    color: black;
+    color: var(--text-color);
     font-size: 17px !important;
 }
 
@@ -69,7 +73,7 @@
     flex-direction: row;
     font-size: 16px;
     font-weight: normal !important;
-    color: #212121;
+    color: var(--text-color);
 }
 
 .settingsSettingSwitch{

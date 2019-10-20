@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import AuthorizationView from "./views/AuthorizationView"
 import BottomBar from "./views/BottomBar"
 import {setUser} from "./redux/actions/FetchedUserAction";
-import {getVkParams} from "./utils/utils";
+import {getVkParams, recursiveTheming} from "./utils/utils";
 
 class App extends React.Component {
     constructor(props) {
@@ -25,7 +25,10 @@ class App extends React.Component {
                 user.group = vk_params.vk_viewer_group_role;
                 this.props.setUserAction(user);
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
+
+        if (this.props.theme === "default")
+            recursiveTheming(document.querySelector("#root"));
     }
 
     render() {
@@ -46,6 +49,7 @@ const mapStateToProps = store => {
     return {
         activeView: store.activeView,
         activePanel: store.activePanel,
+        theme: store.theme,
     }
 };
 

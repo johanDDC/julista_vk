@@ -1,3 +1,7 @@
+#view-AuthorizationView .View__header * {
+    background-color: #5690ff;
+}
+
 .authGroup{
     display: flex;
     flex-direction: column;

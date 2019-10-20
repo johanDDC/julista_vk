@@ -260,7 +260,7 @@ class Schedule extends React.Component {
     generateEmptyTale = () => {
         return (
             <div className="scheduleTale">
-                <p style={{textAlign: "center", color: "#000000"}}>Сегодня нет занятий</p>
+                <p style={{textAlign: "center", color: "var(--text-color)"}}>Сегодня нет занятий</p>
             </div>
         )
     };
@@ -430,7 +430,7 @@ class Schedule extends React.Component {
 
     render() {
         return (
-            <Panel id={this.props.id} style={{backgroundColor: "#5690ff"}}>
+            <Panel id={this.props.id} style={{backgroundColor: "var(--background)"}}>
                 <PanelHeader
                     noShadow>
                     <div className="scheduleHeaderMonth">{this.state.month}</div>
@@ -463,7 +463,7 @@ class Schedule extends React.Component {
                                 pullDownThreshold={75}
                                 onRefresh={this.refresh}
                                 triggerHeight={160}
-                                backgroundColor="#5690ff"
+                                backgroundColor="var(--background)"
                                 startInvisible={true}>
                                 {this.drawShedule()}
                             </PullToRefresh>
