@@ -9,8 +9,19 @@
 }
 
 .accountUserContainerAvatar {
+    display: flex;
+    width: 40px;
+    height: 40px;
     position: relative;
-    margin-right: 12px;
+}
+
+.accountUserContainerAvatarImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 .accountUserContainerMedal {
@@ -31,10 +42,11 @@
 }
 
 .accountUserContainerRow {
-    width: 100%;
+    width: calc(100% - 52px);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-left: 12px;
 }
 
 .accountUserContainerName {

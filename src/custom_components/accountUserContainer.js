@@ -44,7 +44,7 @@ class AccountUserContainer extends React.Component {
         super();
 
         this.state = {
-            avatar: <DefaultAvatarIcon/>,
+            avatarSrc: null,
             medal: null,
         };
     }
@@ -59,19 +59,17 @@ class AccountUserContainer extends React.Component {
             method: "users.get",
             request_id: `request_avatar_${this.props.vk_id}`,
             params: {
-                user_id: this.props.vk_id,
-                fields: ["photo_100"],
-                v: "5.101",
+                user_ids: this.props.vk_id,
+                fields: "photo_100",
+                v: "5.102",
                 access_token: "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402",
             }
         })
             .then(resp => {
-                console.log("GOT AVATAR", resp.data.response[0]);
                 this.setState({
-                    avatar: <Avatar size={40} src={resp.data.response[0].photo_100}/>
+                    avatarSrc: resp.data.response[0]["photo_100"],
                 })
             })
-            .catch(err => console.log(err))
     };
 
     render() {
@@ -79,7 +77,9 @@ class AccountUserContainer extends React.Component {
         return (
             <div className="accountUserContainer">
                 <div className="accountUserContainerAvatar">
-                    {this.state.avatar}
+                    {this.state.avatarSrc
+                        ? <Avatar size={40} src={this.state.avatarSrc}/>
+                        : <Avatar size={40}><DefaultAvatarIcon/></Avatar>}
                     {medal}
                 </div>
                 <div className="accountUserContainerRow">

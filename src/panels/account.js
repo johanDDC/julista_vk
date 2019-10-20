@@ -34,9 +34,9 @@ class Account extends React.Component {
     }
 
     getClassMates = () => {
+        console.log("classmates resp", `https://bklet.ml/api/diary/classmates/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${this.props.profile.student.id}`);
         axios.get(`https://bklet.ml/api/diary/classmates/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${this.props.profile.student.id}`)
             .then(resp => {
-                console.log("classmates resp", resp.data, `https://bklet.ml/api/diary/classmates/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${this.props.profile.student.id}`);
                 let clsmts = [];
                 let clsmts_ids = [];
                 let sorted = [...resp.data.data, this.props.profile.student];
@@ -112,7 +112,11 @@ class Account extends React.Component {
             document.querySelector(".accountClassmateContainer:nth-child(5)").style.marginTop = "8px";
             document.querySelector(".accountShowMoreClassmatesText").innerHTML = "Скрыть весь список";
             document.getElementById("openClassmatesList").style.transform = "rotate(180deg)";
-            document.getElementById("accountMyPlace").style.display = "none";
+            try {
+                document.getElementById("accountMyPlace").style.display = "none";
+            } catch (e) {
+
+            }
             this.is_opened = true;
         } else {
             document.getElementById("classmatesList").style.maxHeight = "240px";
@@ -120,7 +124,11 @@ class Account extends React.Component {
             document.querySelector(".accountClassmateContainer:nth-child(5)").style.marginTop = "46px";
             document.querySelector(".accountShowMoreClassmatesText").innerHTML = "Показать весь список";
             document.getElementById("openClassmatesList").style.transform = "rotate(360deg)";
-            document.getElementById("accountMyPlace").style.display = "flex";
+            try {
+                document.getElementById("accountMyPlace").style.display = "flex";
+            } catch (e) {
+
+            }
             this.is_opened = false;
         }
     };
@@ -138,7 +146,7 @@ class Account extends React.Component {
                             {
                                 this.props.fetchedUser
                                     ? <Avatar size={40} src={this.props.fetchedUser.photo_100}/>
-                                    : <DefaultAvatarIcon/>
+                                    : <Avatar size={40}><DefaultAvatarIcon/></Avatar>
                             }
                         </div>
                         <div className="studentInfoRow">

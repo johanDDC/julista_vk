@@ -16,11 +16,15 @@
 }
 
 .accountProfileAvatar {
-    padding-right: 16px;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    /*padding-right: 16px;*/
 }
 
 .studentInfoRow {
-    width: calc(100% - 16px);
+    margin-left: 16px;
+    width: calc(100% - 56px);
     display: flex;
     flex-direction: row;
     justify-content: space-between;

@@ -71,7 +71,7 @@ function getAndAggregateMarks(id, secret, student_id, dispatcher) {
     let queries = `?student_id=${student_id}&id=${id}&secret=${secret}`;
     // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
 
-    // console.log(baseUrl + methodUrl + queries);
+    console.log(baseUrl + methodUrl + queries);
 
     let intervalId;
 
