@@ -27,7 +27,7 @@ class App extends React.Component {
             })
             .catch(err => console.log(err));
 
-        if (this.props.theme === "default")
+        if (this.props.theme === "dark")
             recursiveTheming(document.querySelector("#root"));
     }
 

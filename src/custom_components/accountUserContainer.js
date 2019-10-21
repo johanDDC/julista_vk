@@ -44,13 +44,12 @@ class AccountUserContainer extends React.Component {
         super();
 
         this.state = {
-            avatarSrc: null,
             medal: null,
         };
     }
 
     componentDidMount() {
-        this.getAvatar()
+        // this.getAvatar()
     }
 
     getAvatar = () => {
@@ -77,9 +76,11 @@ class AccountUserContainer extends React.Component {
         return (
             <div className="accountUserContainer">
                 <div className="accountUserContainerAvatar">
-                    {this.state.avatarSrc
-                        ? <Avatar size={40} src={this.state.avatarSrc}/>
-                        : <Avatar size={40}><DefaultAvatarIcon/></Avatar>}
+                    {
+                        this.props.avatarLink
+                            ? <Avatar size={40} src={this.props.avatarLink}/>
+                            : <Avatar size={40}><DefaultAvatarIcon/></Avatar>
+                    }
                     {medal}
                 </div>
                 <div className="accountUserContainerRow">
@@ -104,7 +105,7 @@ class AccountUserContainer extends React.Component {
 AccountUserContainer.propTypes = {
     number: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    vk_id: PropTypes.number.isRequired,
+    avatarLink: PropTypes.string.isRequired,
     is_birthday: PropTypes.bool,
     percent: PropTypes.string,
 };

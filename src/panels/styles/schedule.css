@@ -1,9 +1,6 @@
 #schedule > .Panel__in {
     padding-bottom: 0 !important;
-}
-
-#schedule > div {
-    background-color: var(--background-head) !important;
+    background-color: var(--background-head);
 }
 
 .scheduleHeaderMonth {

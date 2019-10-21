@@ -44,7 +44,7 @@
 }
 
 .marksTabs > .TabsItem > div {
-    color: var(--text-color) !important;
+    color: var(--background-text-color) !important;
     font-weight: bold !important;
 }
 

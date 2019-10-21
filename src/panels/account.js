@@ -51,53 +51,89 @@ class Account extends React.Component {
                     let is_link;
                     try {
                         is_link = classmate.vk_account;
-                        clsmts_ids.push(classmate.vk_account.toString());
-                    } catch (e) {
+                        clsmts_ids.push(classmate.vk_account);
+                    } catch {
+                        clsmts_ids.push(1);
                         is_link = false;
                     }
-                    let inside =
-                        <AccountUserContainer
-                            name={classmate.name}
-                            number={(i + 1).toString()}
-                            is_birthday={classmate.b_date && isBirthday(classmate.b_date)}
-                            vk_id={classmate.vk_account}
-                            percent={classmate.exp}
-                        />;
-                    if (is_link) {
-                        clsmts.push(
-                            <div className="accountClassmateContainer"
-                                 onClick={() => window.location.href = `vk://vk.com/id${classmate.vk_account}`}
-                            >
-                                {inside}
-                            </div>
-                        );
-                    } else {
-                        clsmts.push(
-                            <div className="accountClassmateContainer"
-                            >
-                                {inside}
-                            </div>
-                        );
-                    }
+                    // let inside =
+                    //     <AccountUserContainer
+                    //         name={classmate.name}
+                    //         number={(i + 1).toString()}
+                    //         is_birthday={classmate.b_date && isBirthday(classmate.b_date)}
+                    //         vk_id={classmate.vk_account}
+                    //         percent={classmate.exp}
+                    //     />;
+                    clsmts.push({
+                        name: classmate.name,
+                        number: (i + 1).toString(),
+                        link: is_link,
+                        bdate: classmate.b_date && isBirthday(classmate.b_date),
+                        exp: classmate.exp,
+                    });
+                    // if (is_link) {
+                    //
+                    //     clsmts.push(
+                    //         <div className="accountClassmateContainer"
+                    //              onClick={() => window.location.href = `vk://vk.com/id${classmate.vk_account}`}
+                    //         >
+                    //             {inside}
+                    //         </div>
+                    //     );
+                    // } else {
+                    //     clsmts.push(
+                    //         <div className="accountClassmateContainer"
+                    //         >
+                    //             {inside}
+                    //         </div>
+                    //     );
+                    // }
                 });
-                console.log("ids", clsmts_ids);
+                console.log("ids", clsmts_ids, clsmts);
                 connect.send("VKWebAppCallAPIMethod", {
                     method: "users.get",
                     request_id: "request_avatars",
                     params: {
-                        user_id: clsmts_ids,
+                        user_ids: clsmts_ids,
                         fields: "photo_100",
-                        v: "5.101",
+                        v: "5.102",
                         access_token: "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402",
                     }
                 })
-                    .then(resp => console.log("avatar data", resp.data.response));
-                this.setState({
-                    classmates: clsmts,
-                    ready: true,
-                })
+                    .then(resp => {
+                        console.log("avatars response", resp.data.response);
+                        resp.data.response.forEach((user, num) => {
+                            clsmts[num].avatar_link = user.photo_100;
+                        });
+                        let nodes = [];
+                        console.log("clsmts after adding", clsmts);
+                        clsmts.forEach(mate => {
+                            nodes.push(
+                                <div className="accountClassmateContainer"
+                                     onClick={() => {
+                                         if (mate.link)
+                                             window.location.href = `vk://vk.com/id${mate.link}`
+                                     }}
+                                >
+                                    <AccountUserContainer
+                                        name={mate.name}
+                                        number={mate.number}
+                                        is_birthday={mate.bdate}
+                                        percent={mate.exp}
+                                        avatarLink={mate.avatar_link}
+                                    />
+                                </div>
+                            )
+                        });
+                        console.log("nodes", nodes);
+                        this.setState({
+                            classmates: nodes,
+                            ready: true,
+                        })
+                    })
+                    .catch(err => console.log("avatar", err));
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log("classmates", err))
     };
 
     switchStudent = () => {
@@ -134,7 +170,6 @@ class Account extends React.Component {
     };
 
     render() {
-        console.log("theme", this.props.theme === "dark");
         return (
             <Panel id={this.props.id}>
                 <PanelHeader

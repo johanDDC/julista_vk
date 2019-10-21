@@ -430,7 +430,7 @@ class Schedule extends React.Component {
 
     render() {
         return (
-            <Panel id={this.props.id} style={{backgroundColor: "var(--background)"}}>
+            <Panel id={this.props.id} style={{backgroundColor: "var(--background-head)"}}>
                 <PanelHeader
                     noShadow>
                     <div className="scheduleHeaderMonth">{this.state.month}</div>
@@ -463,7 +463,7 @@ class Schedule extends React.Component {
                                 pullDownThreshold={75}
                                 onRefresh={this.refresh}
                                 triggerHeight={160}
-                                backgroundColor="var(--background)"
+                                backgroundColor="var(--background-head)"
                                 startInvisible={true}>
                                 {this.drawShedule()}
                             </PullToRefresh>
