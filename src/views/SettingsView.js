@@ -11,6 +11,7 @@ import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
 import {clearProfile} from "../redux/actions/ProfileAction";
 import {clearData} from "../redux/actions/AppLogicAction";
+import {setTheme} from "../redux/actions/ThemeAction";
 
 class SettingsView extends React.Component {
     constructor(props) {
@@ -65,6 +66,8 @@ class SettingsView extends React.Component {
                           setPanel={this.props.setPanelAction}
                           profile={this.props.profile}
                           signOutClear={this.props.signOutClear}
+                          theme={this.props.theme}
+                          setTheme={this.props.setThemeAction}
                 />
             </View>
         )
@@ -78,7 +81,8 @@ const mapStateToProps = store => {
     return {
         activePanel: store.activePanel,
         profile: store.profile,
-        expectedMark: store.expectedMark
+        expectedMark: store.expectedMark,
+        theme: store.theme,
     }
 };
 
@@ -91,6 +95,7 @@ const mapDispatchToProps = dispatch => {
         setMarkAction: mark => dispatch(setMark(mark)),
         setPanelAction: panel => dispatch(setPanel(panel)),
         setViewAction: view => dispatch(setView(view)),
+        setThemeAction: theme => dispatch(setTheme(theme)),
     }
 };
 

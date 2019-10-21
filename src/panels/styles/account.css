@@ -255,7 +255,7 @@
     align-items: center;
     width: 36px;
     height: 36px;
-    background-color: #e6eeff;
+    background-color: var(--additional-background-block);
     border-radius: 50%;
 }
 

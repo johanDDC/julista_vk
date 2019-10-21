@@ -253,9 +253,9 @@ class Marks extends React.Component {
                                     {label && <div className="lastMarkDate"
                                                    style={{
                                                        backgroundColor: label === "Сегодня"
-                                                           ? "#5690ff"
-                                                           : "#f6f6f6"
-                                                       , color: label === "Вчера" && "#999999"
+                                                           ? "var(--inversed-text-color)"
+                                                           : "var(--background-block)"
+                                                       , color: label === "Вчера" && "var(--third-text-color)"
                                                    }}>{label}</div>}
                                 </Div>
                             );

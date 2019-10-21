@@ -35,8 +35,7 @@
 }
 
 .marksTabs > .TabsItem--selected {
-    background-color: #5690ff !important;
-    color: var(--background-text-color) !important;
+    background-color: var(--inversed-text-color) !important;
 }
 
 .marksTabs > .TabsItem--selected::after {
@@ -44,12 +43,12 @@
 }
 
 .marksTabs > .TabsItem > div {
-    color: var(--background-text-color) !important;
+    color: var(--inversed-text-color) !important;
     font-weight: bold !important;
 }
 
 .marksTabs > .TabsItem--selected > div {
-    color: #fff !important;
+    color: var(--background) !important;
 }
 
 .marksBlocksTitle {

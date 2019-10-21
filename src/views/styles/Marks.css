@@ -1,11 +1,12 @@
 #modal-modalMark .ModalPageHeader__in{
-    background-color: #f6f6f6 !important;
+    background-color: var(--background-block) !important;
+    color: var(--text-color);
     font-size: 20px;
     font-weight: bold;
-    color: #292929;
 }
 
 #modal-modalMark .ModalPage__content{
+    background-color: var(--background);
     padding: 16px 16px 0 16px;
     overflow-y: scroll;
 }

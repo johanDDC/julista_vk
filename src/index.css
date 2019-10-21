@@ -31,6 +31,7 @@ section.View {
     --background-head: #5690ff;
     --background-text-color: #5690ff;
     --text-color: #292929;
+    --inversed-text-color: #5690ff;
     --additional-text-color: #535353;
     --third-text-color: #999999;
     --warning-text: #e80a1e;
@@ -45,6 +46,7 @@ section.View {
     --background-head: #132029;
     --background-text-color: #132029;
     --text-color: #ffffff;
+    --inversed-text-color: #ffffff;
     --additional-text-color: #f4f4f4;
     --third-text-color: #dbdbdb;
     --warning-text: #ffffff;

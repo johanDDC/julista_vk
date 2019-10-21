@@ -48,29 +48,6 @@ class AccountUserContainer extends React.Component {
         };
     }
 
-    componentDidMount() {
-        // this.getAvatar()
-    }
-
-    getAvatar = () => {
-        console.log("GETTING AVATAR", this.props.vk_id);
-        connect.send("VKWebAppCallAPIMethod", {
-            method: "users.get",
-            request_id: `request_avatar_${this.props.vk_id}`,
-            params: {
-                user_ids: this.props.vk_id,
-                fields: "photo_100",
-                v: "5.102",
-                access_token: "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402",
-            }
-        })
-            .then(resp => {
-                this.setState({
-                    avatarSrc: resp.data.response[0]["photo_100"],
-                })
-            })
-    };
-
     render() {
         let medal = setMedal(this.props.number);
         return (

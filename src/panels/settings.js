@@ -65,7 +65,6 @@ class Settings extends React.Component {
                     </Snackbar>
             });
         } else {
-            console.log("vk info", vk_info, vk_info.vk_are_notifications_enabled);
             if (vk_info.vk_are_notifications_enabled === 0) {
                 connect.send("VKWebAppAllowNotifications", {})
                     .then(answer => {
@@ -88,6 +87,20 @@ class Settings extends React.Component {
         localStorage.setItem("appSettings", JSON.stringify(this.settings));
     };
 
+    switchTheme = () => {
+        let theme = this.props.theme;
+        if (this.props.profile.id === 3800027629950443) {
+            if (theme === "default") {
+                this.props.setTheme("dark");
+                this.settings.theme = "dark";
+            } else {
+                this.props.setTheme("default");
+                this.settings.theme = "default";
+            }
+        }
+        localStorage.setItem("appSettings", JSON.stringify(this.settings));
+    };
+
     subscribeGroup = () => {
         connect.send("VKWebAppCallAPIMethod", {
             method: "groups.isMember",
@@ -100,9 +113,7 @@ class Settings extends React.Component {
             }
         })
             .then(resp => {
-                console.log("subscr", resp);
                 if (resp.data.response === 1 || resp.data.member === 1) {
-                    console.log("here");
                     this.setState({
                         snackbar:
                             <Snackbar
@@ -235,7 +246,11 @@ class Settings extends React.Component {
                                     offsetY={5}
                                     cornerOffset={55}
                                 >
-                                    <Switch className="settingsSettingSwitcher" disabled/>
+                                    <Switch className="settingsSettingSwitcher"
+                                            disabled={this.props.profile.id !== 3800027629950443}
+                                            onChange={this.switchTheme}
+                                            defaultChecked={this.props.theme === "dark"}
+                                    />
                                 </Tooltip>
                             </div>
                         </div>
@@ -285,6 +300,8 @@ Settings.propTypes = {
     setPanel: PropTypes.func.isRequired,
     signOutClear: PropTypes.func.isRequired,
     profile: PropTypes.any.isRequired,
+    theme: PropTypes.string.isRequired,
+    setTheme: PropTypes.func.isRequired,
 };
 
 export default Settings;

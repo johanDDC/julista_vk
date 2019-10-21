@@ -145,9 +145,9 @@ export function isBirthday(strDate) {
     return (today.getMonth() === birthDate.getMonth() && today.getDate() === birthDate.getDate());
 }
 
-export function recursiveTheming(startElem) {
+export function recursiveTheming(startElem, theme) {
     if (startElem) {
-        startElem.setAttribute("data-theme", "dark");
+        startElem.setAttribute("data-theme", theme);
         for (let child of startElem.children) {
             recursiveTheming(child);
         }

@@ -37,6 +37,12 @@ class Account extends React.Component {
         console.log("classmates resp", `https://bklet.ml/api/diary/classmates/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${this.props.profile.student.id}`);
         axios.get(`https://bklet.ml/api/diary/classmates/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${this.props.profile.student.id}`)
             .then(resp => {
+                if (resp.data.data.length === 0) {
+                    this.setState({
+                        ready: true,
+                    });
+                    return;
+                }
                 let clsmts = [];
                 let clsmts_ids = [];
                 let sorted = [...resp.data.data, this.props.profile.student];
@@ -56,14 +62,6 @@ class Account extends React.Component {
                         clsmts_ids.push(1);
                         is_link = false;
                     }
-                    // let inside =
-                    //     <AccountUserContainer
-                    //         name={classmate.name}
-                    //         number={(i + 1).toString()}
-                    //         is_birthday={classmate.b_date && isBirthday(classmate.b_date)}
-                    //         vk_id={classmate.vk_account}
-                    //         percent={classmate.exp}
-                    //     />;
                     clsmts.push({
                         name: classmate.name,
                         number: (i + 1).toString(),
@@ -71,23 +69,6 @@ class Account extends React.Component {
                         bdate: classmate.b_date && isBirthday(classmate.b_date),
                         exp: classmate.exp,
                     });
-                    // if (is_link) {
-                    //
-                    //     clsmts.push(
-                    //         <div className="accountClassmateContainer"
-                    //              onClick={() => window.location.href = `vk://vk.com/id${classmate.vk_account}`}
-                    //         >
-                    //             {inside}
-                    //         </div>
-                    //     );
-                    // } else {
-                    //     clsmts.push(
-                    //         <div className="accountClassmateContainer"
-                    //         >
-                    //             {inside}
-                    //         </div>
-                    //     );
-                    // }
                 });
                 console.log("ids", clsmts_ids, clsmts);
                 connect.send("VKWebAppCallAPIMethod", {
@@ -129,9 +110,13 @@ class Account extends React.Component {
                         this.setState({
                             classmates: nodes,
                             ready: true,
-                        })
+                        });
                     })
-                    .catch(err => console.log("avatar", err));
+                    .catch(err => {
+                        this.setState({
+                            ready: true,
+                        });
+                    });
             })
             .catch(err => console.log("classmates", err))
     };
@@ -244,13 +229,13 @@ class Account extends React.Component {
                 {/*    </Div>*/}
                 {/*</div>*/}
                 <Div className="accountGradeTop" id="classmatesList">
-                    <div style={{fontSize: "14px", color: "#999999"}}>
+                    <div style={{fontSize: "14px", color: "var(--third-text-color)"}}>
                         Топ класса:
                     </div>
                     {
                         this.state.ready
                             ?
-                            (this.state.classmates.length === 1
+                            (this.state.classmates.length < 2
                                 ? <div className="noClassmates">Ваши одноклассники ещё не авторизовались, вы можете
                                     рассказать им о приложении!</div>
                                 : this.state.classmates)
