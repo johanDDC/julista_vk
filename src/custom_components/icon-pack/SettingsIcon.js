@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-var default_stroke_color = "#A8ADAF";
+var default_stroke_color = "var(--bottom-buttons-inactive)";
 var active_stroke_color = "#5690FF";
 
 const SettingsIcon = props => (

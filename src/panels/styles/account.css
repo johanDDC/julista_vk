@@ -95,7 +95,7 @@
 }
 
 .accountProgressContainerContentSeparator {
-    border: 1px solid #e8e8e8;
+    border: 1px solid var(--additional-background-block);
 }
 
 .accountProgressContainerContentProgress {

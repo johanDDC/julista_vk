@@ -189,7 +189,7 @@
     display: flex;
     flex-grow: 1;
     justify-content: center;
-    border-right: 2px solid #e8e8e8;
+    border-right: 2px solid var(--additional-background-block);
 }
 
 .resultMarksContainerResultedTitle {

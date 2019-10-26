@@ -66,6 +66,7 @@ function auth(login, password, diary, dispatcher, region, province, city, school
         province: province,
         city: city,
         school: school,
+        vk_user_id: getVkParams().vk_user_id,
 
         device_type: (ua.search('ios') > 0
             ? 'ios'
@@ -191,7 +192,7 @@ async function bind_user(id, secret) {
     }, 1000);
 }
 
-export async function unbind_user(id, secret) {
+export function unbind_user(id, secret) {
     let vk_id = getVkParams().vk_user_id;
     let methodUrl = `api/auth/bind_account/vk/logout/`;
     let json = {
@@ -202,7 +203,7 @@ export async function unbind_user(id, secret) {
 
     axios.post(baseUrl + methodUrl, json)
         .then(resp => console.log(resp))
-        .catch(err => console.log(err))
+        .catch(err => console.log("logout err"))
 }
 
 export function clearProfile() {

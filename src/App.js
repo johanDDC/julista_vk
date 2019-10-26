@@ -8,6 +8,7 @@ import AuthorizationView from "./views/AuthorizationView"
 import BottomBar from "./views/BottomBar"
 import {setUser} from "./redux/actions/FetchedUserAction";
 import {getVkParams, recursiveTheming} from "./utils/utils";
+import {setTheme} from "./redux/actions/ThemeAction";
 
 class App extends React.Component {
     constructor(props) {
@@ -27,7 +28,44 @@ class App extends React.Component {
             })
             .catch(err => console.log(err));
 
-        recursiveTheming(document.querySelector("#root"), this.props.theme);
+        VKconnect.subscribe(e => {
+            try {
+                if (e.detail.type === "VKWebAppUpdateConfig") {
+                    console.log("subscribed", e.detail.data);
+                    if (e.detail.data.scheme !== "client_light") {
+                        document.querySelector("body")
+                            .setAttribute("scheme", e.detail.data.scheme);
+                        this.props.setThemeAction("dark")
+                    } else {
+                        this.props.setThemeAction("default")
+                    }
+                }
+            } catch (e) {
+
+            }
+        });
+
+        VKconnect.send("VKWebAppUpdateConfig", {})
+            .then(e => {
+                console.log("config", e.detail.data);
+                if (e.detail.data.scheme !== "client_light") {
+                    document.querySelector("body")
+                        .setAttribute("scheme", e.detail.data.scheme);
+                    this.props.setThemeAction("dark")
+                } else {
+                    this.props.setThemeAction("default")
+                }
+            });
+
+        VKconnect.send("VKWebAppSetViewSettings", {
+            "status_bar_style": "light",
+            "action_bar_color": this.props.theme === "dark"
+                ? "#132029"
+                : "#5690ff"
+        });
+
+        // recursiveTheming(document.querySelector("#root"), this.props.theme);
+        VKconnect.send("VKWebAppAddToFavorites", {});
     }
 
     render() {
@@ -55,6 +93,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
     return {
         setUserAction: user => dispatch(setUser(user)),
+        setThemeAction: theme => dispatch(setTheme(theme)),
     }
 };
 

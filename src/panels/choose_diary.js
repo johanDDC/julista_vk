@@ -4,9 +4,9 @@ import React from "react";
 import "./styles/choose_diary.css"
 
 import MosRuIcon from "../custom_components/icon-pack/MosRuIcon"
-import MosregIcon from "../custom_components/icon-pack/MosregIcon"
 import NetschoolIcon from "../custom_components/icon-pack/NetschoolIcon"
 import EdutatarIcon from "../custom_components/icon-pack/EdutatarIcon"
+import {getVkParams} from "../utils/utils";
 
 class ChooseDiary extends React.Component {
     constructor(props) {
@@ -17,29 +17,7 @@ class ChooseDiary extends React.Component {
     }
 
     startVkAuth = () => {
-        let vk_info = window.location.search.slice(1).split('&')
-            .map((queryParam) => {
-                let kvp = queryParam.split('=');
-                return {key: kvp[0], value: kvp[1]}
-            })
-            .reduce((query, kvp) => {
-                query[kvp.key] = decodeURIComponent(kvp.value);
-                return query
-            }, {});
-        // vk_info = {
-        //     sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
-        //     vk_access_token_settings: "",
-        //     vk_app_id: "6967676",
-        //     vk_are_notifications_enabled: "0",
-        //     vk_group_id: "171343913",
-        //     vk_is_app_user: "1",
-        //     vk_language: "ru",
-        //     vk_platform: "desktop_web",
-        //     vk_ref: "other",
-        //     vk_user_id: "143305590",
-        //     vk_viewer_group_role: "admin",
-        // };
-
+        let vk_info = getVkParams();
         this.props.vkAuth(vk_info)
     };
 

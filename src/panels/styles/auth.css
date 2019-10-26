@@ -1,11 +1,11 @@
-#view-AuthorizationView .View__header * {
-    background-color: #5690ff;
-}
+/*#view-AuthorizationView .View__header * {*/
+/*    background-color: var();*/
+/*}*/
 
 .authGroup{
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--background);
     padding: 0;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .welcome{
-    color: #212121;
+    color: var(--text-color);
     display: flex;
     flex-direction: row;
     font-size: 24px;
@@ -29,7 +29,7 @@
     padding-bottom: 0;
 }
 .medium_tip{
-    color: #767676;
+    color: var(--additional-text-color);
     font-size: 14px;
     font-weight: normal;
 }
@@ -44,7 +44,7 @@
 
 .annotate{
     text-align: start;
-    color: #6d6d6d;
+    color: var(--third-text-color);
     font-size: 13px;
     font-weight: normal;
 }
@@ -102,7 +102,7 @@
     justify-content: space-around;
     align-items: center;
     font-size: 12px;
-    color: #6d6d6d;
+    color: var(--third-text-color);
     padding-bottom: 0;
 }
 

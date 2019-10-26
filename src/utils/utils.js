@@ -121,21 +121,21 @@ export function getVkParams() {
             return query
         }, {});
 
-    let json = {
-        sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
-        vk_access_token_settings: "",
-        vk_app_id: "6967676",
-        vk_are_notifications_enabled: "0",
-        vk_group_id: "171343913",
-        vk_is_app_user: "1",
-        vk_language: "ru",
-        vk_platform: "desktop_web",
-        vk_ref: "other",
-        vk_user_id: "143305590",
-        vk_viewer_group_role: "admin",
-    };
+    // let json = {
+    //     sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
+    //     vk_access_token_settings: "",
+    //     vk_app_id: "6967676",
+    //     vk_are_notifications_enabled: "0",
+    //     vk_group_id: "171343913",
+    //     vk_is_app_user: "1",
+    //     vk_language: "ru",
+    //     vk_platform: "desktop_web",
+    //     vk_ref: "other",
+    //     vk_user_id: "143305590",
+    //     vk_viewer_group_role: "admin",
+    // };
 
-    return json;
+    return params;
 }
 
 export function isBirthday(strDate) {

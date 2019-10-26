@@ -159,6 +159,7 @@ function profile(state = initialState, action) {
             };
 
         case "CLEAR_PROFILE":
+            localStorage.removeItem("userData");
             return {
                 id: null,
                 secret: null,

@@ -1,12 +1,12 @@
 #panel-header-choose_diary * {
-    background-color: #ffffff !important;
+    background-color: var(--background);
 }
 
 .chooseDiaryScreen {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--background);
     padding-bottom: 0;
 }
 
@@ -21,14 +21,17 @@
 }
 
 .chooseDiaryScreenTitle {
+    color: var(--text-color);
     font-size: 21px;
-    font-weight: bold;
     margin-bottom: 32px;
 }
 
 .chooseDiaryScreenDiaryDiaries {
     width: 100%;
-    margin-top: calc(100% - 222px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .chooseDiaryScreenDiaryContainer {
@@ -36,7 +39,7 @@
     height: 58px;
     border-radius: 20px;
     /*border: 1px solid #efefef;*/
-    background-color: #f6f6f6;
+    background-color: var(--background-block);
     margin-bottom: 16px;
     display: flex !important;
     flex-direction: row !important;
@@ -48,7 +51,7 @@
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    color: black !important;
+    color: var(--text-color);
     padding: 4px 0 4px 0;
 }
 
@@ -66,7 +69,7 @@
 
 .chooseDiaryScreenDiaryContainerTitle {
     font-size: 16px;
-    color: #1f1f1f;
+    color: var(--text-color);
     line-height: 1.2;
     text-align: center;
 }

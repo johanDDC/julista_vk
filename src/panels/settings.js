@@ -32,7 +32,6 @@ class Settings extends React.Component {
     signOut = () => {
         console.log("sign out data", this.props.profile.id, this.props.profile.secret);
         unbind_user(this.props.profile.id, this.props.profile.secret);
-        localStorage.removeItem("userData");
         this.props.signOutClear();
         this.props.setView("AuthorizationView");
         this.props.setPanel("choose_diary");
@@ -89,14 +88,12 @@ class Settings extends React.Component {
 
     switchTheme = () => {
         let theme = this.props.theme;
-        if (this.props.profile.id === 3800027629950443) {
-            if (theme === "default") {
-                this.props.setTheme("dark");
-                this.settings.theme = "dark";
-            } else {
-                this.props.setTheme("default");
-                this.settings.theme = "default";
-            }
+        if (theme === "default") {
+            this.props.setTheme("dark");
+            this.settings.theme = "dark";
+        } else {
+            this.props.setTheme("default");
+            this.settings.theme = "default";
         }
         localStorage.setItem("appSettings", JSON.stringify(this.settings));
     };
@@ -189,7 +186,8 @@ class Settings extends React.Component {
                                 </Link>
                             </div>
                             <div className="settingsSettingSwitch">
-                                <Button level="secondary" onClick={this.subscribeGroup}>Подписаться</Button>
+                                <Button level="secondary" onClick={this.subscribeGroup}
+                                        id="settingsGroupSubscribe">Подписаться</Button>
                             </div>
                         </div>
                     </Button>
@@ -247,7 +245,6 @@ class Settings extends React.Component {
                                     cornerOffset={55}
                                 >
                                     <Switch className="settingsSettingSwitcher"
-                                            disabled={this.props.profile.id !== 3800027629950443}
                                             onChange={this.switchTheme}
                                             defaultChecked={this.props.theme === "dark"}
                                     />
@@ -275,7 +272,7 @@ class Settings extends React.Component {
                             </div>
                         </div>
                     </Button>
-                    <Separator/>
+                    <div className="settingsButtonsSeparator"></div>
                     <Button level="tertiary" className="settingsSettingContainer" style={{marginTop: "35px"}}
                             onClick={this.signOut}>
                         <GetOutIcon/>

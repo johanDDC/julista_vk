@@ -2,28 +2,31 @@
     background-color: var(--background-block);
 }
 
-.settingsTitleContainer{
+.settingsTitleContainer {
     padding: 0 0 16px 0;
 }
 
-.settingsTitle{
+.settingsTitle {
     font-size: 14px;
     color: #5690ff;
 }
 
-.groupSettingsContainer{
+.groupSettingsContainer {
     background-color: var(--background);
     box-shadow: 0 4px 4px 0 #26000033;
     padding: 15px 0 12px 16px;
     margin-bottom: 12px;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
 }
 
-.groupSettingsContainer > button{
+.groupSettingsContainer > button {
     margin-top: 0 !important;
     padding: 0;
 }
 
-.settingsSettingContainer{
+.settingsSettingContainer {
     width: 100%;
     min-height: 30px;
     /*padding: 0 0 0 16px;*/
@@ -35,14 +38,14 @@
     border-radius: 0 !important;
 }
 
-.settingsSettingContainer > div{
+.settingsSettingContainer > div {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
 }
 
-.settingsSettingContainer > div > .Button__content{
+.settingsSettingContainer > div > .Button__content {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -51,12 +54,12 @@
     padding: 0;
 }
 
-.settingsSettingContainer > div > div{
+.settingsSettingContainer > div > div {
     color: var(--text-color);
     font-size: 17px !important;
 }
 
-.settingsSettingInfo{
+.settingsSettingInfo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -68,7 +71,7 @@
     margin-left: 15px;
 }
 
-.settingsSettingTitle{
+.settingsSettingTitle {
     display: flex;
     flex-direction: row;
     font-size: 16px;
@@ -76,10 +79,23 @@
     color: var(--text-color);
 }
 
-.settingsSettingSwitch{
+.settingsSettingSwitch {
     margin-right: 16px;
 }
 
-.settingsSettingSwitcher{
+#settingsGroupSubscribe {
+    background-color: var(--additional-background-block);
+    color: var(--button-secondary-text)
+}
+
+
+.settingsSettingSwitcher {
     margin-right: 16px;
+}
+
+.settingsButtonsSeparator {
+    display: flex;
+    width: 75%;
+    border: 1px solid var(--additional-background-block);
+    margin-left: 12%;
 }

@@ -1,16 +1,24 @@
+#choose_school * {
+    background-color: var(--background);
+}
+
 .chooseSchoolSearchContainer {
-    background-color: #5690ff !important;
+    background-color: var(--background-head) !important;
+}
+
+.chooseSchoolSearchContainer .Search__input {
+    color: var(--text-color) !important;
 }
 
 .chooseSchoolSearchContainer .Search__after::before {
-    background-color: #5690ff !important;
+    background-color: var(--background-head) !important;
 }
 
 .chooseSchoolSearchContainer .Search__after-in {
-    background-color: #5690ff !important;
+    background-color: var(--background-head) !important;
     color: #ffffff !important;
 }
 
 .chooseSchoolButton {
-    color: #5690ff !important;
+    color: var(--inversed-text-color) !important;
 }

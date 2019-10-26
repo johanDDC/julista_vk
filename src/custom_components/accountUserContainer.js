@@ -82,7 +82,7 @@ class AccountUserContainer extends React.Component {
 AccountUserContainer.propTypes = {
     number: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    avatarLink: PropTypes.string.isRequired,
+    avatarLink: PropTypes.any.isRequired,
     is_birthday: PropTypes.bool,
     percent: PropTypes.string,
 };

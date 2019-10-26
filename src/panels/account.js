@@ -46,31 +46,10 @@ class Account extends React.Component {
                 let clsmts = [];
                 let clsmts_ids = [];
                 let sorted = [...resp.data.data, this.props.profile.student];
-                sorted.sort(function (a, b) {
-                    if (a.exp < b.exp) return 1;
-                    if (a.exp > b.exp) return -1;
-                    return 0;
+                sorted.forEach(elem => {
+                    if (elem.vk_account)
+                        clsmts_ids.push(elem.vk_account);
                 });
-                this.myPlace = sorted.indexOf(this.props.profile.student);
-                console.log("sorting", sorted);
-                sorted.forEach((classmate, i) => {
-                    let is_link;
-                    try {
-                        is_link = classmate.vk_account;
-                        clsmts_ids.push(classmate.vk_account);
-                    } catch {
-                        clsmts_ids.push(1);
-                        is_link = false;
-                    }
-                    clsmts.push({
-                        name: classmate.name,
-                        number: (i + 1).toString(),
-                        link: is_link,
-                        bdate: classmate.b_date && isBirthday(classmate.b_date),
-                        exp: classmate.exp,
-                    });
-                });
-                console.log("ids", clsmts_ids, clsmts);
                 connect.send("VKWebAppCallAPIMethod", {
                     method: "users.get",
                     request_id: "request_avatars",
@@ -82,13 +61,50 @@ class Account extends React.Component {
                     }
                 })
                     .then(resp => {
-                        console.log("avatars response", resp.data.response);
-                        resp.data.response.forEach((user, num) => {
-                            clsmts[num].avatar_link = user.photo_100;
+                        let id_found = false;
+                        sorted.forEach(mate => {
+                            id_found = false;
+                            if (mate.vk_account) {
+                                for (let i = 0; i < resp.data.response.length; i++) {
+                                    if (mate.vk_account === resp.data.response[i].id) {
+                                        id_found = true;
+                                        clsmts.push({
+                                            name: mate.name,
+                                            link: mate.vk_account,
+                                            bdate: mate.b_date && isBirthday(mate.b_date),
+                                            exp: mate.exp,
+                                            avatar_link: resp.data.response[i].photo_100,
+                                        });
+                                        break;
+                                    }
+                                }
+                                if (!id_found) {
+                                    clsmts.push({
+                                        name: mate.name,
+                                        link: null,
+                                        bdate: mate.b_date && isBirthday(mate.b_date),
+                                        exp: mate.exp,
+                                        avatar_link: null,
+                                    });
+                                }
+                            }
                         });
-                        let nodes = [];
+                        clsmts.push({
+                            name: this.props.profile.student.name,
+                            link: null,
+                            bdate: false, //FIXME
+                            exp: this.props.profile.student.exp,
+                            avatar_link: this.props.fetchedUser.photo_100,
+                        });
+                        clsmts.sort(function (a, b) {
+                            if (a.exp < b.exp) return 1;
+                            if (a.exp > b.exp) return -1;
+                            return 0;
+                        });
+                        console.log("avatars response", resp.data.response);
                         console.log("clsmts after adding", clsmts);
-                        clsmts.forEach(mate => {
+                        let nodes = [];
+                        clsmts.forEach((mate, num) => {
                             nodes.push(
                                 <div className="accountClassmateContainer"
                                      onClick={() => {
@@ -98,7 +114,7 @@ class Account extends React.Component {
                                 >
                                     <AccountUserContainer
                                         name={mate.name}
-                                        number={mate.number}
+                                        number={num + 1}
                                         is_birthday={mate.bdate}
                                         percent={mate.exp}
                                         avatarLink={mate.avatar_link}
