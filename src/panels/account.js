@@ -208,14 +208,14 @@ class Account extends React.Component {
                     </div>
                     <Div className="accountImportantNotification Tappable--ios Tappable--android"
                          onClick={() => {
-                             window.open('vk://vk.com/im?sel=-171343913');
+                             window.open('vk://vk.com/app6441755_-171343913');
                          }}>
                         <div className="accountImportantNotificationIconBlock">
                             <VK_important/>
                         </div>
                         <div className="accountImportantNotificationTextBlock">
-                            Попробуй нашего бота ВК, он очень умный, и сильно тебе поможет, если нет времени заходить в
-                            приложение
+                            Кстати нашего бота можно давить в беседу вашего класса, чтобы он
+                            мог скидывать домашку сразу всем.
                         </div>
                     </Div>
                 </Div>
