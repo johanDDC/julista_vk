@@ -23,6 +23,8 @@ if (localData) {
         id: (localData.id ? localData.id : null),
         secret: (localData.secret ? localData.secret : null),
         diary: (localData.diary ? localData.diary : null),
+        classmates: (localData.classmates ? localData.classmates : null),
+        personalInfo: (localData.personalInfo ? localData.personalInfo : null),
         students: (localData.students ? localData.students : null),
         student: (localData.student
             ? localData.student
@@ -38,6 +40,8 @@ if (localData) {
         id: null,
         secret: null,
         diary: null,
+        personalInfo: null,
+        classmates: null,
         students: null,
         student: null,
         errMessage: null,
@@ -109,22 +113,26 @@ function profile(state = initialState, action) {
                 diary: action.data,
                 isFetching: false
             };
-        case "SET_EXPERIENCE":
-            let locData1 = localStorage.getItem("userData")
+        case "SET_USER_DATA":
+            let locDataUser = localStorage.getItem("userData")
                 ? JSON.parse(localStorage.getItem("userData"))
                 : {};
-            console.log("SET_EXPERIENCE", state.student, action.data, locData1);
-            locData1.student = {
+            locDataUser.student = {
                 ...state.student,
-                exp: action.data,
+                exp: action.data.exp,
             };
-            localStorage.setItem("userData", JSON.stringify(locData1));
+            locDataUser.classmates = action.data.classmates;
+            locDataUser.personalInfo = action.data.personal;
+            console.log("SET_USER_DATA", action.data, locDataUser);
+            localStorage.setItem("userData", JSON.stringify(locDataUser));
             return {
                 ...state,
                 student: {
                     ...state.student,
-                    exp: action.data,
-                }
+                    exp: action.data.exp,
+                },
+                classmates: action.data.classmates,
+                personalInfo: action.data.personal,
             };
         case "SET_STUDENT":
             let locData = localStorage.getItem("userData")

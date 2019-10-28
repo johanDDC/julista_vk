@@ -3,10 +3,10 @@ import {getVkParams} from "../../utils/utils"
 import {async} from "q";
 
 const axios = require('axios');
-let baseUrl = "https://bklet.ml/";
+let baseUrl = "https://bklet.ml/api/";
 
 export function vkAuth(vk_params) {
-    let methodUrl = "api/auth/bind_account/vk/";
+    let methodUrl = "auth/bind_account/vk/";
     let url = baseUrl + methodUrl + "?";
     for (let key in vk_params) {
         url += `${key}=${vk_params[key]}&`
@@ -56,7 +56,7 @@ export function doAuthorize(login, password, diary, region, province, city, scho
 }
 
 function auth(login, password, diary, dispatcher, region, province, city, school) {
-    let methodUrl = "api/auth/";
+    let methodUrl = "auth/";
     let ua = navigator.userAgent.toLowerCase();
     let json = {
         diary: diary,
@@ -75,75 +75,79 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                 : 'pc')),
     };
 
-    axios.post(baseUrl + methodUrl, json)
-        .then((response) => {
-            let students = [];
-            if (response.data.status) {
-                bind_user(response.data.id, response.data.secret);
-                response.data.students.list.forEach(e => {
-                    students.push(e);
-                });
-                let localData = {
-                    id: response.data.id,
-                    secret: response.data.secret,
-                    students: students,
-                    diary: diary,
-                    student: (students.length === 1 ? students[0] : null),
-                    // student: null,
-                };
-                localStorage.setItem("userData", JSON.stringify(localData));
-                connect.send("VKWebAppStorageSet", {
-                    "key": "userData",
-                    "value": JSON.stringify(localData),
-                })
-                    .then(res => console.log("VK Storage Set Success", res))
-                    .catch(err => {
-                        console.log("VK Storage Set Fail", err);
+    console.log("auth data", json);
+
+    fetch(baseUrl + methodUrl, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(json),
+    })
+        .then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    console.log("fetch try", data);
+                    if (data.status) {
+                        bind_user(data.id, data.secret);
+                        let localData = {
+                            id: data.id,
+                            secret: data.secret,
+                            students: data.students.list,
+                            diary: diary,
+                            student: (data.students.list.length === 1 ? data.students.list[0] : null),
+                        };
                         localStorage.setItem("userData", JSON.stringify(localData));
-                    });
-                window.ga('diaryTracker.set', {
-                    diary: diary
-                });
-                window.ga('diaryTracker.send', {
-                    hitType: 'event',
-                    eventCategory: 'Sign in',
-                    eventAction: 'click',
-                    eventLabel: diary
-                });
-                dispatcher({
-                    type: "DO_AUTHORIZATION_SUCCESS",
-                    data: {
-                        id: response.data.id,
-                        secret: response.data.secret,
-                        students: students,
-                        student: (students.length === 1 ? students[0] : null),
-                        // student: null,
-                    },
-                });
-                if (localData.student) {
-                    axios.get(`https://bklet.ml/api/profile/info/?id=${response.data.id}&secret=${response.data.secret}&student_id=${localData.student.id}`)
-                        .then(resp => {
-                            console.log("exp", resp.data.data.exp);
-                            dispatcher({
-                                type: "SET_EXPERIENCE",
-                                data: resp.data.data.exp,
-                            });
+
+                        window.ga('diaryTracker.set', {
+                            diary: diary
+                        });
+                        window.ga('diaryTracker.send', {
+                            hitType: 'event',
+                            eventCategory: 'Sign in',
+                            eventAction: 'click',
+                            eventLabel: diary
+                        });
+
+                        dispatcher({
+                            type: "DO_AUTHORIZATION_SUCCESS",
+                            data: localData,
+                        });
+
+                        console.log("student", localData.student);
+                        if (localData.student) {
+                            fetch(baseUrl + `profile/info/?id=${localData.id}&secret=${localData.secret}&student_id=${localData.student.id}`,
+                                {
+                                    method: "GET"
+                                })
+                                .then(response => {
+                                    console.log("done", response, response.ok);
+                                    if (response.ok) {
+                                        response.json().then(profile => {
+                                            console.log("exp", profile);
+                                            dispatcher({
+                                                type: "SET_USER_DATA",
+                                                data: profile.data,
+                                            });
+                                        })
+                                    }
+                                });
+                        }
+                    } else {
+                        dispatcher({
+                            type: "DO_AUTHORIZATION_FAIL",
+                            data: data.message,
                         })
-                        .catch(err => console.log("exp", err));
-                }
+                    }
+                });
             } else {
                 dispatcher({
                     type: "DO_AUTHORIZATION_FAIL",
-                    data: response.data.message,
+                    data: "Неудачная попытка входа. Пожалуйста, проверьте свои данные и попробуйте ещё раз.",
                 })
             }
         })
-        .catch(error => {
-            dispatcher({
-                type: "DO_AUTHORIZATION_FAIL",
-                data: error
-            })
-        });
+        .catch(err => console.log("fetch loose", err));
 }
 
 export function setDiary(diary) {
@@ -168,7 +172,7 @@ export function setExp(exp) {
 }
 
 async function bind_user(id, secret) {
-    let methodUrl = "api/auth/bind_account/vk/";
+    let methodUrl = "auth/bind_account/vk/";
     let json = getVkParams();
     json.id = id;
     json.secret = secret;
@@ -194,7 +198,7 @@ async function bind_user(id, secret) {
 
 export function unbind_user(id, secret) {
     let vk_id = getVkParams().vk_user_id;
-    let methodUrl = `api/auth/bind_account/vk/logout/`;
+    let methodUrl = `auth/bind_account/vk/logout/`;
     let json = {
         id: id,
         secret: secret,

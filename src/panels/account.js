@@ -12,6 +12,7 @@ import DefaultAvatarIcon from "../custom_components/icon-pack/DefaultAvatarIcon"
 import QuestionIcon from "../custom_components/icon-pack/QuestionIcon"
 import PerformanceIcon from "../custom_components/icon-pack/PerformanceIcon"
 import {isBirthday, recursiveTheming} from "../utils/utils"
+import {getClassmatesAvatars} from "../utils/requests"
 import connect from "@vkontakte/vk-connect-promise";
 
 const axios = require('axios');
@@ -30,111 +31,36 @@ class Account extends React.Component {
     }
 
     componentDidMount() {
-        this.getClassMates();
+        // this.getClassMates();
     }
 
     getClassMates = () => {
-        console.log("classmates resp", `https://bklet.ml/api/diary/classmates/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${this.props.profile.student.id}`);
-        axios.get(`https://bklet.ml/api/diary/classmates/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${this.props.profile.student.id}`)
-            .then(resp => {
-                if (resp.data.data.length === 0) {
-                    this.setState({
-                        ready: true,
-                    });
-                    return;
-                }
-                let clsmts = [];
-                let clsmts_ids = [];
-                let sorted = [...resp.data.data, this.props.profile.student];
-                sorted.forEach(elem => {
-                    if (elem.vk_account)
-                        clsmts_ids.push(elem.vk_account);
-                });
-                connect.send("VKWebAppCallAPIMethod", {
-                    method: "users.get",
-                    request_id: "request_avatars",
-                    params: {
-                        user_ids: clsmts_ids,
-                        fields: "photo_100",
-                        v: "5.102",
-                        access_token: "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402",
-                    }
-                })
-                    .then(resp => {
-                        let id_found = false;
-                        sorted.forEach(mate => {
-                            id_found = false;
-                            if (mate.vk_account) {
-                                for (let i = 0; i < resp.data.response.length; i++) {
-                                    if (mate.vk_account === resp.data.response[i].id) {
-                                        id_found = true;
-                                        clsmts.push({
-                                            name: mate.name,
-                                            link: mate.vk_account,
-                                            bdate: mate.b_date && isBirthday(mate.b_date),
-                                            exp: mate.exp,
-                                            avatar_link: resp.data.response[i].photo_100,
-                                        });
-                                        break;
-                                    }
-                                }
-                                if (!id_found) {
-                                    clsmts.push({
-                                        name: mate.name,
-                                        link: null,
-                                        bdate: mate.b_date && isBirthday(mate.b_date),
-                                        exp: mate.exp,
-                                        avatar_link: null,
-                                    });
-                                }
-                            }
-                        });
-                        clsmts.push({
-                            name: this.props.profile.student.name,
-                            link: null,
-                            bdate: false, //FIXME
-                            exp: this.props.profile.student.exp,
-                            avatar_link: this.props.fetchedUser.photo_100,
-                        });
-                        clsmts.sort(function (a, b) {
-                            if (a.exp < b.exp) return 1;
-                            if (a.exp > b.exp) return -1;
-                            return 0;
-                        });
-                        console.log("avatars response", resp.data.response);
-                        console.log("clsmts after adding", clsmts);
-                        let nodes = [];
-                        clsmts.forEach((mate, num) => {
-                            nodes.push(
-                                <div className="accountClassmateContainer"
-                                     onClick={() => {
-                                         if (mate.link)
-                                             window.location.href = `vk://vk.com/id${mate.link}`
-                                     }}
-                                >
-                                    <AccountUserContainer
-                                        name={mate.name}
-                                        number={num + 1}
-                                        is_birthday={mate.bdate}
-                                        percent={mate.exp}
-                                        avatarLink={mate.avatar_link}
-                                    />
-                                </div>
-                            )
-                        });
-                        console.log("nodes", nodes);
-                        this.setState({
-                            classmates: nodes,
-                            ready: true,
-                        });
-                    })
-                    .catch(err => {
-                        this.setState({
-                            ready: true,
-                        });
-                    });
-            })
-            .catch(err => console.log("classmates", err))
+        let nodes = [];
+        let classmates = [...this.props.profile.classmates, this.props.profile.student];
+        classmates = getClassmatesAvatars(classmates, this.props.profile, this.props.fetchedUser.photo_100);
+        console.log("clsmts after adding", classmates);
+        classmates.forEach((mate, num) => {
+            nodes.push(
+                <div className="accountClassmateContainer"
+                     onClick={() => {
+                         if (mate.link)
+                             window.location.href = `vk://vk.com/id${mate.link}`
+                     }}
+                >
+                    <AccountUserContainer
+                        name={mate.name}
+                        number={num + 1}
+                        is_birthday={mate.bdate}
+                        percent={mate.exp}
+                        avatarLink={mate.avatar_link}
+                    />
+                </div>
+            )
+        });
+        this.setState({
+            classmates: nodes,
+            ready: true,
+        });
     };
 
     switchStudent = () => {

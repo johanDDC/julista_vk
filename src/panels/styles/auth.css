@@ -27,11 +27,13 @@
     font-weight: 600;
     padding-left: 22px;
     padding-bottom: 0;
+    user-select: none;
 }
 .medium_tip{
     color: var(--additional-text-color);
     font-size: 14px;
     font-weight: normal;
+    user-select: none;
 }
 
 .large_tip{
@@ -40,6 +42,7 @@
     font-weight: normal;
     padding-left: 22px;
     padding-bottom: 0;
+    user-select: none;
 }
 
 .annotate{
@@ -47,6 +50,7 @@
     color: var(--third-text-color);
     font-size: 13px;
     font-weight: normal;
+    user-select: none;
 }
 
 .inputContainer{
@@ -89,11 +93,13 @@
     width: 100%;
     outline: 0;
     /*border: 0;*/
+    user-select: none;
 }
 
 .authSignInButton > div > div {
     font-size: 20px !important;
     font-weight: bold !important;
+    user-select: none;
 }
 
 .restorePassword{
@@ -109,4 +115,13 @@
 .restoreLink{
     margin-left: 2px;
     font-weight: bold;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

@@ -10,6 +10,7 @@
     font-size: 12px;
     position: absolute;
     transition: 0.5s linear;
+    user-select: none;
 }
 
 .customInput{
@@ -20,6 +21,7 @@
     background-color: var(--background);
     font-size: 16px;
     color: var(--text-color);
+    user-select: none;
 }
 
 .customInput:focus{
