@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import "./inviteUserContainer.css"
-import PlusInvitaion from "./icon-pack/PlusInvitaion"
+import PlusInvitaion from "../../icon-pack/PlusInvitaion"
 
 const InviteUserContainer = props => (
     <div className="inviteUserContainer" style={{

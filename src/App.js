@@ -56,14 +56,6 @@ class App extends React.Component {
                     this.props.setThemeAction("default")
                 }
             });
-
-        VKconnect.send("VKWebAppSetViewSettings", {
-            "status_bar_style": "light",
-            "action_bar_color": this.props.theme === "dark"
-                ? "#132029"
-                : "#5690ff"
-        });
-
         // recursiveTheming(document.querySelector("#root"), this.props.theme);
         VKconnect.send("VKWebAppAddToFavorites", {});
     }

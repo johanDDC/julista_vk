@@ -35,7 +35,7 @@
 }
 
 .marksTabs > .TabsItem--selected {
-    background-color: var(--inversed-text-color) !important;
+    background-color: var(--hallowen-color) !important;
 }
 
 .marksTabs > .TabsItem--selected::after {
@@ -48,7 +48,7 @@
 }
 
 .marksTabs > .TabsItem--selected > div {
-    color: var(--background) !important;
+    color: var(--inversed-text-color) !important;
 }
 
 .marksBlocksTitle {
@@ -158,7 +158,7 @@
 
 .lastMarkDate {
     font-size: 9px;
-    color: white;
+    color: var(--background);
     border-radius: 7px;
     margin: 6px 5px 0 4px;
     padding: 0 5px 0 4px;

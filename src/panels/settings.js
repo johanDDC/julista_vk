@@ -6,7 +6,7 @@ import VKSettingsIcon from "../custom_components/icon-pack/VKSettingsIcon"
 import SettingsNotificationsIcon from "../custom_components/icon-pack/SettingsNotificationsIcon"
 import DarkThemeIcon from "../custom_components/icon-pack/DarkThemeIcon"
 import BookletCheck from "../custom_components/icon-pack/BookletCheck"
-import Mark from "../custom_components/mark"
+import Mark from "../custom_components/support/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
 import QuestionIcon from "../custom_components/icon-pack/QuestionIcon"
 import Icon24Error from '@vkontakte/icons/dist/24/error';

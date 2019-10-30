@@ -9,7 +9,7 @@ import AuthPassword from "../custom_components/icon-pack/AuthPassword"
 import AuthGift from "../custom_components/icon-pack/AuthGift"
 import AuthRestore from "../custom_components/icon-pack/AuthRestore"
 
-import CustomInput from "../custom_components/customInput"
+import CustomInput from "../custom_components/layouts/auth/customInput"
 
 const axios = require('axios');
 

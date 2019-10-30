@@ -5,8 +5,9 @@ import Icon44Spinner from '@vkontakte/icons/dist/44/spinner';
 
 const CustomSpinner = props => (
     <div className="customSpinnerContainer"
-         style={{backgroundColor: (props.isInverse ? "#5690ff" : "var(--background)")}}>
-        <div className="customSpinnerRotator" style={{color: (props.isInverse ? "var(--background)" : "#5690ff")}}>
+         style={{backgroundColor: (props.isInverse ? "var(--the-color)" : "var(--background)")}}>
+        <div className="customSpinnerRotator"
+             style={{color: (props.isInverse ? "var(--background)" : "var(--the-color)")}}>
             <Icon44Spinner/>
         </div>
     </div>

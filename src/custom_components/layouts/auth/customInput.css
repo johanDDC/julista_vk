@@ -25,6 +25,6 @@
 }
 
 .customInput:focus{
-    border-bottom: 2px solid #5690ff;
+    border-bottom: 2px solid var(--the-color);
     outline: none;
 }

@@ -2,16 +2,17 @@ import {Gallery, Panel, PanelHeader, Div} from '@vkontakte/vkui';
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/schedule.css"
-import Mark from "../custom_components/mark"
-import CustomSpinner from "../custom_components/customSpinner"
+import Mark from "../custom_components/support/mark"
+import CustomSpinner from "../custom_components/support/customSpinner"
 import {getRusMonthName, scheduleGetDates, scheduleNextWeek, schedulePrevWeek} from "../utils/utils"
-import ScheduleWeekBar from "../custom_components/scheduleTopBar"
+import ScheduleWeekBar from "../custom_components/layouts/schedule/scheduleWeekBar"
 import Icon24Chevron from '@vkontakte/icons/dist/24/chevron';
 import SubjectHWIcon from "../custom_components/icon-pack/SubjectHWIcon"
 import SubjectRoomIcon from "../custom_components/icon-pack/SubjectRoomIcon"
 import SubjectTopicIcon from "../custom_components/icon-pack/SubjectTopicIcon"
 import SubjectModuleIcon from "../custom_components/icon-pack/SubjectModuleIcon"
-import PullToRefreshContext from "../custom_components/pullToRefreshContext"
+import PullToRefreshContext from "../custom_components/support/pullToRefreshContext"
+import UpdateButton from "../custom_components/support/UpdateButton"
 
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
 
@@ -266,8 +267,9 @@ class Schedule extends React.Component {
     };
     generateErrorSchedule = () => {
         return (
-            <div className="scheduleTale">
+            <div className="scheduleTale" style={{alignItems: "center"}}>
                 <p className="scheduleTaleError">Непредвиденная ошибка. Пожалуйста, попробуйте позже.</p>
+                <UpdateButton activationFunction={this.refresh}/>
             </div>
         )
     };
@@ -412,6 +414,7 @@ class Schedule extends React.Component {
     };
 
     refresh = () => {
+        console.log("here");
         return new Promise((resolve, reject) => {
             this.setState({fetching: true});
             this.loadData();

@@ -11,9 +11,10 @@ import React from "react";
 import "./styles/marks.css"
 import {turnIntoDate, reverseRuslanString} from "../utils/utils"
 
-import Mark from "../custom_components/mark"
-import CustomSpinner from "../custom_components/customSpinner";
-import AdvisesRow from "../custom_components/advisesRow";
+import Mark from "../custom_components/support/mark"
+import CustomSpinner from "../custom_components/support/customSpinner";
+import AdvisesRow from "../custom_components/layouts/marks/advisesRow";
+import UpdateButton from "../custom_components/support/UpdateButton";
 
 class Marks extends React.Component {
     constructor(props) {
@@ -345,7 +346,10 @@ class Marks extends React.Component {
                     Оценки
                 </PanelHeader>
                 {this.state.error ?
-                    <p className="marksScreenError">Непредвиденная ошибка. Пожалуйста, попробуйте позже.</p>
+                    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                        <p className="marksScreenError">Непредвиденная ошибка. Пожалуйста, попробуйте позже.</p>
+                        <UpdateButton activationFunction={this.loadData}/>
+                    </div>
                     :
                     <div className="marksScreen">
                         <Div>

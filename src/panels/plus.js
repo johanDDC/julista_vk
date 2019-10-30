@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./styles/plus.css"
 
-import InviteUserContainer from "../custom_components/inviteUserContainer"
+import InviteUserContainer from "../custom_components/layouts/plus/inviteUserContainer"
 import BigPlusIcon from "../custom_components/icon-pack/BigPlusIcon"
 import TGbot from "../custom_components/icon-pack/TGbot"
 import VKbot from "../custom_components/icon-pack/VKbot"

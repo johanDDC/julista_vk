@@ -37,18 +37,22 @@ function getSchedule(id, secret, start, end, student_id, dispatcher) {
         })
     }, normalTimeout);
     intervalId = setInterval(() => {
-        axios.get(baseUrl + methodUrl + queries)
-            .then((response) => {
-                // console.log("resp", response.data);
-                if (!response.data.data === null || !response.data.error_msg) {
-                    clearTimeout(timeoutID);
-                    clearInterval(intervalId);
-                    dispatcher({
-                        type: "GET_JOURNAL_SUCCESS",
-                        data: response.data
-                    })
-                }
-            })
+        fetch(baseUrl + methodUrl + queries, {
+            method: "GET"
+        })
+            .then(response => {
+                response.json().then(data => {
+                    if (data.data !== null || data.error_msg) {
+                        console.log("get schedule", data);
+                        clearTimeout(timeoutID);
+                        clearInterval(intervalId);
+                        dispatcher({
+                            type: "GET_JOURNAL_SUCCESS",
+                            data: data
+                        })
+                    }
+                })
+            });
     }, normalInterval)
 }
 

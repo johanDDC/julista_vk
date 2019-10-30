@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./styles/account.css"
 
-import AccountUserContainer from "../custom_components/accountUserContainer"
-import ProgressBar from "../custom_components/ProgressBar"
+import AccountUserContainer from "../custom_components/layouts/account/accountUserContainer"
+import ProgressBar from "../custom_components/layouts/account/ProgressBar"
 import SwitchStudentIcon from "../custom_components/icon-pack/SwitchStudentIcon"
 import VK_important from "../custom_components/icon-pack/VK_important"
 import Icon16Dropdown from '@vkontakte/icons/dist/16/dropdown';

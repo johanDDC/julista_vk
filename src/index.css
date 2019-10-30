@@ -37,6 +37,7 @@ section.View {
     --button-secondary-text: #777777;
     --warning-text: #e80a1e;
     --bottom-buttons-inactive: #a8adaf;
+    --hallowen-color: #ffffff;
 }
 
 
@@ -49,9 +50,11 @@ section.View {
     --background-text-color: #132029;
     --text-color: #ffffff;
     --inversed-text-color: #ffffff;
+    /*--inversed-text-color: #fa6928;*/
     --additional-text-color: #f4f4f4;
     --third-text-color: #dbdbdb;
     --button-secondary-text: #5690ff;
     --warning-text: #ffffff;
     --bottom-buttons-inactive: #ffffff;
+    --hallowen-color: #fa6928;
 }

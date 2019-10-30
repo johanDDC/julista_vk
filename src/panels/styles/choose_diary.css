@@ -32,7 +32,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .chooseDiaryScreenDiaryContainer {
@@ -75,4 +75,9 @@
     line-height: 1.2;
     text-align: center;
     user-select: none;
+}
+
+.halloweenPumpkinHolder {
+    /*position: absolute;*/
+    /*bottom: 0px;*/
 }
