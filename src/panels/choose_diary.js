@@ -87,7 +87,6 @@ class ChooseDiary extends React.Component {
                                 </div>
                             </Button>
                         </div>
-
                         <div className="halloweenPumpkinHolder">
                             <HalloweenPumpkin is_faceless={false}/>
                         </div>

@@ -268,3 +268,30 @@
 #arrow {
     display: none;
 }
+
+.halloweenSpiderContainer {
+    position: absolute;
+    z-index: 10;
+    right: 28%;
+    top: auto;
+    /*transition: 1s ease-in-out;*/
+    /*animation: hide 2s infinite;*/
+}
+
+@keyframes hide {
+    0% {
+        transform: translateY(0)
+    }
+    100% {
+        transform: translateY(-300px)
+    }
+}
+
+@keyframes appear {
+    0% {
+        transform: translateY(-300px)
+    }
+    100% {
+        transform: translateY(0px)
+    }
+}

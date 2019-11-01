@@ -31,36 +31,38 @@ class Account extends React.Component {
     }
 
     componentDidMount() {
-        // this.getClassMates();
+        this.getClassMates();
     }
 
     getClassMates = () => {
         let nodes = [];
-        let classmates = [...this.props.profile.classmates, this.props.profile.student];
-        classmates = getClassmatesAvatars(classmates, this.props.profile, this.props.fetchedUser.photo_100);
-        console.log("clsmts after adding", classmates);
-        classmates.forEach((mate, num) => {
-            nodes.push(
-                <div className="accountClassmateContainer"
-                     onClick={() => {
-                         if (mate.link)
-                             window.location.href = `vk://vk.com/id${mate.link}`
-                     }}
-                >
-                    <AccountUserContainer
-                        name={mate.name}
-                        number={num + 1}
-                        is_birthday={mate.bdate}
-                        percent={mate.exp}
-                        avatarLink={mate.avatar_link}
-                    />
-                </div>
-            )
-        });
-        this.setState({
-            classmates: nodes,
-            ready: true,
-        });
+        console.log("meta data", this.props.profile.classmates, this.props.profile, this.props.profile.student, this.props.fetchedUser.photo_100);
+        getClassmatesAvatars(this.props.profile.classmates, this.props.profile, this.props.fetchedUser.photo_100)
+            .then(mates => {
+                console.log("clsmts after adding", mates);
+                mates.forEach((mate, num) => {
+                    nodes.push(
+                        <div className="accountClassmateContainer"
+                             onClick={() => {
+                                 if (mate.link)
+                                     window.location.href = `vk://vk.com/id${mate.link}`
+                             }}
+                        >
+                            <AccountUserContainer
+                                name={mate.name}
+                                number={num + 1}
+                                is_birthday={mate.bdate}
+                                percent={mate.exp}
+                                avatarLink={mate.avatar_link}
+                            />
+                        </div>
+                    )
+                });
+                this.setState({
+                    classmates: nodes,
+                    ready: true,
+                });
+            });
     };
 
     switchStudent = () => {

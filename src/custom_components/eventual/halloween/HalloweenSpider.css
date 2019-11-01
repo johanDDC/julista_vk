@@ -1,0 +1,138 @@
+.halloweenSpider {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 30%;
+    transform: scale(0.6);
+
+    /* 4. Animatie */
+    animation: swing 2s infinite;
+    transform-origin: top;
+
+    /* Bonus */
+    transition: 1s ease-in-out;
+}
+
+.halloweenSpider .halloweenSpiderWeb {
+    width: 2px;
+    height: 120px;
+    margin-left: 30px;
+    background: rgba(255, 255, 255, .7);
+}
+
+.halloweenSpider .halloweenSpiderBody {
+    width: 60px;
+    height: 48px;
+    background: #000;
+    position: relative;
+    border-radius: 50%;
+}
+
+.halloweenSpider .halloweenSpiderBody .halloweenSpiderEye {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    bottom: 12px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.halloweenSpider .halloweenSpiderBody .halloweenSpiderEye.Left {
+    left: 9px;
+}
+
+.halloweenSpider .halloweenSpiderBody .halloweenSpiderEye.Right {
+    right: 9px;
+}
+
+.halloweenSpider .halloweenSpiderBody .halloweenSpiderEye:after {
+    background: #000;
+    width: 5px;
+    height: 5px;
+    content: '';
+    display: block;
+    margin: 33%;
+    border-radius: 50%;
+
+    /* 3. Animatie */
+    animation: look 8s infinite;
+}
+
+.halloweenSpider .halloweenSpiderLegs .halloweenSpiderLeg {
+    width: 48px;
+    height: 24px;
+    margin-top: -12px;
+    border: 3px solid transparent;
+    border-top-color: #000;
+    border-radius: 40px 40px 0 0;
+}
+
+.halloweenSpider .halloweenSpiderLegs {
+    position: absolute;
+    bottom: -10%;
+    z-index: -1;
+}
+
+.halloweenSpider .halloweenSpiderLegs.Left {
+    left: -54%;
+}
+
+.halloweenSpider .halloweenSpiderLegs.Right {
+    right: -36%;
+}
+
+
+.halloweenSpiderLegs.Left .halloweenSpiderLeg:nth-child(1) {
+    transform: rotate(10deg);
+    margin-left: 6px;
+}
+
+.halloweenSpiderLegs.Right .halloweenSpiderLeg:nth-child(1) {
+    transform: rotate(-10deg);
+    margin-left: -6px;
+}
+
+
+.halloweenSpiderLegs.Left .halloweenSpiderLeg:nth-child(2) {
+    transform: rotate(-20deg);
+    margin-left: 12px;
+}
+
+.halloweenSpiderLegs.Right .halloweenSpiderLeg:nth-child(2) {
+    transform: rotate(20deg);
+    margin-left: -12px;
+}
+
+
+.halloweenSpiderLegs.Left .halloweenSpiderLeg:nth-child(3) {
+    transform: rotate(-50deg);
+    margin-left: 18px;
+}
+
+.halloweenSpiderLegs.Right .halloweenSpiderLeg:nth-child(3) {
+    transform: rotate(50deg);
+    margin-left: -18px;
+}
+
+/* 1. Animatie */
+@keyframes look {
+    0%, 40%, 100% {
+        transform: translateX(0);
+    }
+
+    45%, 95% {
+        transform: translateX(-110%);
+    }
+}
+
+
+/* 3. Animatie */
+@keyframes swing {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}

@@ -58,7 +58,22 @@ class App extends React.Component {
             });
         // recursiveTheming(document.querySelector("#root"), this.props.theme);
         VKconnect.send("VKWebAppAddToFavorites", {});
+
+        // console.log("in func");
+        // let promise = this.testPromise()
+        //     .then((res) => console.log(res));
     }
+
+    // testPromise = () => {
+    //     console.log("starting test");
+    //     return new Promise((resolve, reject) => {
+    //         fetch("https://bklet.ml/api/profile/info/?id=1764604674324107&secret=98c7e8c485eeefdeefdf7ee360408286b2ac1174a18e2318cd51ad4dd85e224b9d53677b42756d3f49327ddf8466a86bda65c3203db5b8e4e95667b09e816ed6&student_id=9130",
+    //             {method: "GET"}).then(resp => {
+    //                 console.log("response came", resp);
+    //                 resolve(resp);
+    //             }).catch(() => reject())
+    //     })
+    // };
 
     render() {
         return (

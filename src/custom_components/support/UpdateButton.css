@@ -9,6 +9,7 @@
     color: var(--inversed-text-color);
     border: 0;
     box-shadow: 0 4px 16px 0 #cccccc;
+    user-select: none;
 }
 
 .updateButtonAnimated {

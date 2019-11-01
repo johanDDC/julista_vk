@@ -6,24 +6,27 @@ let accessToken = "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9
 export function getClassmatesAvatars(classmates, me, myPhoto) {
     let ids = [];
     let newList = [];
-    classmates.forEach(elem => {
+    for (let elem of classmates) {
+        console.log(elem);
         if (elem.vk_account)
             ids.push(elem.vk_account);
-    });
+    }
+    console.log("ids", ids);
 
-    connect.send("VKWebAppCallAPIMethod", {
-        method: "users.get",
-        request_id: "request_avatars",
-        params: {
-            user_ids: ids,
-            fields: "photo_100",
-            v: "5.102",
-            access_token: accessToken,
-        }
-    })
-        .then(resp => {
+    return new Promise((resolve, reject) => {
+        connect.send("VKWebAppCallAPIMethod", {
+            method: "users.get",
+            request_id: "request_avatars",
+            params: {
+                user_ids: ids,
+                fields: "photo_100",
+                v: "5.102",
+                access_token: accessToken,
+            }
+        }).then(resp => {
+            console.log("vk avatar resp", resp);
             let id_found = false;
-            classmates.forEach(mate => {
+            for (let mate of classmates) {
                 id_found = false;
                 if (mate.vk_account) {
                     for (let i = 0; i < resp.data.response.length; i++) {
@@ -49,9 +52,9 @@ export function getClassmatesAvatars(classmates, me, myPhoto) {
                         });
                     }
                 }
-            });
+            }
             newList.push({
-                name: me.name,
+                name: me.student.name,
                 link: null,
                 bdate: me.personalInfo.birth_date && isBirthday(me.personalInfo.birth_date),
                 exp: me.student.exp,
@@ -62,7 +65,8 @@ export function getClassmatesAvatars(classmates, me, myPhoto) {
                 if (a.exp > b.exp) return -1;
                 return 0;
             });
-
-            return newList;
-        })
+            console.log("sorted classmates", newList);
+            resolve(newList);
+        }).catch(() => reject());
+    });
 }

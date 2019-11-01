@@ -9,9 +9,9 @@ class HalloweenPumpkin extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.theme !== "dark") {
-            document.getElementsByClassName("halloweenPumpkinContainer")[0].style.display = "none";
-        }
+        // if (this.props.theme !== "dark") {
+        //     document.getElementsByClassName("halloweenPumpkinContainer")[0].style.display = "none";
+        // }
         if (this.props.is_faceless) {
             for (let eye of document.getElementsByClassName("halloweenPumpkinEye")) {
                 eye.style.display = "none";
@@ -27,7 +27,12 @@ class HalloweenPumpkin extends React.Component {
 
     render() {
         return (
-            <div className="halloweenPumpkinContainer">
+            <div className="halloweenPumpkinContainer"
+                 style={{
+                     display: this.props.theme !== "dark"
+                         ? "none"
+                         : "flex"
+                 }}>
                 <div className="halloweenPumpkin">
                     <div className="halloweenPumpkinTexture"></div>
                     <div className="halloweenPumpkinRoot"></div>

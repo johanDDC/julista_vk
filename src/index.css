@@ -14,6 +14,7 @@
 
 * {
     font-family: 'Roboto', sans-serif !important;
+    user-select: none;
 }
 
 section.View {
@@ -37,7 +38,14 @@ section.View {
     --button-secondary-text: #777777;
     --warning-text: #e80a1e;
     --bottom-buttons-inactive: #a8adaf;
-    --hallowen-color: #ffffff;
+
+    --hallowen-color: #5690ff;
+    --hallowen-temp-1: #ffffff;
+    --hallowen-temp-2: #ffffff;
+    --hallowen-temp-3: #ffffff;
+
+    --hallowen-temp-4: #05a732;
+    --hallowen-temp-5: #04d461;
 }
 
 
@@ -56,5 +64,12 @@ section.View {
     --button-secondary-text: #5690ff;
     --warning-text: #ffffff;
     --bottom-buttons-inactive: #ffffff;
+
     --hallowen-color: #fa6928;
+    --hallowen-temp-1: #a14907;
+    --hallowen-temp-2: #517f54;
+    --hallowen-temp-3: #29412b;
+
+    --hallowen-temp-4: #ff512f;
+    --hallowen-temp-5: #f09819;
 }
