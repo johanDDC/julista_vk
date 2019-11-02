@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transform: scale(0.8);
 }
 
 .halloweenPumpkin {
@@ -116,22 +115,6 @@
     border-top: 0.8em solid transparent;
 }
 
-.halloweenPumpkinTeeth::before {
-    right: 2.2em;
-    top: -0.65em;
-    transform: rotate(30deg);
-    border-bottom: 0.5em solid transparent;
-    border-left: 1em solid #401b03;
-}
-
-.halloweenPumpkinTeeth::after {
-    right: 2.2em;
-    top: -0.65em;
-    transform: rotate(30deg);
-    border-bottom: 0.5em solid transparent;
-    border-left: 1em solid #401b03;
-}
-
 .halloweenPumpkinShadow {
     margin: 10% auto 0;
     background: #222222;
@@ -156,5 +139,25 @@
     }
     50% {
         transform: scale(0.8);
+    }
+}
+
+@keyframes light {
+    0%, 100% {
+        border-right-color: #401b03;
+        border-left-color: #401b03;
+    }
+    50% {
+        border-right-color: #E9C608;
+        border-left-color: #E9C608;
+    }
+}
+
+@keyframes light-mouth {
+    0%, 100% {
+        border-bottom-color: #401b03;
+    }
+    50% {
+        border-bottom-color: #E9C608;
     }
 }

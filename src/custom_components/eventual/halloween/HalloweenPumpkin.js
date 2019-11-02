@@ -12,16 +12,25 @@ class HalloweenPumpkin extends React.Component {
         // if (this.props.theme !== "dark") {
         //     document.getElementsByClassName("halloweenPumpkinContainer")[0].style.display = "none";
         // }
-        if (this.props.is_faceless) {
-            for (let eye of document.getElementsByClassName("halloweenPumpkinEye")) {
-                eye.style.display = "none";
-            }
-            for (let mouth of document.getElementsByClassName("halloweenPumpkinMouth")) {
-                mouth.style.display = "none";
-            }
-            document.getElementsByClassName("halloweenPumpkinTeeth")[0].style.display = "none";
-            document.getElementsByClassName("halloweenPumpkinShadow")[0].style.display = "none";
-            document.getElementsByClassName("halloweenPumpkin")[0].style.animation = "none";
+        if (!this.props.floating) {
+            document.getElementsByClassName("halloweenPumpkin")[0]
+                .style.animation = "none";
+        }
+        if (this.props.lighting) {
+            document.querySelector(".halloweenPumpkinEye.Left")
+                .style.animation = "light 3s infinite";
+            document.querySelector(".halloweenPumpkinEye.Right")
+                .style.animation = "light 3s infinite";
+            document.querySelector(".halloweenPumpkinMouth")
+                .style.animation = "light-mouth 3s infinite";
+            document.querySelector(".halloweenPumpkinMouth.Right")
+                .style.animation = "light-mouth 3s infinite";
+            document.querySelector(".halloweenPumpkinTeeth")
+                .style.animation = "light 3s infinite";
+        }
+        if (this.props.scale) {
+            document.getElementsByClassName("halloweenPumpkinContainer")[0]
+                .style.transform = `scale(${this.props.scale})`;
         }
     }
 
@@ -42,14 +51,18 @@ class HalloweenPumpkin extends React.Component {
                     <div className="halloweenPumpkinMouth Right"></div>
                     <div className="halloweenPumpkinTeeth"></div>
                 </div>
-                <div className="halloweenPumpkinShadow"></div>
+                <div className="halloweenPumpkinShadow"
+                     style={{display: this.props.shadow ? "flex" : "none"}}></div>
             </div>
         )
     }
 }
 
 HalloweenPumpkin.propTypes = {
-    is_faceless: PropTypes.bool.isRequired,
+    scale: PropTypes.number.isRequired,
+    floating: PropTypes.bool.isRequired,
+    shadow: PropTypes.bool.isRequired,
+    lighting: PropTypes.bool,
 };
 
 const mapStateToProps = store => {
