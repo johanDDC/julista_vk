@@ -6,9 +6,11 @@ import ChooseStudent from '../panels/choose_student'
 import ChooseSchool from '../panels/choose_school'
 import "./styles/Authorization.css"
 import {connect} from 'react-redux'
-import {doAuthorize, setDiary, setProfile, setStudent, vkAuth} from "../redux/actions/ProfileAction";
+import {clearProfile, doAuthorize, setDiary, setProfile, setStudent, vkAuth} from "../redux/actions/ProfileAction";
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
+
+import {auth} from "../utils/requests"
 
 let choose_schools_data = [];
 
@@ -109,8 +111,10 @@ class AuthorizationView extends React.Component {
             <ModalRoot activeModal={this.state.activeModal}>
                 <ModalCard
                     id="authThroughVk"
-                    onClose={() => this.setActiveModal(null)}
-                    // icon={<Icon56MoneyTransferOutline/>}
+                    onClose={() => {
+                        this.setActiveModal(null);
+                        this.props.signOutClear();
+                    }}
                     title="Мы уже знакомы!"
                     caption="Вы можете войти в дневник не вводя данные."
                     actions={[{
@@ -122,18 +126,7 @@ class AuthorizationView extends React.Component {
                             } else {
                                 this.props.setViewAction("MainView", "schedule");
                             }
-                            let locData = localStorage.getItem("userData")
-                                ? JSON.parse(localStorage.getItem("userData"))
-                                : {};
-                            locData = {
-                                ...locData,
-                                id: this.props.profile.id,
-                                secret: this.props.profile.secret,
-                                diary: this.props.profile.diary,
-                                students: this.props.profile.students,
-                                student: this.props.profile.student,
-                            };
-                            localStorage.setItem("userData", JSON.stringify(locData));
+
                             this.setActiveModal(null);
                         }
                     }]}
@@ -186,7 +179,6 @@ let choose_school = (school) => {
 
 
 const mapStateToProps = store => {
-    // console.log("Auth View", store);
     return {
         activePanel: store.activePanel,
         diary: store.diary,
@@ -199,7 +191,11 @@ const mapDispatchToProps = dispatch => {
     return {
         setDiaryAction: diary => dispatch(setDiary(diary)),
         getProfileAction: (login, password, diary, region, province, city, school) => {
-            dispatch(doAuthorize(login, password, diary, region, province, city, school));
+            return new Promise((resolve, reject) => {
+                auth(dispatch, login, password, diary, region, province, city, school)
+                    .then(result => resolve(result))
+                    .catch(err => reject(err));
+            });
         },
         setPanelAction: (panel, kwarg) => {
             if (kwarg)
@@ -210,6 +206,10 @@ const mapDispatchToProps = dispatch => {
         setStudentAction: student => dispatch(setStudent(student)),
         setProfileAction: profile => dispatch(setProfile(null, profile, null)),
         doVkAuth: params => dispatch(vkAuth(params)),
+
+        signOutClear: () => {
+            dispatch(clearProfile());
+        },
     }
 };
 

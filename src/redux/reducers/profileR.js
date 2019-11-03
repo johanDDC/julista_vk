@@ -75,6 +75,7 @@ function profile(state = initialState, action) {
             };
 
         case "DO_AUTHORIZATION_SUCCESS":
+            console.log("reduce", action.data);
             storeData(action.data);
             return {
                 ...state,

@@ -35,48 +35,44 @@ class Auth extends React.Component {
         this.drawRegionsSelector()
     }
 
+    componentDidMount() {
+        if (this.props.profile.id) {
+            this.props.openModal();
+        }
+    }
+
     btnBack = () => {
-        this.props.setPanel("choose_diary")
+        this.props.setPanel("choose_diary");
     };
 
     buttonClick = () => {
         let login = document.getElementById("loginInput-i").value;
         let password = document.getElementById("passInput-i").value;
-        try {
-            let inviteCode = document.getElementById("inviteCodeInput-i").value;
-        } catch (e) {
-            let inviteCode = "";
-        }
+        // try {
+        //     let inviteCode = document.getElementById("inviteCodeInput-i").value;
+        // } catch (e) {
+        //     let inviteCode = "";
+        // }
 
         if (login.trim().length !== 0 && password.trim().length !== 0) {
             this.props.setSpinner(true);
-            // console.log("per data", login, password, this.props.profile.diary,
-            //     this.region, this.province, this.city, this.state.choosenSchool[0]);
             this.props.getProfile(login, password, this.props.profile.diary,
-                this.region, this.province, this.city, this.state.choosenSchool[0]);
-
-            let id = setInterval(() => {
-                if (this.props.profile.error) {
-                    clearInterval(id);
+                this.region, this.province, this.city, this.state.choosenSchool[0])
+                .then(result => {
                     this.props.setSpinner(false);
-                    if (this.props.profile.errMessage instanceof Error) {
-                        this.props.openError("Непредвиденная ошибка. Пожалуйста, попробуйте позже.");
+                    console.log("long promise chain result", result);
+                    if (result.student === null) {
+                        this.props.setPanel("choose_student");
                     } else {
-                        this.props.openError(this.props.profile.errMessage);
+                        this.props.setView("MainView", "schedule");
                     }
-                    this.setState({error: true});
-                } else {
-                    if (this.props.profile.secret) {
-                        clearInterval(id);
-                        this.props.setSpinner(false);
-                        if (this.props.profile.student === null) {
-                            this.props.setPanel("choose_student");
-                        } else {
-                            this.props.setView("MainView", "schedule");
-                        }
-                    }
-                }
-            }, 200);
+                })
+                .catch(err => {
+                    if (err instanceof Error)
+                        this.props.openError("Непредвиденная ошибка. Пожалуйста, попробуйте позже.");
+                    else
+                        this.props.openError(err);
+                });
         }
     };
 
@@ -227,12 +223,6 @@ class Auth extends React.Component {
                 });
             })
     };
-
-    componentDidMount() {
-        if (this.props.profile.id) {
-            this.props.openModal();
-        }
-    }
 
     render() {
         return (

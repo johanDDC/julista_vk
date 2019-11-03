@@ -40,99 +40,30 @@ export function vkAuth(vk_params) {
     }
 }
 
-export function doAuthorize(login, password, diary, region, province, city, school) {
-    return dispatch => {
-        dispatch({
-            type: "DO_AUTHORIZATION_REQUEST",
-            data: {
-                id: null,
-                secret: null,
-                students: [],
-                student: null,
-            },
-        });
-
-        auth(login, password, diary, dispatch, region, province, city, school)
+export function doAuthorize() {
+    return {
+        type: "DO_AUTHORIZATION_REQUEST",
+        data: {
+            id: null,
+            secret: null,
+            students: [],
+            student: null,
+        }
     }
 }
 
-function auth(login, password, diary, dispatcher, region, province, city, school) {
-    let methodUrl = "auth/";
-    let ua = navigator.userAgent.toLowerCase();
-    let json = {
-        diary: diary,
-        login: login,
-        password: password,
-        region: region,
-        province: province,
-        city: city,
-        school: school,
-        vk_user_id: getVkParams().vk_user_id,
+export function authSuccess(data) {
+    return {
+        type: "DO_AUTHORIZATION_SUCCESS",
+        data: data,
+    }
+}
 
-        device_type: (ua.search('ios') > 0
-            ? 'ios'
-            : (ua.search('android') > 0
-                ? 'android'
-                : 'pc')),
-    };
-
-    console.log("auth data", json);
-
-    fetch(baseUrl + methodUrl, {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: "POST",
-        body: JSON.stringify(json),
-    })
-        .then(response => {
-            if (response.ok) {
-                response.json().then(data => {
-                    console.log("fetch try", data);
-                    if (data.status) {
-                        bindUser(data.id, data.secret)
-                            .then(result => console.log("bind", result))
-                            .catch(err => console.log("bind err", err));
-                        let localData = {
-                            id: data.id,
-                            secret: data.secret,
-                            students: data.students.list,
-                            diary: diary,
-                            student: (data.students.list.length === 1 ? data.students.list[0] : null),
-                        };
-                        localStorage.setItem("userData", JSON.stringify(localData));
-
-                        window.ga('diaryTracker.set', {
-                            diary: diary
-                        });
-                        window.ga('diaryTracker.send', {
-                            hitType: 'event',
-                            eventCategory: 'Sign in',
-                            eventAction: 'click',
-                            eventLabel: diary
-                        });
-
-                        dispatcher({
-                            type: "DO_AUTHORIZATION_SUCCESS",
-                            data: localData,
-                        });
-                        console.log("student", localData.student);
-                        setProfile(localData, null, dispatcher);
-                    } else {
-                        dispatcher({
-                            type: "DO_AUTHORIZATION_FAIL",
-                            data: data.message,
-                        })
-                    }
-                });
-            } else {
-                dispatcher({
-                    type: "DO_AUTHORIZATION_FAIL",
-                    data: "Неудачная попытка входа. Пожалуйста, проверьте свои данные и попробуйте ещё раз.",
-                })
-            }
-        })
-        .catch(err => console.log("fetch loose", err));
+export function authFail(message) {
+    return {
+        type: "DO_AUTHORIZATION_FAIL",
+        data: message,
+    }
 }
 
 export function setDiary(diary) {

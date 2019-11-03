@@ -1,8 +1,75 @@
 import connect from "@vkontakte/vk-connect-promise";
 import {getVkParams, isBirthday} from "./utils";
+import {authFail, authSuccess, doAuthorize, setProfile} from "../redux/actions/ProfileAction";
+import {signInDiary} from "./metrics";
 
 let accessToken = "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402";
 let baseUrl = "https://bklet.ml/api/";
+
+export function auth(reduxDispatcher, login, pass, diary, reg, prov, city, school) {
+    let methodUrl = "auth/";
+    let ua = navigator.userAgent.toLowerCase();
+    let json = {
+        diary: diary,
+        login: login,
+        password: pass,
+        region: reg,
+        province: prov,
+        city: city,
+        school: school,
+        vk_user_id: getVkParams().vk_user_id,
+
+        device_type: (ua.search('ios') > 0
+            ? 'ios'
+            : (ua.search('android') > 0
+                ? 'android'
+                : 'pc')),
+    };
+
+    reduxDispatcher(doAuthorize());
+
+    return new Promise((resolve, reject) => {
+        fetch(baseUrl + methodUrl, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(json),
+        }).then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    if (data.status) {
+                        bindUser(data.id, data.secret)
+                            .then(result => console.log("bind", result))
+                            .catch(err => console.log("bind err", err));
+                        let localData = {
+                            id: data.id,
+                            secret: data.secret,
+                            students: data.students.list,
+                            diary: diary,
+                            student: (data.students.list.length === 1 ? data.students.list[0] : null),
+                        };
+
+                        signInDiary(diary);
+
+                        reduxDispatcher(authSuccess(localData));
+
+                        console.log("auth", localData);
+                        setProfile(localData, null, reduxDispatcher);
+                        resolve(localData);
+                    } else {
+                        reduxDispatcher(authFail(data.message));
+                        reject(data.message);
+                    }
+                });
+            } else {
+                let message = "Неудачная попытка входа. Пожалуйста, проверьте свои данные и попробуйте ещё раз.";
+                reduxDispatcher(authFail(message));
+                reject(message);
+            }
+        }).catch(err => console.log("fetch loose", err));
+    })
+}
 
 export function getClassmatesAvatars(classmates, me, myPhoto) {
     let ids = [];
