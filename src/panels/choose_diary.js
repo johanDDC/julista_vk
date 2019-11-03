@@ -93,7 +93,7 @@ class ChooseDiary extends React.Component {
                                 shadow={true}
                                 floating={true}
                                 lighting={false}
-                                scale={0.8}
+
                             />
                         </div>
                     </div>

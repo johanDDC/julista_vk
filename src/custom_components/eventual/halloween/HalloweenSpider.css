@@ -3,7 +3,6 @@
     display: inline-block;
     top: 0;
     left: 30%;
-    transform: scale(0.6);
 
     /* 4. Animatie */
     animation: swing 2s infinite;

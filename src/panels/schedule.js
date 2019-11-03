@@ -41,29 +41,29 @@ class Schedule extends React.Component {
     }
 
     loadData = async () => {
-        this.props.getJournal(this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8], this.props.profile.student.id);
-
-        let id = setInterval(() => {
-            if (this.props.appData.error) {
-                clearInterval(id);
-                this.setState({
-                    error: true,
-                    ready: true,
-                    fetching: false,
-                });
-            } else {
-                if (this.props.appData.journal.data.length !== 0) {
-                    this.scheduleData = this.props.appData.journal;
-                    clearInterval(id);
-                    this.setState({
-                        ready: true,
-                        weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length), // if holidays, length is equal to 0
-                        fetching: false,
-                    });
-                    return 0;
-                }
-            }
-        }, 200);
+        // this.props.getJournal(this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8], this.props.profile.student.id);
+        //
+        // let id = setInterval(() => {
+        //     if (this.props.appData.error) {
+        //         clearInterval(id);
+        //         this.setState({
+        //             error: true,
+        //             ready: true,
+        //             fetching: false,
+        //         });
+        //     } else {
+        //         if (this.props.appData.journal.data.length !== 0) {
+        //             this.scheduleData = this.props.appData.journal;
+        //             clearInterval(id);
+        //             this.setState({
+        //                 ready: true,
+        //                 weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length), // if holidays, length is equal to 0
+        //                 fetching: false,
+        //             });
+        //             return 0;
+        //         }
+        //     }
+        // }, 200);
     };
 
     drawSpinner = () => {
