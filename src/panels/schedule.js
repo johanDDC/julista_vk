@@ -16,6 +16,7 @@ import UpdateButton from "../custom_components/support/UpdateButton"
 import HalloweenSpider from "../custom_components/eventual/halloween/HalloweenSpider"
 
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
+import ScheduleSwiper from "../custom_components/layouts/schedule/ScheduleSwiper";
 
 
 class Schedule extends React.Component {
@@ -35,8 +36,8 @@ class Schedule extends React.Component {
             fetching: false,
         };
 
-        if (flag)
-            this.loadData();
+        // if (flag)
+        //     this.loadData();
     }
 
     loadData = async () => {
@@ -439,44 +440,45 @@ class Schedule extends React.Component {
                     noShadow>
                     <div className="scheduleHeaderMonth">{this.state.month}</div>
                 </PanelHeader>
-                <div className="halloweenSpiderContainer">
-                    <HalloweenSpider/>
-                </div>
-                {this.drawTopBar()}
-                <Div id="scheduleWeekSwiperLeft" onClick={this.prevWeek}>
-                    <div className="up"></div>
-                    <div className="down"></div>
-                    <div style={{transform: "scaleX(-1)"}}>
-                        <Icon24Chevron/>
-                    </div>
-                </Div>
-                <Div id="scheduleWeekSwiperRight" onClick={this.nextWeek}>
-                    <div className="up"></div>
-                    <div className="down"></div>
-                    <Icon24Chevron/>
-                </Div>
-                <div className="pullToRefreshContainer">
-                    {
-                        (this.state.ready
-                            ?
-                            <PullToRefresh
-                                pullDownContent={<PullDownContent
-                                    label=""
-                                />}
-                                releaseContent={<ReleaseContent
-                                    label=""
-                                />}
-                                refreshContent={<PullToRefreshContext/>}
-                                pullDownThreshold={75}
-                                onRefresh={this.refresh}
-                                triggerHeight={160}
-                                backgroundColor="var(--background-head)"
-                                startInvisible={true}>
-                                {this.drawShedule()}
-                            </PullToRefresh>
-                            : this.drawSpinner())
-                    }
-                </div>
+                <ScheduleSwiper/>
+                {/*<div className="halloweenSpiderContainer">*/}
+                {/*    <HalloweenSpider/>*/}
+                {/*</div>*/}
+                {/*{this.drawTopBar()}*/}
+                {/*<Div id="scheduleWeekSwiperLeft" onClick={this.prevWeek}>*/}
+                {/*    <div className="up"></div>*/}
+                {/*    <div className="down"></div>*/}
+                {/*    <div style={{transform: "scaleX(-1)"}}>*/}
+                {/*        <Icon24Chevron/>*/}
+                {/*    </div>*/}
+                {/*</Div>*/}
+                {/*<Div id="scheduleWeekSwiperRight" onClick={this.nextWeek}>*/}
+                {/*    <div className="up"></div>*/}
+                {/*    <div className="down"></div>*/}
+                {/*    <Icon24Chevron/>*/}
+                {/*</Div>*/}
+                {/*<div className="pullToRefreshContainer">*/}
+                {/*    {*/}
+                {/*        (this.state.ready*/}
+                {/*            ?*/}
+                {/*            <PullToRefresh*/}
+                {/*                pullDownContent={<PullDownContent*/}
+                {/*                    label=""*/}
+                {/*                />}*/}
+                {/*                releaseContent={<ReleaseContent*/}
+                {/*                    label=""*/}
+                {/*                />}*/}
+                {/*                refreshContent={<PullToRefreshContext/>}*/}
+                {/*                pullDownThreshold={75}*/}
+                {/*                onRefresh={this.refresh}*/}
+                {/*                triggerHeight={160}*/}
+                {/*                backgroundColor="var(--background-head)"*/}
+                {/*                startInvisible={true}>*/}
+                {/*                {this.drawShedule()}*/}
+                {/*            </PullToRefresh>*/}
+                {/*            : this.drawSpinner())*/}
+                {/*    }*/}
+                {/*</div>*/}
             </Panel>
         )
     }
