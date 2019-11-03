@@ -7,10 +7,10 @@
 }
 
 .halloweenPumpkin {
-    height: 187px;
-    width: 255px;
+    height: 99px;
+    width: 128px;
     background: #f68632;
-    border: 7px solid #a14907;
+    border: 4px solid #a14907;
     border-radius: 70%/110%;
     position: relative;
     box-shadow: inset 0 0 20px #a14907, 0 0 30px -4px red;
@@ -19,35 +19,35 @@
 }
 
 .halloweenPumpkinTexture {
-    height: 187px;
-    width: 255px;
+    height: 99px;
+    width: 128px;
     position: absolute;
-    bottom: -7px;
+    bottom: -3px;
     border-radius: 70%/130%;
-    border-bottom: 8px solid #a14907;
-    border-top: 8px solid #a14907;
+    border-bottom: 4px solid #a14907;
+    border-top: 4px solid #a14907;
 }
 
 .halloweenPumpkinTexture::after {
     content: '';
     display: block;
-    height: 182px;
-    width: 204px;
+    height: 99px;
+    width: 102px;
     position: absolute;
-    bottom: -7px;
-    left: 25px;
+    bottom: -3px;
+    left: 12px;
     border-radius: 70%/130%;
-    border-bottom: 8px solid #a14907;
-    border-top: 8px solid #a14907;
+    border-bottom: 4px solid #a14907;
+    border-top: 4px solid #a14907;
 }
 
 .halloweenPumpkinRoot {
     background: #517f54;
-    height: 48px;
-    width: 21px;
+    height: 24px;
+    width: 10px;
     position: absolute;
-    left: 117px;
-    top: -46px;
+    left: 59px;
+    top: -23px;
     transform: rotate(5deg);
     border-radius: 30% 20% 70% 10%;
     z-index: 1;
@@ -58,58 +58,58 @@
     position: absolute;
     width: 0;
     height: 0;
-    border-top: 14px solid transparent;
-    top: 48px;
+    border-top: 7px solid transparent;
+    top: 24px;
 }
 
 .halloweenPumpkinEye.Right {
-    right: 63px;
-    border-left: 41px solid #401b03;
-    border-bottom: 36px solid transparent;
+    right: 31px;
+    border-left: 20px solid #401b03;
+    border-bottom: 18px solid transparent;
     transform: rotate(30deg);
 }
 
 .halloweenPumpkinEye.Left {
-    left: 63px;
-    border-right: 41px solid #401b03;
-    border-bottom: 36px solid transparent;
+    left: 31px;
+    border-right: 20px solid #401b03;
+    border-bottom: 18px solid transparent;
     transform: rotate(-30deg);
 }
 
 .halloweenPumpkinMouth {
-    border-bottom: 17px solid #401b03;
+    border-bottom: 8px solid #401b03;
     position: absolute;
-    width: 68px;
-    height: 34px;
-    bottom: 25px;
+    width: 34px;
+    height: 17px;
+    bottom: 12px;
 }
 
 .halloweenPumpkinMouth.Right {
-    right: 61px;
+    right: 30px;
     border-radius: 0 0 100% 0;
 }
 
 .halloweenPumpkinMouth.Left {
-    left: 61px;
+    left: 30px;
     border-radius: 0 0 0 100%;
 }
 
 .halloweenPumpkinTeeth {
-    border-left: 14px solid #401b03;
+    border-left: 7px solid #401b03;
     border-bottom: 0 solid transparent;
-    border-top: 14px solid transparent;
-    width: 8px;
-    height: 17px;
+    border-top: 7px solid transparent;
+    width: 4px;
+    height: 8px;
     position: absolute;
-    top: 131px;
-    left: 123px;
+    top: 72px;
+    left: 61px;
 }
 
 .halloweenPumpkinShadow {
     margin: 10% auto 0;
     background: #222222;
-    width: 230px;
-    height: 50px;
+    width: 115px;
+    height: 25px;
     border-radius: 50%;
     animation: zoom 3s infinite;
 }

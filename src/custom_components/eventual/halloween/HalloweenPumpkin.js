@@ -9,9 +9,6 @@ class HalloweenPumpkin extends React.Component {
     }
 
     componentDidMount() {
-        // if (this.props.theme !== "dark") {
-        //     document.getElementsByClassName("halloweenPumpkinContainer")[0].style.display = "none";
-        // }
         if (!this.props.floating) {
             document.getElementsByClassName("halloweenPumpkin")[0]
                 .style.animation = "none";
@@ -27,10 +24,6 @@ class HalloweenPumpkin extends React.Component {
                 .style.animation = "light-mouth 3s infinite";
             document.querySelector(".halloweenPumpkinTeeth")
                 .style.animation = "light 3s infinite";
-        }
-        if (this.props.scale) {
-            document.getElementsByClassName("halloweenPumpkinContainer")[0]
-                .style.transform = `scale(${this.props.scale})`;
         }
     }
 
@@ -59,7 +52,6 @@ class HalloweenPumpkin extends React.Component {
 }
 
 HalloweenPumpkin.propTypes = {
-    scale: PropTypes.number.isRequired,
     floating: PropTypes.bool.isRequired,
     shadow: PropTypes.bool.isRequired,
     lighting: PropTypes.bool,
