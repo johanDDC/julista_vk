@@ -40,30 +40,6 @@ class Auth extends React.Component {
     };
 
     buttonClick = () => {
-        // fetch("https://bklet.ml/api/auth/", {
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     method: "POST",
-        //     body:
-        //         JSON.stringify({
-        //             region: "40",
-        //             province: "-3",
-        //             city: "3",
-        //             school: 302,
-        //             login: "Ерина",
-        //             password: "Ee89605154446",
-        //             diary: "netschool",
-        //         })
-        // })
-        //     .then(response => {
-        //         console.log("fetch try", response.body);
-        //         response.json().then(data => {
-        //             console.log("fetch try", data)
-        //         });
-        //     })
-        //     .catch(err => console.log("fetch loose", err));
-
         let login = document.getElementById("loginInput-i").value;
         let password = document.getElementById("passInput-i").value;
         try {

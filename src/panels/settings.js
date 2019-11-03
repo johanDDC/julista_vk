@@ -33,9 +33,11 @@ class Settings extends React.Component {
         unbindUser(this.props.profile.id, this.props.profile.secret)
             .then(result => {
                 console.log("unbind", result);
-                this.props.signOutClear();
-                this.props.setView("AuthorizationView");
-                this.props.setPanel("choose_diary");
+                if (result.status) {
+                    this.props.signOutClear();
+                    this.props.setView("AuthorizationView");
+                    this.props.setPanel("choose_diary");
+                }
             })
             .catch(err => console.log("unbind err", err));
     };

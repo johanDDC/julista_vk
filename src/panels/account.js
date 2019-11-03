@@ -31,7 +31,7 @@ class Account extends React.Component {
     }
 
     componentDidMount() {
-        // this.getClassMates();
+        this.getClassMates();
     }
 
     getClassMates = () => {

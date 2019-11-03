@@ -86,7 +86,7 @@ export function bindUser(id, secret) {
                 },
                 method: "POST",
                 body: JSON.stringify(json),
-            }).then(response => resolve(response))
+            }).then(response => response.json().then(data => resolve(data)))
             .catch(err => reject(err))
     }))
 }
@@ -109,7 +109,7 @@ export function unbindUser(id, secret) {
                 method: "POST",
                 body: JSON.stringify(json),
             })
-            .then(response => resolve(response))
+            .then(response => response.json().then(data => resolve(data)))
             .catch(err => reject(err))
     });
 }
