@@ -10,7 +10,7 @@ import Mark from "../custom_components/support/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
 import QuestionIcon from "../custom_components/icon-pack/QuestionIcon"
 import Icon24Error from '@vkontakte/icons/dist/24/error';
-import {unbind_user} from "../redux/actions/ProfileAction"
+import {unbindUser} from "../utils/requests"
 import connect from '@vkontakte/vk-connect-promise';
 import {getVkParams} from "../utils/utils"
 
@@ -30,11 +30,14 @@ class Settings extends React.Component {
     }
 
     signOut = () => {
-        console.log("sign out data", this.props.profile.id, this.props.profile.secret);
-        unbind_user(this.props.profile.id, this.props.profile.secret);
-        this.props.signOutClear();
-        this.props.setView("AuthorizationView");
-        this.props.setPanel("choose_diary");
+        unbindUser(this.props.profile.id, this.props.profile.secret)
+            .then(result => {
+                console.log("unbind", result);
+                this.props.signOutClear();
+                this.props.setView("AuthorizationView");
+                this.props.setPanel("choose_diary");
+            })
+            .catch(err => console.log("unbind err", err));
     };
 
     askForNotifications = () => {

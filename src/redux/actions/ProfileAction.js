@@ -1,5 +1,6 @@
 import connect from '@vkontakte/vk-connect-promise';
 import {getVkParams} from "../../utils/utils"
+import {bindUser} from "../../utils/requests";
 
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/api/";
@@ -90,7 +91,9 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                 response.json().then(data => {
                     console.log("fetch try", data);
                     if (data.status) {
-                        bind_user(data.id, data.secret);
+                        bindUser(data.id, data.secret)
+                            .then(result => console.log("bind", result))
+                            .catch(err => console.log("bind err", err));
                         let localData = {
                             id: data.id,
                             secret: data.secret,
@@ -173,45 +176,6 @@ export function setProfile(profileData, profileInfo, dispatcher) {
             data: profileInfo,
         }
     }
-}
-
-async function bind_user(id, secret) {
-    let methodUrl = "auth/bind_account/vk/";
-    let json = getVkParams();
-    json.id = id;
-    json.secret = secret;
-    console.log("bind data", json);
-
-    let intervalId;
-
-    var timeoutID = setTimeout(() => {
-        clearInterval(intervalId);
-    }, 10000);
-    intervalId = setInterval(() => {
-        axios.post(baseUrl + methodUrl, json)
-            .then(response => {
-                clearTimeout(timeoutID);
-                clearInterval(intervalId);
-                console.log("bind result", response)
-            })
-            .catch(err => {
-                console.log("bind fail", err)
-            });
-    }, 1000);
-}
-
-export function unbind_user(id, secret) {
-    let vk_id = getVkParams().vk_user_id;
-    let methodUrl = `auth/bind_account/vk/logout/`;
-    let json = {
-        id: id,
-        secret: secret,
-        vk_user_id: vk_id - 0,
-    };
-
-    axios.post(baseUrl + methodUrl, json)
-        .then(resp => console.log(resp))
-        .catch(err => console.log("logout err"))
 }
 
 export function clearProfile() {

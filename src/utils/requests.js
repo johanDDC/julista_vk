@@ -1,7 +1,8 @@
 import connect from "@vkontakte/vk-connect-promise";
-import {isBirthday} from "./utils";
+import {getVkParams, isBirthday} from "./utils";
 
 let accessToken = "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402";
+let baseUrl = "https://bklet.ml/api/";
 
 export function getClassmatesAvatars(classmates, me, myPhoto) {
     let ids = [];
@@ -68,5 +69,47 @@ export function getClassmatesAvatars(classmates, me, myPhoto) {
             console.log("sorted classmates", newList);
             resolve(newList);
         }).catch(() => reject());
+    });
+}
+
+export function bindUser(id, secret) {
+    let methodUrl = "auth/bind_account/vk/";
+    let json = getVkParams();
+    json.id = id;
+    json.secret = secret;
+
+    return new Promise(((resolve, reject) => {
+        fetch(baseUrl + methodUrl,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(json),
+            }).then(response => resolve(response))
+            .catch(err => reject(err))
+    }))
+}
+
+export function unbindUser(id, secret) {
+    let methodUrl = `auth/bind_account/vk/logout/`;
+    let vk_id = getVkParams().vk_user_id;
+    let json = {
+        id: id,
+        secret: secret,
+        vk_user_id: vk_id - 0,
+    };
+
+    return new Promise((resolve, reject) => {
+        fetch(baseUrl + methodUrl,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(json),
+            })
+            .then(response => resolve(response))
+            .catch(err => reject(err))
     });
 }
