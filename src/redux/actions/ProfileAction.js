@@ -2,7 +2,6 @@ import connect from '@vkontakte/vk-connect-promise';
 import {getVkParams} from "../../utils/utils"
 import {bindUser} from "../../utils/requests";
 
-const axios = require('axios');
 let baseUrl = "https://bklet.ml/api/";
 
 export function vkAuth(vk_params) {
