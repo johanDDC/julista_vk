@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/julista_vk/static/css/main.d5ea3379.chunk.css",
-    "main.js": "/julista_vk/static/js/main.45814f68.chunk.js",
-    "main.js.map": "/julista_vk/static/js/main.45814f68.chunk.js.map",
+    "main.css": "/julista_vk/static/css/main.9a2f3efb.chunk.css",
+    "main.js": "/julista_vk/static/js/main.cb2b1e99.chunk.js",
+    "main.js.map": "/julista_vk/static/js/main.cb2b1e99.chunk.js.map",
     "runtime~main.js": "/julista_vk/static/js/runtime~main.bdba013e.js",
     "runtime~main.js.map": "/julista_vk/static/js/runtime~main.bdba013e.js.map",
     "static/css/2.a83908c5.chunk.css": "/julista_vk/static/css/2.a83908c5.chunk.css",
-    "static/js/2.1757cd4d.chunk.js": "/julista_vk/static/js/2.1757cd4d.chunk.js",
-    "static/js/2.1757cd4d.chunk.js.map": "/julista_vk/static/js/2.1757cd4d.chunk.js.map",
+    "static/js/2.0a541b00.chunk.js": "/julista_vk/static/js/2.0a541b00.chunk.js",
+    "static/js/2.0a541b00.chunk.js.map": "/julista_vk/static/js/2.0a541b00.chunk.js.map",
     "index.html": "/julista_vk/index.html",
-    "precache-manifest.ab464e898a1a46f33eefae35c676879d.js": "/julista_vk/precache-manifest.ab464e898a1a46f33eefae35c676879d.js",
+    "precache-manifest.b21546d78a3ff6826ad5939b123c8906.js": "/julista_vk/precache-manifest.b21546d78a3ff6826ad5939b123c8906.js",
     "service-worker.js": "/julista_vk/service-worker.js",
     "static/css/2.a83908c5.chunk.css.map": "/julista_vk/static/css/2.a83908c5.chunk.css.map",
-    "static/css/main.d5ea3379.chunk.css.map": "/julista_vk/static/css/main.d5ea3379.chunk.css.map"
+    "static/css/main.9a2f3efb.chunk.css.map": "/julista_vk/static/css/main.9a2f3efb.chunk.css.map"
   }
 }
