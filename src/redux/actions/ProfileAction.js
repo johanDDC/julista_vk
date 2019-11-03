@@ -1,6 +1,5 @@
 import connect from '@vkontakte/vk-connect-promise';
 import {getVkParams} from "../../utils/utils"
-import {async} from "q";
 
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/api/";
@@ -13,24 +12,26 @@ export function vkAuth(vk_params) {
     }
 
     return dispatch => {
-        axios.get(url)
-            .then(resp => {
-                if (resp.data.status) {
-                    let students = [];
-                    resp.data.students.list.forEach(e => {
-                        students.push(e);
-                    });
+        fetch(url, {
+            method: "GET"
+        }).then(response => {
+            response.json().then(data => {
+                if (data.status) {
+                    let localData = {
+                        id: data.id,
+                        secret: data.secret,
+                        students: data.students.list,
+                        student: (data.students.list.length === 1 ? data.students.list[0] : null),
+                    };
                     dispatch({
                         type: "DO_VK_AUTHORIZATION_SUCCESS",
-                        data: {
-                            id: resp.data.id,
-                            secret: resp.data.secret,
-                            students: students,
-                            student: (students.length === 1 ? students[0] : null),
-                        },
+                        data: localData,
                     });
+
+                    setProfile(localData, null, dispatch)
                 }
             })
+        })
             .catch(err => {
                 dispatch({
                     type: "DO_VK_AUTHORIZATION_FAIL",
@@ -113,26 +114,8 @@ function auth(login, password, diary, dispatcher, region, province, city, school
                             type: "DO_AUTHORIZATION_SUCCESS",
                             data: localData,
                         });
-
                         console.log("student", localData.student);
-                        if (localData.student) {
-                            fetch(baseUrl + `profile/info/?id=${localData.id}&secret=${localData.secret}&student_id=${localData.student.id}`,
-                                {
-                                    method: "GET"
-                                })
-                                .then(response => {
-                                    console.log("done", response, response.ok);
-                                    if (response.ok) {
-                                        response.json().then(profile => {
-                                            console.log("exp", profile);
-                                            dispatcher({
-                                                type: "SET_USER_DATA",
-                                                data: profile.data,
-                                            });
-                                        })
-                                    }
-                                });
-                        }
+                        setProfile(localData, null, dispatcher);
                     } else {
                         dispatcher({
                             type: "DO_AUTHORIZATION_FAIL",
@@ -164,10 +147,31 @@ export function setStudent(student) {
     }
 }
 
-export function setExp(exp) {
-    return {
-        type: "SET_EXPERIENCE",
-        data: exp,
+export function setProfile(profileData, profileInfo, dispatcher) {
+    if (profileData) {
+        if (profileData.student) {
+            fetch(baseUrl + `profile/info/?id=${profileData.id}&secret=${profileData.secret}&student_id=${profileData.student.id}`,
+                {
+                    method: "GET"
+                })
+                .then(response => {
+                    console.log("done", response, response.ok);
+                    if (response.ok) {
+                        response.json().then(profile => {
+                            console.log("exp", profile);
+                            dispatcher({
+                                type: "SET_USER_DATA",
+                                data: profile.data,
+                            });
+                        })
+                    }
+                });
+        }
+    } else if (profileInfo) {
+        return {
+            type: "SET_USER_DATA",
+            data: profileInfo,
+        }
     }
 }
 

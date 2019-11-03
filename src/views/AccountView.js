@@ -3,7 +3,7 @@ import {View} from '@vkontakte/vkui';
 import Account from '../panels/account'
 import {connect} from "react-redux";
 import ChooseStudent from "../panels/choose_student";
-import {setExp, setStudent} from "../redux/actions/ProfileAction";
+import {setProfile, setStudent} from "../redux/actions/ProfileAction";
 import {setPanel} from "../redux/actions/PanelAction";
 import {clearData} from "../redux/actions/AppLogicAction";
 
@@ -27,7 +27,7 @@ class AccountView extends React.Component {
                                profile={this.props.profile}
                                setStudent={this.props.setStudentAction}
                                setPanel={this.props.setPanelAction}
-                               setExp={this.props.setExpAction}
+                               setProfile={this.props.setProfileAction}
                 />
             </View>
         )
@@ -51,7 +51,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(setPanel(panel))
         },
         setStudentAction: student => dispatch(setStudent(student)),
-        setExpAction: exp => dispatch(setExp(exp)),
+        setProfileAction: profile => dispatch(setProfile(null, profile, null)),
     }
 };
 

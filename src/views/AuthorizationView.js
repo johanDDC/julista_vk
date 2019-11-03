@@ -6,7 +6,7 @@ import ChooseStudent from '../panels/choose_student'
 import ChooseSchool from '../panels/choose_school'
 import "./styles/Authorization.css"
 import {connect} from 'react-redux'
-import {doAuthorize, setDiary, setExp, setStudent, vkAuth} from "../redux/actions/ProfileAction";
+import {doAuthorize, setDiary, setProfile, setStudent, vkAuth} from "../redux/actions/ProfileAction";
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
 
@@ -173,7 +173,7 @@ class AuthorizationView extends React.Component {
                                setStudent={this.props.setStudentAction}
                                setView={this.props.setViewAction}
                                setPanel={this.props.setPanelAction}
-                               setExp={this.props.setExpAction}
+                               setProfile={this.props.setProfileAction}
                 />
             </View>
         )
@@ -208,7 +208,7 @@ const mapDispatchToProps = dispatch => {
         },
         setViewAction: view => dispatch(setView(view)),
         setStudentAction: student => dispatch(setStudent(student)),
-        setExpAction: exp => dispatch(setExp(exp)),
+        setProfileAction: profile => dispatch(setProfile(null, profile, null)),
         doVkAuth: params => dispatch(vkAuth(params)),
     }
 };

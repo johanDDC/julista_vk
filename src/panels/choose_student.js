@@ -15,12 +15,16 @@ class ChooseStudent extends React.Component {
     }
 
     choose = (student) => {
-        axios.get(`https://bklet.ml/api/profile/info/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${student.id}`)
-            .then(resp => {
-                console.log("exp", resp.data.data.exp);
-                this.props.setExp(resp.data.data.exp)
+        fetch(`https://bklet.ml/api/profile/info/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${student.id}`,
+            {
+                method: "GET"
             })
-            .catch(err => console.log("exp", err));
+            .then(response => {
+                response.json().then(profile => {
+                    console.log("profile", profile);
+                    this.props.setProfile(profile.data);
+                });
+            });
         this.props.setStudent(student);
         try {
             this.props.setView("MainView");
@@ -72,7 +76,7 @@ ChooseStudent.propTypes = {
     setStudent: PropTypes.func.isRequired,
     setView: PropTypes.func,
     setPanel: PropTypes.func.isRequired,
-    setExp: PropTypes.func.isRequired,
+    setProfile: PropTypes.func.isRequired,
 };
 
 export default ChooseStudent;
