@@ -144,15 +144,12 @@ class AuthorizationView extends React.Component {
                              vkAuth={this.props.doVkAuth}
                 />
                 <Auth id="auth"
-                      fetchedUser={this.props.fetchedUser}
                       setSpinner={this.viewScreenSpinner}
                       setPanel={this.props.setPanelAction}
                       setView={this.props.setViewAction}
                       profile={this.props.profile}
                       getProfile={this.props.getProfileAction}
                       openError={this.callError}
-                      openIncorrect={this.callIncorrect}
-                      openUnsupported={this.callUnsupported}
                       openModal={this.openModal}
                       stateData={choose_schools_data}
                 />

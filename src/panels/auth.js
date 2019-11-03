@@ -10,6 +10,7 @@ import AuthGift from "../custom_components/icon-pack/AuthGift"
 import AuthRestore from "../custom_components/icon-pack/AuthRestore"
 
 import CustomInput from "../custom_components/layouts/auth/customInput"
+import {getAuthData} from "../utils/requests";
 
 const axios = require('axios');
 
@@ -48,11 +49,6 @@ class Auth extends React.Component {
     buttonClick = () => {
         let login = document.getElementById("loginInput-i").value;
         let password = document.getElementById("passInput-i").value;
-        // try {
-        //     let inviteCode = document.getElementById("inviteCodeInput-i").value;
-        // } catch (e) {
-        //     let inviteCode = "";
-        // }
 
         if (login.trim().length !== 0 && password.trim().length !== 0) {
             this.props.setSpinner(true);
@@ -76,22 +72,38 @@ class Auth extends React.Component {
         }
     };
 
+    drawSelectorComponent = (type, description, stateData, options, changeFunc) => {
+        return (
+            <Select
+                id={type + "Select"}
+                placeholder={`Выберите ваш ${description}`}
+                value={stateData}
+                onChange={changeFunc}
+            >
+                {options}
+            </Select>
+        );
+    };
+
     drawRegionsSelector = () => {
         let options = [];
-        axios.get("https://bklet.ml/api/auth/get_data/")
-            .then(reg_resp => {
-                reg_resp.data.data.forEach(reg => {
+        getAuthData()
+            .then(data => {
+                console.log(data);
+                data.forEach(reg => {
                     options.push(
                         <option value={reg.id}>{reg.name}</option>
                     )
                 });
+
                 this.setState({
                     regions:
-                        <Select
-                            id="regionSelect"
-                            placeholder="Выберите ваш регион"
-                            value={this.props.stateData[3]}
-                            onChange={() => {
+                        this.drawSelectorComponent(
+                            "region",
+                            "регион",
+                            this.props.stateData[3],
+                            options,
+                            () => {
                                 this.region = document.getElementById("regionSelect").value;
                                 this.setState({
                                     cities: null,
@@ -101,33 +113,33 @@ class Auth extends React.Component {
                                         <Spinner size="medium"/>
                                 });
                                 this.drawProvincesSelector(this.props.stateData[4]);
-                            }}
-                        >
-                            {options}
-                        </Select>
+                            }
+                        )
                 });
+
                 if (this.props.stateData[3]) {
                     this.region = document.getElementById("regionSelect").value;
                     this.drawProvincesSelector(this.props.stateData[4]);
                 }
-            })
+            });
     };
     drawProvincesSelector = (defaultVal) => {
         let options = [];
-        axios.get("https://bklet.ml/api/auth/get_data/?region=" + this.region)
-            .then(province_resp => {
-                province_resp.data.data.forEach(province => {
+        getAuthData(this.region)
+            .then(data => {
+                data.forEach(reg => {
                     options.push(
-                        <option value={province.id}>{province.name}</option>
+                        <option value={reg.id}>{reg.name}</option>
                     )
                 });
                 this.setState({
                     provinces:
-                        <Select
-                            id="provinceSelect"
-                            placeholder="Выберите ваш район"
-                            value={defaultVal && defaultVal}
-                            onChange={() => {
+                        this.drawSelectorComponent(
+                            "province",
+                            "район",
+                            defaultVal,
+                            options,
+                            () => {
                                 this.province = document.getElementById("provinceSelect").value;
                                 this.setState({
                                     schools: null,
@@ -136,33 +148,33 @@ class Auth extends React.Component {
                                         <Spinner size="medium"/>
                                 });
                                 this.drawCitiesSelector(this.props.stateData[5]);
-                            }}
-                        >
-                            {options}
-                        </Select>
+                            }
+                        )
                 });
+
                 if (defaultVal) {
                     this.province = document.getElementById("provinceSelect").value;
                     this.drawCitiesSelector(this.props.stateData[5]);
                 }
-            })
+            });
     };
     drawCitiesSelector = (defaultVal) => {
         let options = [];
-        axios.get(`https://bklet.ml/api/auth/get_data/?region=${this.region}&province=${this.province}`)
-            .then(city_resp => {
-                city_resp.data.data.forEach(city => {
+        getAuthData(this.region, this.province)
+            .then(data => {
+                data.forEach(reg => {
                     options.push(
-                        <option value={city.id}>{city.name}</option>
+                        <option value={reg.id}>{reg.name}</option>
                     )
                 });
                 this.setState({
                     cities:
-                        <Select
-                            id="citySelect"
-                            placeholder="Выберите ваш город"
-                            value={defaultVal && defaultVal}
-                            onChange={() => {
+                        this.drawSelectorComponent(
+                            "city",
+                            "город",
+                            defaultVal,
+                            options,
+                            () => {
                                 this.city = document.getElementById("citySelect").value;
                                 this.setState({
                                     schools:
@@ -170,22 +182,21 @@ class Auth extends React.Component {
                                     choosenSchool: null,
                                 });
                                 this.drawSchoolsSelector();
-                            }}
-                        >
-                            {options}
-                        </Select>
+                            }
+                        )
                 });
+
                 if (defaultVal) {
                     this.city = document.getElementById("citySelect").value;
                     this.drawSchoolsSelector();
                 }
-            })
+            });
     };
     drawSchoolsSelector = () => {
         let options = [];
-        axios.get(`https://bklet.ml/api/auth/get_data/?region=${this.region}&province=${this.province}&city=${this.city}`)
-            .then(school_resp => {
-                school_resp.data.data.forEach(school => {
+        getAuthData(this.region, this.province, this.city)
+            .then(data => {
+                data.forEach(school => {
                     let name = school.name.replace("МБОУ ", "");
                     name = name.replace("НОУ ", "");
                     name = name.replace("ЧОУ ", "");
@@ -201,6 +212,7 @@ class Auth extends React.Component {
                         {id: school.id, name: name}
                     )
                 });
+
                 this.setState({
                     schools:
                         <SelectMimicry
@@ -285,18 +297,6 @@ class Auth extends React.Component {
                             {this.state.schools}
                         </Div>
                         : null)}
-                    {/*<Div>*/}
-                    {/*    <div*/}
-                    {/*        className="medium_tip">Введите код приглашения, при его наличии, или оставьте поле пустым</div>*/}
-                    {/*</Div>*/}
-                    {/*<Div className="inviteInput">*/}
-                    {/*    <div className="inputIcon">*/}
-                    {/*        <AuthGift/>*/}
-                    {/*    </div>*/}
-                    {/*    <CustomInput id="inviteCodeInput"*/}
-                    {/*                 type="text"*/}
-                    {/*    />*/}
-                    {/*</Div>*/}
                     <Div>
                         <div className="annotate">Нажимая войти, вы соглашаетесь на обработку, хранение, передачу ваших
                             персональных данных.
@@ -306,17 +306,6 @@ class Auth extends React.Component {
                                 target="_blank">Политика конфиденциальности</Link>
                         </div>
                     </Div>
-                    {/*<Div className="restorePassword">*/}
-                    {/*    <div className="inputIcon" style={{margin: 0}}>*/}
-                    {/*        <AuthRestore/>*/}
-                    {/*    </div>*/}
-                    {/*    <div>Забыли данные учетной записи?*/}
-                    {/*            <Link*/}
-                    {/*                href="https://google.com"*/}
-                    {/*                target="_blank"*/}
-                    {/*                className="restoreLink">Восстановить</Link>*/}
-                    {/*        </div>*/}
-                    {/*</Div>*/}
                     <Div>
                         <Button level="tertiary" className="authSignInButton"
                                 onClick={this.buttonClick}>
@@ -332,22 +321,12 @@ class Auth extends React.Component {
 
 Auth.propTypes = {
     id: PropTypes.string.isRequired,
-    fetchedUser: PropTypes.shape({
-        photo_200: PropTypes.string,
-        first_name: PropTypes.string,
-        last_name: PropTypes.string,
-        city: PropTypes.shape({
-            title: PropTypes.string,
-        }),
-    }),
     profile: PropTypes.any.isRequired,
     setView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
     getProfile: PropTypes.func.isRequired,
     setSpinner: PropTypes.func,
     openError: PropTypes.func.isRequired,
-    openIncorrect: PropTypes.func.isRequired,
-    openUnsupported: PropTypes.func,
     openModal: PropTypes.func,
     stateData: PropTypes.array,
 };

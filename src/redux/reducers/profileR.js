@@ -94,7 +94,6 @@ function profile(state = initialState, action) {
                 error: true,
             };
         case "SET_DIARY":
-            storeData({diary: action.data});
             return {
                 ...state,
                 diary: action.data,

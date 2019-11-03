@@ -6,6 +6,24 @@ import {signInDiary} from "./metrics";
 let accessToken = "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402";
 let baseUrl = "https://bklet.ml/api/";
 
+export function getAuthData(region, province, city) {
+    let methodUrl = `auth/get_data/`;
+    if (region)
+        methodUrl += `?region=${region}`;
+    if (province)
+        methodUrl += `&province=${province}`;
+    if (city)
+        methodUrl += `&city=${city}`;
+
+    return new Promise((resolve, reject) => {
+        fetch(baseUrl + methodUrl, {
+            method: "GET"
+        }).then(response => response.json()
+            .then(data => resolve(data.data)))
+            .catch(err => reject(err))
+    })
+}
+
 export function auth(reduxDispatcher, login, pass, diary, reg, prov, city, school) {
     let methodUrl = "auth/";
     let ua = navigator.userAgent.toLowerCase();
@@ -69,6 +87,25 @@ export function auth(reduxDispatcher, login, pass, diary, reg, prov, city, schoo
             }
         }).catch(err => console.log("fetch loose", err));
     })
+}
+
+export function bindUser(id, secret) {
+    let methodUrl = "auth/bind_account/vk/";
+    let json = getVkParams();
+    json.id = id;
+    json.secret = secret;
+
+    return new Promise(((resolve, reject) => {
+        fetch(baseUrl + methodUrl,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(json),
+            }).then(response => response.json().then(data => resolve(data)))
+            .catch(err => reject(err))
+    }))
 }
 
 export function getClassmatesAvatars(classmates, me, myPhoto) {
@@ -137,25 +174,6 @@ export function getClassmatesAvatars(classmates, me, myPhoto) {
             resolve(newList);
         }).catch(() => reject());
     });
-}
-
-export function bindUser(id, secret) {
-    let methodUrl = "auth/bind_account/vk/";
-    let json = getVkParams();
-    json.id = id;
-    json.secret = secret;
-
-    return new Promise(((resolve, reject) => {
-        fetch(baseUrl + methodUrl,
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify(json),
-            }).then(response => response.json().then(data => resolve(data)))
-            .catch(err => reject(err))
-    }))
 }
 
 export function unbindUser(id, secret) {
