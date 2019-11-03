@@ -74,7 +74,6 @@ class App extends React.Component {
 }
 
 const mapStateToProps = store => {
-    // console.log("App", store);
     return {
         activeView: store.activeView,
         activePanel: store.activePanel,

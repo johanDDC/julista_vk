@@ -40,6 +40,9 @@ class Settings extends React.Component {
                 }
             })
             .catch(err => console.log("unbind err", err));
+        this.props.signOutClear();
+        this.props.setView("AuthorizationView");
+        this.props.setPanel("choose_diary");
     };
 
     askForNotifications = () => {

@@ -12,7 +12,6 @@ import {getVkParams} from "../utils/utils";
 class ChooseDiary extends React.Component {
     constructor(props) {
         super(props);
-        this.d = "";
 
         this.startVkAuth();
     }
@@ -27,6 +26,23 @@ class ChooseDiary extends React.Component {
         this.props.setDiary(diary)
     };
 
+    diaryEntity = (name, description, icon) => {
+        return (
+            <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
+                    onClick={() => {
+                        this.choose(name);
+                    }}>
+                <div className="chooseDiaryScreenDiaryContainerIcon"
+                >
+                    {icon}
+                </div>
+                <div className="chooseDiaryScreenDiaryContainerTitle">{description}</div>
+                <div className="chooseDiaryScreenDiaryContainerChecker">
+                </div>
+            </Button>
+        )
+    };
+
     render() {
         return (
             <Panel id={this.props.id}>
@@ -36,56 +52,9 @@ class ChooseDiary extends React.Component {
                     </div>
                     <div className="chooseDiaryScreenDiaryDiaries">
                         <div>
-                            <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
-                                    onClick={() => {
-                                        this.d = "mosru";
-                                        this.choose(this.d);
-                                    }}>
-                                <div className="chooseDiaryScreenDiaryContainerIcon"
-                                >
-                                    <MosRuIcon/>
-                                </div>
-                                <div className="chooseDiaryScreenDiaryContainerTitle">Дневник МЭШ (mos.ru)</div>
-                                <div className="chooseDiaryScreenDiaryContainerChecker">
-                                </div>
-                            </Button>
-                            {/*<Button level="tertiary" className="chooseDiaryScreenDiaryContainer"*/}
-                            {/*        onClick={() => {*/}
-                            {/*            this.d = "mosregru";*/}
-                            {/*            this.choose(this.d);*/}
-                            {/*        }}>*/}
-                            {/*    <div className="chooseDiaryScreenDiaryContainerIcon"*/}
-                            {/*    >*/}
-                            {/*        <MosregIcon/>*/}
-                            {/*    </div>*/}
-                            {/*    <div className="chooseDiaryScreenDiaryContainerTitle">Школьный портал МО</div>*/}
-                            {/*    <div className="chooseDiaryScreenDiaryContainerChecker">*/}
-                            {/*    </div>*/}
-                            {/*</Button>*/}
-                            <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
-                                    onClick={() => {
-                                        this.d = "netschool";
-                                        this.choose(this.d);
-                                    }}>
-                                <div className="chooseDiaryScreenDiaryContainerIcon">
-                                    <NetschoolIcon/>
-                                </div>
-                                <div className="chooseDiaryScreenDiaryContainerTitle">Сетевой Город</div>
-                                <div className="chooseDiaryScreenDiaryContainerChecker">
-                                </div>
-                            </Button>
-                            <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
-                                    onClick={() => {
-                                        this.d = "edutatar";
-                                        this.choose(this.d);
-                                    }}>
-                                <div className="chooseDiaryScreenDiaryContainerIcon">
-                                    <EdutatarIcon/>
-                                </div>
-                                <div className="chooseDiaryScreenDiaryContainerTitle">EDU Tatar</div>
-                                <div className="chooseDiaryScreenDiaryContainerChecker">
-                                </div>
-                            </Button>
+                            {this.diaryEntity("mosru", "Дневник МЭШ (mos.ru)", <MosRuIcon/>)}
+                            {this.diaryEntity("netschool", "Сетевой Город", <NetschoolIcon/>)}
+                            {this.diaryEntity("edutatar", "EDU Tatar", <EdutatarIcon/>)}
                         </div>
                         <div className="halloweenPumpkinHolder">
                             <HalloweenPumpkin
@@ -93,7 +62,6 @@ class ChooseDiary extends React.Component {
                                 shadow={true}
                                 floating={true}
                                 lighting={false}
-
                             />
                         </div>
                     </div>
