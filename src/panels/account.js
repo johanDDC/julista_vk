@@ -9,13 +9,8 @@ import SwitchStudentIcon from "../custom_components/icon-pack/SwitchStudentIcon"
 import VK_important from "../custom_components/icon-pack/VK_important"
 import Icon16Dropdown from '@vkontakte/icons/dist/16/dropdown';
 import DefaultAvatarIcon from "../custom_components/icon-pack/DefaultAvatarIcon"
-import QuestionIcon from "../custom_components/icon-pack/QuestionIcon"
 import PerformanceIcon from "../custom_components/icon-pack/PerformanceIcon"
-import {isBirthday, recursiveTheming} from "../utils/utils"
 import {getClassmatesAvatars} from "../utils/requests"
-import connect from "@vkontakte/vk-connect-promise";
-
-const axios = require('axios');
 
 class Account extends React.Component {
     constructor() {
@@ -36,10 +31,8 @@ class Account extends React.Component {
 
     getClassMates = () => {
         let nodes = [];
-        console.log("meta data", this.props.profile.classmates, this.props.profile, this.props.profile.student, this.props.fetchedUser.photo_100);
         getClassmatesAvatars(this.props.profile.classmates, this.props.profile, this.props.fetchedUser.photo_100)
             .then(mates => {
-                console.log("clsmts after adding", mates);
                 mates.forEach((mate, num) => {
                     nodes.push(
                         <div className="accountClassmateContainer"
@@ -242,7 +235,6 @@ class Account extends React.Component {
                 {/*        </Button>*/}
                 {/*    </div>*/}
                 {/*</Group>*/}
-                {/*{this.props.theme === "dark" && recursiveTheming(document.querySelector("#account"))}*/}
             </Panel>
         );
     }
@@ -254,8 +246,6 @@ Account.propTypes = {
     setPanel: PropTypes.func.isRequired,
     clearJournalData: PropTypes.func.isRequired,
     fetchedUser: PropTypes.any,
-
-    theme: PropTypes.string.isRequired,
 };
 
 export default Account;

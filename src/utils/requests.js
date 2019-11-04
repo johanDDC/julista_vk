@@ -157,7 +157,6 @@ export function getClassmatesAvatars(classmates, me, myPhoto) {
         if (elem.vk_account)
             ids.push(elem.vk_account);
     }
-    console.log("ids", ids);
 
     return new Promise((resolve, reject) => {
         connect.send("VKWebAppCallAPIMethod", {
@@ -170,7 +169,6 @@ export function getClassmatesAvatars(classmates, me, myPhoto) {
                 access_token: accessToken,
             }
         }).then(resp => {
-            console.log("vk avatar resp", resp);
             let id_found = false;
             for (let mate of classmates) {
                 id_found = false;
@@ -211,7 +209,6 @@ export function getClassmatesAvatars(classmates, me, myPhoto) {
                 if (a.exp > b.exp) return -1;
                 return 0;
             });
-            console.log("sorted classmates", newList);
             resolve(newList);
         }).catch(() => reject());
     });

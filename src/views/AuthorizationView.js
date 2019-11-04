@@ -93,7 +93,7 @@ class AuthorizationView extends React.Component {
                         title: 'Войти',
                         type: 'primary',
                         action: () => {
-                            this.props.setProfileAction(this.authData);
+                            this.props.getProfileInfoAction(this.authData);
                             this.props.doVkAuth(this.authData).then(e => {
                                 this.setActiveModal(null);
                                 if (this.authData.student === null) {
@@ -136,7 +136,7 @@ class AuthorizationView extends React.Component {
                                setStudent={this.props.setStudentAction}
                                switchView={this.props.switchViewAction}
                                setPanel={this.props.setPanelAction}
-                               setProfile={this.props.setProfileAction}
+                               getProfileInfo={this.props.getProfileInfoAction}
                 />
             </View>
         )
@@ -174,7 +174,7 @@ const mapDispatchToProps = dispatch => {
         },
         switchViewAction: (view, panel) => dispatch(switchView(view, panel)),
         setStudentAction: student => dispatch(setStudent(student)),
-        setProfileAction: profile => getProfileInfo(dispatch, profile),
+        getProfileInfoAction: profile => getProfileInfo(dispatch, profile),
         doVkAuth: authData => {
             return new Promise(resolve => {
                 dispatch(authVk(authData, true));

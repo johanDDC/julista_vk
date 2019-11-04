@@ -12,7 +12,7 @@ class ChooseStudent extends React.Component {
     }
 
     choose = (student) => {
-        this.props.setProfile({
+        this.props.getProfileInfo({
             ...this.props.profile,
             student: student
         });
@@ -61,7 +61,7 @@ ChooseStudent.propTypes = {
     setStudent: PropTypes.func.isRequired,
     switchView: PropTypes.func,
     setPanel: PropTypes.func.isRequired,
-    setProfile: PropTypes.func.isRequired,
+    getProfileInfo: PropTypes.func.isRequired,
 };
 
 export default ChooseStudent;

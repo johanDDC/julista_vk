@@ -3,7 +3,7 @@ import {View} from '@vkontakte/vkui';
 import Account from '../panels/account'
 import {connect} from "react-redux";
 import ChooseStudent from "../panels/choose_student";
-import {setProfile, setStudent} from "../redux/actions/ProfileAction";
+import {setStudent} from "../redux/actions/ProfileAction";
 import {setPanel} from "../redux/actions/AppPresentationAction";
 import {clearData} from "../redux/actions/AppLogicAction";
 import {getProfileInfo} from "../utils/requests";
@@ -16,19 +16,18 @@ class AccountView extends React.Component {
 
     render() {
         return (
-            <View activePanel={(this.props.activePanel === "auth" ? "account" : this.props.activePanel)}>
+            <View activePanel={this.props.activePanel}>
                 <Account id="account"
                          fetchedUser={this.props.fetchedUser}
                          profile={this.props.profile}
                          setPanel={this.props.setPanelAction}
                          clearJournalData={this.props.clearJournalData}
-                         theme={this.props.theme}
                 />
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}
                                setStudent={this.props.setStudentAction}
                                setPanel={this.props.setPanelAction}
-                               setProfile={this.props.setProfileAction}
+                               getProfileInfo={this.props.getProfileInfoAction}
                 />
             </View>
         )
@@ -41,7 +40,6 @@ const mapStateToProps = store => {
         activePanel: store.presentation.activePanel,
         profile: store.profile,
         fetchedUser: store.fetchedUser,
-        theme: store.presentation.theme,
     }
 };
 
@@ -52,7 +50,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(setPanel(panel))
         },
         setStudentAction: student => dispatch(setStudent(student)),
-        setProfileAction: profile => getProfileInfo(dispatch, profile),
+        getProfileInfoAction: profile => getProfileInfo(dispatch, profile),
     }
 };
 
