@@ -6,13 +6,9 @@ import "./styles/auth.css"
 
 import AuthAccount from "../custom_components/icon-pack/AuthAccount"
 import AuthPassword from "../custom_components/icon-pack/AuthPassword"
-import AuthGift from "../custom_components/icon-pack/AuthGift"
-import AuthRestore from "../custom_components/icon-pack/AuthRestore"
 
 import CustomInput from "../custom_components/layouts/auth/customInput"
 import {getAuthData} from "../utils/requests";
-
-const axios = require('axios');
 
 class Auth extends React.Component {
     constructor(props) {

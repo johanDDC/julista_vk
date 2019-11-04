@@ -6,6 +6,7 @@ import ChooseStudent from "../panels/choose_student";
 import {setProfile, setStudent} from "../redux/actions/ProfileAction";
 import {setPanel} from "../redux/actions/PanelAction";
 import {clearData} from "../redux/actions/AppLogicAction";
+import {getProfileInfo} from "../utils/requests";
 
 
 class AccountView extends React.Component {
@@ -51,7 +52,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(setPanel(panel))
         },
         setStudentAction: student => dispatch(setStudent(student)),
-        setProfileAction: profile => dispatch(setProfile(null, profile, null)),
+        setProfileAction: profile => getProfileInfo(dispatch, profile),
     }
 };
 

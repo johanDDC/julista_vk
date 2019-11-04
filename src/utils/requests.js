@@ -89,6 +89,18 @@ export function auth(reduxDispatcher, login, pass, diary, reg, prov, city, schoo
     })
 }
 
+export function getProfileInfo(reduxDispatcher, profileData) {
+    let methodUrl = `profile/info/?id=${profileData.id}&secret=${profileData.secret}&student_id=${profileData.student.id}`;
+    console.log(methodUrl);
+    fetch(baseUrl + methodUrl, {
+        method: "GET"
+    })
+        .then(response => response.json().then(profile => {
+            console.log(profile);
+            reduxDispatcher(setProfile(profile.data));
+        }))
+}
+
 export function bindUser(id, secret) {
     let methodUrl = "auth/bind_account/vk/";
     let json = getVkParams();

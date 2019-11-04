@@ -10,7 +10,7 @@ import {clearProfile, doAuthorize, setDiary, setProfile, setStudent, vkAuth} fro
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
 
-import {auth} from "../utils/requests"
+import {auth, getProfileInfo} from "../utils/requests"
 
 let choose_schools_data = [];
 
@@ -52,23 +52,6 @@ class AuthorizationView extends React.Component {
         this.setState({popout: (switcher ? <ScreenSpinner/> : null)});
     };
 
-    callIncorrect = () => {
-        this.setState({
-            popout:
-                <Alert
-                    actionsLayout="vertical"
-                    actions={[{
-                        title: 'ОК',
-                        autoclose: true,
-                        style: 'cancel'
-                    }]}
-                    onClose={() => this.setState({popout: null})}
-                >
-                    <h2>Ошибка авторизации</h2>
-                    <p>Неправильный логин или пароль</p>
-                </Alert>
-        })
-    };
     callError = (message) => {
         this.setState({
             popout:
@@ -83,25 +66,6 @@ class AuthorizationView extends React.Component {
                 >
                     <h2>Ошибка авторизации</h2>
                     <p>{message}</p>
-                </Alert>
-        })
-    };
-    callUnsupported = () => {
-        this.setState({
-            popout:
-                <Alert
-                    actionsLayout="vertical"
-                    actions={[{
-                        title: 'ОК',
-                        autoclose: true,
-                        style: 'cancel'
-                    }]}
-                    onClose={() => this.setState({popout: null})}
-                >
-                    <h2>Ошибка авторизации</h2>
-                    <p>Опс, войти не получилось. Вполне возможно, что ваша школа ещё не поддерживается нашим дневником.
-                        К сожалению вам приёдтся подождать, пока мы не добавим вашу школу. Об обновлениях поддержки
-                        мы обязательно напишем в нашей группе в ВК.</p>
                 </Alert>
         })
     };
@@ -201,7 +165,7 @@ const mapDispatchToProps = dispatch => {
         },
         setViewAction: view => dispatch(setView(view)),
         setStudentAction: student => dispatch(setStudent(student)),
-        setProfileAction: profile => dispatch(setProfile(null, profile, null)),
+        setProfileAction: profile => getProfileInfo(dispatch, profile),
         doVkAuth: params => dispatch(vkAuth(params)),
 
         signOutClear: () => {

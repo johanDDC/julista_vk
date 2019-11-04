@@ -80,32 +80,11 @@ export function setStudent(student) {
     }
 }
 
-export function setProfile(profileData, profileInfo, dispatcher) {
-    if (profileData) {
-        if (profileData.student) {
-            fetch(baseUrl + `profile/info/?id=${profileData.id}&secret=${profileData.secret}&student_id=${profileData.student.id}`,
-                {
-                    method: "GET"
-                })
-                .then(response => {
-                    console.log("done", response, response.ok);
-                    if (response.ok) {
-                        response.json().then(profile => {
-                            console.log("exp", profile);
-                            dispatcher({
-                                type: "SET_USER_DATA",
-                                data: profile.data,
-                            });
-                        })
-                    }
-                });
-        }
-    } else if (profileInfo) {
-        return {
-            type: "SET_USER_DATA",
-            data: profileInfo,
-        }
-    }
+export function setProfile(data) {
+    return {
+        type: "SET_USER_DATA",
+        data: data,
+    };
 }
 
 export function clearProfile() {

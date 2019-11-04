@@ -3,28 +3,19 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./styles/choose_student.css"
 
-const axios = require('axios');
-
 class ChooseStudent extends React.Component {
     constructor(props) {
         super(props);
-        this.d = "";
 
         this.students = [];
         this.drawStudents();
     }
 
     choose = (student) => {
-        fetch(`https://bklet.ml/api/profile/info/?id=${this.props.profile.id}&secret=${this.props.profile.secret}&student_id=${student.id}`,
-            {
-                method: "GET"
-            })
-            .then(response => {
-                response.json().then(profile => {
-                    console.log("profile", profile);
-                    this.props.setProfile(profile.data);
-                });
-            });
+        this.props.setProfile({
+            ...this.props.profile,
+            student: student
+        });
         this.props.setStudent(student);
         try {
             this.props.setView("MainView");
@@ -39,8 +30,7 @@ class ChooseStudent extends React.Component {
             this.students.push(
                 <Button level="tertiary" className="chooseStudentScreenStudentContainer"
                         onClick={() => {
-                            this.d = student;
-                            this.choose(this.d)
+                            this.choose(student)
                         }}>
                     <div className="chooseStudentScreenStudentName">
                         {student.name}
