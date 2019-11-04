@@ -7,19 +7,11 @@ import MosRuIcon from "../custom_components/icon-pack/MosRuIcon"
 import NetschoolIcon from "../custom_components/icon-pack/NetschoolIcon"
 import HalloweenPumpkin from "../custom_components/eventual/halloween/HalloweenPumpkin"
 import EdutatarIcon from "../custom_components/icon-pack/EdutatarIcon"
-import {getVkParams} from "../utils/utils";
 
 class ChooseDiary extends React.Component {
     constructor(props) {
         super(props);
-
-        this.startVkAuth();
     }
-
-    startVkAuth = () => {
-        let vk_info = getVkParams();
-        this.props.vkAuth(vk_info)
-    };
 
     choose = (diary) => {
         this.props.setPanel("auth");
@@ -76,7 +68,6 @@ ChooseDiary.propTypes = {
     id: PropTypes.string.isRequired,
     setPanel: PropTypes.func.isRequired,
     setDiary: PropTypes.func.isRequired,
-    vkAuth: PropTypes.func.isRequired,
 };
 
 export default ChooseDiary;

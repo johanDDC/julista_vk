@@ -1,6 +1,6 @@
 import connect from "@vkontakte/vk-connect-promise";
 import {getVkParams, isBirthday} from "./utils";
-import {authFail, authSuccess, doAuthorize, setProfile} from "../redux/actions/ProfileAction";
+import {authFail, authSuccess, authVk, doAuthorize, setProfile} from "../redux/actions/ProfileAction";
 import {signInDiary} from "./metrics";
 
 let accessToken = "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402";
@@ -22,6 +22,35 @@ export function getAuthData(region, province, city) {
             .then(data => resolve(data.data)))
             .catch(err => reject(err))
     })
+}
+
+export function vkAuth() {
+    let methodUrl = "auth/bind_account/vk/";
+    let vkParams = getVkParams();
+    let url = baseUrl + methodUrl + "?";
+    for (let key in vkParams) {
+        url += `${key}=${vkParams[key]}&`
+    }
+
+    return new Promise((resolve, reject) => {
+        fetch(url, {
+            method: "GET"
+        }).then(response => response.json().then(data => {
+            if (data.status) {
+                let localData = {
+                    id: data.id,
+                    secret: data.secret,
+                    students: data.students.list,
+                    student: (data.students.list.length === 1 ? data.students.list[0] : null),
+                };
+
+                resolve(localData)
+                // reduxDispatcher(authVk(localData, true));
+
+                // setProfile(localData, null, dispatch)
+            }
+        })).catch(err => reject(err));
+    });
 }
 
 export function auth(reduxDispatcher, login, pass, diary, reg, prov, city, school) {

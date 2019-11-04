@@ -4,6 +4,19 @@ import {bindUser} from "../../utils/requests";
 
 let baseUrl = "https://bklet.ml/api/";
 
+export function authVk(data, status) {
+    if (status) {
+        return {
+            type: "DO_VK_AUTHORIZATION_SUCCESS",
+            data: data,
+        }
+    } else {
+        return {
+            type: "DO_VK_AUTHORIZATION_FAIL",
+        }
+    }
+}
+
 export function vkAuth(vk_params) {
     let methodUrl = "auth/bind_account/vk/";
     let url = baseUrl + methodUrl + "?";
@@ -23,19 +36,14 @@ export function vkAuth(vk_params) {
                         students: data.students.list,
                         student: (data.students.list.length === 1 ? data.students.list[0] : null),
                     };
-                    dispatch({
-                        type: "DO_VK_AUTHORIZATION_SUCCESS",
-                        data: localData,
-                    });
+                    dispatch();
 
                     setProfile(localData, null, dispatch)
                 }
             })
         })
             .catch(err => {
-                dispatch({
-                    type: "DO_VK_AUTHORIZATION_FAIL",
-                });
+                dispatch();
             });
     }
 }

@@ -6,11 +6,11 @@ import ChooseStudent from '../panels/choose_student'
 import ChooseSchool from '../panels/choose_school'
 import "./styles/Authorization.css"
 import {connect} from 'react-redux'
-import {clearProfile, doAuthorize, setDiary, setProfile, setStudent, vkAuth} from "../redux/actions/ProfileAction";
+import {authVk, clearProfile, setDiary, setStudent} from "../redux/actions/ProfileAction";
 import {setPanel} from "../redux/actions/PanelAction";
 import {setView} from "../redux/actions/ViewAction";
 
-import {auth, getProfileInfo} from "../utils/requests"
+import {auth, getProfileInfo, vkAuth} from "../utils/requests"
 
 let choose_schools_data = [];
 
@@ -24,6 +24,16 @@ class AuthorizationView extends React.Component {
             modalHistory: [],
         };
 
+        this.authData = null;
+    }
+
+    componentDidMount() {
+        vkAuth()
+            .then(data => {
+                console.log("vk", data);
+                this.authData = data;
+                this.openModal();
+            });
     }
 
     setActiveModal(activeModal) {
@@ -85,13 +95,15 @@ class AuthorizationView extends React.Component {
                         title: 'Войти',
                         type: 'primary',
                         action: () => {
-                            if (this.props.profile.student === null) {
-                                this.props.setPanelAction("choose_student");
-                            } else {
-                                this.props.setViewAction("MainView", "schedule");
-                            }
-
-                            this.setActiveModal(null);
+                            this.props.setProfileAction(this.authData);
+                            this.props.doVkAuth(this.authData).then(e => {
+                                this.setActiveModal(null);
+                                if (this.authData.student === null) {
+                                    this.props.setPanelAction("choose_student");
+                                } else {
+                                    this.props.setViewAction("MainView", "schedule");
+                                }
+                            });
                         }
                     }]}
                 >
@@ -105,7 +117,6 @@ class AuthorizationView extends React.Component {
                 <ChooseDiary id="choose_diary"
                              setDiary={this.props.setDiaryAction}
                              setPanel={this.props.setPanelAction}
-                             vkAuth={this.props.doVkAuth}
                 />
                 <Auth id="auth"
                       setSpinner={this.viewScreenSpinner}
@@ -166,7 +177,12 @@ const mapDispatchToProps = dispatch => {
         setViewAction: view => dispatch(setView(view)),
         setStudentAction: student => dispatch(setStudent(student)),
         setProfileAction: profile => getProfileInfo(dispatch, profile),
-        doVkAuth: params => dispatch(vkAuth(params)),
+        doVkAuth: authData => {
+            return new Promise(resolve => {
+                dispatch(authVk(authData, true));
+                resolve();
+            })
+        },
 
         signOutClear: () => {
             dispatch(clearProfile());

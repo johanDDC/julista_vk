@@ -57,7 +57,11 @@ class ScheduleView extends React.Component {
             </ModalRoot>
         ;
         return (
-            <View activePanel={(this.props.activePanel === "auth" ? "schedule" : this.props.activePanel)}
+            <View activePanel={
+                (this.props.activePanel === "auth" || this.props.activePanel === "choose_diary"
+                    ? "schedule"
+                    : this.props.activePanel)
+            }
                   modal={modal}>
                 <Schedule id="schedule"
                           profile={this.props.profile}
