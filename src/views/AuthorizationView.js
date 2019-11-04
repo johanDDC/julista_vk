@@ -7,9 +7,7 @@ import ChooseSchool from '../panels/choose_school'
 import "./styles/Authorization.css"
 import {connect} from 'react-redux'
 import {authVk, clearProfile, setDiary, setStudent} from "../redux/actions/ProfileAction";
-import {setPanel} from "../redux/actions/PanelAction";
-import {setView} from "../redux/actions/ViewAction";
-
+import {setPanel, switchView} from "../redux/actions/AppPresentationAction";
 import {auth, getProfileInfo, vkAuth} from "../utils/requests"
 
 let choose_schools_data = [];
@@ -101,7 +99,7 @@ class AuthorizationView extends React.Component {
                                 if (this.authData.student === null) {
                                     this.props.setPanelAction("choose_student");
                                 } else {
-                                    this.props.setViewAction("MainView", "schedule");
+                                    this.props.switchViewAction("MainView", "schedule");
                                 }
                             });
                         }
@@ -121,7 +119,7 @@ class AuthorizationView extends React.Component {
                 <Auth id="auth"
                       setSpinner={this.viewScreenSpinner}
                       setPanel={this.props.setPanelAction}
-                      setView={this.props.setViewAction}
+                      switchView={this.props.switchViewAction}
                       profile={this.props.profile}
                       getProfile={this.props.getProfileAction}
                       openError={this.callError}
@@ -136,7 +134,7 @@ class AuthorizationView extends React.Component {
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}
                                setStudent={this.props.setStudentAction}
-                               setView={this.props.setViewAction}
+                               switchView={this.props.switchViewAction}
                                setPanel={this.props.setPanelAction}
                                setProfile={this.props.setProfileAction}
                 />
@@ -152,7 +150,7 @@ let choose_school = (school) => {
 
 const mapStateToProps = store => {
     return {
-        activePanel: store.activePanel,
+        activePanel: store.presentation.activePanel,
         diary: store.diary,
         fetchedUser: store.fetchedUser,
         profile: store.profile,
@@ -174,7 +172,7 @@ const mapDispatchToProps = dispatch => {
                 choose_schools_data = kwarg;
             dispatch(setPanel(panel))
         },
-        setViewAction: view => dispatch(setView(view)),
+        switchViewAction: (view, panel) => dispatch(switchView(view, panel)),
         setStudentAction: student => dispatch(setStudent(student)),
         setProfileAction: profile => getProfileInfo(dispatch, profile),
         doVkAuth: authData => {

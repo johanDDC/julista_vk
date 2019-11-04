@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import "./advisesRow.css"
-import {Button, Div} from "@vkontakte/vkui";
 
 class AdvisesRow extends React.Component {
     constructor() {

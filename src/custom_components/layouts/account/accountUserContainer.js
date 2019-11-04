@@ -2,12 +2,9 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {Div, Avatar} from '@vkontakte/vkui';
 import "./accountUserContainer.css"
-import connect from '@vkontakte/vk-connect-promise';
 
-import LevelCircle from "./levelCircle"
 import DefaultAvatarIcon from "../../icon-pack/DefaultAvatarIcon"
 import BirthdayIcon from "../../icon-pack/BirthdayIcon"
-import {getVkParams} from "../../../utils/utils";
 
 var fill_color;
 var outline_color;

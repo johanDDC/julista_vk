@@ -56,7 +56,7 @@ class Auth extends React.Component {
                     if (result.student === null) {
                         this.props.setPanel("choose_student");
                     } else {
-                        this.props.setView("MainView", "schedule");
+                        this.props.switchView("MainView", "schedule");
                     }
                 })
                 .catch(err => {
@@ -318,7 +318,7 @@ class Auth extends React.Component {
 Auth.propTypes = {
     id: PropTypes.string.isRequired,
     profile: PropTypes.any.isRequired,
-    setView: PropTypes.func.isRequired,
+    switchView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
     getProfile: PropTypes.func.isRequired,
     setSpinner: PropTypes.func,

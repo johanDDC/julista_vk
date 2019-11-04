@@ -8,7 +8,7 @@ import AuthorizationView from "./views/AuthorizationView"
 import BottomBar from "./views/BottomBar"
 import {setUser} from "./redux/actions/FetchedUserAction";
 import {getVkParams, recursiveTheming} from "./utils/utils";
-import {setTheme} from "./redux/actions/ThemeAction";
+import {switchTheme} from "./redux/actions/AppPresentationAction";
 
 class App extends React.Component {
     constructor(props) {
@@ -75,8 +75,8 @@ class App extends React.Component {
 
 const mapStateToProps = store => {
     return {
-        activeView: store.activeView,
-        activePanel: store.activePanel,
+        activeView: store.presentation.activeView,
+        activePanel: store.presentation.activePanel,
         theme: store.theme,
     }
 };
@@ -84,7 +84,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
     return {
         setUserAction: user => dispatch(setUser(user)),
-        setThemeAction: theme => dispatch(setTheme(theme)),
+        setThemeAction: theme => dispatch(switchTheme(theme)),
     }
 };
 

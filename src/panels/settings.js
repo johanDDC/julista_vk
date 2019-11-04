@@ -35,14 +35,12 @@ class Settings extends React.Component {
                 console.log("unbind", result);
                 if (result.status) {
                     this.props.signOutClear();
-                    this.props.setView("AuthorizationView");
-                    this.props.setPanel("choose_diary");
+                    this.props.switchView("AuthorizationView", "choose_diary");
                 }
             })
             .catch(err => console.log("unbind err", err));
         this.props.signOutClear();
-        this.props.setView("AuthorizationView");
-        this.props.setPanel("choose_diary");
+        this.props.switchView("AuthorizationView", "choose_diary");
     };
 
     askForNotifications = () => {
@@ -301,7 +299,7 @@ Settings.propTypes = {
     id: PropTypes.string.isRequired,
     expectedMark: PropTypes.number.isRequired,
     chooseMark: PropTypes.func.isRequired,
-    setView: PropTypes.func.isRequired,
+    switchView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
     signOutClear: PropTypes.func.isRequired,
     profile: PropTypes.any.isRequired,

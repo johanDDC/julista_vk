@@ -17,12 +17,7 @@ class ChooseStudent extends React.Component {
             student: student
         });
         this.props.setStudent(student);
-        try {
-            this.props.setView("MainView");
-            this.props.setPanel("schedule");
-        } catch (e) {
-            this.props.setPanel("account");
-        }
+        this.props.switchView("MainView", "schedule");
     };
 
     drawStudents = () => {
@@ -64,7 +59,7 @@ ChooseStudent.propTypes = {
     id: PropTypes.string.isRequired,
     profile: PropTypes.any.isRequired,
     setStudent: PropTypes.func.isRequired,
-    setView: PropTypes.func,
+    switchView: PropTypes.func,
     setPanel: PropTypes.func.isRequired,
     setProfile: PropTypes.func.isRequired,
 };

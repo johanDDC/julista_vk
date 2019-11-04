@@ -1,5 +1,5 @@
 import React from "react";
-import { Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
+import {Epic, Tabbar, TabbarItem} from '@vkontakte/vkui';
 import "./styles/BottomBar.css"
 
 import AccountIcon from "../custom_components/icon-pack/AccountIcon"
@@ -14,7 +14,7 @@ import MarksView from "./MarksView";
 import ScheduleView from "./ScheduleView";
 import PlusView from "./PlusView";
 import SettingsView from "./SettingsView";
-import {setPanel} from "../redux/actions/PanelAction";
+import {setPanel} from "../redux/actions/AppPresentationAction";
 import {connect} from "react-redux";
 
 
@@ -23,9 +23,19 @@ class BottomBar extends React.Component {
         super(props);
 
         this.state = {
-            activeStory: 'Schedule',
+            activeStory: "",
         };
         this.onStoryChange = this.onStoryChange.bind(this);
+
+        String.prototype.capitalize = function () {
+            return this.replace(/(?:^|\s)\S/g, function (a) {
+                return a.toUpperCase();
+            });
+        };
+    }
+
+    componentDidMount() {
+        this.setState({activeStory: this.props.activePanel.capitalize()});
     }
 
     onStoryChange(e) {
@@ -81,7 +91,7 @@ class BottomBar extends React.Component {
                     ><SettingsIcon size="24" selected={this.state.activeStory === 'Settings'}/></TabbarItem>
                 </Tabbar>
             }>
-                <AccountView id="Account" >
+                <AccountView id="Account">
                 </AccountView>
                 <MarksView id="Marks" activePanel={this.props.activePanel}
                            userId={this.props.userId}
@@ -103,7 +113,7 @@ class BottomBar extends React.Component {
 const mapStateToProps = store => {
     // console.log("BottomBar", store);
     return {
-        activePanel: store.activePanel,
+        activePanel: store.presentation.activePanel,
         profile: store.profile,
     }
 };

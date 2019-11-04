@@ -56,12 +56,11 @@ class ScheduleView extends React.Component {
                 </ModalPage>
             </ModalRoot>
         ;
+        // (this.props.activePanel === "auth" || this.props.activePanel === "choose_diary"
+        //     ? "schedule"
+        //     : this.props.activePanel)
         return (
-            <View activePanel={
-                (this.props.activePanel === "auth" || this.props.activePanel === "choose_diary"
-                    ? "schedule"
-                    : this.props.activePanel)
-            }
+            <View activePanel="schedule"
                   modal={modal}>
                 <Schedule id="schedule"
                           profile={this.props.profile}
@@ -79,7 +78,7 @@ withPlatform(ScheduleView);
 const mapStateToProps = store => {
     // console.log("Schedule View", store);
     return {
-        activePanel: store.activePanel,
+        activePanel: store.presentation.activePanel,
         profile: store.profile,
         appLogic: store.appLogic,
     }

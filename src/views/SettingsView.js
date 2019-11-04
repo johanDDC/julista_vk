@@ -2,16 +2,15 @@ import React from 'react';
 import {View, ActionSheet, ActionSheetItem, withPlatform, ANDROID, IOS,} from '@vkontakte/vkui';
 import Settings from '../panels/settings'
 import {connect} from "react-redux";
-import {setMark} from "../redux/actions/ExpectedMarkAction";
+import {setExpectedMark, switchView} from "../redux/actions/AppPresentationAction";
 import PurposeMarkFive from "../custom_components/icon-pack/PurposeMarkFive"
 import PurposeMarkFour from "../custom_components/icon-pack/PurposeMarkFour"
 import PurposeMarkThree from "../custom_components/icon-pack/PurposeMarkThree"
 import "./styles/Settings.css"
-import {setPanel} from "../redux/actions/PanelAction";
-import {setView} from "../redux/actions/ViewAction";
+import {setPanel} from "../redux/actions/AppPresentationAction";
 import {clearProfile} from "../redux/actions/ProfileAction";
 import {clearData} from "../redux/actions/AppLogicAction";
-import {setTheme} from "../redux/actions/ThemeAction";
+import {switchTheme} from "../redux/actions/AppPresentationAction";
 
 class SettingsView extends React.Component {
     constructor(props) {
@@ -62,7 +61,7 @@ class SettingsView extends React.Component {
                 <Settings id="settings"
                           expectedMark={this.props.expectedMark}
                           chooseMark={this.chooseMark}
-                          setView={this.props.setViewAction}
+                          switchView={this.props.switchViewAction}
                           setPanel={this.props.setPanelAction}
                           profile={this.props.profile}
                           signOutClear={this.props.signOutClear}
@@ -79,10 +78,10 @@ withPlatform(SettingsView);
 const mapStateToProps = store => {
     // console.log("Settings View", store);
     return {
-        activePanel: store.activePanel,
+        activePanel: store.presentation.activePanel,
         profile: store.profile,
-        expectedMark: store.expectedMark,
-        theme: store.theme,
+        expectedMark: store.presentation.expectedMark,
+        theme: store.presentation.theme,
     }
 };
 
@@ -92,10 +91,10 @@ const mapDispatchToProps = dispatch => {
             dispatch(clearProfile());
             dispatch(clearData());
         },
-        setMarkAction: mark => dispatch(setMark(mark)),
+        setMarkAction: mark => dispatch(setExpectedMark(mark)),
         setPanelAction: panel => dispatch(setPanel(panel)),
-        setViewAction: view => dispatch(setView(view)),
-        setThemeAction: theme => dispatch(setTheme(theme)),
+        switchViewAction: (view, panel) => dispatch(switchView(view, panel)),
+        setThemeAction: theme => dispatch(switchTheme(theme)),
     }
 };
 

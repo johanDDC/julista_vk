@@ -4,7 +4,7 @@ import Account from '../panels/account'
 import {connect} from "react-redux";
 import ChooseStudent from "../panels/choose_student";
 import {setProfile, setStudent} from "../redux/actions/ProfileAction";
-import {setPanel} from "../redux/actions/PanelAction";
+import {setPanel} from "../redux/actions/AppPresentationAction";
 import {clearData} from "../redux/actions/AppLogicAction";
 import {getProfileInfo} from "../utils/requests";
 
@@ -38,10 +38,10 @@ class AccountView extends React.Component {
 const mapStateToProps = store => {
     console.log("Account View", store);
     return {
-        activePanel: store.activePanel,
+        activePanel: store.presentation.activePanel,
         profile: store.profile,
         fetchedUser: store.fetchedUser,
-        theme: store.theme,
+        theme: store.presentation.theme,
     }
 };
 
