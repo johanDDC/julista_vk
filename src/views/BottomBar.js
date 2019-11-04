@@ -5,7 +5,6 @@ import "./styles/BottomBar.css"
 import AccountIcon from "../custom_components/icon-pack/AccountIcon"
 import MarksIcon from "../custom_components/icon-pack/MarksIcon"
 import ScheduleIcon from "../custom_components/icon-pack/ScheduleIcon"
-import PlusIcon from "../custom_components/icon-pack/PlusIcon"
 import SettingsIcon from "../custom_components/icon-pack/SettingsIcon"
 
 
@@ -79,11 +78,6 @@ class BottomBar extends React.Component {
                         selected={this.state.activeStory === 'Schedule'}
                         data-story="Schedule"
                     ><ScheduleIcon size="24" selected={this.state.activeStory === 'Schedule'}/></TabbarItem>
-                    {/*<TabbarItem*/}
-                    {/*    onClick={this.onStoryChange}*/}
-                    {/*    selected={this.state.activeStory === 'Plus'}*/}
-                    {/*    data-story="Plus"*/}
-                    {/*><PlusIcon size="24" selected={this.state.activeStory === 'Plus'}/></TabbarItem>*/}
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'Settings'}
@@ -111,7 +105,6 @@ class BottomBar extends React.Component {
 }
 
 const mapStateToProps = store => {
-    // console.log("BottomBar", store);
     return {
         activePanel: store.presentation.activePanel,
         profile: store.profile,
