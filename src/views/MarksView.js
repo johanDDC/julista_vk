@@ -69,7 +69,6 @@ class MarksView extends React.Component {
 }
 
 const mapStateToProps = store => {
-    // console.log("Marks View", store);
     return {
         activePanel: store.presentation.activePanel,
         profile: store.profile,
