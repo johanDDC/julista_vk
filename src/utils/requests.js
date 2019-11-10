@@ -2,6 +2,8 @@ import connect from "@vkontakte/vk-connect-promise";
 import {getVkParams, isBirthday} from "./utils";
 import {authFail, authSuccess, authVk, doAuthorize, setProfile} from "../redux/actions/ProfileAction";
 import {signInDiary} from "./metrics";
+import {getAndAggregateMarks} from "../redux/actions/AppLogicAction";
+import BookletCache from "./cashe";
 
 let accessToken = "f865feccf865feccf865fecc0cf80fafb0ff865f865fecca4ac75d0909fd9d72a2d0402";
 let baseUrl = "https://bklet.ml/api/";
@@ -212,6 +214,48 @@ export function getClassmatesAvatars(classmates, me, myPhoto) {
             resolve(newList);
         }).catch(() => reject());
     });
+}
+
+export function getAllMarks(reduxDispatcher, id, secret, studentId) {
+    let methodUrl = "diary/marks/all/";
+    let queries = `?student_id=${studentId}&id=${id}&secret=${secret}`;
+    let request = baseUrl + methodUrl + queries;
+    let store = new BookletCache();
+    return new Promise((resolve, reject) => {
+        store.getData(request)
+            .then(data => {
+                if (data.data === null || data.error) {
+                    reject();
+                } else {
+                    resolve(data.data);
+                }
+            })
+            .catch(() => {
+                store.cacheData(request)
+                    .then(res => res.json()
+                        .then(data => console.log(data)));
+            })
+    });
+
+    // return new Promise((resolve, reject) => {
+    //     fetch(baseUrl + methodUrl + queries,
+    //         {
+    //             method: "GET",
+    //         })
+    //         .then(response => {
+    //                 cacheData(baseUrl + methodUrl + queries,
+    //                     response);
+    //                 response.json().then(data => {
+    //                     console.log("resp data", data);
+    //
+    //                 })
+    //             }
+    //         )
+    //         .catch(err => {
+    //             getAndAggregateMarks(false);
+    //             reject(err);
+    //         })
+    // });
 }
 
 export function unbindUser(id, secret) {

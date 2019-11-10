@@ -28,4 +28,4 @@ ReactDOM.render(
     </Provider>
     , root);
 
-registerServiceWorker();
+// registerServiceWorker();

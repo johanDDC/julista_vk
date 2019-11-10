@@ -5,7 +5,8 @@ import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import "./styles/Marks.css"
 
 import {connect} from "react-redux";
-import {getLastMarks, getMarks} from "../redux/actions/AppLogicAction";
+import {getLastMarks} from "../redux/actions/AppLogicAction";
+import {getAllMarks} from "../utils/requests";
 
 class MarksView extends React.Component {
     constructor(props) {
@@ -80,7 +81,10 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
     return {
         getMarksAction: (userId, secret, student_id) => {
-            dispatch(getMarks(userId, secret, student_id))
+            return new Promise((resolve, reject) => {
+                getAllMarks(dispatch, userId, secret, student_id).then(data => resolve(data))
+                    .catch(r => reject())
+            });
         },
         getLastMarksAction: (userId, secret, student_id) => {
             dispatch(getLastMarks(userId, secret, student_id))

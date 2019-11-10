@@ -56,50 +56,18 @@ function getSchedule(id, secret, start, end, student_id, dispatcher) {
     }, normalInterval)
 }
 
-export function getMarks(id, secret, student_id,) {
-    return dispatch => {
-        dispatch({
-            type: "GET_MARKS_REQUEST",
-            data: {
-                data: []
-            },
-        });
-
-        getAndAggregateMarks(id, secret, student_id, dispatch)
-    }
-}
-
-function getAndAggregateMarks(id, secret, student_id, dispatcher) {
-    let methodUrl = "api/diary/marks/all/";
-
-    let queries = `?student_id=${student_id}&id=${id}&secret=${secret}`;
-    // let queries = `?id=0&secret=${secret}&start=${setCorrectYear(startDate.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(endDate.toLocaleDateString("ru-RU"))}`;
-
-    console.log(baseUrl + methodUrl + queries);
-
-    let intervalId;
-
-    var timeoutID = setTimeout(() => {
-        clearInterval(intervalId);
-        dispatcher({
+export function getAndAggregateMarks(status, data) {
+    if (status) {
+        return {
+            type: "GET_MARKS_SUCCESS",
+            data: data,
+        }
+    } else {
+        return {
             type: "GET_MARKS_FAIL",
             data: Error("end timeout")
-        })
-    }, normalTimeout);
-    intervalId = setInterval(() => {
-        axios.get(baseUrl + methodUrl + queries)
-            .then((response) => {
-                console.log("marks resp", response.data);
-                if (!response.data.data === null || !response.data.error) {
-                    clearTimeout(timeoutID);
-                    clearInterval(intervalId);
-                    dispatcher({
-                        type: "GET_MARKS_SUCCESS",
-                        data: response.data
-                    })
-                }
-            })
-    }, normalInterval);
+        }
+    }
 }
 
 export function getLastMarks(id, secret, student_id) {

@@ -15,6 +15,7 @@ import Mark from "../custom_components/support/mark"
 import CustomSpinner from "../custom_components/support/customSpinner";
 import AdvisesRow from "../custom_components/layouts/marks/advisesRow";
 import UpdateButton from "../custom_components/support/UpdateButton";
+import {getAllMarks} from "../utils/requests";
 
 class Marks extends React.Component {
     constructor(props) {
@@ -40,7 +41,8 @@ class Marks extends React.Component {
     }
 
     loadData = async () => {
-        this.props.getMarks(this.props.profile.id, this.props.profile.secret, this.props.profile.student.id);
+        this.props.getMarks(this.props.profile.id, this.props.profile.secret, this.props.profile.student.id)
+            .then(data => console.log(data));
         this.props.getLastMarks(this.props.profile.id, this.props.profile.secret, this.props.profile.student.id);
 
         let id = setInterval(() => {
