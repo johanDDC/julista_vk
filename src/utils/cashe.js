@@ -51,13 +51,17 @@ class BookletCache {
     };
 
     cacheData = (request, entity) => {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             this.storage.then(storage => {
                 fetch(request).then(response => {
-                    let save = response.clone();
-                    this.#saveTime(entity);
-                    storage.put(request, response)
-                        .then(() => resolve(save))
+                    console.log(response);
+                    if (response.ok){
+                        let save = response.clone();
+                        this.#saveTime(entity);
+                        storage.put(request, response)
+                            .then(() => resolve(save))
+                    } else
+                        reject();
                 });
             });
         });
@@ -70,7 +74,12 @@ class BookletCache {
                 .then(() => {
                     this.storage.then(storage => {
                         storage.match(request)
-                            .then(response => response.json().then(data => resolve(data)))
+                            .then(response => {
+                                if (response.ok)
+                                    response.json().then(data => resolve(data))
+                                else
+                                    reject();
+                            })
                             .catch(() => reject())
                     });
                 });

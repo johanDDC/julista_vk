@@ -5,8 +5,6 @@ import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import "./styles/Marks.css"
 
 import {connect} from "react-redux";
-import {getLastMarks} from "../redux/actions/AppLogicAction";
-import {getAllMarks} from "../utils/requests";
 
 class MarksView extends React.Component {
     constructor(props) {
@@ -58,8 +56,6 @@ class MarksView extends React.Component {
                 <Marks id="marks"
                        profile={this.props.profile}
                        appData={this.props.appLogic}
-                       getMarks={this.props.getMarksAction}
-                       getLastMarks={this.props.getLastMarksAction}
                        openModal={this.setModalMark}
                        closeModal={this.closeModal}
                        expectedMark={this.props.expectedMark}
@@ -70,6 +66,7 @@ class MarksView extends React.Component {
 }
 
 const mapStateToProps = store => {
+    console.log(store);
     return {
         activePanel: store.presentation.activePanel,
         profile: store.profile,
@@ -80,15 +77,6 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getMarksAction: (userId, secret, student_id) => {
-            return new Promise((resolve, reject) => {
-                getAllMarks(dispatch, userId, secret, student_id).then(data => resolve(data))
-                    .catch(r => reject())
-            });
-        },
-        getLastMarksAction: (userId, secret, student_id) => {
-            dispatch(getLastMarks(userId, secret, student_id))
-        }
     }
 };
 

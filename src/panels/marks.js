@@ -54,6 +54,9 @@ class Marks extends React.Component {
                 this.marksData = data;
                 this.props.setAllMarks(data);
                 this.startRenderMain();
+            })
+            .catch(() => {
+                this.setState({error: true});
             });
         getLastMarks(this.props.profile.id,
             this.props.profile.secret,

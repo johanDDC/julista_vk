@@ -168,7 +168,8 @@ export function promiseStoreConstruct(store, request, entity) {
             .catch(() => {
                 store.cacheData(request, entity)
                     .then(res => res.json()
-                        .then(data => resolve(data.data)));
+                        .then(data => resolve(data.data)))
+                    .catch(() => reject())
             })
     });
 }

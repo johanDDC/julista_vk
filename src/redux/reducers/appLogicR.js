@@ -2,15 +2,8 @@ const initialState = {
     journal: {
         data: []
     },
-    marks: {
-        data: []
-    },
-    lastMarks: {
-        data: []
-    },
-    isFetching: false,
-    error: false,
-    errorLastMarks: false,
+    marks: [],
+    lastMarks: [],
 };
 
 function appLogic(state = initialState, action) {
@@ -35,45 +28,15 @@ function appLogic(state = initialState, action) {
                 isFetching: false,
                 error: true,
             };
-        case "GET_MARKS_REQUEST":
+        case "SET_MARKS":
             return {
                 ...state,
                 marks: action.data,
-                isFetching: true,
-                error: false,
             };
-        case "GET_MARKS_SUCCESS":
-            return {
-                ...state,
-                marks: action.data,
-                isFetching: false,
-                error: false,
-            };
-        case "GET_MARKS_FAIL":
-            return {
-                ...state,
-                isFetching: false,
-                error: true,
-            };
-        case "GET_LAST_MARKS_REQUEST":
+        case "SET_LAST_MARKS":
             return {
                 ...state,
                 lastMarks: action.data,
-                isFetching: true,
-                errorLastMarks: false,
-            };
-        case "GET_LAST_MARKS_SUCCESS":
-            return {
-                ...state,
-                lastMarks: action.data,
-                isFetching: false,
-                errorLastMarks: false,
-            };
-        case "GET_LAST_MARKS_FAIL":
-            return {
-                ...state,
-                isFetching: false,
-                errorLastMarks: true,
             };
         case "CLEAR_DATA":
             return {

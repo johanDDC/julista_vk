@@ -56,66 +56,18 @@ function getSchedule(id, secret, start, end, student_id, dispatcher) {
     }, normalInterval)
 }
 
-export function getAndAggregateMarks(status, data) {
-    if (status) {
-        return {
-            type: "GET_MARKS_SUCCESS",
-            data: data,
-        }
-    } else {
-        return {
-            type: "GET_MARKS_FAIL",
-            data: Error("end timeout")
-        }
+export function setAllMarks(data) {
+    return{
+        type: "SET_MARKS",
+        data: data
     }
 }
 
-export function getLastMarks(id, secret, student_id) {
-    return dispatch => {
-        dispatch({
-            type: "GET_LAST_MARKS_REQUEST",
-            data: {
-                data: []
-            },
-        });
-
-        getLMarks(id, secret, student_id, dispatch);
+export function setLastMarks(data) {
+    return{
+        type: "SET_LAST_MARKS",
+        data: data
     }
-}
-
-function getLMarks(id, secret, student_id, dispatcher) {
-    let methodUrl = `api/diary/marks/range/?before=5&after=0&id=${id}&secret=${secret}&student_id=${student_id}`;
-
-    // console.log("error here", baseUrl + methodUrl + queries);
-
-    let intervalId;
-
-    var timeoutID = setTimeout(() => {
-        clearInterval(intervalId);
-        dispatcher({
-            type: "GET_LAST_MARKS_FAIL",
-            data: Error("end timeout")
-        })
-    }, normalTimeout);
-    intervalId = setInterval(() => {
-        axios.get(baseUrl + methodUrl)
-            .then((response) => {
-                console.log("last marks resp", response.data);
-                if (response.data.error) {
-                    dispatcher({
-                        type: "GET_LAST_MARKS_FAIL",
-                        data: response.data.error
-                    })
-                } else {
-                    clearTimeout(timeoutID);
-                    clearInterval(intervalId);
-                    dispatcher({
-                        type: "GET_LAST_MARKS_SUCCESS",
-                        data: response.data
-                    })
-                }
-            })
-    }, normalInterval);
 }
 
 export function clearData() {
