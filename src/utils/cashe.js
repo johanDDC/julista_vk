@@ -1,6 +1,20 @@
+import {cacheTimeChecker} from "./utils";
+
 class BookletCache {
+    static instance = null;
+
     constructor() {
         this.storage = this.#openCache();
+        this.timeStore = localStorage.getItem("cache")
+            ? JSON.parse(localStorage.getItem("cache"))
+            : {};
+    }
+
+    static getInstance(){
+        if (BookletCache.instance === null)
+            BookletCache.instance = new BookletCache();
+
+        return this.instance;
     }
 
     #openCache = () => {
@@ -11,12 +25,37 @@ class BookletCache {
                 })
         });
     };
+    #checkCache = (entity) => {
+        try {
+            return cacheTimeChecker(this.timeStore[`${entity}`].time);
+        } catch (e) {
+            return false;
+        }
+    };
+    #clear = (request, status) => {
+        return new Promise(resolve => {
+            if (status) {
+                console.log("clear",);
+                this.storage.then(storage => {
+                    storage.delete(request)
+                        .then(() => resolve())
+                });
+            } else
+                resolve();
+        });
+    };
+    #saveTime = entity => {
+        // Object.assign(this.timeStore, {`${entity}`, {}})
+        this.timeStore["" + entity] = {time: new Date()};
+        localStorage.setItem("cache", JSON.stringify(this.timeStore));
+    };
 
-    cacheData = request => {
+    cacheData = (request, entity) => {
         return new Promise(resolve => {
             this.storage.then(storage => {
                 fetch(request).then(response => {
                     let save = response.clone();
+                    this.#saveTime(entity);
                     storage.put(request, response)
                         .then(() => resolve(save))
                 });
@@ -24,27 +63,19 @@ class BookletCache {
         });
     };
 
-    getData = request => {
+    getData = (request, entity) => {
         return new Promise((resolve, reject) => {
-            this.storage.then(storage => {
-                storage.match(request)
-                    .then(response => response.json().then(data => resolve(data)))
-                    .catch(() => reject())
-            });
+            // this.#clear(request, this.#checkCache(entity))
+            this.#clear(request, this.#checkCache(entity))
+                .then(() => {
+                    this.storage.then(storage => {
+                        storage.match(request)
+                            .then(response => response.json().then(data => resolve(data)))
+                            .catch(() => reject())
+                    });
+                });
         });
     };
 }
-
-// export function cacheData(request) {
-//     caches.open("booklet_cache")
-//         .then(cache => {
-//             // cache.add(request);
-//             cache.match(request).then(resp => resp.json().then(data => console.log(data)))
-//         })
-// }
-//
-// export function getCashedData(request) {
-//
-// }
 
 export default BookletCache;

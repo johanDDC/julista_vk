@@ -15,7 +15,9 @@ import Mark from "../custom_components/support/mark"
 import CustomSpinner from "../custom_components/support/customSpinner";
 import AdvisesRow from "../custom_components/layouts/marks/advisesRow";
 import UpdateButton from "../custom_components/support/UpdateButton";
-import {getAllMarks} from "../utils/requests";
+import {getAllMarks, getLastMarks} from "../utils/requests";
+import {setAllMarks, setLastMarks} from "../redux/actions/AppLogicAction";
+import {connect} from "react-redux";
 
 class Marks extends React.Component {
     constructor(props) {
@@ -25,52 +27,47 @@ class Marks extends React.Component {
         this.lastMarksData = this.props.appData.lastMarks;
         this.tabs = [];
         this.tabsItems = [];
-        let flag = this.props.appData.marks.data.length === 0;
 
         this.state = {
             activeTab: "1",
-            ready: !flag,
+            ready: this.marksData.length !== 0,
             error: false,
-            errorLastMarks: false,
+            lastMarksBlock: null,
         };
+        console.log(this.marksData);
 
-        if (flag)
+        if (this.marksData.length !== 0)
+            this.startRenderMain();
+        if (this.marksData.length !== 0)
+            this.startRenderLastMarks();
+        if (this.marksData.length === 0 || this.lastMarksData.length === 0)
             this.loadData();
-        else
-            this.startRender();
     }
 
-    loadData = async () => {
-        this.props.getMarks(this.props.profile.id, this.props.profile.secret, this.props.profile.student.id)
-            .then(data => console.log(data));
-        this.props.getLastMarks(this.props.profile.id, this.props.profile.secret, this.props.profile.student.id);
-
-        let id = setInterval(() => {
-            if (this.props.appData.error) {
-                clearInterval(id);
-                this.setState({error: true, ready: true});
-            }
-            if (!this.state.error && this.props.appData.marks.data.length !== 0) {
-                this.marksData = this.props.appData.marks;
-                clearInterval(id);
-                this.startRender();
-            }
-        }, 200);
-        let id2 = setInterval(() => {
-            if (this.props.appData.errorLastMarks) {
-                clearInterval(id2);
-                this.setState({errorLastMarks: true, ready: true});
-            }
-            if (this.props.appData.lastMarks.data.length !== 0 && !this.state.errorLastMarks) {
-                this.lastMarksData = this.props.appData.lastMarks;
-                clearInterval(id2);
-                // this.startRender();
-            }
-        }, 200);
+    loadData = () => {
+        getAllMarks(this.props.profile.id,
+            this.props.profile.secret,
+            this.props.profile.student.id,
+            "marks")
+            .then(data => {
+                console.log(data);
+                this.marksData = data;
+                this.props.setAllMarks(data);
+                this.startRenderMain();
+            });
+        getLastMarks(this.props.profile.id,
+            this.props.profile.secret,
+            this.props.profile.student.id,
+            "last_marks")
+            .then(data => {
+                console.log(data);
+                this.lastMarksData = data;
+                this.props.setLastMarks(data);
+            });
     };
 
-    startRender = () => {
-        let periods = this.marksData.data[0].periods.length;
+    startRenderMain = () => {
+        let periods = this.marksData[0].periods.length;
         for (let i = 0; i < periods; i++) {
             this.tabs.push(this.drawTab(i));
         }
@@ -80,9 +77,55 @@ class Marks extends React.Component {
         });
     };
 
+    startRenderLastMarks = () => {
+        if (this.lastMarksData.lessons.length !== 0) {
+            let lastMarks = [];
+            Object.keys(this.lastMarksData.dates).forEach(date => {
+                this.lastMarksData.dates[date].forEach(mark => {
+                    let label;
+
+                    let day = turnIntoDate(mark.date);
+                    let today = new Date();
+                    let shift = today.getDate() - day.getDate();
+
+                    if (shift === 0) label = "Сегодня";
+                    else if (shift === 1) label = "Вчера";
+                    else label = false;
+
+                    lastMarks.push(
+                        <Div className="lastMarkContainer">
+                            <div className="lastMarkVal">
+                                <Mark size="32" val={mark.value.toString()} is_routine={false} fontSize="20"/>
+                            </div>
+                            <div className="lastMarkSubject">{mark.subject}</div>
+                            {label && <div className="lastMarkDate"
+                                           style={{
+                                               backgroundColor: label === "Сегодня"
+                                                   ? "var(--inversed-text-color)"
+                                                   : "var(--background-block)"
+                                               , color: label === "Вчера" && "var(--third-text-color)"
+                                           }}>{label}</div>}
+                        </Div>
+                    );
+                });
+            });
+            this.setState({
+                lastMarksBlock:
+                    <div>
+                        <Div className="marksBlocksTitle">
+                            ПОСЛЕДНИЕ ОЦЕНКИ
+                        </Div>
+                        <HorizontalScroll className="lastMarksContainer">
+                            {lastMarks.reverse()}
+                        </HorizontalScroll>
+                    </div>
+            });
+        }
+    }
+
     drawTabsItem = () => {
-        if (this.marksData.data[0]) {
-            let periods = this.marksData.data[0].periods.length;
+        if (this.marksData[0]) {
+            let periods = this.marksData[0].periods.length;
             this.tabsItems = [];
             for (let i = 0; i < periods; i++) {
                 this.tabsItems.push(
@@ -219,7 +262,7 @@ class Marks extends React.Component {
         };
 
         let generateSubjectsFields = (currentPeriod) => {
-            this.marksData.data.forEach(subject => {
+            this.marksData.forEach(subject => {
                 if (subject.periods.length !== 0)
                     subjectsFields.push(generateSubject(subject, currentPeriod));
             })
@@ -227,62 +270,9 @@ class Marks extends React.Component {
 
         generateSubjectsFields(currentTab);
 
-        let drawLastMarks = () => {
-            if (this.state.errorLastMarks) {
-                return (
-                    <p className="errorLastMarks">Не удалось загрузить последние оценки из-за непредвиденной ошибки.</p>
-                )
-            } else {
-                if (this.lastMarksData.data.length !== 0 && this.lastMarksData.data.lessons.length !== 0) {
-                    let lastMarks = [];
-                    Object.keys(this.lastMarksData.data.dates).forEach(date => {
-                        this.lastMarksData.data.dates[date].forEach(mark => {
-                            let label;
-
-                            let day = turnIntoDate(mark.date);
-                            let today = new Date();
-                            let shift = today.getDate() - day.getDate();
-
-                            if (shift === 0) label = "Сегодня";
-                            else if (shift === 1) label = "Вчера";
-                            else label = false;
-
-                            lastMarks.push(
-                                <Div className="lastMarkContainer">
-                                    <div className="lastMarkVal">
-                                        <Mark size="32" val={mark.value.toString()} is_routine={false} fontSize="20"/>
-                                    </div>
-                                    <div className="lastMarkSubject">{mark.subject}</div>
-                                    {label && <div className="lastMarkDate"
-                                                   style={{
-                                                       backgroundColor: label === "Сегодня"
-                                                           ? "var(--inversed-text-color)"
-                                                           : "var(--background-block)"
-                                                       , color: label === "Вчера" && "var(--third-text-color)"
-                                                   }}>{label}</div>}
-                                </Div>
-                            );
-                        });
-                    });
-                    return (
-                        <div>
-                            <Div className="marksBlocksTitle">
-                                ПОСЛЕДНИЕ ОЦЕНКИ
-                            </Div>
-                            <HorizontalScroll className="lastMarksContainer">
-                                {lastMarks.reverse()}
-                            </HorizontalScroll>
-                        </div>
-                    );
-                } else {
-                    return null;
-                }
-            }
-        };
-
         return (
             <div id={currentTab}>
-                {drawLastMarks()}
+                {this.state.lastMarksBlock}
                 <Div className="marksBlocksTitle">
                     ВСЕ ОЦЕНКИ
                 </Div>
@@ -329,7 +319,7 @@ class Marks extends React.Component {
             );
         };
 
-        this.marksData.data.forEach(subject => {
+        this.marksData.forEach(subject => {
             if (subject.periods.length !== 0)
                 subjectFields.push(drawSubjectField(subject));
         });
@@ -375,10 +365,15 @@ class Marks extends React.Component {
 
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        setAllMarks: data => dispatch(setAllMarks(data)),
+        setLastMarks: data => dispatch(setLastMarks(data)),
+    }
+};
+
 Marks.propTypes = {
     id: PropTypes.string.isRequired,
-    getMarks: PropTypes.func.isRequired,
-    getLastMarks: PropTypes.func.isRequired,
     profile: PropTypes.any.isRequired,
     appData: PropTypes.any.isRequired,
     openModal: PropTypes.func.isRequired,
@@ -386,4 +381,7 @@ Marks.propTypes = {
     expectedMark: PropTypes.string.isRequired,
 };
 
-export default Marks;
+export default connect(
+    null,
+    mapDispatchToProps
+)(Marks);

@@ -1,5 +1,5 @@
 import connect from "@vkontakte/vk-connect-promise";
-import {getVkParams, isBirthday} from "./utils";
+import {getVkParams, isBirthday, promiseStoreConstruct} from "./utils";
 import {authFail, authSuccess, authVk, doAuthorize, setProfile} from "../redux/actions/ProfileAction";
 import {signInDiary} from "./metrics";
 import {getAndAggregateMarks} from "../redux/actions/AppLogicAction";
@@ -216,46 +216,20 @@ export function getClassmatesAvatars(classmates, me, myPhoto) {
     });
 }
 
-export function getAllMarks(reduxDispatcher, id, secret, studentId) {
+export function getAllMarks(id, secret, studentId, entity) {
     let methodUrl = "diary/marks/all/";
     let queries = `?student_id=${studentId}&id=${id}&secret=${secret}`;
     let request = baseUrl + methodUrl + queries;
-    let store = new BookletCache();
-    return new Promise((resolve, reject) => {
-        store.getData(request)
-            .then(data => {
-                if (data.data === null || data.error) {
-                    reject();
-                } else {
-                    resolve(data.data);
-                }
-            })
-            .catch(() => {
-                store.cacheData(request)
-                    .then(res => res.json()
-                        .then(data => console.log(data)));
-            })
-    });
+    let store = BookletCache.getInstance();
+    return promiseStoreConstruct(store, request, entity);
+}
 
-    // return new Promise((resolve, reject) => {
-    //     fetch(baseUrl + methodUrl + queries,
-    //         {
-    //             method: "GET",
-    //         })
-    //         .then(response => {
-    //                 cacheData(baseUrl + methodUrl + queries,
-    //                     response);
-    //                 response.json().then(data => {
-    //                     console.log("resp data", data);
-    //
-    //                 })
-    //             }
-    //         )
-    //         .catch(err => {
-    //             getAndAggregateMarks(false);
-    //             reject(err);
-    //         })
-    // });
+export function getLastMarks(id, secret, studentId, entity) {
+    let methodUrl = `diary/marks/range/`;
+    let queries = `?before=5&after=0&id=${id}&secret=${secret}&student_id=${studentId}`;
+    let request = baseUrl + methodUrl + queries;
+    let store = BookletCache.getInstance();
+    return promiseStoreConstruct(store, request, entity);
 }
 
 export function unbindUser(id, secret) {

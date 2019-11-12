@@ -152,7 +152,39 @@ export function recursiveTheming(startElem, theme) {
             recursiveTheming(child);
         }
     }
-};
+}
+
+export function promiseStoreConstruct(store, request, entity) {
+    return new Promise((resolve, reject) => {
+        store.getData(request, entity)
+            .then(data => {
+                console.log(data);
+                if (data.data === null || data.error) {
+                    reject();
+                } else {
+                    resolve(data.data);
+                }
+            })
+            .catch(() => {
+                store.cacheData(request, entity)
+                    .then(res => res.json()
+                        .then(data => resolve(data.data)));
+            })
+    });
+}
+
+export function cacheTimeChecker(time) {
+    let now = new Date();
+    let nowDayPart = now.getHours();
+    let difference = now.getTime() - time.getTime();
+    let mins = difference / (1000 * 60);
+    if (nowDayPart > 8 && nowDayPart < 16) {
+        return mins >= 45;
+    } else if (nowDayPart >= 16 && nowDayPart <= 23) {
+        return mins >= 120;
+    } else
+        return false;
+}
 
 // json = {
 //     sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",
