@@ -17,6 +17,9 @@ import HalloweenSpider from "../custom_components/eventual/halloween/HalloweenSp
 import ScheduleSwiper from "../custom_components/layouts/schedule/ScheduleSwiper"
 
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
+import {setAllMarks, setJournal, setLastMarks} from "../redux/actions/AppLogicAction";
+import {connect} from "react-redux";
+import {getSchedule} from "../utils/requests";
 
 
 class Schedule extends React.Component {
@@ -25,45 +28,41 @@ class Schedule extends React.Component {
 
         this.dayDates = scheduleGetDates();
         this.scheduleData = this.props.appData.journal;
-        let flag = this.props.appData.journal.data.length === 0;
 
         this.state = {
             currentDay: (new Date().getDay() <= 6 && new Date().getDay() > 0 ? new Date().getDay() - 1 : 0),
             month: getRusMonthName(new Date().getMonth()),
-            weekDuration: (!flag ? this.scheduleData.data.days.length : 5),
-            ready: !flag,
+            weekDuration: (this.scheduleData.length !== 0
+                ? this.scheduleData.days.length
+                : 5),
+            ready: this.scheduleData.length !== 0,
             error: false,
             fetching: false,
         };
 
-        if (flag)
-            this.loadData();
+        this.loadData();
     }
 
-    loadData = async () => {
-        this.props.getJournal(this.props.profile.id, this.props.profile.secret, this.dayDates[7], this.dayDates[8], this.props.profile.student.id);
-
-        let id = setInterval(() => {
-            if (this.props.appData.error) {
-                clearInterval(id);
+    loadData = () => {
+        getSchedule(this.props.profile.id,
+            this.props.profile.secret,
+            this.dayDates[7],
+            this.dayDates[8],
+            this.props.profile.student.id)
+            .then(data => {
+                this.scheduleData = data;
+                this.props.setJournalData(data);
                 this.setState({
-                    error: true,
                     ready: true,
+                    weekDuration: (this.props.appData.journal.days.length < 5
+                        ? 5
+                        : this.props.appData.journal.days.length), // if holidays, length is equal to 0
                     fetching: false,
                 });
-            } else {
-                if (this.props.appData.journal.data.length !== 0) {
-                    this.scheduleData = this.props.appData.journal;
-                    clearInterval(id);
-                    this.setState({
-                        ready: true,
-                        weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length), // if holidays, length is equal to 0
-                        fetching: false,
-                    });
-                    return 0;
-                }
-            }
-        }, 200);
+            })
+            .catch(() => {
+                this.setState({error: true});
+            });
     };
 
     drawSpinner = () => {
@@ -277,7 +276,7 @@ class Schedule extends React.Component {
     };
 
     generateSchedule = () => {
-        let days = this.scheduleData.data.days;
+        let days = this.scheduleData.days;
         let tales = [];
 
         if (this.state.error) {
@@ -326,11 +325,6 @@ class Schedule extends React.Component {
                 className="scheduleSliderContainer"
                 slideIndex={this.state.currentDay}
                 onChange={slideIndex => {
-                    // this.setState({
-                    //     currentDay: (slideIndex >= (this.state.weekDuration < 5 ?
-                    //         5 :
-                    //         this.state.weekDuration) ? slideIndex - 1 : slideIndex)
-                    // });
                     this.setState({
                         currentDay: (slideIndex >= (this.state.weekDuration < 5 ? 5 : this.state.weekDuration)
                             ? slideIndex - 1
@@ -487,9 +481,17 @@ class Schedule extends React.Component {
 Schedule.propTypes = {
     id: PropTypes.string.isRequired,
     profile: PropTypes.any.isRequired,
-    getJournal: PropTypes.func.isRequired,
     appData: PropTypes.any.isRequired,
     openModal: PropTypes.func.isRequired,
 };
 
-export default Schedule;
+const mapDispatchToProps = dispatch => {
+    return {
+        setJournalData: data => dispatch(setJournal(data)),
+    }
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Schedule);

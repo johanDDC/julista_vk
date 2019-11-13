@@ -46,8 +46,7 @@ class Marks extends React.Component {
     loadData = () => {
         getAllMarks(this.props.profile.id,
             this.props.profile.secret,
-            this.props.profile.student.id,
-            "marks")
+            this.props.profile.student.id)
             .then(data => {
                 this.marksData = data;
                 this.props.setAllMarks(data);
@@ -58,8 +57,7 @@ class Marks extends React.Component {
             });
         getLastMarks(this.props.profile.id,
             this.props.profile.secret,
-            this.props.profile.student.id,
-            "last_marks")
+            this.props.profile.student.id)
             .then(data => {
                 this.lastMarksData = data;
                 this.props.setLastMarks(data);

@@ -75,14 +75,9 @@ const mapStateToProps = store => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-    }
-};
-
 withPlatform(MarksView);
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(MarksView);

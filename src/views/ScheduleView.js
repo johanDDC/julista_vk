@@ -56,15 +56,11 @@ class ScheduleView extends React.Component {
                 </ModalPage>
             </ModalRoot>
         ;
-        // (this.props.activePanel === "auth" || this.props.activePanel === "choose_diary"
-        //     ? "schedule"
-        //     : this.props.activePanel)
         return (
             <View activePanel="schedule"
                   modal={modal}>
                 <Schedule id="schedule"
                           profile={this.props.profile}
-                          getJournal={this.props.getJournalAction}
                           appData={this.props.appLogic}
                           openModal={this.setModalSchedule}
                 />
@@ -76,7 +72,6 @@ class ScheduleView extends React.Component {
 withPlatform(ScheduleView);
 
 const mapStateToProps = store => {
-    // console.log("Schedule View", store);
     return {
         activePanel: store.presentation.activePanel,
         profile: store.profile,
@@ -84,16 +79,7 @@ const mapStateToProps = store => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getJournalAction: (userId, secret, start, end, student_id) => {
-            dispatch(getJournal(userId, secret, start, end, student_id))
-        }
-    }
-};
-
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(ScheduleView);

@@ -1,5 +1,5 @@
 import connect from "@vkontakte/vk-connect-promise";
-import {getVkParams, isBirthday, promiseStoreConstruct} from "./utils";
+import {getVkParams, isBirthday, promiseStoreConstruct, setCorrectYear} from "./utils";
 import {authFail, authSuccess, authVk, doAuthorize, setProfile} from "../redux/actions/ProfileAction";
 import {signInDiary} from "./metrics";
 import {getAndAggregateMarks} from "../redux/actions/AppLogicAction";
@@ -216,20 +216,28 @@ export function getClassmatesAvatars(classmates, me, myPhoto) {
     });
 }
 
-export function getAllMarks(id, secret, studentId, entity) {
+export function getAllMarks(id, secret, studentId) {
     let methodUrl = "diary/marks/all/";
     let queries = `?student_id=${studentId}&id=${id}&secret=${secret}`;
     let request = baseUrl + methodUrl + queries;
     let store = BookletCache.getInstance();
-    return promiseStoreConstruct(store, request, entity);
+    return promiseStoreConstruct(store, request, "marks");
 }
 
-export function getLastMarks(id, secret, studentId, entity) {
+export function getLastMarks(id, secret, studentId) {
     let methodUrl = `diary/marks/range/`;
     let queries = `?before=5&after=0&id=${id}&secret=${secret}&student_id=${studentId}`;
     let request = baseUrl + methodUrl + queries;
     let store = BookletCache.getInstance();
-    return promiseStoreConstruct(store, request, entity);
+    return promiseStoreConstruct(store, request, "last_marks");
+}
+
+export function getSchedule(id, secret, start, end, studentId) {
+    let methodUrl = "diary/journal/dates/";
+    let queries = `?student_id=${studentId}&id=${id}&secret=${secret}&start=${setCorrectYear(start.toLocaleDateString("ru-RU"))}&end=${setCorrectYear(end.toLocaleDateString("ru-RU"))}`;
+    let request = baseUrl + methodUrl + queries;
+    let store = BookletCache.getInstance();
+    return promiseStoreConstruct(store, request, "schedule")
 }
 
 export function unbindUser(id, secret) {
