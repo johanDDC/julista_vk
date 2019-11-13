@@ -158,7 +158,6 @@ export function promiseStoreConstruct(store, request, entity) {
     return new Promise((resolve, reject) => {
         store.getData(request, entity)
             .then(data => {
-                console.log(data);
                 if (data.data === null || data.error) {
                     reject();
                 } else {
@@ -175,9 +174,10 @@ export function promiseStoreConstruct(store, request, entity) {
 }
 
 export function cacheTimeChecker(time) {
+    let gotTime = new Date(time);
     let now = new Date();
     let nowDayPart = now.getHours();
-    let difference = now.getTime() - time.getTime();
+    let difference = now.getTime() - gotTime.getTime();
     let mins = difference / (1000 * 60);
     if (nowDayPart > 8 && nowDayPart < 16) {
         return mins >= 45;

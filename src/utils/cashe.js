@@ -69,7 +69,6 @@ class BookletCache {
 
     getData = (request, entity) => {
         return new Promise((resolve, reject) => {
-            // this.#clear(request, this.#checkCache(entity))
             this.#clear(request, this.#checkCache(entity))
                 .then(() => {
                     this.storage.then(storage => {

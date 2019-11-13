@@ -34,7 +34,6 @@ class Marks extends React.Component {
             error: false,
             lastMarksBlock: null,
         };
-        console.log(this.marksData);
 
         if (this.marksData.length !== 0)
             this.startRenderMain();
@@ -50,7 +49,6 @@ class Marks extends React.Component {
             this.props.profile.student.id,
             "marks")
             .then(data => {
-                console.log(data);
                 this.marksData = data;
                 this.props.setAllMarks(data);
                 this.startRenderMain();
@@ -63,9 +61,9 @@ class Marks extends React.Component {
             this.props.profile.student.id,
             "last_marks")
             .then(data => {
-                console.log(data);
                 this.lastMarksData = data;
                 this.props.setLastMarks(data);
+                this.startRenderLastMarks();
             });
     };
 
@@ -89,7 +87,7 @@ class Marks extends React.Component {
 
                     let day = turnIntoDate(mark.date);
                     let today = new Date();
-                    let shift = today.getDate() - day.getDate();
+                    let shift = Math.floor((today.getTime() - day.getTime()) / (1000 * 60 * 60 * 24));
 
                     if (shift === 0) label = "Сегодня";
                     else if (shift === 1) label = "Вчера";
@@ -112,19 +110,12 @@ class Marks extends React.Component {
                     );
                 });
             });
+            console.log("gotcha");
             this.setState({
-                lastMarksBlock:
-                    <div>
-                        <Div className="marksBlocksTitle">
-                            ПОСЛЕДНИЕ ОЦЕНКИ
-                        </Div>
-                        <HorizontalScroll className="lastMarksContainer">
-                            {lastMarks.reverse()}
-                        </HorizontalScroll>
-                    </div>
+                lastMarksBlock: (lastMarks.reverse())
             });
         }
-    }
+    };
 
     drawTabsItem = () => {
         if (this.marksData[0]) {
@@ -275,6 +266,16 @@ class Marks extends React.Component {
 
         return (
             <div id={currentTab}>
+                {/*{this.state.lastMarksBlock ?*/}
+                {/*    <div>*/}
+                {/*        <Div className="marksBlocksTitle">*/}
+                {/*            ПОСЛЕДНИЕ ОЦЕНКИ*/}
+                {/*        </Div>*/}
+                {/*        <HorizontalScroll className="lastMarksContainer">*/}
+                {/*            {this.state.lastMarksBlock}*/}
+                {/*        </HorizontalScroll>*/}
+                {/*    </div>*/}
+                {/*    : null}*/}
                 {this.state.lastMarksBlock}
                 <Div className="marksBlocksTitle">
                     ВСЕ ОЦЕНКИ
@@ -335,6 +336,7 @@ class Marks extends React.Component {
     };
 
     render() {
+        console.log("block", this.state.lastMarksBlock);
         return (
             <Panel id={this.props.id}>
                 <PanelHeader noShadow={true}>
