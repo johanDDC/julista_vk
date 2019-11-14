@@ -35,25 +35,9 @@
 }
 
 .marksTabs > .TabsItem--selected {
-    background-color: var(--hallowen-color) !important;
-    border: 1px solid var(--hallowen-temp-1);
+    background-color: var(--the-color) !important;
     border-radius: 70%/110%;
     position: relative;
-    border-bottom: 2px solid var(--hallowen-temp-1);
-    border-top: 2px solid var(--hallowen-temp-1);
-}
-
-.marksTabs > .TabsItem--selected::before {
-    content: ' ';
-    position: absolute;
-    background-color: var(--hallowen-temp-2);
-    height: 18px;
-    width: 10px;
-    top: -17px;
-    transform: rotate(5deg);
-    border-radius: 30% 20% 70% 10%;
-    z-index: 1;
-    box-shadow: inset 0 0 8px var(--hallowen-temp-3);
 }
 
 .marksTabs > .TabsItem--selected::after {
@@ -283,7 +267,7 @@
 
 .errorLastMarks {
     font-size: 12px;
-    color: #E80A1E;
+    color: var(--warning-text);
     text-align: center;
 }
 

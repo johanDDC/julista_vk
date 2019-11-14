@@ -38,19 +38,6 @@ section.View {
     --button-secondary-text: #777777;
     --warning-text: #e80a1e;
     --bottom-buttons-inactive: #a8adaf;
-
-    --hallowen-color: #5690ff;
-    --hallowen-temp-1: #ffffff;
-    --hallowen-temp-2: #ffffff;
-    --hallowen-temp-3: #ffffff;
-
-    /*progress bar*/
-    --hallowen-temp-4: #05a732;
-    --hallowen-temp-5: #04d461;
-
-    /*advices*/
-    --hallowen-temp-6: #1cb336;
-    --hallowen-temp-7: #72de20;
 }
 
 
@@ -63,21 +50,9 @@ section.View {
     --background-text-color: #132029;
     --text-color: #ffffff;
     --inversed-text-color: #ffffff;
-    /*--inversed-text-color: #fa6928;*/
     --additional-text-color: #f4f4f4;
     --third-text-color: #dbdbdb;
     --button-secondary-text: #5690ff;
     --warning-text: #ffffff;
     --bottom-buttons-inactive: #ffffff;
-
-    --hallowen-color: #fa6928;
-    --hallowen-temp-1: #a14907;
-    --hallowen-temp-2: #517f54;
-    --hallowen-temp-3: #29412b;
-
-    --hallowen-temp-4: #ff512f;
-    --hallowen-temp-5: #f09819;
-
-    --hallowen-temp-6: #ff512f;
-    --hallowen-temp-7: #f09819;
 }

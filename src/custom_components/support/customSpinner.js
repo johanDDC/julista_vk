@@ -11,26 +11,13 @@ class CustomSpinner extends React.Component {
     }
 
     render() {
-        let inside;
-        if (this.props.theme === "dark") {
-            inside =
-                <HalloweenPumpkin
-                    scale={0.4}
-                    shadow={false}
-                    lighting={true}
-                    floating={false}
-                />
-        } else {
-            inside =
+        return (
+            <div className="customSpinnerContainer"
+                 style={{backgroundColor: (this.props.isInverse ? "var(--the-color)" : "var(--background)")}}>
                 <div className="customSpinnerRotator"
                      style={{color: (this.props.isInverse ? "var(--background)" : "var(--the-color)")}}>
                     <Icon44Spinner/>
                 </div>
-        }
-        return (
-            <div className="customSpinnerContainer"
-                 style={{backgroundColor: (this.props.isInverse ? "var(--the-color)" : "var(--background)")}}>
-                {inside}
             </div>
         )
     }
@@ -41,10 +28,5 @@ CustomSpinner.propTypes = {
     isInverse: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = store => {
-    return {
-        theme: store.theme,
-    }
-};
 
-export default connect(mapStateToProps)(CustomSpinner);
+export default CustomSpinner;

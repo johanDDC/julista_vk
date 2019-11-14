@@ -115,7 +115,7 @@
 
 .scheduleTaleError {
     font-size: 16px;
-    color: #ef464d;
+    color: var(--warning-text);
     padding: 50% 16px 0 16px;
     text-align: center;
 }
@@ -267,15 +267,6 @@
 
 #arrow {
     display: none;
-}
-
-.halloweenSpiderContainer {
-    position: absolute;
-    z-index: 10;
-    right: 28%;
-    top: auto;
-    /*transition: 1s ease-in-out;*/
-    /*animation: hide 2s infinite;*/
 }
 
 @keyframes hide {

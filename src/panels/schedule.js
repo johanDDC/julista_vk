@@ -434,9 +434,6 @@ class Schedule extends React.Component {
                     noShadow>
                     <div className="scheduleHeaderMonth">{this.state.month}</div>
                 </PanelHeader>
-                <div className="halloweenSpiderContainer">
-                    <HalloweenSpider/>
-                </div>
                 {this.drawTopBar()}
                 {/*<ScheduleSwiper/>*/}
                 <Div id="scheduleWeekSwiperLeft" onClick={this.prevWeek}>
