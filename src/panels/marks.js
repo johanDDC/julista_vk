@@ -81,31 +81,33 @@ class Marks extends React.Component {
             let lastMarks = [];
             Object.keys(this.lastMarksData.dates).forEach(date => {
                 this.lastMarksData.dates[date].forEach(mark => {
-                    let label;
+                    if (mark.value.length <= 3) { // Excluding "Не был" and "Болел", but including "Нзч"
+                        let label;
 
-                    let day = turnIntoDate(mark.date);
-                    let today = new Date();
-                    let shift = Math.floor((today.getTime() - day.getTime()) / (1000 * 60 * 60 * 24));
+                        let day = turnIntoDate(mark.date);
+                        let today = new Date();
+                        let shift = Math.floor((today.getTime() - day.getTime()) / (1000 * 60 * 60 * 24));
 
-                    if (shift === 0) label = "Сегодня";
-                    else if (shift === 1) label = "Вчера";
-                    else label = false;
+                        if (shift === 0) label = "Сегодня";
+                        else if (shift === 1) label = "Вчера";
+                        else label = false;
 
-                    lastMarks.push(
-                        <Div className="lastMarkContainer">
-                            <div className="lastMarkVal">
-                                <Mark size="32" val={mark.value.toString()} is_routine={false} fontSize="20"/>
-                            </div>
-                            <div className="lastMarkSubject">{mark.subject}</div>
-                            {label && <div className="lastMarkDate"
-                                           style={{
-                                               backgroundColor: label === "Сегодня"
-                                                   ? "var(--inversed-text-color)"
-                                                   : "var(--background-block)"
-                                               , color: label === "Вчера" && "var(--third-text-color)"
-                                           }}>{label}</div>}
-                        </Div>
-                    );
+                        lastMarks.push(
+                            <Div className="lastMarkContainer">
+                                <div className="lastMarkVal">
+                                    <Mark size="32" val={mark.value.toString()} is_routine={false} fontSize="20"/>
+                                </div>
+                                <div className="lastMarkSubject">{mark.subject}</div>
+                                {label && <div className="lastMarkDate"
+                                               style={{
+                                                   backgroundColor: label === "Сегодня"
+                                                       ? "var(--inversed-text-color)"
+                                                       : "var(--background-block)"
+                                                   , color: label === "Вчера" && "var(--third-text-color)"
+                                               }}>{label}</div>}
+                            </Div>
+                        );
+                    }
                 });
             });
             console.log("gotcha");
@@ -264,7 +266,7 @@ class Marks extends React.Component {
 
         return (
             <div id={currentTab}>
-                {this.state.lastMarksBlock ?
+                {this.state.lastMarksBlock && this.state.lastMarksBlock.length > 0 ?
                     <div>
                         <Div className="marksBlocksTitle">
                             ПОСЛЕДНИЕ ОЦЕНКИ
