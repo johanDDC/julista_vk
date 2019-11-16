@@ -10,7 +10,7 @@ class BookletCache {
             : {};
     }
 
-    static getInstance(){
+    static getInstance() {
         if (BookletCache.instance === null)
             BookletCache.instance = new BookletCache();
 
@@ -55,7 +55,7 @@ class BookletCache {
             this.storage.then(storage => {
                 fetch(request).then(response => {
                     console.log(response);
-                    if (response.ok){
+                    if (response.ok) {
                         let save = response.clone();
                         this.#saveTime(entity);
                         storage.put(request, response)
@@ -84,6 +84,10 @@ class BookletCache {
                 });
         });
     };
+
+    forceClear = () => {
+        caches.delete("booklet_cache");
+    }
 }
 
 export default BookletCache;

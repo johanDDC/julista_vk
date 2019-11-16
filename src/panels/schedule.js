@@ -340,73 +340,52 @@ class Schedule extends React.Component {
 
     prevWeek = () => {
         let newDatesArr = schedulePrevWeek(this.dayDates[7]);
-        this.props.getJournal(this.props.profile.id,
+        this.setState({ready: false});
+        getSchedule(this.props.profile.id,
             this.props.profile.secret,
             newDatesArr[7],
             newDatesArr[8],
-            this.props.profile.student.id);
-        this.dayDates = newDatesArr;
-        this.setState({
-            ready: false,
-            month: getRusMonthName(this.dayDates[7].getMonth()),
-            currentDay: (this.state.weekDuration < 5 ? this.state.weekDuration - 1 : 4),
-        });
-        document.getElementById("scheduleWeekSwiperLeft")
-            .style.display = "none";
-
-        let id = setInterval(() => {
-                if (this.props.appData.error) {
-                    clearInterval(id);
-                    this.setState({error: true});
-                    this.setState({ready: true});
-                } else {
-                    if (this.props.appData.journal.data.length !== 0) {
-                        this.scheduleData = this.props.appData.journal;
-                        clearInterval(id);
-                        this.setState({
-                            ready: true,
-                            weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length),
-                        });
-
-                    }
-                }
-            },
-            200
-        );
-
+            this.props.profile.student.id)
+            .then(data => {
+                this.scheduleData = data;
+                this.dayDates = newDatesArr;
+                document.getElementById("scheduleWeekSwiperLeft")
+                    .style.display = "none";
+                console.log("why?");
+                this.setState({
+                    ready: true,
+                    month: getRusMonthName(this.dayDates[7].getMonth()),
+                    currentDay: (this.state.weekDuration < 5 ? this.state.weekDuration - 1 : 4),
+                    weekDuration: (this.props.appData.journal.days.length < 5 ? 5 : this.props.appData.journal.days.length),
+                });
+            })
+            .catch(() => {
+                this.setState({error: true});
+            });
     };
     nextWeek = () => {
         let newDatesArr = scheduleNextWeek(this.dayDates[7]);
-        this.props.getJournal(this.props.profile.id,
+        this.setState({ready: false});
+        getSchedule(this.props.profile.id,
             this.props.profile.secret,
             newDatesArr[7],
             newDatesArr[8],
-            this.props.profile.student.id);
-        this.dayDates = newDatesArr;
-        this.setState({
-            ready: false,
-            month: getRusMonthName(this.dayDates[7].getMonth()),
-            currentDay: 0,
-        });
-        document.getElementById("scheduleWeekSwiperRight")
-            .style.display = "none";
-
-        let id = setInterval(() => {
-            if (this.props.appData.error) {
-                clearInterval(id);
+            this.props.profile.student.id)
+            .then(data => {
+                this.scheduleData = data;
+                this.dayDates = newDatesArr;
+                document.getElementById("scheduleWeekSwiperRight")
+                    .style.display = "none";
+                this.setState({
+                    ready: true,
+                    month: getRusMonthName(this.dayDates[7].getMonth()),
+                    currentDay: 0,
+                    weekDuration: (this.props.appData.journal.days.length < 5 ? 5 : this.props.appData.journal.days.length),
+                });
+            })
+            .catch(() => {
                 this.setState({error: true});
-                this.setState({ready: true});
-            } else {
-                if (this.props.appData.journal.data.length !== 0) {
-                    this.scheduleData = this.props.appData.journal;
-                    clearInterval(id);
-                    this.setState({
-                        ready: true,
-                        weekDuration: (this.props.appData.journal.data.days.length < 5 ? 5 : this.props.appData.journal.data.days.length),
-                    });
-                }
-            }
-        }, 200);
+            });
     };
 
     refresh = () => {

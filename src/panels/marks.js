@@ -264,17 +264,16 @@ class Marks extends React.Component {
 
         return (
             <div id={currentTab}>
-                {/*{this.state.lastMarksBlock ?*/}
-                {/*    <div>*/}
-                {/*        <Div className="marksBlocksTitle">*/}
-                {/*            ПОСЛЕДНИЕ ОЦЕНКИ*/}
-                {/*        </Div>*/}
-                {/*        <HorizontalScroll className="lastMarksContainer">*/}
-                {/*            {this.state.lastMarksBlock}*/}
-                {/*        </HorizontalScroll>*/}
-                {/*    </div>*/}
-                {/*    : null}*/}
-                {this.state.lastMarksBlock}
+                {this.state.lastMarksBlock ?
+                    <div>
+                        <Div className="marksBlocksTitle">
+                            ПОСЛЕДНИЕ ОЦЕНКИ
+                        </Div>
+                        <HorizontalScroll className="lastMarksContainer">
+                            {this.state.lastMarksBlock}
+                        </HorizontalScroll>
+                    </div>
+                    : null}
                 <Div className="marksBlocksTitle">
                     ВСЕ ОЦЕНКИ
                 </Div>
