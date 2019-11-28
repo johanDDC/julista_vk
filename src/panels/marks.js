@@ -30,16 +30,15 @@ class Marks extends React.Component {
 
         this.state = {
             activeTab: "1",
-            ready: this.marksData.length !== 0,
+            ready: Number(this.marksData.length !== 0),
             error: false,
             lastMarksBlock: null,
         };
-
         if (this.marksData.length !== 0)
             this.startRenderMain();
-        if (this.marksData.length !== 0)
-            this.startRenderLastMarks();
-        if (this.marksData.length === 0 || this.lastMarksData.length === 0)
+        // if (this.lastMarksData.length !== 0)
+        //     this.startRenderLastMarks();
+        if (this.marksData.length === 0 && this.lastMarksData.length === 0)
             this.loadData();
     }
 
@@ -53,35 +52,39 @@ class Marks extends React.Component {
                 this.startRenderMain();
             })
             .catch(() => {
+                console.log("here i am");
                 this.setState({error: true});
             });
-        getLastMarks(this.props.profile.id,
-            this.props.profile.secret,
-            this.props.profile.student.id)
-            .then(data => {
-                this.lastMarksData = data;
-                this.props.setLastMarks(data);
-                this.startRenderLastMarks();
-            });
+        // getLastMarks(this.props.profile.id,
+        //     this.props.profile.secret,
+        //     this.props.profile.student.id)
+        //     .then(data => {
+        //         this.lastMarksData = data;
+        //         this.props.setLastMarks(data);
+        //         // this.startRenderMain();
+        //     });
     };
 
     startRenderMain = () => {
         let periods = this.marksData[0].periods.length;
+        console.log("check", this.marksData[0].periods);
         for (let i = 0; i < periods; i++) {
             this.tabs.push(this.drawTab(i));
-        }
 
+        }
         this.setState({
-            ready: true,
+            ready: 1,
         });
     };
 
     startRenderLastMarks = () => {
-        if (this.lastMarksData.lessons.length !== 0) {
-            let lastMarks = [];
+        let lastMarks = [];
+        console.log("here", this.lastMarksData);
+        if (this.lastMarksData.length !== 0 || this.lastMarksData.lessons) {
+            console.log("here", this.lastMarksData);
             Object.keys(this.lastMarksData.dates).forEach(date => {
                 this.lastMarksData.dates[date].forEach(mark => {
-                    if (mark.value.length <= 3) { // Excluding "Не был" and "Болел", but including "Нзч"
+                    if (typeof (mark.value) === "number") { // Excluding "Не был" and "Болел", but including "Нзч"
                         let label;
 
                         let day = turnIntoDate(mark.date);
@@ -110,11 +113,18 @@ class Marks extends React.Component {
                     }
                 });
             });
-            console.log("gotcha");
-            this.setState({
-                lastMarksBlock: (lastMarks.reverse())
-            });
+            // this.setState({ready: 4});
+            lastMarks =
+                <div>
+                    <Div className="marksBlocksTitle">
+                        ПОСЛЕДНИЕ ОЦЕНКИ
+                    </Div>
+                    <HorizontalScroll className="lastMarksContainer">
+                        {lastMarks}
+                    </HorizontalScroll>
+                </div>
         }
+        return lastMarks
     };
 
     drawTabsItem = () => {
@@ -145,114 +155,116 @@ class Marks extends React.Component {
         let subjectsFields = [];
 
         let generateSubject = (subject, currentPeriod) => {
-            let period = subject.periods[currentPeriod];
-            let marks = [];
-            let marksModal = [];
-            let avg = 0;
-            let marksLength = 0;
-            let marksDataframe = [];
-            period.marks.forEach(mark => {
-                marksDataframe.push(mark.value - 0);
-                avg += (!isNaN(mark.value)
-                    ? mark.value * (mark.weight ? mark.weight : 1)
-                    : 0);
-                marksLength += (!isNaN(mark.value) ? (mark.weight ? mark.weight : 1) : 0);
-                marks.push(
+            if (subject.periods.length >= currentPeriod + 1){
+                let period = subject.periods[currentPeriod];
+                let marks = [];
+                let marksModal = [];
+                let avg = 0;
+                let marksLength = 0;
+                let marksDataframe = [];
+                period.marks.forEach(mark => {
+                    marksDataframe.push(mark.value - 0);
+                    avg += (!isNaN(mark.value)
+                        ? mark.value * (mark.weight ? mark.weight : 1)
+                        : 0);
+                    marksLength += (!isNaN(mark.value) ? (mark.weight ? mark.weight : 1) : 0);
+                    marks.push(
+                        <div>
+                            <Mark size="16" val={mark.value.toString()} is_routine={true} fontSize="12"/>
+                        </div>
+                    );
+                    marksModal.push(
+                        <div className="modalMarkMarksInfo">
+                            <div className="modalMarkMarksInfoLeft">
+                                <Mark size="22" is_routine={false} val={mark.value.toString()} fontSize="14"
+                                      weight={(mark.weight ? mark.weight.toString() : "1")}/>
+                            </div>
+                            <div className="modalMarkMarksInfoContainer">
+                                {mark.form
+                                    ?
+                                    <div className="modalMarkMarksInfoForm">
+                                        {mark.form}
+                                    </div>
+                                    : null}
+                                {mark.name
+                                    ?
+                                    <div className="modalMarkMarksInfoName">
+                                        {mark.name}
+                                    </div>
+                                    : null}
+                                {mark.date
+                                    ?
+                                    <div className="modalMarkMarksInfoDate">
+                                        {reverseRuslanString(mark.date)}
+                                    </div>
+                                    : null}
+                            </div>
+                        </div>
+                    );
+                });
+                avg /= marksLength;
+                avg = avg.toFixed(2);
+                let modal = (
                     <div>
-                        <Mark size="16" val={mark.value.toString()} is_routine={true} fontSize="12"/>
-                    </div>
-                );
-                marksModal.push(
-                    <div className="modalMarkMarksInfo">
-                        <div className="modalMarkMarksInfoLeft">
-                            <Mark size="22" is_routine={false} val={mark.value.toString()} fontSize="14"
-                                  weight={(mark.weight ? mark.weight.toString() : "1")}/>
+                        <div className="modalMarkTitle">
+                            Сведения о предмете
                         </div>
-                        <div className="modalMarkMarksInfoContainer">
-                            {mark.form
-                                ?
-                                <div className="modalMarkMarksInfoForm">
-                                    {mark.form}
-                                </div>
-                                : null}
-                            {mark.name
-                                ?
-                                <div className="modalMarkMarksInfoName">
-                                    {mark.name}
-                                </div>
-                                : null}
-                            {mark.date
-                                ?
-                                <div className="modalMarkMarksInfoDate">
-                                    {reverseRuslanString(mark.date)}
-                                </div>
-                                : null}
+                        <div className="modalMarkSubjectInfo">
+                            <div className="modalMarkSubjectInfoLeft">
+                                {(isNaN(avg) ? "0.00" : avg)}
+                            </div>
+                            <div className="modalMarkSubjectInfoText">
+                                Средний балл
+                            </div>
+                        </div>
+                        <div className="modalMarkSubjectInfo">
+                            <div className="modalMarkSubjectInfoLeft">
+                                {period.final_mark ?
+                                    <Mark size="22" val={period.final_mark.toString()} is_routine={false} fontSize="14"/>
+                                    : "-"}
+                            </div>
+                            <div className="modalMarkSubjectInfoText">
+                                Итоговая оценка
+                            </div>
+                        </div>
+                        <div className="modalMarkTitle">
+                            Оценки
+                        </div>
+                        {marksModal}
+                        <div className="modalEmptyElement">
                         </div>
                     </div>
                 );
-            });
-            avg /= marksLength;
-            avg = avg.toFixed(2);
-            let modal = (
-                <div>
-                    <div className="modalMarkTitle">
-                        Сведения о предмете
-                    </div>
-                    <div className="modalMarkSubjectInfo">
-                        <div className="modalMarkSubjectInfoLeft">
-                            {(isNaN(avg) ? "0.00" : avg)}
-                        </div>
-                        <div className="modalMarkSubjectInfoText">
-                            Средний балл
-                        </div>
-                    </div>
-                    <div className="modalMarkSubjectInfo">
-                        <div className="modalMarkSubjectInfoLeft">
-                            {period.final_mark ?
-                                <Mark size="22" val={period.final_mark.toString()} is_routine={false} fontSize="14"/>
-                                : "-"}
-                        </div>
-                        <div className="modalMarkSubjectInfoText">
-                            Итоговая оценка
-                        </div>
-                    </div>
-                    <div className="modalMarkTitle">
-                        Оценки
-                    </div>
-                    {marksModal}
-                    <div className="modalEmptyElement">
-                    </div>
-                </div>
-            );
-            return (
-                <div className="allMarksContainer" onClick={() => this.props.openModal(modal, subject.name)}>
-                    <div className="subjectRow">
-                        <div className="subject">
-                            {subject.name}
-                        </div>
-                        <div className="subjectRowMarks">
-                            {period.final_mark &&
-                            <div className="subjectRowMarksFinalMark">
-                                <Mark size="16" val={period.final_mark.toString()} is_routine={false} fontSize="12"/>
+                return (
+                    <div className="allMarksContainer" onClick={() => this.props.openModal(modal, subject.name)}>
+                        <div className="subjectRow">
+                            <div className="subject">
+                                {subject.name}
                             </div>
-                            }
-                            <div className="avg">
-                                {isNaN(avg) ? null : avg}
+                            <div className="subjectRowMarks">
+                                {period.final_mark &&
+                                <div className="subjectRowMarksFinalMark">
+                                    <Mark size="16" val={period.final_mark.toString()} is_routine={false} fontSize="12"/>
+                                </div>
+                                }
+                                <div className="avg">
+                                    {isNaN(avg) ? null : avg}
+                                </div>
                             </div>
                         </div>
+                        <div className="marksRow">
+                            {marks}
+                        </div>
+                        <div className="marksAdviceRowContainer">
+                            <AdvisesRow
+                                expectedMark={this.props.expectedMark}
+                                allMarks={marksDataframe}
+                                avg={(avg - 0)}
+                            />
+                        </div>
                     </div>
-                    <div className="marksRow">
-                        {marks}
-                    </div>
-                    <div className="marksAdviceRowContainer">
-                        <AdvisesRow
-                            expectedMark={this.props.expectedMark}
-                            allMarks={marksDataframe}
-                            avg={(avg - 0)}
-                        />
-                    </div>
-                </div>
-            );
+                );
+            }
         };
 
         let generateSubjectsFields = (currentPeriod) => {
@@ -261,21 +273,16 @@ class Marks extends React.Component {
                     subjectsFields.push(generateSubject(subject, currentPeriod));
             })
         };
-
         generateSubjectsFields(currentTab);
+        // let lastMarksBlock = this.startRenderLastMarks();
+        // console.log("block", lastMarksBlock);
+
+        if (currentTab !== 0)
+            console.log("check");
 
         return (
             <div id={currentTab}>
-                {this.state.lastMarksBlock && this.state.lastMarksBlock.length > 0 ?
-                    <div>
-                        <Div className="marksBlocksTitle">
-                            ПОСЛЕДНИЕ ОЦЕНКИ
-                        </Div>
-                        <HorizontalScroll className="lastMarksContainer">
-                            {this.state.lastMarksBlock}
-                        </HorizontalScroll>
-                    </div>
-                    : null}
+                {/*{lastMarksBlock}*/}
                 <Div className="marksBlocksTitle">
                     ВСЕ ОЦЕНКИ
                 </Div>
@@ -335,7 +342,6 @@ class Marks extends React.Component {
     };
 
     render() {
-        console.log("block", this.state.lastMarksBlock);
         return (
             <Panel id={this.props.id}>
                 <PanelHeader noShadow={true}>
@@ -359,7 +365,7 @@ class Marks extends React.Component {
                                 </TabsItem>
                             </Tabs>
                         </Div>
-                        {this.state.ready ? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
+                        {this.state.ready > 0? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
                         {this.state.activeTab === 'result' ? this.drawResultTab() : null}
                     </div>
                 }
