@@ -2,7 +2,7 @@ import React from 'react';
 import {View, ActionSheet, ActionSheetItem, withPlatform, ANDROID, IOS,} from '@vkontakte/vkui';
 import Settings from '../panels/settings'
 import {connect} from "react-redux";
-import {setExpectedMark, switchView} from "../redux/actions/AppPresentationAction";
+import {setExpectedMark, setModuleSystem, switchView} from "../redux/actions/AppPresentationAction";
 import PurposeMarkFive from "../custom_components/icon-pack/PurposeMarkFive"
 import PurposeMarkFour from "../custom_components/icon-pack/PurposeMarkFour"
 import PurposeMarkThree from "../custom_components/icon-pack/PurposeMarkThree"
@@ -54,6 +54,42 @@ class SettingsView extends React.Component {
         });
     };
 
+    chooseSystem = () => {
+        this.setState({
+            popout:
+                <ActionSheet
+                    onClose={() => this.setState({popout: null})}
+                    title="Выбери свою систему обучения:"
+                >
+                    <ActionSheetItem autoclose
+                                     onClick={() => {
+                                         this.props.setModuleSystem("четверти");
+                                     }}
+                                     // before={<PurposeMarkFive/>}
+                    >
+                        Четверти
+                    </ActionSheetItem>
+                    <ActionSheetItem autoclose
+                                     onClick={() => {
+                                         this.props.setModuleSystem("триместры");
+                                     }}
+                                     // before={<PurposeMarkFour/>}
+                    >
+                        Триместры
+                    </ActionSheetItem>
+                    <ActionSheetItem autoclose
+                                     onClick={() => {
+                                         this.props.setModuleSystem("полугодия");
+                                     }}
+                                     // before={<PurposeMarkThree/>}
+                    >
+                        Полугодия
+                    </ActionSheetItem>
+                    {this.props.platform === IOS && <ActionSheetItem autoclose theme="cancel">Cancel</ActionSheetItem>}
+                </ActionSheet>
+        });
+    };
+
     render() {
         return (
             <View activePanel={(this.props.activePanel === "auth" ? "settings" : this.props.activePanel)}
@@ -61,6 +97,7 @@ class SettingsView extends React.Component {
                 <Settings id="settings"
                           expectedMark={this.props.expectedMark}
                           chooseMark={this.chooseMark}
+                          chooseSystem={this.chooseSystem}
                           switchView={this.props.switchViewAction}
                           setPanel={this.props.setPanelAction}
                           profile={this.props.profile}
@@ -92,6 +129,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(clearData());
         },
         setMarkAction: mark => dispatch(setExpectedMark(mark)),
+        setModuleSystem: type => dispatch(setModuleSystem(type)),
         setPanelAction: panel => dispatch(setPanel(panel)),
         switchViewAction: (view, panel) => dispatch(switchView(view, panel)),
         setThemeAction: theme => dispatch(switchTheme(theme)),

@@ -161,13 +161,13 @@ export function promiseStoreConstruct(store, request, entity) {
                 if (data.data === null || data.error) {
                     reject();
                 } else {
-                    resolve(data.data);
+                    resolve(data);
                 }
             })
             .catch(() => {
                 store.cacheData(request, entity)
                     .then(res => res.json()
-                        .then(data => resolve(data.data)))
+                        .then(data => resolve(data)))
                     .catch(() => reject())
             })
     });

@@ -8,6 +8,8 @@ let initialState = {
     theme: "default",
     notifications: false,
     expectedMark: 5,
+    moduleSystem: "четверти",
+    actualPart: "1",
     ...restoreData(),
 };
 
@@ -43,6 +45,18 @@ function presentation(state = initialState, action) {
             return {
                 ...state,
                 expectedMark: action.data,
+            };
+        case "SET_MODULE_SYSTEM":
+            storeData({moduleSystem: action.data});
+            return {
+                ...state,
+                moduleSystem: action.data,
+            };
+        case "SET_ACTUAL_PART":
+            storeData({actualPart: action.data});
+            return {
+                ...state,
+                actualPart: action.data,
             };
         default:
             return state;

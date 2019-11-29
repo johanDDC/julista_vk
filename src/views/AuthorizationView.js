@@ -133,8 +133,6 @@ class AuthorizationView extends React.Component {
                 />
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}
-                               setStudent={this.props.setStudentAction}
-                               switchView={this.props.switchViewAction}
                                setPanel={this.props.setPanelAction}
                                getProfileInfo={this.props.getProfileInfoAction}
                 />
@@ -172,8 +170,6 @@ const mapDispatchToProps = dispatch => {
                 choose_schools_data = kwarg;
             dispatch(setPanel(panel))
         },
-        switchViewAction: (view, panel) => dispatch(switchView(view, panel)),
-        setStudentAction: student => dispatch(setStudent(student)),
         getProfileInfoAction: profile => getProfileInfo(dispatch, profile),
         doVkAuth: authData => {
             return new Promise(resolve => {

@@ -18,6 +18,7 @@ import UpdateButton from "../custom_components/support/UpdateButton";
 import {getAllMarks, getLastMarks} from "../utils/requests";
 import {setAllMarks, setLastMarks} from "../redux/actions/AppLogicAction";
 import {connect} from "react-redux";
+import {actualMarksPart} from "../redux/actions/AppPresentationAction";
 
 class Marks extends React.Component {
     constructor(props) {
@@ -27,9 +28,10 @@ class Marks extends React.Component {
         this.lastMarksData = this.props.appData.lastMarks;
         this.tabs = [];
         this.tabsItems = [];
+        console.log("ap", this.props.actualPart);
 
         this.state = {
-            activeTab: "1",
+            activeTab: this.props.actualPart,
             ready: Number(this.marksData.length !== 0),
             error: false,
             lastMarksBlock: null,
@@ -47,9 +49,10 @@ class Marks extends React.Component {
             this.props.profile.secret,
             this.props.profile.student.id)
             .then(data => {
-                this.marksData = data;
-                this.props.setAllMarks(data);
-                this.startRenderMain();
+                console.log(data.actual);
+                this.marksData = data.data;
+                this.props.setAllMarks(data.data);
+                this.startRenderMain(data.actual);
             })
             .catch(() => {
                 console.log("here i am");
@@ -65,16 +68,24 @@ class Marks extends React.Component {
         //     });
     };
 
-    startRenderMain = () => {
+    startRenderMain = (actual) => {
         let periods = this.marksData[0].periods.length;
-        console.log("check", this.marksData[0].periods);
+
         for (let i = 0; i < periods; i++) {
             this.tabs.push(this.drawTab(i));
 
         }
-        this.setState({
-            ready: 1,
-        });
+        if (actual){
+            this.props.setActualPart(`${actual + 1}`);
+            this.setState({
+                ready: 1,
+                activeTab: `${actual + 1}`
+            });
+        } else {
+            this.setState({
+                ready: 1,
+            });
+        }
     };
 
     startRenderLastMarks = () => {
@@ -155,7 +166,7 @@ class Marks extends React.Component {
         let subjectsFields = [];
 
         let generateSubject = (subject, currentPeriod) => {
-            if (subject.periods.length >= currentPeriod + 1){
+            if (subject.periods.length >= currentPeriod + 1) {
                 let period = subject.periods[currentPeriod];
                 let marks = [];
                 let marksModal = [];
@@ -220,7 +231,8 @@ class Marks extends React.Component {
                         <div className="modalMarkSubjectInfo">
                             <div className="modalMarkSubjectInfoLeft">
                                 {period.final_mark ?
-                                    <Mark size="22" val={period.final_mark.toString()} is_routine={false} fontSize="14"/>
+                                    <Mark size="22" val={period.final_mark.toString()} is_routine={false}
+                                          fontSize="14"/>
                                     : "-"}
                             </div>
                             <div className="modalMarkSubjectInfoText">
@@ -244,7 +256,8 @@ class Marks extends React.Component {
                             <div className="subjectRowMarks">
                                 {period.final_mark &&
                                 <div className="subjectRowMarksFinalMark">
-                                    <Mark size="16" val={period.final_mark.toString()} is_routine={false} fontSize="12"/>
+                                    <Mark size="16" val={period.final_mark.toString()} is_routine={false}
+                                          fontSize="12"/>
                                 </div>
                                 }
                                 <div className="avg">
@@ -365,7 +378,7 @@ class Marks extends React.Component {
                                 </TabsItem>
                             </Tabs>
                         </Div>
-                        {this.state.ready > 0? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
+                        {this.state.ready > 0 ? this.tabs[this.state.activeTab - 1] : this.drawSpinner()}
                         {this.state.activeTab === 'result' ? this.drawResultTab() : null}
                     </div>
                 }
@@ -374,13 +387,6 @@ class Marks extends React.Component {
     }
 
 }
-
-const mapDispatchToProps = dispatch => {
-    return {
-        setAllMarks: data => dispatch(setAllMarks(data)),
-        setLastMarks: data => dispatch(setLastMarks(data)),
-    }
-};
 
 Marks.propTypes = {
     id: PropTypes.string.isRequired,
@@ -391,7 +397,22 @@ Marks.propTypes = {
     expectedMark: PropTypes.string.isRequired,
 };
 
+
+const mapStateToProps = store => {
+    return {
+        actualPart: store.presentation.actualPart,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setAllMarks: data => dispatch(setAllMarks(data)),
+        setActualPart: part => dispatch(actualMarksPart(part)),
+        setLastMarks: data => dispatch(setLastMarks(data)),
+    }
+};
+
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Marks);

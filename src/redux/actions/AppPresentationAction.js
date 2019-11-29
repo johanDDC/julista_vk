@@ -46,3 +46,17 @@ export function setExpectedMark(mark) {
         data: mark
     }
 }
+
+export function setModuleSystem(type) {
+    return {
+        type: "SET_MODULE_SYSTEM",
+        data: type
+    }
+}
+
+export function actualMarksPart(part) {
+    return {
+        type: "SET_ACTUAL_PART",
+        data: part
+    }
+}

@@ -86,8 +86,8 @@ class BookletCache {
     };
 
     forceClear = () => {
-        caches.delete("booklet_cache");
         localStorage.removeItem("cache")
+        caches.delete("booklet_cache");
     }
 }
 

@@ -13,6 +13,7 @@ import Icon24Error from '@vkontakte/icons/dist/24/error';
 import {unbindUser} from "../utils/requests"
 import connect from '@vkontakte/vk-connect-promise';
 import {getVkParams} from "../utils/utils"
+import SettingsModuleSystemIcon from "../custom_components/icon-pack/SettingsModuleSystemIcon";
 
 const axios = require('axios');
 
@@ -241,23 +242,16 @@ class Settings extends React.Component {
                             <div className="settingsSettingTitle">
                                 Тёмная тема
                             </div>
-                            <div>
-                                <Tooltip
-                                    text="Обязательно появится в релизе"
-                                    isShown={this.state.tooltip}
-                                    onClose={() => this.setState({tooltip: false})}
-                                    offsetX={-50}
-                                    offsetY={5}
-                                    cornerOffset={55}
-                                >
-                                    <Switch className="settingsSettingSwitcher"
-                                            onChange={this.switchTheme}
-                                            defaultChecked={this.props.theme === "dark"}
-                                    />
-                                </Tooltip>
-                            </div>
                         </div>
                     </div>
+                    <Button level="tertiary" className="settingsSettingContainer" onClick={this.props.chooseSystem}>
+                        <SettingsModuleSystemIcon/>
+                        <div className="settingsSettingInfo">
+                            <div className="settingsSettingTitle">
+                                Модульная система
+                            </div>
+                        </div>
+                    </Button>
                 </div>
                 <div className="groupSettingsContainer">
                     <Button level="tertiary" className="settingsSettingContainer">
@@ -299,6 +293,7 @@ Settings.propTypes = {
     id: PropTypes.string.isRequired,
     expectedMark: PropTypes.number.isRequired,
     chooseMark: PropTypes.func.isRequired,
+    chooseSystem: PropTypes.func.isRequired,
     switchView: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
     signOutClear: PropTypes.func.isRequired,

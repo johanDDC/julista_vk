@@ -28,6 +28,7 @@ class Schedule extends React.Component {
 
         this.dayDates = scheduleGetDates();
         this.scheduleData = this.props.appData.journal;
+        console.log(this.props.appData.journal);
 
         this.state = {
             currentDay: (new Date().getDay() <= 6 && new Date().getDay() > 0 ? new Date().getDay() - 1 : 0),
@@ -50,8 +51,8 @@ class Schedule extends React.Component {
             this.dayDates[8],
             this.props.profile.student.id)
             .then(data => {
-                this.scheduleData = data;
-                this.props.setJournalData(data);
+                this.scheduleData = data.data;
+                this.props.setJournalData(data.data);
                 this.setState({
                     ready: true,
                     weekDuration: (this.props.appData.journal.days.length < 5

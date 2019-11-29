@@ -49,7 +49,6 @@ const mapDispatchToProps = dispatch => {
         setPanelAction: panel => {
             dispatch(setPanel(panel))
         },
-        setStudentAction: student => dispatch(setStudent(student)),
         getProfileInfoAction: profile => getProfileInfo(dispatch, profile),
     }
 };

@@ -108,6 +108,7 @@ function profile(state = initialState, action) {
                 classmates: action.data.classmates,
                 personalInfo: action.data.personal,
             };
+            console.log("o", obj);
             storeData(obj);
             return {
                 ...state,
