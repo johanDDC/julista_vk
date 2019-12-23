@@ -6,6 +6,7 @@ import {setAllMarks, setLastMarks} from "../redux/actions/AppLogicAction";
 import {actualMarksPart, switchView} from "../redux/actions/AppPresentationAction";
 import {connect} from "react-redux";
 import {setStudent} from "../redux/actions/ProfileAction";
+import {getProfileInfo} from "../utils/requests";
 
 class ChooseStudent extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class ChooseStudent extends React.Component {
     }
 
     choose = (student) => {
-        this.props.getProfileInfo({
+        this.props.getProfileInfoAction({
             ...this.props.profile,
             student: student
         });
@@ -63,19 +64,19 @@ ChooseStudent.propTypes = {
     id: PropTypes.string.isRequired,
     profile: PropTypes.any.isRequired,
     setPanel: PropTypes.func.isRequired,
-    getProfileInfo: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = store => {
-    return {
-        // actualPart: store.presentation.actualPart,
-    }
-};
+// const mapStateToProps = store => {
+//     return {
+//         // actualPart: store.presentation.actualPart,
+//     }
+// };
 
 const mapDispatchToProps = dispatch => {
     return {
         switchViewAction: (view, panel) => dispatch(switchView(view, panel)),
         setStudentAction: student => dispatch(setStudent(student)),
+        getProfileInfoAction: profile => getProfileInfo(dispatch, profile),
     }
 };
 

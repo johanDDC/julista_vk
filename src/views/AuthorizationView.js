@@ -93,7 +93,7 @@ class AuthorizationView extends React.Component {
                         title: 'Войти',
                         type: 'primary',
                         action: () => {
-                            this.props.getProfileInfoAction(this.authData);
+                            // this.props.getProfileInfoAction(this.authData);
                             this.props.doVkAuth(this.authData).then(e => {
                                 this.setActiveModal(null);
                                 if (this.authData.student === null) {
@@ -134,7 +134,6 @@ class AuthorizationView extends React.Component {
                 <ChooseStudent id="choose_student"
                                profile={this.props.profile}
                                setPanel={this.props.setPanelAction}
-                               getProfileInfo={this.props.getProfileInfoAction}
                 />
             </View>
         )
