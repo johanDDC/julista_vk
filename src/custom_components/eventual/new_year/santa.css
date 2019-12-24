@@ -1,0 +1,145 @@
+.santa {
+    position: relative;
+    width: 105px;
+    height: 165px;
+}
+
+.hat {
+    position: absolute;
+    background: #ef5c53;
+    width: 100%;
+    height: 45px;
+    top: 15px;
+    border-radius: 50px 50px 0 0;
+    box-shadow: inset 15px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.hat:after {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 24px;
+    background: #fff;
+    border-radius: 25px;
+    top: 45px;
+    margin-left: -10%;
+    box-shadow: inset 15px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.hat:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;;
+    background: #fff;
+    border-radius: 50%;
+    top: -15px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    box-shadow: inset 15px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.ear {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: #ffe1c7;
+    top: 87px;
+    border-radius: 50%;
+    z-index: -2;
+}
+
+.ear.left {
+    left: -12px;
+}
+
+.ear.right {
+    right: -12px;
+}
+
+.face {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 85px;
+    border-radius: 0 0 60px 60px;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.face i:nth-of-type(1),
+.face i:nth-of-type(2) {
+    position: absolute;
+    width: 45%;
+    height: 45%;
+    background: #ffe1c7;
+    top: 0;
+    display: block;
+    border-radius: 0 0 45% 45%;
+    overflow: hidden;
+}
+
+.face i:nth-of-type(1) {
+    left: 5%;
+}
+
+.face i:nth-of-type(2) {
+    right: 5%;
+}
+
+.eye {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: #000;
+    top: 15px;
+    border-radius: 50%;
+}
+
+.eye.left {
+    left: 28px;
+}
+
+.eye.right {
+    right: 28px;
+}
+
+.nose {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #ef5c53;
+    top: 24px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.beard {
+    position: absolute;
+    width: 100%;
+    height: 90px;
+    background: #f4f4f4;
+    bottom: 0;
+    border-radius: 0 0 100px 100px;
+    box-shadow: inset 0 -10px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes');
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.5rem;
+    color: var(--the-color);
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

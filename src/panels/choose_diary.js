@@ -8,6 +8,7 @@ import NetschoolIcon from "../custom_components/icon-pack/NetschoolIcon"
 import HalloweenPumpkin from "../custom_components/eventual/halloween/HalloweenPumpkin"
 import EdutatarIcon from "../custom_components/icon-pack/EdutatarIcon"
 import {getVkParams} from "../utils/utils";
+import NewYearSanta from "../custom_components/eventual/new_year/santa";
 
 class ChooseDiary extends React.Component {
     constructor(props) {
@@ -88,13 +89,7 @@ class ChooseDiary extends React.Component {
                             </Button>
                         </div>
                         <div className="halloweenPumpkinHolder">
-                            <HalloweenPumpkin
-                                is_faceless={false}
-                                shadow={true}
-                                floating={true}
-                                lighting={false}
-
-                            />
+                            <NewYearSanta/>
                         </div>
                     </div>
                 </Div>

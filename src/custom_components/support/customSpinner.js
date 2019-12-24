@@ -11,26 +11,28 @@ class CustomSpinner extends React.Component {
     }
 
     render() {
-        let inside;
-        if (this.props.theme === "dark") {
-            inside =
-                <HalloweenPumpkin
-                    scale={0.4}
-                    shadow={false}
-                    lighting={true}
-                    floating={false}
-                />
-        } else {
-            inside =
-                <div className="customSpinnerRotator"
-                     style={{color: (this.props.isInverse ? "var(--background)" : "var(--the-color)")}}>
-                    <Icon44Spinner/>
-                </div>
+        {/*<div className="customSpinnerRotator"*/
+        }
+        {/*     style={{color: (this.props.isInverse ? "var(--background)" : "var(--the-color)")}}>*/
+        }
+        {/*    <Icon44Spinner/>*/
+        }
+        {/*</div>*/
         }
         return (
             <div className="customSpinnerContainer"
-                 style={{backgroundColor: (this.props.isInverse ? "var(--the-color)" : "var(--background)")}}>
-                {inside}
+                 // style={{backgroundColor: (this.props.isInverse ? "var(--the-color)" : "var(--background)")}}>
+                 style={{backgroundColor: "transparent"}}>
+                <div id="warningGradientOuterBarG">
+                    <div id="warningGradientFrontBarG" className="warningGradientAnimationG">
+                        <div className="warningGradientBarLineG"></div>
+                        <div className="warningGradientBarLineG"></div>
+                        <div className="warningGradientBarLineG"></div>
+                        <div className="warningGradientBarLineG"></div>
+                        <div className="warningGradientBarLineG"></div>
+                        <div className="warningGradientBarLineG"></div>
+                    </div>
+                </div>
             </div>
         )
     }

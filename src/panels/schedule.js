@@ -13,7 +13,6 @@ import SubjectTopicIcon from "../custom_components/icon-pack/SubjectTopicIcon"
 import SubjectModuleIcon from "../custom_components/icon-pack/SubjectModuleIcon"
 import PullToRefreshContext from "../custom_components/support/pullToRefreshContext"
 import UpdateButton from "../custom_components/support/UpdateButton"
-import HalloweenSpider from "../custom_components/eventual/halloween/HalloweenSpider"
 import ScheduleSwiper from "../custom_components/layouts/schedule/ScheduleSwiper"
 
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
@@ -440,9 +439,6 @@ class Schedule extends React.Component {
                     noShadow>
                     <div className="scheduleHeaderMonth">{this.state.month}</div>
                 </PanelHeader>
-                <div className="halloweenSpiderContainer">
-                    <HalloweenSpider/>
-                </div>
                 {this.drawTopBar()}
                 {/*<ScheduleSwiper/>*/}
                 <Div id="scheduleWeekSwiperLeft" onClick={this.prevWeek}>
@@ -457,6 +453,8 @@ class Schedule extends React.Component {
                     <div className="down"></div>
                     <Icon24Chevron/>
                 </Div>
+                <div className="snow1"></div>
+                <div className="snow2"></div>
                 <div className="pullToRefreshContainer">
                     {
                         (this.state.ready

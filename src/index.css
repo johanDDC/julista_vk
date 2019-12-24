@@ -40,17 +40,17 @@ section.View {
     --bottom-buttons-inactive: #a8adaf;
 
     --hallowen-color: #5690ff;
-    --hallowen-temp-1: #ffffff;
-    --hallowen-temp-2: #ffffff;
-    --hallowen-temp-3: #ffffff;
+    --eventual-color-1: #ffffff;
+    --eventual-color-2: #ffffff;
+    --eventual-color-3: #ffffff;
 
     /*progress bar*/
-    --hallowen-temp-4: #05a732;
-    --hallowen-temp-5: #04d461;
+    --eventual-color-4: #05a732;
+    --eventual-color-5: #04d461;
 
     /*advices*/
-    --hallowen-temp-6: #1cb336;
-    --hallowen-temp-7: #72de20;
+    --eventual-color-6: #1cb336;
+    --eventual-color-7: #72de20;
 }
 
 
@@ -71,13 +71,13 @@ section.View {
     --bottom-buttons-inactive: #ffffff;
 
     --hallowen-color: #fa6928;
-    --hallowen-temp-1: #a14907;
-    --hallowen-temp-2: #517f54;
-    --hallowen-temp-3: #29412b;
+    --eventual-color-1: #a14907;
+    --eventual-color-2: #517f54;
+    --eventual-color-3: #29412b;
 
-    --hallowen-temp-4: #ff512f;
-    --hallowen-temp-5: #f09819;
+    --eventual-color-4: #ff512f;
+    --eventual-color-5: #f09819;
 
-    --hallowen-temp-6: #ff512f;
-    --hallowen-temp-7: #f09819;
+    --eventual-color-6: #1cb336;
+    --eventual-color-7: #72de20;
 }

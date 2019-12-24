@@ -14,5 +14,5 @@
     flex-direction: row;
     border-radius: 5px;
     /*background: linear-gradient(#05a732, #04d461);*/
-    background: linear-gradient(90deg, var(--hallowen-temp-4), var(--hallowen-temp-5));
+    background: linear-gradient(90deg, var(--eventual-color-4), var(--eventual-color-5));
 }

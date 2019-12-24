@@ -1,4 +1,4 @@
-.customSpinnerContainer{
+.customSpinnerContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,6 +22,7 @@
         transform: rotate(360deg);
     }
 }
+
 @keyframes rotation {
     from {
         -ms-transform: rotate(0deg);
@@ -38,10 +39,112 @@
         transform: rotate(360deg);
     }
 }
+
 .customSpinnerRotator {
     -webkit-animation: rotation 0.75s linear infinite;
     -moz-animation: rotation 0.75s linear infinite;
     -ms-animation: rotation 0.75s linear infinite;
     -o-animation: rotation 0.75s linear infinite;
     animation: rotation 0.75s linear infinite;
+}
+
+#warningGradientOuterBarG {
+    height: 16px;
+    width: 128px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.14);
+    margin: auto;
+    margin-left: -32px;
+    background: linear-gradient(top, rgb(255, 255, 255), rgb(255, 0, 0));
+    border-radius: 7px;
+    border: 4px solid var(--the-color);
+}
+
+.warningGradientBarLineG {
+    background-color: rgba(255, 255, 255, 0.94);
+    float: left;
+    width: 11px;
+    height: 96px;
+    margin-right: 19px;
+    margin-top: -22px;
+    transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+}
+
+.warningGradientAnimationG {
+    width: 189px;
+    animation-name: warningGradientAnimationG;
+    -o-animation-name: warningGradientAnimationG;
+    -ms-animation-name: warningGradientAnimationG;
+    -webkit-animation-name: warningGradientAnimationG;
+    -moz-animation-name: warningGradientAnimationG;
+    animation-duration: 0.905s;
+    -o-animation-duration: 0.905s;
+    -ms-animation-duration: 0.905s;
+    -webkit-animation-duration: 0.905s;
+    -moz-animation-duration: 0.905s;
+    animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -o-animation-timing-function: linear;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+}
+
+
+@keyframes warningGradientAnimationG {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: -30px;
+    }
+}
+
+@-o-keyframes warningGradientAnimationG {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: -30px;
+    }
+}
+
+@-ms-keyframes warningGradientAnimationG {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: -30px;
+    }
+}
+
+@-webkit-keyframes warningGradientAnimationG {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: -30px;
+    }
+}
+
+@-moz-keyframes warningGradientAnimationG {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: -30px;
+    }
 }
