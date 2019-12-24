@@ -1,17 +1,26 @@
 {
   "files": {
-    "main.css": "/julista_vk/static/css/main.88747804.chunk.css",
-    "main.js": "/julista_vk/static/js/main.3e6ad0b8.chunk.js",
-    "main.js.map": "/julista_vk/static/js/main.3e6ad0b8.chunk.js.map",
-    "runtime~main.js": "/julista_vk/static/js/runtime~main.bdba013e.js",
-    "runtime~main.js.map": "/julista_vk/static/js/runtime~main.bdba013e.js.map",
-    "static/css/2.a83908c5.chunk.css": "/julista_vk/static/css/2.a83908c5.chunk.css",
-    "static/js/2.0a541b00.chunk.js": "/julista_vk/static/js/2.0a541b00.chunk.js",
-    "static/js/2.0a541b00.chunk.js.map": "/julista_vk/static/js/2.0a541b00.chunk.js.map",
+    "main.css": "/julista_vk/static/css/main.0023473e.chunk.css",
+    "main.js": "/julista_vk/static/js/main.e254b8ac.chunk.js",
+    "main.js.map": "/julista_vk/static/js/main.e254b8ac.chunk.js.map",
+    "runtime-main.js": "/julista_vk/static/js/runtime-main.4c664778.js",
+    "runtime-main.js.map": "/julista_vk/static/js/runtime-main.4c664778.js.map",
+    "static/css/2.2cfa1b23.chunk.css": "/julista_vk/static/css/2.2cfa1b23.chunk.css",
+    "static/js/2.27663261.chunk.js": "/julista_vk/static/js/2.27663261.chunk.js",
+    "static/js/2.27663261.chunk.js.map": "/julista_vk/static/js/2.27663261.chunk.js.map",
     "index.html": "/julista_vk/index.html",
-    "precache-manifest.1d6b6514e3195b273d6f6da4ff4d0c63.js": "/julista_vk/precache-manifest.1d6b6514e3195b273d6f6da4ff4d0c63.js",
+    "precache-manifest.95e92bfe634a3a9a8489823cf8633ad9.js": "/julista_vk/precache-manifest.95e92bfe634a3a9a8489823cf8633ad9.js",
     "service-worker.js": "/julista_vk/service-worker.js",
-    "static/css/2.a83908c5.chunk.css.map": "/julista_vk/static/css/2.a83908c5.chunk.css.map",
-    "static/css/main.88747804.chunk.css.map": "/julista_vk/static/css/main.88747804.chunk.css.map"
-  }
+    "static/css/2.2cfa1b23.chunk.css.map": "/julista_vk/static/css/2.2cfa1b23.chunk.css.map",
+    "static/css/main.0023473e.chunk.css.map": "/julista_vk/static/css/main.0023473e.chunk.css.map",
+    "static/js/2.27663261.chunk.js.LICENSE": "/julista_vk/static/js/2.27663261.chunk.js.LICENSE",
+    "static/media/schedule.css": "/julista_vk/static/media/snow.23cfba16.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4c664778.js",
+    "static/css/2.2cfa1b23.chunk.css",
+    "static/js/2.27663261.chunk.js",
+    "static/css/main.0023473e.chunk.css",
+    "static/js/main.e254b8ac.chunk.js"
+  ]
 }
