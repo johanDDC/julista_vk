@@ -35,8 +35,8 @@ class Schedule extends React.Component {
             fetching: false,
         };
 
-        // if (flag)
-        //     this.loadData();
+        if (flag)
+            this.loadData();
     }
 
     loadData = async () => {
