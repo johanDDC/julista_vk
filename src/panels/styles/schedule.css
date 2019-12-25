@@ -297,8 +297,8 @@
 }
 
 
-.snow1 {
-    background: url(../../custom_components/snow.png);
+#snow1 {
+    background: url(../../custom_components/snow_small.png);
     background-repeat: repeat;
     width: 100%;
     height: 100%;
@@ -306,19 +306,6 @@
     top: 0;
     left: 0;
     animation: animateOne 20s infinite linear;
-
-}
-
-.snow2 {
-    background: url(../../custom_components/snow.png);
-    background-repeat: repeat;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: animateSecond 20s infinite linear;
-
 }
 
 

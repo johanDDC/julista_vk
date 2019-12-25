@@ -55,11 +55,12 @@ section.View {
 
 
 [data-theme="dark"] {
-    --background: #1b2936;
-    --background-block: #23323f;
-    --additional-background-block: #2a3d4c;
-    --background-bottom-bar: #283d4e;
-    --background-head: #132029;
+    --the-color: #023064;
+    --background: #023064;
+    --background-block: #022959;
+    --additional-background-block: #02254A;
+    --background-bottom-bar: #023064;
+    --background-head: #02275b;
     --background-text-color: #132029;
     --text-color: #ffffff;
     --inversed-text-color: #ffffff;
