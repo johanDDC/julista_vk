@@ -316,6 +316,8 @@ class Schedule extends React.Component {
 
             if (this.state.weekDuration === 6)
                 document.querySelector(".Gallery__slide:last-child").style.width = "50px";
+            document.getElementById("snow1").style.display = "none";
+            document.getElementById("snow2").style.display = "block";
         } catch (e) {
 
         }
@@ -453,8 +455,7 @@ class Schedule extends React.Component {
                     <div className="down"></div>
                     <Icon24Chevron/>
                 </Div>
-                <div className="snow1"></div>
-                <div className="snow2"></div>
+                <div id="snow1"></div>
                 <div className="pullToRefreshContainer">
                     {
                         (this.state.ready

@@ -14,6 +14,7 @@ class ScheduleWeekBar extends React.Component {
             :   this.props.weekDuration - 1);
         return (
             <Div className="scheduleWeekTopBar">
+                <div id="snow2"></div>
                 <div className="scheduleWeekDay">
                     <span>ПН</span>
                     <Button level="tertiary" style={{margin: 0, padding: 0, color: "#fff"}}
