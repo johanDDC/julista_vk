@@ -4,7 +4,7 @@ import React from "react";
 import "./styles/schedule.css"
 import Mark from "../custom_components/support/mark"
 import CustomSpinner from "../custom_components/support/customSpinner"
-import {getRusMonthName, scheduleGetDates, scheduleNextWeek, schedulePrevWeek} from "../utils/utils"
+import {getRusMonthName, scheduleGetDates, scheduleNextWeek, schedulePrevWeek} from "../utils/Utils"
 import ScheduleWeekBar from "../custom_components/layouts/schedule/scheduleWeekBar"
 import Icon24Chevron from '@vkontakte/icons/dist/24/chevron';
 import SubjectHWIcon from "../custom_components/icon-pack/SubjectHWIcon"

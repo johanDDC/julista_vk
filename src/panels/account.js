@@ -11,8 +11,8 @@ import Icon16Dropdown from '@vkontakte/icons/dist/16/dropdown';
 import DefaultAvatarIcon from "../custom_components/icon-pack/DefaultAvatarIcon"
 import QuestionIcon from "../custom_components/icon-pack/QuestionIcon"
 import PerformanceIcon from "../custom_components/icon-pack/PerformanceIcon"
-import {isBirthday, recursiveTheming} from "../utils/utils"
-import {getClassmatesAvatars} from "../utils/requests"
+import {isBirthday, recursiveTheming} from "../utils/Utils"
+import {getClassmatesAvatars} from "../utils/Requests"
 import connect from "@vkontakte/vk-connect-promise";
 
 const axios = require('axios');

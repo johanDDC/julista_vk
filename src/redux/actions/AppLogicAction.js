@@ -1,4 +1,4 @@
-import {getStartDateForLastMarks, setCorrectYear} from "../../utils/utils"
+import {getStartDateForLastMarks, setCorrectYear} from "../../utils/Utils"
 
 const axios = require('axios');
 let baseUrl = "https://bklet.ml/";

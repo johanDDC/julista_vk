@@ -7,25 +7,37 @@ import MosRuIcon from "../custom_components/icon-pack/MosRuIcon"
 import NetschoolIcon from "../custom_components/icon-pack/NetschoolIcon"
 import HalloweenPumpkin from "../custom_components/eventual/halloween/HalloweenPumpkin"
 import EdutatarIcon from "../custom_components/icon-pack/EdutatarIcon"
-import {getVkParams} from "../utils/utils";
+import {getVkParams} from "../utils/Utils";
 import NewYearSanta from "../custom_components/eventual/new_year/santa";
+import {PanelProps} from "../utils/Props";
+import {openModal, switchPanelAction} from "../redux/actions/AppPresentation";
+import {Dispatch} from "redux";
+import {completeAuth, setDiary} from "../redux/actions/Profile";
+import {vkAuth} from "../utils/Requests";
+import {connect} from "react-redux";
 
-class ChooseDiary extends React.Component {
-    constructor(props) {
+interface Props extends PanelProps {
+    setDiary: (diary: string) => void
+    auth: (auth_data: {}) => void
+    openModal: () => void
+}
+
+
+class ChooseDiary extends React.Component<Props> {
+    constructor(props: Props) {
         super(props);
-        this.d = "";
-
-        this.startVkAuth();
     }
 
     startVkAuth = () => {
-        let vk_info = getVkParams();
-        this.props.vkAuth(vk_info)
+        vkAuth().then((data: {}) => {
+            this.props.auth(data);
+            this.props.openModal();
+        });
     };
 
-    choose = (diary) => {
-        this.props.setPanel("auth");
-        this.props.setDiary(diary)
+    choose = (diary: string) => {
+        this.props.setDiary(diary);
+        this.props.switchPanel("auth");
     };
 
     render() {
@@ -39,8 +51,7 @@ class ChooseDiary extends React.Component {
                         <div>
                             <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
                                     onClick={() => {
-                                        this.d = "mosru";
-                                        this.choose(this.d);
+                                        this.choose("mosru");
                                     }}>
                                 <div className="chooseDiaryScreenDiaryContainerIcon"
                                 >
@@ -50,23 +61,9 @@ class ChooseDiary extends React.Component {
                                 <div className="chooseDiaryScreenDiaryContainerChecker">
                                 </div>
                             </Button>
-                            {/*<Button level="tertiary" className="chooseDiaryScreenDiaryContainer"*/}
-                            {/*        onClick={() => {*/}
-                            {/*            this.d = "mosregru";*/}
-                            {/*            this.choose(this.d);*/}
-                            {/*        }}>*/}
-                            {/*    <div className="chooseDiaryScreenDiaryContainerIcon"*/}
-                            {/*    >*/}
-                            {/*        <MosregIcon/>*/}
-                            {/*    </div>*/}
-                            {/*    <div className="chooseDiaryScreenDiaryContainerTitle">Школьный портал МО</div>*/}
-                            {/*    <div className="chooseDiaryScreenDiaryContainerChecker">*/}
-                            {/*    </div>*/}
-                            {/*</Button>*/}
                             <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
                                     onClick={() => {
-                                        this.d = "netschool";
-                                        this.choose(this.d);
+                                        this.choose("netschool");
                                     }}>
                                 <div className="chooseDiaryScreenDiaryContainerIcon">
                                     <NetschoolIcon/>
@@ -77,8 +74,7 @@ class ChooseDiary extends React.Component {
                             </Button>
                             <Button level="tertiary" className="chooseDiaryScreenDiaryContainer"
                                     onClick={() => {
-                                        this.d = "edutatar";
-                                        this.choose(this.d);
+                                        this.choose("edutatar");
                                     }}>
                                 <div className="chooseDiaryScreenDiaryContainerIcon">
                                     <EdutatarIcon/>
@@ -99,11 +95,13 @@ class ChooseDiary extends React.Component {
 
 }
 
-ChooseDiary.propTypes = {
-    id: PropTypes.string.isRequired,
-    setPanel: PropTypes.func.isRequired,
-    setDiary: PropTypes.func.isRequired,
-    vkAuth: PropTypes.func.isRequired,
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        switchPanel: (panel: string) => dispatch(switchPanelAction(panel)),
+        setDiary: (diary: string) => dispatch(setDiary(diary)),
+        auth: (authData: {}) => dispatch(completeAuth(authData)),
+        openModal: () => dispatch(openModal("vkAuth")),
+    }
 };
 
-export default ChooseDiary;
+export default connect(null, mapDispatchToProps)(ChooseDiary);

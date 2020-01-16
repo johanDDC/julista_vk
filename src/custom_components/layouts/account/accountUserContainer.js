@@ -7,7 +7,7 @@ import connect from '@vkontakte/vk-connect-promise';
 import LevelCircle from "./levelCircle"
 import DefaultAvatarIcon from "../../icon-pack/DefaultAvatarIcon"
 import BirthdayIcon from "../../icon-pack/BirthdayIcon"
-import {getVkParams} from "../../../utils/utils";
+import {getVkParams} from "../../../utils/Utils";
 
 var fill_color;
 var outline_color;

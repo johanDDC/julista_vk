@@ -1,3 +1,5 @@
+import {VkParamsProps} from "./Props";
+
 export function scheduleGetDates() {
     let today = new Date();
     let dayOfWeek = today.getDay();
@@ -23,7 +25,7 @@ export function scheduleGetDates() {
     return dates;
 }
 
-export function schedulePrevWeek(currentStart) {
+export function schedulePrevWeek(currentStart: Date) {
     let newStart = new Date(currentStart.getFullYear(), currentStart.getMonth(), currentStart.getDate() - 7);
     let newEnd = new Date(currentStart.getFullYear(), currentStart.getMonth(), currentStart.getDate() - 1);
     let resArr = [];
@@ -38,7 +40,7 @@ export function schedulePrevWeek(currentStart) {
     return resArr;
 }
 
-export function scheduleNextWeek(currentStart) {
+export function scheduleNextWeek(currentStart: Date) {
     let newStart = new Date(currentStart.getFullYear(), currentStart.getMonth(), currentStart.getDate() + 7);
     let newEnd = new Date(newStart.getFullYear(), newStart.getMonth(), newStart.getDate() + 6);
     let resArr = [];
@@ -53,14 +55,14 @@ export function scheduleNextWeek(currentStart) {
     return resArr;
 }
 
-export function setCorrectYear(str) {
+export function setCorrectYear(str: string) {
     let correctYear = str.slice(8);
     str = str.slice(0, 6);
     str = str + correctYear;
     return str;
 }
 
-export function getRusMonthName(monthNum) {
+export function getRusMonthName(monthNum: number) {
     switch (monthNum) {
         case 0:
             return "Январь";
@@ -90,33 +92,34 @@ export function getRusMonthName(monthNum) {
     }
 }
 
-export function getStartDateForLastMarks(dueDate) {
+export function getStartDateForLastMarks(dueDate: Date) {
     let startDate = new Date(dueDate.getFullYear(), dueDate.getMonth(), dueDate.getDate() - 7);
     return startDate;
 }
 
 
-export function turnIntoDate(string) {
-    let dateParams = string.split('.');
-    let date = new Date(dateParams[0] - 0, dateParams[1] - 1, dateParams[2] - 0);
-
-    return date;
+export function turnIntoDate(str: string) {
+    let dateParams = str.split('.');
+    return new Date(
+        parseInt(dateParams[0]),
+        parseInt(dateParams[1]) - 1,
+        parseInt(dateParams[2]));
 }
 
-export function reverseRuslanString(string) {
+export function reverseRuslanString(string: string) {
     let str = string.substr(5);
     str = str.substr(3) + '.' + str.substr(0, 2);
-
     return str;
 }
 
-export function getVkParams() {
+export function getVkParams(): VkParamsProps {
     let params = window.location.search.slice(1).split('&')
         .map((queryParam) => {
             let kvp = queryParam.split('=');
             return {key: kvp[0], value: kvp[1]}
         })
         .reduce((query, kvp) => {
+            // @ts-ignore
             query[kvp.key] = decodeURIComponent(kvp.value);
             return query
         }, {});
@@ -138,21 +141,21 @@ export function getVkParams() {
     return params;
 }
 
-export function isBirthday(strDate) {
+export function isBirthday(strDate: any) {
     let tokens = strDate.split("-");
     let birthDate = new Date(tokens[0], tokens[1] - 1, tokens[2]);
     let today = new Date();
     return (today.getMonth() === birthDate.getMonth() && today.getDate() === birthDate.getDate());
 }
 
-export function recursiveTheming(startElem, theme) {
+export function recursiveTheming(startElem: any, theme: any) {
     if (startElem) {
         startElem.setAttribute("data-theme", theme);
         for (let child of startElem.children) {
-            recursiveTheming(child);
+            recursiveTheming(child, theme);
         }
     }
-};
+}
 
 // json = {
 //     sign: "06DakpJLGnTxBx3vhdVYuahPhTcnKeZEgMuAtAOqVms",

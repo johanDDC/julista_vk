@@ -2,11 +2,11 @@ import 'core-js/es6/map';
 import 'core-js/es6/set';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import connect from '@vkontakte/vkui-connect';
+import connect from "@vkontakte/vk-connect";
 import App from './App';
 import store from "./redux/store/main";
 import {Provider} from "react-redux"
-import registerServiceWorker from './sw';
+// import registerServiceWorker from './sw';
 import mVKMiniAppsScrollHelper from '@vkontakte/mvk-mini-apps-scroll-helper';
 import './index.css'
 
@@ -28,4 +28,4 @@ ReactDOM.render(
     </Provider>
     , root);
 
-registerServiceWorker();
+// registerServiceWorker();

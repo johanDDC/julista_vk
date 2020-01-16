@@ -10,9 +10,9 @@ import Mark from "../custom_components/support/mark"
 import GetOutIcon from "../custom_components/icon-pack/GetOutIcon"
 import QuestionIcon from "../custom_components/icon-pack/QuestionIcon"
 import Icon24Error from '@vkontakte/icons/dist/24/error';
-import {unbindUser} from "../utils/requests"
+import {unbindUser} from "../utils/Requests"
 import connect from '@vkontakte/vk-connect-promise';
-import {getVkParams} from "../utils/utils"
+import {getVkParams} from "../utils/Utils"
 
 const axios = require('axios');
 

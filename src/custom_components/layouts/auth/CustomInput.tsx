@@ -1,20 +1,38 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import "./customInput.css"
+import "./custom_input.css"
 
-const CustomInput = props => {
+interface Props {
+    id: string
+    placeholder: string
+    type: string
+    value: string
+    onChange: (val: string) => void
+}
+
+const CustomInput = (props: Props) => {
     function clickCapture() {
+        // @ts-ignore
         document.getElementById(`${props.id}-i`).focus();
+        // @ts-ignore
         document.getElementById(props.id).style.marginTop = "-28px";
+        // @ts-ignore
         document.getElementById(props.id).style.color = "#5690ff";
     }
 
     function clickLost() {
+        // @ts-ignore
         document.getElementById(props.id).style.color = "#757575";
+        // @ts-ignore
         if (document.getElementById(`${props.id}-i`).value === "") {
+            // @ts-ignore
             document.getElementById(props.id).style.marginTop = "0";
         }
 
+    }
+
+    function onChange() {
+        // @ts-ignore
+        props.onChange(document.getElementById(props.id).value);
     }
 
     if (props.value && props.value.trim() !== "")
@@ -36,17 +54,12 @@ const CustomInput = props => {
                    onFocus={clickCapture}
                    onBlur={clickLost}
                    autoComplete="off"
-                   defaultValue={props.value && props.value}
+                   defaultValue={props.value}
+                   onChange={onChange}
             />
         </div>
     )
 };
 
-CustomInput.propTypes = {
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
-    value: PropTypes.string,
-};
 
-export default CustomInput;
+export default CustomInput

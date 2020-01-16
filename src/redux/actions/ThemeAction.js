@@ -1,4 +1,4 @@
-import {recursiveTheming} from "../../utils/utils";
+import {recursiveTheming} from "../../utils/Utils";
 import VKconnect from '@vkontakte/vk-connect-promise';
 
 export function setTheme(theme) {

@@ -1,4 +1,4 @@
-import {Div, Panel, PanelHeader, Link, Button, Select, Spinner, SelectMimicry} from '@vkontakte/vkui';
+import {Button, Div, Link, Panel, PanelHeader, Select, SelectMimicry, Spinner} from '@vkontakte/vkui';
 import PanelHeaderBack from '@vkontakte/vkui/dist/components/PanelHeaderBack/PanelHeaderBack';
 import PropTypes from "prop-types";
 import React from "react";
@@ -6,115 +6,141 @@ import "./styles/auth.css"
 
 import AuthAccount from "../custom_components/icon-pack/AuthAccount"
 import AuthPassword from "../custom_components/icon-pack/AuthPassword"
-import AuthGift from "../custom_components/icon-pack/AuthGift"
-import AuthRestore from "../custom_components/icon-pack/AuthRestore"
 
-import CustomInput from "../custom_components/layouts/auth/customInput"
+import CustomInput from "../custom_components/layouts/auth/CustomInput"
+import {PanelProps} from "../utils/Props";
+import {Dispatch} from "redux";
+import {connect} from "react-redux";
+import {switchPanelAction, switchViewAction} from "../redux/actions/AppPresentation";
+import {getCities, getProvinces, getRegions, getSchools, inputLogin, inputPassword} from "../redux/actions/AuthValues";
+import {auth, getAuthData} from "../utils/Requests";
+import {completeAuth} from "../redux/actions/Profile";
 
-const axios = require('axios');
+interface Props extends PanelProps {
+    login: string,
+    password: string,
+    inputLogin: (login: string) => void,
+    inputPassword: (password: string) => void,
+    diary: string,
 
-class Auth extends React.Component {
-    constructor(props) {
+    region: null | number,
+    province: null | number,
+    city: null | number,
+    school: null | number,
+
+    getRegions: (regions: Array<React.ReactChild>) => void,
+    getProvinces: (provinces: Array<React.ReactChild>) => void,
+    getCities: (cities: Array<React.ReactChild>) => void,
+    getSchools: (schools: Array<React.ReactChild>) => void,
+
+    showSpinner: (switcher: boolean) => void
+    completeAuth: (auth_data: {}) => void
+    alertError: (message: string) => void
+    switchView: (view: string, panel: string) => void
+}
+
+
+class Auth extends React.Component<Props> {
+    constructor(props: Props) {
         super(props);
-        this.state = {
-            error: false,
-            schools: null,
-            provinces: null,
-            cities: null,
-            ready: false,
-            netschoolSelector: (this.props.profile.diary === "netschool" ? <Spinner size="medium"/> : null),
-            regions: <Spinner size="medium"/>,
 
-            choosenSchool: this.props.stateData.length !== 0 ? this.props.stateData[6] : "",
-        };
-
-        this.region = null;
-        this.province = null;
-        this.city = null;
-
-        this.drawRegionsSelector()
+        // this.drawRegionsSelector()
     }
 
     btnBack = () => {
-        this.props.setPanel("choose_diary")
+        this.props.switchPanel("choose_diary");
     };
 
     buttonClick = () => {
+        // @ts-ignore
         let login = document.getElementById("loginInput-i").value;
+        // @ts-ignore
         let password = document.getElementById("passInput-i").value;
-        try {
-            let inviteCode = document.getElementById("inviteCodeInput-i").value;
-        } catch (e) {
-            let inviteCode = "";
-        }
+        // try {
+        //     // @ts-ignore
+        //     let inviteCode = document.getElementById("inviteCodeInput-i").value;
+        // } catch (e) {
+        //     let inviteCode = "";
+        // }
 
         if (login.trim().length !== 0 && password.trim().length !== 0) {
-            this.props.setSpinner(true);
-            // console.log("per data", login, password, this.props.profile.diary,
-            //     this.region, this.province, this.city, this.state.choosenSchool[0]);
-            this.props.getProfile(login, password, this.props.profile.diary,
-                this.region, this.province, this.city, this.state.choosenSchool[0]);
-
-            let id = setInterval(() => {
-                if (this.props.profile.error) {
-                    clearInterval(id);
-                    this.props.setSpinner(false);
-                    if (this.props.profile.errMessage instanceof Error) {
-                        this.props.openError("Непредвиденная ошибка. Пожалуйста, попробуйте позже.");
-                    } else {
-                        this.props.openError(this.props.profile.errMessage);
-                    }
-                    this.setState({error: true});
-                } else {
-                    if (this.props.profile.secret) {
-                        clearInterval(id);
-                        this.props.setSpinner(false);
-                        if (this.props.profile.student === null) {
-                            this.props.setPanel("choose_student");
-                        } else {
-                            this.props.setView("MainView", "schedule");
-                        }
-                    }
+            this.props.showSpinner(true);
+            auth(
+                this.props.login,
+                this.props.password,
+                this.props.diary,
+                this.props.region,
+                this.props.province,
+                this.props.city,
+                this.props.school
+            ).then((data: {}) => {
+                    this.props.completeAuth(data);
+                    this.props.switchView("main", "schedule");
                 }
-            }, 200);
+            ).catch((message: string) =>
+                this.props.alertError(message)
+            );
         }
     };
 
+    drawSelectorComponent = (
+        type: string,
+        description: string,
+        stateData: string,
+        options: [],
+        changeFunc: (args?: any) => void
+    ) => {
+        return (
+            <Select
+                id={type + "Select"}
+                placeholder={`Выберите ваш ${description}`}
+                value={stateData}
+                onChange={changeFunc}
+            >
+                {options}
+            </Select>
+        );
+    };
+
+    /*
     drawRegionsSelector = () => {
-        let options = [];
-        axios.get("https://bklet.ml/api/auth/get_data/")
-            .then(reg_resp => {
-                reg_resp.data.data.forEach(reg => {
+        let options: Array<React.ReactChild> = [];
+        getAuthData()
+            .then(data => {
+                console.log(data);
+                data.forEach(reg => {
                     options.push(
                         <option value={reg.id}>{reg.name}</option>
                     )
                 });
-                this.setState({
-                    regions:
-                        <Select
-                            id="regionSelect"
-                            placeholder="Выберите ваш регион"
-                            value={this.props.stateData[3]}
-                            onChange={() => {
-                                this.region = document.getElementById("regionSelect").value;
-                                this.setState({
-                                    cities: null,
-                                    schools: null,
-                                    choosenSchool: null,
-                                    provinces:
-                                        <Spinner size="medium"/>
-                                });
-                                this.drawProvincesSelector(this.props.stateData[4]);
-                            }}
-                        >
-                            {options}
-                        </Select>
-                });
+        this.props.getRegions(options);
+
+                // this.setState({
+                //     regions:
+                //         this.drawSelectorComponent(
+                //             "region",
+                //             "регион",
+                //             this.props.stateData[3],
+                //             options,
+                //             () => {
+                //                 this.region = document.getElementById("regionSelect").value;
+                //                 this.setState({
+                //                     cities: null,
+                //                     schools: null,
+                //                     choosenSchool: null,
+                //                     provinces:
+                //                         <Spinner size="medium"/>
+                //                 });
+                //                 this.drawProvincesSelector(this.props.stateData[4]);
+                //             }
+                //         )
+                // });
+
                 if (this.props.stateData[3]) {
                     this.region = document.getElementById("regionSelect").value;
                     this.drawProvincesSelector(this.props.stateData[4]);
                 }
-            })
+            });
     };
     drawProvincesSelector = (defaultVal) => {
         let options = [];
@@ -211,6 +237,8 @@ class Auth extends React.Component {
                             top="Выберите вашу школу"
                             placeholder="Не выбрана"
                             onClick={() => {
+                                // @ts-ignore
+                                // @ts-ignore
                                 let data = [
                                     options,
                                     document.getElementById("loginInput-i").value,
@@ -227,12 +255,7 @@ class Auth extends React.Component {
                 });
             })
     };
-
-    componentDidMount() {
-        if (this.props.profile.id) {
-            this.props.openModal();
-        }
-    }
+    */
 
     render() {
         return (
@@ -259,7 +282,8 @@ class Auth extends React.Component {
                             <CustomInput id="loginInput"
                                          type="text"
                                          placeholder="Логин"
-                                         value={this.props.stateData[1] && this.props.stateData[1]}
+                                         value={this.props.login}
+                                         onChange={this.props.inputLogin}
                             />
                         </div>
                     </Div>
@@ -271,13 +295,17 @@ class Auth extends React.Component {
                             <CustomInput id="passInput"
                                          type="password"
                                          placeholder="Пароль"
-                                         value={this.props.stateData[2] && this.props.stateData[2]}
+                                         value={this.props.password}
+                                         onChange={this.props.inputPassword}
                             />
                         </div>
                     </Div>
+                    {/*
                     {(this.props.profile.diary === "netschool" ?
                         <Div>
-                            {this.state.regions}
+                            {
+                                this.drawSelectorComponent()
+                            }
                         </Div>
                         : null)}
                     {(this.state.provinces ?
@@ -295,18 +323,7 @@ class Auth extends React.Component {
                             {this.state.schools}
                         </Div>
                         : null)}
-                    {/*<Div>*/}
-                    {/*    <div*/}
-                    {/*        className="medium_tip">Введите код приглашения, при его наличии, или оставьте поле пустым</div>*/}
-                    {/*</Div>*/}
-                    {/*<Div className="inviteInput">*/}
-                    {/*    <div className="inputIcon">*/}
-                    {/*        <AuthGift/>*/}
-                    {/*    </div>*/}
-                    {/*    <CustomInput id="inviteCodeInput"*/}
-                    {/*                 type="text"*/}
-                    {/*    />*/}
-                    {/*</Div>*/}
+                        */}
                     <Div>
                         <div className="annotate">Нажимая войти, вы соглашаетесь на обработку, хранение, передачу ваших
                             персональных данных.
@@ -316,17 +333,6 @@ class Auth extends React.Component {
                                 target="_blank">Политика конфиденциальности</Link>
                         </div>
                     </Div>
-                    {/*<Div className="restorePassword">*/}
-                    {/*    <div className="inputIcon" style={{margin: 0}}>*/}
-                    {/*        <AuthRestore/>*/}
-                    {/*    </div>*/}
-                    {/*    <div>Забыли данные учетной записи?*/}
-                    {/*            <Link*/}
-                    {/*                href="https://google.com"*/}
-                    {/*                target="_blank"*/}
-                    {/*                className="restoreLink">Восстановить</Link>*/}
-                    {/*        </div>*/}
-                    {/*</Div>*/}
                     <Div>
                         <Button level="tertiary" className="authSignInButton"
                                 onClick={this.buttonClick}>
@@ -340,26 +346,34 @@ class Auth extends React.Component {
 
 }
 
-Auth.propTypes = {
-    id: PropTypes.string.isRequired,
-    fetchedUser: PropTypes.shape({
-        photo_200: PropTypes.string,
-        first_name: PropTypes.string,
-        last_name: PropTypes.string,
-        city: PropTypes.shape({
-            title: PropTypes.string,
-        }),
-    }),
-    profile: PropTypes.any.isRequired,
-    setView: PropTypes.func.isRequired,
-    setPanel: PropTypes.func.isRequired,
-    getProfile: PropTypes.func.isRequired,
-    setSpinner: PropTypes.func,
-    openError: PropTypes.func.isRequired,
-    openIncorrect: PropTypes.func.isRequired,
-    openUnsupported: PropTypes.func,
-    openModal: PropTypes.func,
-    stateData: PropTypes.array,
+const mapStateToProps = (state: any) => {
+    return {
+        login: state.authValues.login,
+        password: state.authValues.password,
+        region: state.authValues.region,
+        province: state.authValues.province,
+        city: state.authValues.city,
+        school: state.authValues.school,
+
+        diary: state.profile.diary,
+    }
 };
 
-export default Auth;
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        inputLogin: (login: string) => dispatch(inputLogin(login)),
+        inputPassword: (password: string) => dispatch(inputPassword(password)),
+
+        getRegions: (regions: Array<React.ReactChild>) => dispatch(getRegions(regions)),
+        getProvinces: (provinces: Array<React.ReactChild>) => dispatch(getProvinces(provinces)),
+        getCities: (cities: Array<React.ReactChild>) => dispatch(getCities(cities)),
+        getSchools: (schools: Array<React.ReactChild>) => dispatch(getSchools(schools)),
+
+        switchPanel: (panel: string) => dispatch(switchPanelAction(panel)),
+        switchView: (view: string, panel: string) => dispatch(switchViewAction(view, panel)),
+
+        completeAuth: (authData: {}) => dispatch(completeAuth(authData)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)

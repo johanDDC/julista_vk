@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from '@vkontakte/vkui';
 import Account from '../panels/account'
 import {connect} from "react-redux";
-import ChooseStudent from "../panels/choose_student";
+import ChooseStudent from "../panels/ChooseStudent";
 import {setProfile, setStudent} from "../redux/actions/ProfileAction";
 import {setPanel} from "../redux/actions/PanelAction";
 import {clearData} from "../redux/actions/AppLogicAction";

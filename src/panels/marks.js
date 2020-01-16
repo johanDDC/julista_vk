@@ -9,7 +9,7 @@ import {
 import PropTypes from "prop-types";
 import React from "react";
 import "./styles/marks.css"
-import {turnIntoDate, reverseRuslanString} from "../utils/utils"
+import {turnIntoDate, reverseRuslanString} from "../utils/Utils"
 
 import Mark from "../custom_components/support/mark"
 import CustomSpinner from "../custom_components/support/customSpinner";
