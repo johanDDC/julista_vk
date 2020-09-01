@@ -4,8 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import connect from "@vkontakte/vk-connect";
 import App from './App';
-import store from "./redux/store/main";
-import {Provider} from "react-redux"
+// import store from "./redux/store/main";
+// import {Provider} from "react-redux"
 // import registerServiceWorker from './sw';
 import mVKMiniAppsScrollHelper from '@vkontakte/mvk-mini-apps-scroll-helper';
 import './index.css'
@@ -23,9 +23,7 @@ mVKMiniAppsScrollHelper(root);
 
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App/>
-    </Provider>
+    <App/>
     , root);
 
 // registerServiceWorker();

@@ -1,0 +1,52 @@
+#view-countdown {
+    --background_page: #ffffff;
+}
+
+.countdownScreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF url("../../img/Blogo.png") no-repeat;
+    background-position: -50px -20px;
+    background-size: 200px;
+}
+
+.countdownTimer {
+    display: flex;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.countdownTimerCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.countdownTimerDigit {
+    text-align: center;
+}
+
+.countdownTimerDelimeter {
+}
+
+.countdownTimerDesc {
+    text-align: center;
+    font-size: 16px;
+}
+
+.countdownTitle {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.countdownDescription {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 12px;
+}

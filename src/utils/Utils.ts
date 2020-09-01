@@ -112,7 +112,7 @@ export function reverseRuslanString(string: string) {
     return str;
 }
 
-export function getVkParams(): VkParamsProps {
+export function getVkParams(): any {
     let params = window.location.search.slice(1).split('&')
         .map((queryParam) => {
             let kvp = queryParam.split('=');

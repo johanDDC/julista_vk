@@ -29,12 +29,12 @@ const authValues = (state = initialState, action: AnyAction) => {
     switch (action.type) {
         case INPUT_LOGIN:
             return {
-                login: action.data,
+                // login: action.data,
                 ...state
             };
         case INPUT_PASSWORD:
             return {
-                password: action.data,
+                // password: action.data,
                 ...state
             };
         case INPUT_REGION:

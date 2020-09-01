@@ -125,7 +125,7 @@ export function getProfileInfo(
 }
 
 export function getClassmatesAvatars(classmates: Array<any>, me: any, myPhoto: {}) {
-    let ids: Array<string | number> = [];
+    let ids: any = [];
     let newList: Array<{}> = [];
     for (let elem of classmates) {
         console.log(elem);

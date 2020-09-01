@@ -82,3 +82,7 @@ section.View {
     --eventual-color-6: #1cb336;
     --eventual-color-7: #72de20;
 }
+
+.View {
+    overflow: hidden;
+}
