@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "94ce9cb939e2b5c4844dc78888928af0",
+    "revision": "b62266aef2408c0772e6409c688f5fe0",
     "url": "/julista_vk/index.html"
   },
   {
