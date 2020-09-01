@@ -1,27 +1,26 @@
 {
   "files": {
-    "main.css": "/julista_vk/static/css/main.e3be6690.chunk.css",
-    "main.js": "/julista_vk/static/js/main.4fb8f39b.chunk.js",
-    "main.js.map": "/julista_vk/static/js/main.4fb8f39b.chunk.js.map",
-    "runtime-main.js": "/julista_vk/static/js/runtime-main.4c664778.js",
-    "runtime-main.js.map": "/julista_vk/static/js/runtime-main.4c664778.js.map",
+    "main.css": "/julista_vk/static/css/main.406664c4.chunk.css",
+    "main.js": "/julista_vk/static/js/main.503729a3.chunk.js",
+    "main.js.map": "/julista_vk/static/js/main.503729a3.chunk.js.map",
+    "runtime-main.js": "/julista_vk/static/js/runtime-main.dcc616e6.js",
+    "runtime-main.js.map": "/julista_vk/static/js/runtime-main.dcc616e6.js.map",
     "static/css/2.2cfa1b23.chunk.css": "/julista_vk/static/css/2.2cfa1b23.chunk.css",
-    "static/js/2.27663261.chunk.js": "/julista_vk/static/js/2.27663261.chunk.js",
-    "static/js/2.27663261.chunk.js.map": "/julista_vk/static/js/2.27663261.chunk.js.map",
+    "static/js/2.3cfd63eb.chunk.js": "/julista_vk/static/js/2.3cfd63eb.chunk.js",
+    "static/js/2.3cfd63eb.chunk.js.map": "/julista_vk/static/js/2.3cfd63eb.chunk.js.map",
     "index.html": "/julista_vk/index.html",
-    "precache-manifest.6f803db2f2986f8d90306d2ccaa6f103.js": "/julista_vk/precache-manifest.6f803db2f2986f8d90306d2ccaa6f103.js",
+    "precache-manifest.88bd9d9dd63e944881cf28a10a39a08c.js": "/julista_vk/precache-manifest.88bd9d9dd63e944881cf28a10a39a08c.js",
     "service-worker.js": "/julista_vk/service-worker.js",
     "static/css/2.2cfa1b23.chunk.css.map": "/julista_vk/static/css/2.2cfa1b23.chunk.css.map",
-    "static/css/main.e3be6690.chunk.css.map": "/julista_vk/static/css/main.e3be6690.chunk.css.map",
-    "static/js/2.27663261.chunk.js.LICENSE": "/julista_vk/static/js/2.27663261.chunk.js.LICENSE",
-    "static/media/scheduleWeekBar.css": "/julista_vk/static/media/snow_big.23cfba16.png",
-    "static/media/schedule.css": "/julista_vk/static/media/snow_small.021114c5.png"
+    "static/css/main.406664c4.chunk.css.map": "/julista_vk/static/css/main.406664c4.chunk.css.map",
+    "static/js/2.3cfd63eb.chunk.js.LICENSE.txt": "/julista_vk/static/js/2.3cfd63eb.chunk.js.LICENSE.txt",
+    "static/media/countdown.css": "/julista_vk/static/media/Blogo.8c74cd49.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.4c664778.js",
+    "static/js/runtime-main.dcc616e6.js",
     "static/css/2.2cfa1b23.chunk.css",
-    "static/js/2.27663261.chunk.js",
-    "static/css/main.e3be6690.chunk.css",
-    "static/js/main.4fb8f39b.chunk.js"
+    "static/js/2.3cfd63eb.chunk.js",
+    "static/css/main.406664c4.chunk.css",
+    "static/js/main.503729a3.chunk.js"
   ]
 }
